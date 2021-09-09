@@ -90,7 +90,6 @@ const LayoutFooter: React.FC = () => {
           <div className={s.logoWrap}>
             <Link to="/" className={s.logoLink}>
               <Icon name="png/universe" width="auto" height="auto" className={s.logo} />
-              <Icon name="universe-text" width="94" height="15" className={s.logoText} />
             </Link>
             <Text type="p1" color="white">
               Launch your own community-driven NFT universe baked with social tools, media services, and distribution -

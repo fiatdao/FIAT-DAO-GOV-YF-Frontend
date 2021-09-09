@@ -12,7 +12,7 @@ import Grid from 'components/custom/grid';
 import Icon, { IconNames } from 'components/custom/icon';
 import IconsSet from 'components/custom/icons-set';
 import { Hint, Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import { YFPoolID, useYFPools } from 'modules/yield-farming/providers/pools-provider';
@@ -187,7 +187,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               The ${poolMeta?.label} staking pool ended after {totalEpochs} epochs on {formattedEndDate}. Deposits are
               now disabled, but you can still withdraw your tokens and collect any unclaimed rewards.
             </Text>
-            {poolMeta?.tokens.some(tk => tk === XyzToken) && (
+            {poolMeta?.tokens.some(tk => tk === EnterToken) && (
               <Link to="/governance" className="link-gradient">
                 <Text
                   type="p2"

@@ -7,11 +7,15 @@ import linkSrc from 'resources/png/token-link.png';
 import sushiSrc from 'resources/png/token-sushi.png';
 import uslpSrc from 'resources/png/token-uslp.png';
 import universeSrc from 'resources/png/universe.png';
+import enterdaoSrc from 'resources/png/enterdao.png';
+import manaSrc from 'resources/png/mana.png';
+import sandSrc from 'resources/png/sandbox.png';
+import axsSrc from 'resources/png/axie.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
 
-export type LogoIconNames = 'png/universe' | 'universe-text';
+export type LogoIconNames = 'png/enterdao'; // | 'universe-text';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -33,6 +37,10 @@ export type TokenIconNames =
   | 'token-usdt'
   | 'token-snx'
   | 'compound'
+  | 'png/universe'
+  | 'png/mana'
+  | 'png/sandbox'
+  | 'png/axie'
   | 'png/aave'
   | 'png/sushi'
   | 'png/link'
@@ -169,8 +177,16 @@ const Icon: React.FC<IconProps> = props => {
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/enterdao':
+          return enterdaoSrc;
         case 'png/universe':
           return universeSrc;
+        case 'png/mana':
+          return manaSrc;
+        case 'png/sandbox':
+          return sandSrc;
+        case 'png/axie':
+          return axsSrc;
         case 'png/aave':
           return aaveSrc;
         case 'png/ilv':

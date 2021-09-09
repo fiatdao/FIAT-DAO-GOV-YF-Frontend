@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { getGasValue, getHumanValue, getNonHumanValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
 
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
@@ -13,13 +13,13 @@ import DAO_BARN_ABI from './daoBarn.json';
 
 import { getNowTs } from 'utils';
 
-const Contract = new Web3Contract(DAO_BARN_ABI as Web3ContractAbiItem[], config.contracts.dao.barn, 'DAO Barn');
+const Contract = new Web3Contract(DAO_BARN_ABI as Web3ContractAbiItem[], config.contracts.dao.barn, 'Kernel');
 
 function loadCommonData(): Promise<any> {
   return Contract.batch([
     {
       method: 'xyzStaked',
-      transform: (value: string) => getHumanValue(new BigNumber(value), XyzToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
     },
   ]).then(([xyzStaked]) => {
     return {
@@ -37,17 +37,17 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'balanceOf',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), XyzToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
     },
     {
       method: 'votingPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), XyzToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
     },
     {
       method: 'multiplierAtTs',
       methodArgs: [userAddress, getNowTs()],
-      transform: (value: string) => getHumanValue(new BigNumber(value), XyzToken.decimals)?.toNumber(),
+      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals)?.toNumber(),
     },
     {
       method: 'userLockedUntil',
@@ -57,7 +57,7 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'delegatedPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), XyzToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
     },
     {
       method: 'userDelegatedTo',
@@ -75,7 +75,7 @@ function loadUserData(userAddress?: string): Promise<any> {
 
 function xyzStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
   return Contract.call('xyzStakedAtTs', [timestamp], {}).then((value: string) =>
-    getHumanValue(new BigNumber(value), XyzToken.decimals),
+    getHumanValue(new BigNumber(value), EnterToken.decimals),
   );
 }
 

@@ -12,14 +12,16 @@ import { useWallet } from 'wallets/wallet';
 
 export enum KnownTokens {
   ETH = 'ETH',
+  ENTR = 'ENTR',
   XYZ = 'XYZ',
   USDC = 'USDC',
   BOND = 'BOND',
+  MANA = 'MANA',
   AAVE = 'AAVE',
-  COMP = 'COMP',
+  SAND = 'SAND',
   SNX = 'SNX',
   SUSHI = 'SUSHI',
-  LINK = 'LINK',
+  AXS = 'AXS',
   ILV = 'ILV',
   USDC_XYZ_SLP = 'USDC_XYZ_SUSHI_LP',
 }
@@ -44,13 +46,13 @@ export const EthToken: TokenMeta = {
   coinGeckoId: 'ethereum',
 };
 
-export const XyzToken: TokenMeta = {
-  address: config.tokens.xyz,
-  symbol: KnownTokens.XYZ,
-  name: 'XYZ Governance Token',
+export const EnterToken: TokenMeta = {
+  address: config.tokens.entr,
+  symbol: KnownTokens.ENTR,
+  name: 'EnterDAO Governance Token',
   decimals: 18,
-  icon: 'png/universe' as any,
-  contract: new Erc20Contract([], config.tokens.xyz),
+  icon: 'png/enterdao' as any,
+  contract: new Erc20Contract([], config.tokens.entr),
 };
 
 export const UsdcToken: TokenMeta = {
@@ -63,6 +65,16 @@ export const UsdcToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.usdc),
 };
 
+export const ManaToken: TokenMeta = {
+  address: config.tokens.mana,
+  symbol: KnownTokens.MANA,
+  name: 'MANA',
+  decimals: 18,
+  icon: 'png/mana',
+  coinGeckoId: 'decentraland',
+  contract: new Erc20Contract([], config.tokens.mana),
+};
+
 export const BondToken: TokenMeta = {
   address: config.tokens.bond,
   symbol: KnownTokens.BOND,
@@ -73,24 +85,24 @@ export const BondToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.bond),
 };
 
-export const AaveToken: TokenMeta = {
-  address: config.tokens.aave,
-  symbol: KnownTokens.AAVE,
-  name: 'Aave',
+export const XyzToken: TokenMeta = {
+  address: config.tokens.xyz,
+  symbol: KnownTokens.XYZ,
+  name: 'XYZ',
   decimals: 18,
-  icon: 'png/aave',
-  coinGeckoId: 'aave',
-  contract: new Erc20Contract([], config.tokens.aave),
+  icon: 'png/universe',
+  coinGeckoId: 'universe-xyz',
+  contract: new Erc20Contract([], config.tokens.xyz),
 };
 
-export const CompToken: TokenMeta = {
-  address: config.tokens.comp,
-  symbol: KnownTokens.COMP,
-  name: 'Compound',
+export const SandToken: TokenMeta = {
+  address: config.tokens.sand,
+  symbol: KnownTokens.SAND,
+  name: 'Sandbox',
   decimals: 18,
-  icon: 'compound',
-  coinGeckoId: 'compound-governance-token',
-  contract: new Erc20Contract([], config.tokens.comp),
+  icon: 'png/sandbox',
+  coinGeckoId: 'the-sandbox',
+  contract: new Erc20Contract([], config.tokens.sand),
 };
 
 export const SnxToken: TokenMeta = {
@@ -113,14 +125,14 @@ export const SushiToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.sushi),
 };
 
-export const LinkToken: TokenMeta = {
-  address: config.tokens.link,
-  symbol: KnownTokens.LINK,
-  name: 'Chainlink',
+export const AxsToken: TokenMeta = {
+  address: config.tokens.axs,
+  symbol: KnownTokens.AXS,
+  name: 'Axie Infinity',
   decimals: 18,
-  icon: 'png/link',
-  coinGeckoId: 'chainlink',
-  contract: new Erc20Contract([], config.tokens.link),
+  icon: 'png/axie',
+  coinGeckoId: 'axie-infinity',
+  contract: new Erc20Contract([], config.tokens.axs),
 };
 
 export const IlvToken: TokenMeta = {
@@ -144,14 +156,15 @@ export const UsdcXyzSLPToken: TokenMeta = {
 
 const KNOWN_TOKENS: TokenMeta[] = [
   EthToken,
-  XyzToken,
+  EnterToken,
   UsdcToken,
   BondToken,
-  AaveToken,
-  CompToken,
+  ManaToken,
+  XyzToken,
+  SandToken,
   SnxToken,
   SushiToken,
-  LinkToken,
+  AxsToken,
   IlvToken,
   UsdcXyzSLPToken,
 ];
@@ -212,11 +225,11 @@ async function getXyzPrice(): Promise<BigNumber> {
   let xyzReserve;
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === XyzToken.address) {
-    xyzReserve = new BigNumber(reserve0).unscaleBy(XyzToken.decimals);
+  if (String(token0).toLowerCase() === EnterToken.address) {
+    xyzReserve = new BigNumber(reserve0).unscaleBy(EnterToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    xyzReserve = new BigNumber(reserve1).unscaleBy(XyzToken.decimals);
+    xyzReserve = new BigNumber(reserve1).unscaleBy(EnterToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
@@ -239,7 +252,7 @@ async function getUsdcXyzSLPPrice(): Promise<BigNumber> {
 
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === XyzToken.address) {
+  if (String(token0).toLowerCase() === EnterToken.address) {
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
@@ -312,10 +325,10 @@ const KnownTokensProvider: FC = props => {
   const [reload, version] = useReload();
 
   useEffect(() => {
-    (XyzToken.contract as Erc20Contract).loadCommon().catch(Error);
+    (EnterToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      XyzToken.price = await getXyzPrice().catch(() => undefined);
+      EnterToken.price = await getXyzPrice().catch(() => undefined);
       UsdcXyzSLPToken.price = await getUsdcXyzSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
@@ -357,7 +370,7 @@ const KnownTokensProvider: FC = props => {
 
     // load xyz balance for connected wallet
     if (wallet.account) {
-      (XyzToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
+      (EnterToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }
   }, [wallet.account]);
 
