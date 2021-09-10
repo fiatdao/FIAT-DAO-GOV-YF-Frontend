@@ -115,16 +115,6 @@ export const SnxToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.snx),
 };
 
-export const SushiToken: TokenMeta = {
-  address: config.tokens.sushi,
-  symbol: KnownTokens.SUSHI,
-  name: 'Sushi',
-  decimals: 18,
-  icon: 'png/sushi',
-  coinGeckoId: 'sushi',
-  contract: new Erc20Contract([], config.tokens.sushi),
-};
-
 export const AxsToken: TokenMeta = {
   address: config.tokens.axs,
   symbol: KnownTokens.AXS,
@@ -163,7 +153,6 @@ const KNOWN_TOKENS: TokenMeta[] = [
   XyzToken,
   SandToken,
   SnxToken,
-  SushiToken,
   AxsToken,
   IlvToken,
   UsdcXyzSLPToken,

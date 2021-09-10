@@ -15,7 +15,7 @@ import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
 
-export type LogoIconNames = 'png/enterdao'; // | 'universe-text';
+export type LogoIconNames = 'png/enterdao';
 
 export type TokenIconNames =
   | 'bond-circle-token'

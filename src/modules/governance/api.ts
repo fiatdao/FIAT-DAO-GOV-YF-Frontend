@@ -51,7 +51,7 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
       console.log(result);
       return {
         ...result.data.overview,
-        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18), //TODO totalDelegatedPower is not returned
+        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18),
         TotalVKek: BigNumber.ZERO, //TODO not supported
       }
     });
