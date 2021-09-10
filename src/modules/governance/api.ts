@@ -30,10 +30,8 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
     cache: new InMemoryCache(),
   });
 
-  // TODO holders are not returned yet
   return client
     .query({
-
       query: gql`
       query GetOverview {
         overview(id: "OVERVIEW") {
@@ -41,6 +39,7 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
           totalDelegatedPower
           voters
           kernelUsers
+          holders
         }
       }
     `})
@@ -120,7 +119,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
         delegatedPower: getHumanValue(new BigNumber(item.delegatedPower), 18),
         votes: item.votes,
         proposals: item.proposals,
-        votingPower: getHumanValue(new BigNumber(item.tokensStaked), 18) // TODO
+        votingPower: getHumanValue(new BigNumber(item.tokensStaked), 18) // TODO - voting power not calculated yet
       })),
     };
   }));
@@ -182,22 +181,19 @@ export type APILiteProposalEntity = {
 export function fetchProposals(
   page = 1,
   limit = 10,
-  state?: string
+  state: string = 'all',
 ): Promise<PaginatedResult<APILiteProposalEntity>> {
   const client = new ApolloClient({
     uri: config.graph.graphUrl,
     cache: new InMemoryCache(),
   });
 
-  console.log(state);
   return client
     .query({
 
-    // TODO all proposals filter is not excluded for some reason...
-    // where: {${(state != "ALL") ? "state: $state" : ""}}
     query: gql`
       query GetProposals ($limit: Int, $offset: Int, $state: String) {
-        proposals (first: $limit, skip: $offset) {
+        proposals (first: $limit, skip: $offset, where: {${(state != "all") ? "state: $state" : ""}}) {
           id
           proposer
           title
@@ -215,26 +211,27 @@ export function fetchProposals(
       variables: {
         offset: limit * (page - 1),
         limit: limit,
-        state: state != undefined ? state.toUpperCase() : "ALL"
+        state: state
       },
     })
     .catch(e => {
       console.log(e)
       return { data: [], meta: {count: 0, block: 0}}
     })
-    .then(result => {
-      console.log(result)
-      return { data: result.data.proposals, meta: {count: result.data.overview.proposals, block: 0}}
-    })
     .then((result => {
       return {
-        ...result,
-        data: (result.data ?? []).map((item: any) => ({
-          ...item,
-          proposalId: item.id,
-          forVotes: getHumanValue(new BigNumber(item.forVotes), 18)!,
-          againstVotes: getHumanValue(new BigNumber(item.againstVotes), 18)!
-        }))
+        data: (result.data.proposals ?? []).map((item: any) => {
+          // TODO state of proposal must be updated
+          // const history = buildProposalHistory(item);
+          return {
+            ...item,
+            proposalId: item.id,
+            forVotes: getHumanValue(new BigNumber(item.forVotes), 18)!,
+            againstVotes: getHumanValue(new BigNumber(item.againstVotes), 18)!,
+            // state: history[0].name
+          }
+        }),
+        meta: {count: result.data.overview.proposals.length, block: 0}
       };
     }));
 }
@@ -281,7 +278,7 @@ function isFailedProposal(proposal: any): boolean {
   return false;
 }
 
-function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
+function calculateEvents(proposal: any) {
   let history = new Array<APIProposalHistoryEntity>();
   let eventsCopy = JSON.parse(JSON.stringify(proposal.events)) as Array<any>;
   eventsCopy.sort((a: any, b: any) => {
@@ -375,7 +372,8 @@ function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
       startTimestamp: eventsCopy[0].createTime,
       endTimestamp: 0,
       txHash: eventsCopy[0].txHash
-    })
+    });
+    return history;
   }
 
   if (shouldStopBuilding(nextDeadline)) {
@@ -390,6 +388,49 @@ function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
   });
 
   return history;
+}
+
+function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
+  let history = calculateEvents(proposal);
+
+  // Sort and Populate Timestamps
+  history.sort((e1, e2) => {
+    if (e1.name == "CREATED" && e2.name == "WARMUP") {
+      return 1;
+    } else if (e2.name == "CREATED" && e1.name == "WARMUP") {
+      return -1;
+    }
+
+    if (e1.name == "ACCEPTED" && e2.name == "QUEUED") {
+      return 1;
+    } else if (e2.name == "ACCEPTED" && e1.name == "QUEUED") {
+      return -1;
+    }
+
+    return  e2.startTimestamp - e1.startTimestamp;
+  });
+
+  for (let i = 1; i <= history.length-1; i++) {
+    history[i].endTimestamp = history[i-1].startTimestamp -1;
+  }
+  history[0].endTimestamp = lastEventEndAt(proposal, history[0]);
+
+  return history;
+}
+
+function lastEventEndAt(proposal: any, event: APIProposalHistoryEntity): number {
+  switch (event.name) {
+    case "WARMUP":
+      return event.startTimestamp + proposal.warmUpDuration;
+    case "ACTIVE":
+      return event.startTimestamp + proposal.activeDuration;
+    case "QUEUED":
+      return event.startTimestamp + proposal.queueDuration;
+    case "GRACE":
+      return event.startTimestamp + proposal.gracePeriodDuration;
+    default:
+      return 0
+  }
 }
 
 export function fetchProposal(proposalId: number): Promise<APIProposalEntity> {
@@ -447,12 +488,14 @@ export function fetchProposal(proposalId: number): Promise<APIProposalEntity> {
   })
   .then(result => {
     console.log(result);
-
+    const history = buildProposalHistory(result.data.proposal);
     return {
       ...result.data.proposal,
+      proposalId: result.data.proposal.id,
       forVotes: getHumanValue(new BigNumber(result.data.proposal.forVotes), 18)!,
       againstVotes: getHumanValue(new BigNumber(result.data.proposal.againstVotes), 18)!,
-      history: buildProposalHistory(result.data.proposal)
+      history: history,
+      state: history[0].name
     }
   })
 }
@@ -470,37 +513,45 @@ export function fetchProposalVoters(
   limit = 10,
   support?: boolean,
 ): Promise<PaginatedResult<APIVoteEntity>> {
-  const query = QueryString.stringify(
-    {
-      page: String(page),
-      limit: String(limit),
-      support,
-    },
-    {
-      skipNull: true,
-      skipEmptyString: true,
-      encode: true,
-    },
-  );
+  const client = new ApolloClient({
+    uri: config.graph.graphUrl,
+    cache: new InMemoryCache(),
+  });
 
-  const url = new URL(`/api/governance/proposals/${proposalId}/votes?${query}`, API_URL);
-
-  return fetch(url.toString())
-    .then(result => result.json())
-    .then(({ status, ...data }) => {
-      if (status !== 200) {
-        return Promise.reject(status);
-      }
-
-      return data;
+  return client
+    .query({
+      query: gql`
+        query GetVotes ($proposalId: String, $limit: Int, $offset: Int) {
+          votes (proposalId: $proposalId, first: $limit, skip: $offset) {
+            address
+            support
+            blockTimestamp
+            power
+          }
+          proposal (id: $proposalId) {
+            votesCount
+          }
+        }
+      `,
+      variables: {
+        proposalId: proposalId.toString(),
+        offset: limit * (page -1 ),
+        limit: limit,
+      },
     })
-    .then((result: PaginatedResult<APIVoteEntity>) => ({
-      ...result,
-      data: (result.data ?? []).map(vote => ({
-        ...vote,
-        power: getHumanValue(new BigNumber(vote.power), 18)!,
+  .catch(e => {
+    console.log(e)
+    return { data: [], meta: {count:0, block: 0}};
+  })
+  .then(result => {
+    return {
+      data: (result.data.votes ?? []).map((item: any) => ({
+        ...item,
+        power: getHumanValue(new BigNumber(item.power), 18)!
       })),
-    }));
+      meta: {count: result.data.proposal.votesCount, block: 0}
+    }
+  })
 }
 
 export type APIAbrogationEntity = {
