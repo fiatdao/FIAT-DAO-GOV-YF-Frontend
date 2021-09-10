@@ -27,7 +27,7 @@ const config = {
     snx: toLowerCase(process.env.REACT_APP_TOKEN_SNX_ADDR),
     axs: toLowerCase(process.env.REACT_APP_TOKEN_AXS_ADDR),
     ilv: toLowerCase(process.env.REACT_APP_TOKEN_ILV_ADDR),
-    usdcXyzSLP: toLowerCase(process.env.REACT_APP_TOKEN_USDC_XYZ_SLP_ADDR),
+    usdcEntrSLP: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ENTR_SUSHI_LP),
   },
   contracts: {
     yf: {
@@ -39,7 +39,7 @@ const config = {
       snx: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SNX_ADDR),
       axs: toLowerCase(process.env.REACT_APP_CONTRACT_YF_AXS_ADDR),
       ilv: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ILV_ADDR),
-      usdcXyzSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_USDC_XYZ_SLP_ADDR),
+      usdcEntrSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_USDC_ENTR_SUSHI_LP),
     },
     dao: {
       governance: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),

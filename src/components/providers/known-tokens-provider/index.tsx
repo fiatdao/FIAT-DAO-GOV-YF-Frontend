@@ -20,10 +20,9 @@ export enum KnownTokens {
   AAVE = 'AAVE',
   SAND = 'SAND',
   SNX = 'SNX',
-  SUSHI = 'SUSHI',
   AXS = 'AXS',
   ILV = 'ILV',
-  USDC_XYZ_SLP = 'USDC_XYZ_SUSHI_LP',
+  USDC_ENTR_SLP = 'USDC_ENTR_SUSHI_LP',
 }
 
 export type TokenMeta = {
@@ -135,13 +134,13 @@ export const IlvToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.ilv),
 };
 
-export const UsdcXyzSLPToken: TokenMeta = {
-  address: config.tokens.usdcXyzSLP,
-  symbol: KnownTokens.USDC_XYZ_SLP,
-  name: 'USDC XYZ SUSHI LP',
+export const UsdcEntrSLPToken: TokenMeta = {
+  address: config.tokens.usdcEntrSLP,
+  symbol: KnownTokens.USDC_ENTR_SLP,
+  name: 'USDC ENTR SUSHI LP',
   decimals: 18,
   icon: 'png/uslp',
-  contract: new Erc20Contract([], config.tokens.usdcXyzSLP),
+  contract: new Erc20Contract([], config.tokens.usdcEntrSLP),
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
@@ -155,7 +154,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   SnxToken,
   AxsToken,
   IlvToken,
-  UsdcXyzSLPToken,
+  UsdcEntrSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -205,7 +204,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 
 // ToDo: Check the ENTR price calculation
 async function getXyzPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcXyzSLPToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
@@ -232,7 +231,7 @@ async function getXyzPrice(): Promise<BigNumber> {
 
 // ToDo: Check the SLP price calculation
 async function getUsdcXyzSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcXyzSLPToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -320,7 +319,7 @@ const KnownTokensProvider: FC = props => {
 
     (async () => {
       EnterToken.price = await getXyzPrice().catch(() => undefined);
-      UsdcXyzSLPToken.price = await getUsdcXyzSLPPrice().catch(() => undefined);
+      UsdcEntrSLPToken.price = await getUsdcXyzSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)

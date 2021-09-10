@@ -13,7 +13,7 @@ import {
   AxsToken,
   SnxToken,
   TokenMeta,
-  UsdcXyzSLPToken,
+  UsdcEntrSLPToken,
   useKnownTokens,
 } from 'components/providers/known-tokens-provider';
 import config from 'config';
@@ -30,7 +30,7 @@ export enum YFPoolID {
   SNX = 'snx',
   AXS = 'axs',
   ILV = 'ilv',
-  USDC_XYZ_SLP = 'usdc-xyz-slp',
+  USDC_ENTR_SLP = 'usdc-entr-slp',
 }
 
 export type YFPoolMeta = {
@@ -105,13 +105,13 @@ export const IlvYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.ilv),
 };
 
-export const UsdcXyzSLPYfPool: YFPoolMeta = {
-  name: YFPoolID.USDC_XYZ_SLP,
-  label: 'USDC_XYZ_SUSHI_LP',
+export const UsdcEntrSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.USDC_ENTR_SLP,
+  label: 'USDC_ENTR_SUSHI_LP',
   icons: ['png/uslp'],
   colors: ['var(--theme-red-color)'],
-  tokens: [UsdcXyzSLPToken],
-  contract: new YfPoolContract(config.contracts.yf.usdcXyzSLP),
+  tokens: [UsdcEntrSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.usdcEntrSLP),
 };
 
 const KNOWN_POOLS: YFPoolMeta[] = [
@@ -122,7 +122,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   SnxYfPool,
   AxsYfPool,
   IlvYfPool,
-  UsdcXyzSLPYfPool,
+  UsdcEntrSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
@@ -426,7 +426,7 @@ const YFPoolsProvider: FC = props => {
       <ContractListener contract={SnxYfPool.contract} />
       <ContractListener contract={AxsYfPool.contract} />
       <ContractListener contract={IlvYfPool.contract} />
-      <ContractListener contract={UsdcXyzSLPYfPool.contract} />
+      <ContractListener contract={UsdcEntrSLPYfPool.contract} />
     </YFPoolsContext.Provider>
   );
 };
