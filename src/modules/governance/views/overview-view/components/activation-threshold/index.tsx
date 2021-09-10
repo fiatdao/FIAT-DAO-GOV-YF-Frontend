@@ -58,7 +58,7 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
           <Icon name="ribbon-outlined" />
         </Grid>
         <Grid flow="col" gap={8} align="center">
-          <Icon name="png/universe" width={32} height={32} />
+          <Icon name="png/enterdao" width={32} height={32} />
           <Text type="p1" weight="bold" color="primary">
             {formatXYZValue(dao.entrStaked)}
           </Text>

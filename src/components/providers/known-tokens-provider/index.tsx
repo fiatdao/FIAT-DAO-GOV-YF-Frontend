@@ -214,6 +214,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
   createAbiItem('token0', [], ['address']),
 ];
 
+// ToDo: Check the ENTR price calculation
 async function getXyzPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcXyzSLPToken.address);
 
@@ -240,6 +241,7 @@ async function getXyzPrice(): Promise<BigNumber> {
   return usdcReserve.dividedBy(xyzReserve);
 }
 
+// ToDo: Check the SLP price calculation
 async function getUsdcXyzSLPPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcXyzSLPToken.address);
 

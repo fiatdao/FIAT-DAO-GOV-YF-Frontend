@@ -13,7 +13,7 @@ import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import { UseLeftTime } from 'hooks/useLeftTime';
 import useMergeState from 'hooks/useMergeState';
-import imgSrc from 'resources/png/universe.png';
+import imgSrc from 'resources/png/enterdao.png';
 
 import { EnterToken } from '../../../../components/providers/known-tokens-provider';
 import Erc20Contract from '../../../../web3/erc20Contract';
@@ -82,7 +82,7 @@ const VotingHeader: React.FC = () => {
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/universe" width={40} height={40} />
+              <Icon name="png/enterdao" width={40} height={40} />
               <Button
                 type="primary"
                 size="small"
@@ -104,7 +104,7 @@ const VotingHeader: React.FC = () => {
                   {formatXYZValue(xyzBalance)}
                 </Text>
               </Skeleton>
-              <Icon name="png/universe" src={imgSrc} width={40} height={40} />
+              <Icon name="png/enterdao" src={imgSrc} width={40} height={40} />
             </Grid>
           </Grid>
           <Divider type="vertical" />

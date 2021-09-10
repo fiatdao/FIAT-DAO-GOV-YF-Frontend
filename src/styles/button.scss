@@ -8,7 +8,7 @@
   padding: 12px 32px;
 
   border: 0;
-  background: var(--gradient-green);
+  background: var(--gradient-pink);
   box-shadow: 0 10px 20px rgba(136, 120, 172, 0.2);
 
   border-radius: 12px;
@@ -23,12 +23,12 @@
 
   &:hover {
     color: #000;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #bceb00 15.57%, #00eaea 84.88%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   }
 
   &:active {
     color: #000;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #bceb00 15.57%, #00eaea 84.88%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   }
 
   &:disabled,

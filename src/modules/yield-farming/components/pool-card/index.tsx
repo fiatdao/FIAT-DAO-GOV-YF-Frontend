@@ -94,7 +94,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               Reward
             </Text>
             <div className="flex flow-col">
-              <Icon name="png/universe" className={s.xyzReward} />
+              <Icon name="png/enterdao" className={s.xyzReward} />
               <Text type="p1" weight="semibold" color="primary">
                 {formatToken(epochReward) ?? '-'}
               </Text>
@@ -106,7 +106,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                 My Potential Reward
               </Text>
               <div className="flex flow-col">
-                <Icon name="png/universe" className={s.xyzReward} />
+                <Icon name="png/enterdao" className={s.xyzReward} />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(potentialReward) ?? '-'}
                 </Text>
