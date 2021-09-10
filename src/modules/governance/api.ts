@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import QueryString from 'query-string';
-import { getHumanValue } from 'web3/utils';
+import {getHumanValue} from 'web3/utils';
 
 import config from 'config';
 import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
@@ -43,10 +43,6 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
         }
       }
     `})
-    .catch(e => {
-      console.log(e)
-      return { data: {}};
-    })
     .then(result => {
       console.log(result);
       return {
@@ -54,7 +50,11 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
         totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18),
         TotalVKek: BigNumber.ZERO, //TODO not supported
       }
-    });
+    })
+    .catch(e => {
+      console.log(e)
+      return { data: {}};
+    })
 }
 
 export type APIVoterEntity = {
@@ -101,28 +101,27 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
         limit: limit
       },
     })
+    .then((result => {
+      console.log(result)
+
+      return {
+        ...result,
+        data: (result.data ?? []).map((item: any) => ({
+          address: item.id,
+          tokensStaked: getHumanValue(new BigNumber(item.tokensStaked), 18),
+          lockedUntil: item.lockedUntil,
+          delegatedPower: getHumanValue(new BigNumber(item.delegatedPower), 18),
+          votes: item.votes,
+          proposals: item.proposals,
+          votingPower: getHumanValue(new BigNumber(item.tokensStaked), 18) // TODO - voting power not calculated yet
+        })),
+        meta: {count: result.data.overview.kernelUsers, block: 0}
+      };
+    }))
     .catch(e => {
       console.log(e)
       return { data: [], meta: { count: 0, block: 0 } }
-  })
-  .then(result => {
-    console.log(result)
-    return { data: result.data.voters, meta: {count: result.data.overview.kernelUsers, block: 0}}
-  })
-  .then((result => {
-    return {
-      ...result,
-      data: (result.data ?? []).map((item: any) => ({
-        address: item.id,
-        tokensStaked: getHumanValue(new BigNumber(item.tokensStaked), 18),
-        lockedUntil: item.lockedUntil,
-        delegatedPower: getHumanValue(new BigNumber(item.delegatedPower), 18),
-        votes: item.votes,
-        proposals: item.proposals,
-        votingPower: getHumanValue(new BigNumber(item.tokensStaked), 18) // TODO - voting power not calculated yet
-      })),
-    };
-  }));
+    })
 }
 
 export enum APIProposalState {
@@ -257,10 +256,6 @@ export function fetchProposals(
       }
     `,
     })
-    .catch(e => {
-      console.log(e)
-      return { data: [], meta: {count: 0, block: 0}}
-    })
     .then((result => {
       let response = {
         data: (result.data.proposals ?? []).map((item: any) => {
@@ -287,7 +282,11 @@ export function fetchProposals(
       response.data.proposals = result.data.proposals.slice(limit * (page - 1), limit * page);
 
       return response;
-    }));
+    }))
+    .catch(e => {
+      console.log(e)
+      return { data: [], meta: {count: 0, block: 0}}
+    });
 }
 
 export type APIProposalHistoryEntity = {
@@ -536,22 +535,22 @@ export function fetchProposal(proposalId: number): Promise<APIProposalEntity> {
         proposalId: proposalId.toString()
       }
     })
-  .catch(e => {
-    console.log(e)
-    return { data: {}};
-  })
-  .then(result => {
-    console.log(result);
-    const history = buildProposalHistory(result.data.proposal);
-    return {
-      ...result.data.proposal,
-      proposalId: result.data.proposal.id,
-      forVotes: getHumanValue(new BigNumber(result.data.proposal.forVotes), 18)!,
-      againstVotes: getHumanValue(new BigNumber(result.data.proposal.againstVotes), 18)!,
-      history: history,
-      state: history[0].name
-    }
-  })
+    .then(result => {
+      console.log(result);
+      const history = buildProposalHistory(result.data.proposal);
+      return {
+        ...result.data.proposal,
+        proposalId: result.data.proposal.id,
+        forVotes: getHumanValue(new BigNumber(result.data.proposal.forVotes), 18)!,
+        againstVotes: getHumanValue(new BigNumber(result.data.proposal.againstVotes), 18)!,
+        history: history,
+        state: history[0].name
+      }
+    })
+    .catch(e => {
+      console.log(e)
+      return { data: {}};
+    })
 }
 
 export type APIVoteEntity = {
@@ -571,12 +570,11 @@ export function fetchProposalVoters(
     uri: config.graph.graphUrl,
     cache: new InMemoryCache(),
   });
-
   return client
     .query({
       query: gql`
-        query GetVotes ($proposalId: String, $limit: Int, $offset: Int) {
-          votes (proposalId: $proposalId, first: $limit, skip: $offset) {
+        query GetVotes ($proposalId: String, $limit: Int, $offset: Int, $support: Boolean) {
+          votes (proposalId: $proposalId, first: $limit, skip: $offset, where: {${(support != undefined) ? "support: $support" : ""}}) {
             address
             support
             blockTimestamp
@@ -591,21 +589,22 @@ export function fetchProposalVoters(
         proposalId: proposalId.toString(),
         offset: limit * (page -1 ),
         limit: limit,
+        support: support
       },
     })
-  .catch(e => {
-    console.log(e)
-    return { data: [], meta: {count:0, block: 0}};
-  })
-  .then(result => {
-    return {
-      data: (result.data.votes ?? []).map((item: any) => ({
-        ...item,
-        power: getHumanValue(new BigNumber(item.power), 18)!
-      })),
-      meta: {count: result.data.proposal.votesCount, block: 0}
-    }
-  })
+    .then(result => {
+      return {
+        data: (result.data.votes ?? []).map((item: any) => ({
+          ...item,
+          power: getHumanValue(new BigNumber(item.power), 18)!
+        })),
+        meta: {count: result.data.proposal.votesCount, block: 0}
+      }
+    })
+    .catch(e => {
+      console.log(e)
+      return { data: [], meta: {count:0, block: 0}};
+    })
 }
 
 export type APIAbrogationEntity = {
@@ -626,7 +625,6 @@ export function fetchAbrogation(proposalId: number): Promise<APIAbrogationEntity
       if (status !== 200) {
         return Promise.reject(status);
       }
-
       return data;
     })
     .then((data: APIAbrogationEntity) => ({
@@ -695,18 +693,13 @@ export function fetchTreasuryTokens(): Promise<APITreasuryToken[]> {
     .then(result => result.json())
     .then((res) => {
       const assets = res[`${config.contracts.dao.governance}`].products[0].assets
-
-
-      const data = assets.filter((t: { symbol: string; }) => t.symbol != 'ETH').map((m: { address: any; symbol: any; decimals: any; }) => {
+      return assets.filter((t: { symbol: string; }) => t.symbol != 'ETH').map((m: { address: any; symbol: any; decimals: any; }) => {
         return {
           tokenAddress: m.address,
           tokenSymbol: m.symbol,
           tokenDecimals: m.decimals
         }
-      })
-
-
-      return data;
+      });
     });
 }
 
