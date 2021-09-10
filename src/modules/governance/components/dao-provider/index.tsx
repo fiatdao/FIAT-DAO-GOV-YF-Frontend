@@ -17,7 +17,7 @@ import { APIProposalStateId } from '../../api';
 export type DAOProviderState = {
   minThreshold: number;
   isActive?: boolean;
-  xyzStaked?: BigNumber;
+  entrStaked?: BigNumber;
   activationThreshold?: BigNumber;
   activationRate?: number;
   thresholdRate?: number;
@@ -26,7 +26,7 @@ export type DAOProviderState = {
 const InitialState: DAOProviderState = {
   minThreshold: 1,
   isActive: undefined,
-  xyzStaked: undefined,
+  entrStaked: undefined,
   activationThreshold: undefined,
   activationRate: undefined,
   thresholdRate: undefined,
@@ -93,44 +93,44 @@ const DAOProvider: React.FC = props => {
 
   React.useEffect(() => {
     const { isActive } = daoGovernance;
-    const { xyzStaked, activationThreshold, votingPower } = daoBarn;
+    const { entrStaked, activationThreshold, votingPower } = daoBarn;
 
     let activationRate: number | undefined;
 
-    if (xyzStaked && activationThreshold?.gt(ZERO_BIG_NUMBER)) {
-      activationRate = xyzStaked.multipliedBy(100).div(activationThreshold).toNumber();
+    if (entrStaked && activationThreshold?.gt(ZERO_BIG_NUMBER)) {
+      activationRate = entrStaked.multipliedBy(100).div(activationThreshold).toNumber();
       activationRate = Math.min(activationRate, 100);
     }
 
     let thresholdRate: number | undefined;
 
-    if (votingPower && xyzStaked?.gt(ZERO_BIG_NUMBER)) {
-      thresholdRate = votingPower.multipliedBy(100).div(xyzStaked).toNumber();
+    if (votingPower && entrStaked?.gt(ZERO_BIG_NUMBER)) {
+      thresholdRate = votingPower.multipliedBy(100).div(entrStaked).toNumber();
       thresholdRate = Math.min(thresholdRate, 100);
     }
 
     setState({
       isActive,
-      xyzStaked,
+      entrStaked,
       activationThreshold,
       activationRate,
       thresholdRate,
     });
-  }, [daoGovernance.isActive, daoBarn.xyzStaked, daoBarn.activationThreshold, daoBarn.votingPower]);
+  }, [daoGovernance.isActive, daoBarn.entrStaked, daoBarn.activationThreshold, daoBarn.votingPower]);
 
   const apr = useMemo(() => {
     const { poolFeature } = daoReward;
-    const { xyzStaked } = daoBarn;
+    const { entrStaked } = daoBarn;
 
-    if (!poolFeature || !xyzStaked || poolFeature.endTs < Date.now() / 1_000) {
+    if (!poolFeature || !entrStaked || poolFeature.endTs < Date.now() / 1_000) {
       return undefined;
     }
 
     const duration = Number(poolFeature.totalDuration);
     const yearInSeconds = 365 * 24 * 60 * 60;
 
-    return poolFeature.totalAmount.div(xyzStaked).div(duration).multipliedBy(yearInSeconds);
-  }, [daoReward.poolFeature, daoBarn.xyzStaked]);
+    return poolFeature.totalAmount.div(entrStaked).div(duration).multipliedBy(yearInSeconds);
+  }, [daoReward.poolFeature, daoBarn.entrStaked]);
 
   function activate() {
     return daoGovernance.actions.activate().then(() => {

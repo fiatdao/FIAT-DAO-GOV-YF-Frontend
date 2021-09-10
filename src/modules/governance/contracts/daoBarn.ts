@@ -18,12 +18,12 @@ const Contract = new Web3Contract(DAO_BARN_ABI as Web3ContractAbiItem[], config.
 function loadCommonData(): Promise<any> {
   return Contract.batch([
     {
-      method: 'xyzStaked',
+      method: 'entrStaked',
       transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
     },
-  ]).then(([xyzStaked]) => {
+  ]).then(([entrStaked]) => {
     return {
-      xyzStaked,
+      entrStaked,
     };
   });
 }
@@ -73,8 +73,8 @@ function loadUserData(userAddress?: string): Promise<any> {
   }));
 }
 
-function xyzStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
-  return Contract.call('xyzStakedAtTs', [timestamp], {}).then((value: string) =>
+function entrStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
+  return Contract.call('entrStakedAtTs', [timestamp], {}).then((value: string) =>
     getHumanValue(new BigNumber(value), EnterToken.decimals),
   );
 }
@@ -127,7 +127,7 @@ function lockSend(timestamp: number, from: string, gasPrice: number): Promise<vo
 export type DAOBarnContractData = {
   contract: Web3Contract;
   activationThreshold?: BigNumber;
-  xyzStaked?: BigNumber;
+  entrStaked?: BigNumber;
   balance?: BigNumber;
   votingPower?: BigNumber;
   multiplier?: number;
@@ -139,7 +139,7 @@ export type DAOBarnContractData = {
 const InitialState: DAOBarnContractData = {
   contract: Contract,
   activationThreshold: new BigNumber(config.dao.activationThreshold),
-  xyzStaked: undefined,
+  entrStaked: undefined,
   balance: undefined,
   votingPower: undefined,
   multiplier: undefined,
@@ -151,7 +151,7 @@ const InitialState: DAOBarnContractData = {
 export type DAOBarnContract = DAOBarnContractData & {
   reload(): void;
   actions: {
-    xyzStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
+    entrStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
     votingPower(address: string): Promise<BigNumber | undefined>;
     votingPowerAtTs(timestamp: number): Promise<BigNumber | undefined>;
     deposit(amount: BigNumber, gasPrice: number): Promise<any>;
@@ -170,7 +170,7 @@ export function useDAOBarnContract(): DAOBarnContract {
 
   React.useEffect(() => {
     setState({
-      xyzStaked: undefined,
+      entrStaked: undefined,
     });
 
     loadCommonData().then(setState).catch(Error);
@@ -193,8 +193,8 @@ export function useDAOBarnContract(): DAOBarnContract {
     ...state,
     reload,
     actions: {
-      xyzStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
-        return xyzStakedAtTsCall(timestamp);
+      entrStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
+        return entrStakedAtTsCall(timestamp);
       },
       votingPower(address: string): Promise<BigNumber | undefined> {
         return votingPowerCall(address);
