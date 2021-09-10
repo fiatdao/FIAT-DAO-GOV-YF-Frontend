@@ -178,22 +178,58 @@ export type APILiteProposalEntity = {
   againstVotes: BigNumber;
 };
 
+function getTimeLeft(state: string, proposal: any): number {
+  const now = Math.floor(Date.now() / 1000);
+  switch (state) {
+    case APIProposalState.WARMUP:
+      return proposal.createTime + proposal.warmUpDuration - now;
+    case APIProposalState.ACTIVE:
+      return proposal.createTime + proposal.warmUpDuration + proposal.activeDuration - now;
+    case APIProposalState.QUEUED:
+      return proposal.createTime + proposal.warmUpDuration + proposal.activeDuration + proposal.queueDuration - now;
+    case APIProposalState.GRACE:
+      return proposal.createTime + proposal.warmUpDuration + proposal.queueDuration + proposal.gracePeriodDuration - now;
+    default:
+      return 0;
+  }
+}
+
+function buildStateFilter(state: string) {
+  if (state == "ALL") {
+    return [];
+  }
+
+  let filter = [];
+  switch (state) {
+    case APIProposalState.ACTIVE:
+      filter.push(APIProposalState.WARMUP, APIProposalState.ACTIVE, APIProposalState.ACCEPTED, APIProposalState.QUEUED, APIProposalState.GRACE)
+      break;
+    case APIProposalState.FAILED:
+      filter.push(APIProposalState.CANCELED, APIProposalState.FAILED, APIProposalState.ABROGATED, APIProposalState.EXPIRED);
+      break;
+    default:
+      filter.push(state)
+      break;
+  }
+  return filter;
+}
+
 export function fetchProposals(
   page = 1,
   limit = 10,
-  state: string = 'all',
+  state: string = 'ALL',
 ): Promise<PaginatedResult<APILiteProposalEntity>> {
   const client = new ApolloClient({
     uri: config.graph.graphUrl,
     cache: new InMemoryCache(),
   });
-
+  let stateFilter = buildStateFilter(state.toUpperCase());
   return client
     .query({
 
     query: gql`
-      query GetProposals ($limit: Int, $offset: Int, $state: String) {
-        proposals (first: $limit, skip: $offset, where: {${(state != "all") ? "state: $state" : ""}}) {
+      query GetProposals {
+        proposals (first: 1000) {
           id
           proposer
           title
@@ -202,37 +238,55 @@ export function fetchProposals(
           state
           forVotes
           againstVotes
+          warmUpDuration
+          activeDuration
+          queueDuration
+          gracePeriodDuration
+          events(orderBy:createTime, orderDirection: desc) {
+            proposalId
+            caller
+            eventType
+            createTime
+            txHash
+            eta
+          }
         }
         overview (id: "OVERVIEW") {
           proposals
         }
       }
     `,
-      variables: {
-        offset: limit * (page - 1),
-        limit: limit,
-        state: state
-      },
     })
     .catch(e => {
       console.log(e)
       return { data: [], meta: {count: 0, block: 0}}
     })
     .then((result => {
-      return {
+      let response = {
         data: (result.data.proposals ?? []).map((item: any) => {
-          // TODO state of proposal must be updated
-          // const history = buildProposalHistory(item);
+          const history = buildProposalHistory(item);
+          const state = history[0].name;
           return {
             ...item,
-            proposalId: item.id,
+            proposalId: Number.parseInt(item.id),
             forVotes: getHumanValue(new BigNumber(item.forVotes), 18)!,
             againstVotes: getHumanValue(new BigNumber(item.againstVotes), 18)!,
-            // state: history[0].name
+            stateTimeLeft: getTimeLeft(state, item),
+            state: state
           }
         }),
         meta: {count: result.data.overview.proposals.length, block: 0}
       };
+      // Apply filter based on the proposal state
+      response.data = response.data.filter((p: APILiteProposalEntity) => {
+        return stateFilter.length == 0 || stateFilter.indexOf(p.state) != -1;
+      });
+      // Sort based on Proposal Id
+      response.data = response.data.sort((a:APILiteProposalEntity, b:APILiteProposalEntity) => b.proposalId - a.proposalId );
+      // Paginate the result
+      response.data.proposals = result.data.proposals.slice(limit * (page - 1), limit * page);
+
+      return response;
     }));
 }
 
@@ -261,7 +315,7 @@ export type APIProposalEntity = APILiteProposalEntity & {
 function checkForCancelledEvent(eventsCopy: Array<any>, nextDeadline: number, history: APIProposalHistoryEntity[]) {
   if (eventsCopy.length > 0 && eventsCopy[0].createTime < nextDeadline && eventsCopy[0].eventType == "CANCELED") {
     history.push({
-      name: "CANCELED",
+      name: APIProposalState.CANCELED,
       startTimestamp: eventsCopy[0].createTime,
       endTimestamp: 0,
       txHash: eventsCopy[0].txHash
@@ -286,7 +340,7 @@ function calculateEvents(proposal: any) {
   });
 
   history.push({
-    name: "CREATED",
+    name: APIProposalState.CREATED,
     startTimestamp: proposal.createTime,
     endTimestamp: 0,
     txHash: eventsCopy[0].txHash
@@ -294,7 +348,7 @@ function calculateEvents(proposal: any) {
   // Remove Created event
   eventsCopy = eventsCopy.slice(1);
   let warmUpEvent = history.push({
-    name: "WARMUP",
+    name: APIProposalState.WARMUP,
     startTimestamp: proposal.createTime,
     endTimestamp: 0, //proposal.createTime+ proposal.warmUpDuration,
     txHash: ""
@@ -312,7 +366,7 @@ function calculateEvents(proposal: any) {
   // if the proposal was not canceled in the WARMUP period, then it means we reached ACTIVE state so we add that to
   // the history
   history.push({
-    name: "ACTIVE",
+    name: APIProposalState.ACTIVE,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
     txHash: ""
@@ -327,7 +381,7 @@ function calculateEvents(proposal: any) {
   }
 
   history.push({
-    name: isFailedProposal(proposal) ? "FAILED" : "ACCEPTED",
+    name: isFailedProposal(proposal) ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
     txHash: ""
@@ -339,9 +393,9 @@ function calculateEvents(proposal: any) {
     return history;
   }
 
-  if (eventsCopy[0].eventType == "QUEUED") {
+  if (eventsCopy[0].eventType == APIProposalState.QUEUED) {
     history.push({
-      name: "QUEUED",
+      name: APIProposalState.QUEUED,
       startTimestamp: proposal.createTime + proposal.warmUpDuration + proposal.activeDuration + 1,
       endTimestamp: 0,
       txHash: eventsCopy[0].txHash,
@@ -358,7 +412,7 @@ function calculateEvents(proposal: any) {
 
   // No abrogation proposal or did not pass
   history.push({
-    name: "GRACE",
+    name: APIProposalState.GRACE,
     startTimestamp: nextDeadline,
     endTimestamp: 0,
     txHash: ""
@@ -366,9 +420,9 @@ function calculateEvents(proposal: any) {
 
   nextDeadline += proposal.gracePeriodDuration;
   if (eventsCopy.length > 0 && eventsCopy[0].createTime <= nextDeadline
-    && eventsCopy[0].eventType == "EXECUTED") {
+    && eventsCopy[0].eventType == APIProposalState.EXECUTED) {
     history.push({
-      name: "EXECUTED",
+      name: APIProposalState.EXECUTED,
       startTimestamp: eventsCopy[0].createTime,
       endTimestamp: 0,
       txHash: eventsCopy[0].txHash
@@ -381,7 +435,7 @@ function calculateEvents(proposal: any) {
   }
 
   history.push({
-    name: "EXPIRED",
+    name: APIProposalState.EXPIRED,
     startTimestamp: nextDeadline,
     endTimestamp: 0,
     txHash: ""
@@ -395,15 +449,15 @@ function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
 
   // Sort and Populate Timestamps
   history.sort((e1, e2) => {
-    if (e1.name == "CREATED" && e2.name == "WARMUP") {
+    if (e1.name == APIProposalState.CREATED && e2.name == APIProposalState.WARMUP) {
       return 1;
-    } else if (e2.name == "CREATED" && e1.name == "WARMUP") {
+    } else if (e2.name == APIProposalState.CREATED && e1.name == APIProposalState.WARMUP) {
       return -1;
     }
 
-    if (e1.name == "ACCEPTED" && e2.name == "QUEUED") {
+    if (e1.name == APIProposalState.ACCEPTED && e2.name == APIProposalState.QUEUED) {
       return 1;
-    } else if (e2.name == "ACCEPTED" && e1.name == "QUEUED") {
+    } else if (e2.name == APIProposalState.ACCEPTED && e1.name == APIProposalState.QUEUED) {
       return -1;
     }
 
@@ -420,13 +474,13 @@ function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
 
 function lastEventEndAt(proposal: any, event: APIProposalHistoryEntity): number {
   switch (event.name) {
-    case "WARMUP":
+    case APIProposalState.WARMUP:
       return event.startTimestamp + proposal.warmUpDuration;
-    case "ACTIVE":
+    case APIProposalState.ACTIVE:
       return event.startTimestamp + proposal.activeDuration;
-    case "QUEUED":
+    case APIProposalState.QUEUED:
       return event.startTimestamp + proposal.queueDuration;
-    case "GRACE":
+    case APIProposalState.GRACE:
       return event.startTimestamp + proposal.gracePeriodDuration;
     default:
       return 0
