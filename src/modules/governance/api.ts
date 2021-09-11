@@ -4,6 +4,7 @@ import {getHumanValue} from 'web3/utils';
 
 import config from 'config';
 import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
+import {getProposalStateCall, ProposalState} from "./contracts/daoGovernance";
 
 const API_URL = config.api.baseUrl;
 
@@ -75,7 +76,6 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
   });
 
   // TODO GraphQL sorting does not work since tokensStaked is String!
-  // TODO It seems that kernelUsers are < than Voters. Must be investigated
   // TODO VotingPower is not accounted yet
   return client
     .query({
@@ -106,7 +106,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
 
       return {
         ...result,
-        data: (result.data ?? []).map((item: any) => ({
+        data: (result.data.voters ?? []).map((item: any) => ({
           address: item.id,
           tokensStaked: getHumanValue(new BigNumber(item.tokensStaked), 18),
           lockedUntil: item.lockedUntil,
@@ -256,32 +256,33 @@ export function fetchProposals(
       }
     `,
     })
-    .then((result => {
-      let response = {
-        data: (result.data.proposals ?? []).map((item: any) => {
-          const history = buildProposalHistory(item);
-          const state = history[0].name;
-          return {
-            ...item,
-            proposalId: Number.parseInt(item.id),
-            forVotes: getHumanValue(new BigNumber(item.forVotes), 18)!,
-            againstVotes: getHumanValue(new BigNumber(item.againstVotes), 18)!,
-            stateTimeLeft: getTimeLeft(state, item),
-            state: state
-          }
-        }),
-        meta: {count: result.data.overview.proposals.length, block: 0}
+    .then((async response => {
+      let result: PaginatedResult<APILiteProposalEntity> = {
+        data: [],
+        meta: {count: response.data.overview.proposals.length}
       };
+
+      for (let i = 0; i < response.data.proposals.length; i++) {
+        const graphProposal = response.data.proposals[i];
+        const liteProposal: APILiteProposalEntity = {...graphProposal};
+        const history = await buildProposalHistory(graphProposal);
+        liteProposal.proposalId = Number.parseInt(graphProposal.id);
+        liteProposal.forVotes = getHumanValue(new BigNumber(graphProposal.forVotes), 18)!;
+        liteProposal.againstVotes = getHumanValue(new BigNumber(graphProposal.againstVotes), 18)!
+        liteProposal.stateTimeLeft = getTimeLeft(state, graphProposal);
+        liteProposal.state = history[0].name as APIProposalState;
+        result.data.push(liteProposal);
+      }
+
       // Apply filter based on the proposal state
-      response.data = response.data.filter((p: APILiteProposalEntity) => {
+      result.data = result.data.filter((p: APILiteProposalEntity) => {
         return stateFilter.length == 0 || stateFilter.indexOf(p.state) != -1;
       });
       // Sort based on Proposal Id
-      response.data = response.data.sort((a:APILiteProposalEntity, b:APILiteProposalEntity) => b.proposalId - a.proposalId );
+      result.data = result.data.sort((a:APILiteProposalEntity, b:APILiteProposalEntity) => b.proposalId - a.proposalId );
       // Paginate the result
-      response.data.proposals = result.data.proposals.slice(limit * (page - 1), limit * page);
-
-      return response;
+      result.data = result.data.slice(limit * (page - 1), limit * page);
+      return result;
     }))
     .catch(e => {
       console.log(e)
@@ -326,12 +327,12 @@ function shouldStopBuilding(nextDeadline: number) {
   return nextDeadline >= Math.floor(Date.now() / 1000);
 }
 
-function isFailedProposal(proposal: any): boolean {
-  // TODO get the data from the contract
-  return false;
+async function isFailedProposal(proposal: any): Promise<boolean> {
+  const state = await getProposalStateCall(proposal.id)
+  return state == ProposalState.Failed;
 }
 
-function calculateEvents(proposal: any) {
+async function calculateEvents(proposal: any) {
   let history = new Array<APIProposalHistoryEntity>();
   let eventsCopy = JSON.parse(JSON.stringify(proposal.events)) as Array<any>;
   eventsCopy.sort((a: any, b: any) => {
@@ -380,7 +381,7 @@ function calculateEvents(proposal: any) {
   }
 
   history.push({
-    name: isFailedProposal(proposal) ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
+    name: (await isFailedProposal(proposal)) ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
     txHash: ""
@@ -443,8 +444,8 @@ function calculateEvents(proposal: any) {
   return history;
 }
 
-function buildProposalHistory(proposal: any): APIProposalHistoryEntity[] {
-  let history = calculateEvents(proposal);
+async function buildProposalHistory(proposal: any): Promise<APIProposalHistoryEntity[]> {
+  let history = await calculateEvents(proposal);
 
   // Sort and Populate Timestamps
   history.sort((e1, e2) => {
@@ -535,9 +536,9 @@ export function fetchProposal(proposalId: number): Promise<APIProposalEntity> {
         proposalId: proposalId.toString()
       }
     })
-    .then(result => {
+    .then(async result => {
       console.log(result);
-      const history = buildProposalHistory(result.data.proposal);
+      const history = await buildProposalHistory(result.data.proposal);
       return {
         ...result.data.proposal,
         proposalId: result.data.proposal.id,
@@ -731,7 +732,6 @@ type ZapperTransactionHistory = {
 
 export function fetchTreasuryHistory(): Promise<PaginatedResult<APITreasuryHistory>> {
 
-  // const url = new URL(`/api/governance/treasury/transactions?${query}`, API_URL);
   const url = new URL(`/v1/transactions?address=${config.contracts.dao.governance}&addresses%5B%5D=${config.contracts.dao.governance}&network=ethereum&api_key=${config.zapper.apiKey}`, config.zapper.baseUrl);
 
   return fetch(url.toString())

@@ -87,7 +87,7 @@ export enum ProposalState {
   Executed,
 }
 
-function getProposalStateCall(proposalId: number): Promise<ProposalState> {
+export function getProposalStateCall(proposalId: number): Promise<ProposalState> {
   return Contract.call('state', [proposalId]).then(Number);
 }
 
