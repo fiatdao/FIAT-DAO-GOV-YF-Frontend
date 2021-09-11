@@ -85,6 +85,7 @@ export enum ProposalState {
   Grace,
   Expired,
   Executed,
+  Abrogated
 }
 
 export function getProposalStateCall(proposalId: number): Promise<ProposalState> {
@@ -126,7 +127,7 @@ export type AbrogationProposal = {
   againstVotes: number;
 };
 
-function abrogationProposalCall(proposalId: number): Promise<AbrogationProposal> {
+export function abrogationProposalCall(proposalId: number): Promise<AbrogationProposal> {
   return Contract.call('abrogationProposals', [proposalId]);
 }
 

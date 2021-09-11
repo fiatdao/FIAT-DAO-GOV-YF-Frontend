@@ -327,11 +327,6 @@ function shouldStopBuilding(nextDeadline: number) {
   return nextDeadline >= Math.floor(Date.now() / 1000);
 }
 
-async function isFailedProposal(proposal: any): Promise<boolean> {
-  const state = await getProposalStateCall(proposal.id)
-  return state == ProposalState.Failed;
-}
-
 async function calculateEvents(proposal: any) {
   let history = new Array<APIProposalHistoryEntity>();
   let eventsCopy = JSON.parse(JSON.stringify(proposal.events)) as Array<any>;
@@ -347,7 +342,7 @@ async function calculateEvents(proposal: any) {
   });
   // Remove Created event
   eventsCopy = eventsCopy.slice(1);
-  let warmUpEvent = history.push({
+  history.push({
     name: APIProposalState.WARMUP,
     startTimestamp: proposal.createTime,
     endTimestamp: 0, //proposal.createTime+ proposal.warmUpDuration,
@@ -380,8 +375,9 @@ async function calculateEvents(proposal: any) {
     return history;
   }
 
+  const proposalState = await getProposalStateCall(proposal.id)
   history.push({
-    name: (await isFailedProposal(proposal)) ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
+    name: proposalState === ProposalState.Failed ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
     txHash: ""
@@ -408,7 +404,15 @@ async function calculateEvents(proposal: any) {
     return history;
   }
 
-  // TODO add logic for abrogation proposals
+  if (proposalState == ProposalState.Abrogated) {
+    history.push({
+      name: APIProposalState.ABROGATED,
+      startTimestamp: nextDeadline,
+      endTimestamp: 0,
+      txHash: ""
+    });
+    return history;
+  }
 
   // No abrogation proposal or did not pass
   history.push({
