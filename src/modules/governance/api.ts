@@ -7,6 +7,8 @@ import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 import {getProposalStateCall, ProposalState} from "./contracts/daoGovernance";
 
 const API_URL = config.api.baseUrl;
+const BASE_MULTIPLIER = new BigNumber(10).pow(18);
+const ONE_YEAR = new BigNumber(31556926);
 
 type PaginatedResult<T extends Record<string, any>> = {
   data: T[];
@@ -69,6 +71,30 @@ export type APIVoterEntity = {
   hasActiveDelegation: boolean;
 };
 
+function computeMultiplier(lockedUntil: number, now: number) {
+  if (now >= lockedUntil) {
+    return BASE_MULTIPLIER;
+  }
+
+  let diff = new BigNumber(lockedUntil - now);
+  if (diff.gte(ONE_YEAR)) {
+    return BASE_MULTIPLIER.multipliedBy(new BigNumber(2));
+  }
+  return BASE_MULTIPLIER.plus(diff.multipliedBy(BASE_MULTIPLIER).dividedBy(ONE_YEAR));
+}
+
+function calculateVotingPower(voter: APIVoterEntity): BigNumber {
+  let now = Math.floor(Date.now() / 1000);
+  let ownVotingPower: BigNumber;
+  if (voter.hasActiveDelegation) {
+    ownVotingPower = BigNumber.ZERO;
+  } else {
+    const multiplier = computeMultiplier(voter.lockedUntil, now);
+    ownVotingPower = (new BigNumber(voter.tokensStaked)).multipliedBy(multiplier).dividedBy(BASE_MULTIPLIER);
+  }
+  return ownVotingPower.plus(voter.delegatedPower);
+}
+
 export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVoterEntity>> {
   const client = new ApolloClient({
     uri: config.graph.graphUrl,
@@ -76,7 +102,6 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
   });
 
   // TODO GraphQL sorting does not work since tokensStaked is String!
-  // TODO VotingPower is not accounted yet
   return client
     .query({
 
@@ -113,7 +138,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
           delegatedPower: getHumanValue(new BigNumber(item.delegatedPower), 18),
           votes: item.votes,
           proposals: item.proposals,
-          votingPower: getHumanValue(new BigNumber(item.tokensStaked), 18) // TODO - voting power not calculated yet
+          votingPower: getHumanValue(calculateVotingPower(item), 18)
         })),
         meta: {count: result.data.overview.kernelUsers, block: 0}
       };
