@@ -12,7 +12,7 @@ import TokenInput from 'components/custom/token-input';
 import { Text } from 'components/custom/typography';
 import useMergeState from 'hooks/useMergeState';
 
-import { XyzToken } from '../../../../components/providers/known-tokens-provider';
+import { EnterToken } from '../../../../components/providers/known-tokens-provider';
 import { useDAO } from '../../components/dao-provider';
 
 import { isValidAddress } from 'utils';
@@ -82,9 +82,9 @@ const WalletDelegateView: React.FC = () => {
     <div className="card">
       <Grid className="card-header" flow="col" gap={24} colsTemplate="auto" align="start">
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/universe" width={40} height={40} />
+          <Icon name="png/enterdao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
-            {XyzToken.symbol}
+            {EnterToken.symbol}
           </Text>
         </Grid>
 

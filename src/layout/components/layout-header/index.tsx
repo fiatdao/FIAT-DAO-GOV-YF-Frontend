@@ -14,7 +14,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import { useWarning } from 'components/providers/warning-provider';
 import ConnectedWallet from 'wallets/components/connected-wallet';
 import { MetamaskConnector } from 'wallets/connectors/metamask';
@@ -59,9 +59,9 @@ const LayoutHeader: React.FC = () => {
         await connector.addToken({
           type: 'ERC20',
           options: {
-            address: XyzToken.address,
-            symbol: XyzToken.symbol,
-            decimals: XyzToken.decimals,
+            address: EnterToken.address,
+            symbol: EnterToken.symbol,
+            decimals: EnterToken.decimals,
             image: `${window.location.origin}/android-chrome-192x192.png`,
           },
         });
@@ -74,7 +74,7 @@ const LayoutHeader: React.FC = () => {
   return (
     <div className={s.component} ref={setReferenceElement}>
       <ExternalLink href="https://universe.xyz/" target="_self">
-        <Icon name="png/universe" width="auto" height="auto" className={s.logo} />
+        <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
       </ExternalLink>
       <div className={s.titleDelimiter} />
       <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>

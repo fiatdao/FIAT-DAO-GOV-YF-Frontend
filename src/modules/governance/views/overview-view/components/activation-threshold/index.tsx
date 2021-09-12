@@ -8,7 +8,7 @@ import Icon from 'components/custom/icon';
 import ProgressNew from 'components/custom/progress';
 import { Hint, Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 
 import { useDAO } from '../../../../components/dao-provider';
 
@@ -37,8 +37,8 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Hint
           text={
             <Text type="p2">
-              For the {XyzToken.symbol} to be activated, a threshold of {formatXYZValue(dao.activationThreshold)}{' '}
-              {XyzToken.symbol}
+              For the {EnterToken.symbol} to be activated, a threshold of {formatXYZValue(dao.activationThreshold)}{' '}
+              {EnterToken.symbol}
               tokens staked has to be met.
             </Text>
           }>
@@ -58,9 +58,9 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
           <Icon name="ribbon-outlined" />
         </Grid>
         <Grid flow="col" gap={8} align="center">
-          <Icon name="png/universe" width={32} height={32} />
+          <Icon name="png/enterdao" width={32} height={32} />
           <Text type="p1" weight="bold" color="primary">
-            {formatXYZValue(dao.xyzStaked)}
+            {formatXYZValue(dao.entrStaked)}
           </Text>
           <Text type="p1" weight="semibold" color="secondary">
             / {formatXYZValue(dao.activationThreshold)} already staked.
