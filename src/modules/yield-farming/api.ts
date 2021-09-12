@@ -2,8 +2,6 @@ import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import BigNumber from 'bignumber.js';
 
 import config from 'config';
-import { result } from 'lodash';
-
 import { PaginatedResult } from 'utils/fetch';
 
 export enum APIYFPoolActionType {
