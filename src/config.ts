@@ -10,9 +10,6 @@ const config = {
   graph: {
     graphUrl: `${String(process.env.REACT_APP_BASE_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`,
   },
-  api: {
-    baseUrl: String(process.env.REACT_APP_BASE_API_URL),
-  },
   zapper: {
     baseUrl: String(process.env.REACT_APP_ZAPPER_URL),
     apiKey: String(process.env.REACT_APP_ZAPPER_API_KEY)
