@@ -5,19 +5,19 @@
   // primary regular
   --btn-primary-shadow: 0 10px 20px rgba(136, 120, 172, 0.2);
   --btn-primary-border: 0;
-  --btn-primary-bg: linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-primary-bg: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-primary-text: #000;
 
   // primary hover
   --btn-primary-shadow-hover: 0 10px 20px rgba(136, 120, 172, 0.2);
   --btn-primary-border-hover: none;
-  --btn-primary-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-primary-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-primary-text-hover: #000;
 
   // primary active
   --btn-primary-shadow-active: 0 10px 20px rgba(136, 120, 172, 0.2);
   --btn-primary-border-active: none;
-  --btn-primary-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%), #CC362E;
+  --btn-primary-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%), #CC362E;
   --btn-primary-text-active: #000;
 
   // primary disabled
@@ -29,19 +29,19 @@
   // default regular
   --btn-default-shadow: none;
   --btn-default-border: 0;
-  --btn-default-bg: linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-default-bg: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-default-text: var(--theme-primary-color);
 
   // default hover
   --btn-default-shadow-hover: none;
   --btn-default-border-hover: none;
-  --btn-default-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-default-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-default-text-hover: var(--theme-secondary-color);
 
   // default active
   --btn-default-shadow-active: none;
   --btn-default-border-active: none;
-  --btn-default-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%), #CC362E;
+  --btn-default-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%), #CC362E;
   --btn-default-text-active: var(--theme-primary-color);
 
   // default disabled
@@ -53,19 +53,19 @@
   // ghost regular
   --btn-ghost-shadow: none;
   --btn-ghost-border: 0;
-  --btn-ghost-bg: linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-ghost-bg: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-ghost-text: var(--theme-primary-color);
 
   // ghost hover
   --btn-ghost-shadow-hover: none;
   --btn-ghost-border-hover: none;
-  --btn-ghost-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+  --btn-ghost-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
   --btn-ghost-text-hover: var(--theme-secondary-color);
 
   // ghost active
   --btn-ghost-shadow-active: none;
   --btn-ghost-border-active: none;
-  --btn-ghost-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%), #CC362E;
+  --btn-ghost-bg-active: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%), #CC362E;
   --btn-ghost-text-active: var(--theme-primary-color);
 
   // ghost disabled

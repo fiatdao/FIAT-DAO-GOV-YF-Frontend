@@ -12,7 +12,7 @@ import Grid from 'components/custom/grid';
 import Icon, { IconNames } from 'components/custom/icon';
 import IconsSet from 'components/custom/icons-set';
 import { Hint, Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import { YFPoolID, useYFPools } from 'modules/yield-farming/providers/pools-provider';
@@ -94,7 +94,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               Reward
             </Text>
             <div className="flex flow-col">
-              <Icon name="png/universe" className={s.xyzReward} />
+              <Icon name="png/enterdao" className={s.xyzReward} />
               <Text type="p1" weight="semibold" color="primary">
                 {formatToken(epochReward) ?? '-'}
               </Text>
@@ -106,7 +106,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                 My Potential Reward
               </Text>
               <div className="flex flow-col">
-                <Icon name="png/universe" className={s.xyzReward} />
+                <Icon name="png/enterdao" className={s.xyzReward} />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(potentialReward) ?? '-'}
                 </Text>
@@ -187,7 +187,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               The ${poolMeta?.label} staking pool ended after {totalEpochs} epochs on {formattedEndDate}. Deposits are
               now disabled, but you can still withdraw your tokens and collect any unclaimed rewards.
             </Text>
-            {poolMeta?.tokens.some(tk => tk === XyzToken) && (
+            {poolMeta?.tokens.some(tk => tk === EnterToken) && (
               <Link to="/governance" className="link-gradient">
                 <Text
                   type="p2"
@@ -201,7 +201,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
           </Grid>
         </div>
       )}
-      {poolId === YFPoolID.USDC_XYZ_SLP && !isPoolAvailable && (
+      {poolId === YFPoolID.USDC_ENTR_SLP && !isPoolAvailable && (
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
             <Text type="p2" weight="semibold" color="secondary" className="mb-4">

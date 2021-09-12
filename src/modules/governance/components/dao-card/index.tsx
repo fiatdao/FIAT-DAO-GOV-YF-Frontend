@@ -5,7 +5,7 @@ import { formatPercent, formatToken } from 'web3/utils';
 
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import { UseLeftTime } from 'hooks/useLeftTime';
 import { useDAO } from 'modules/governance/components/dao-provider';
 import { useWallet } from 'wallets/wallet';
@@ -44,12 +44,12 @@ const DaoCard: FC = () => {
       </div>
       <div className="card-row card-row-border p-24">
         <Text type="lb2" weight="semibold" color="secondary">
-          {XyzToken.symbol} Staked
+          {EnterToken.symbol} Staked
         </Text>
         <div className="flex flow-col">
-          <Icon name="png/universe" className="mr-4" />
+          <Icon name="png/enterdao" className="mr-4" />
           <Text type="p1" weight="semibold" color="primary">
-            {formatToken(daoBarn.xyzStaked) ?? '-'}
+            {formatToken(daoBarn.entrStaked) ?? '-'}
           </Text>
         </div>
       </div>
@@ -59,7 +59,7 @@ const DaoCard: FC = () => {
             My Staked Balance
           </Text>
           <div className="flex flow-col">
-            <Icon name="png/universe" className="mr-4" />
+            <Icon name="png/enterdao" className="mr-4" />
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(daoBarn.balance) ?? '-'}
             </Text>
@@ -69,14 +69,14 @@ const DaoCard: FC = () => {
       <div className="card-row card-row-border p-24">
         <div className="flex flow-row">
           <Text type="lb2" weight="semibold" color="secondary" className="mb-4">
-            {XyzToken.symbol} Rewards
+            {EnterToken.symbol} Rewards
           </Text>
           <Text type="p2" color="secondary">
             out of {formatToken(daoReward.poolFeature?.totalAmount)}
           </Text>
         </div>
         <div className="flex flow-col">
-          <Icon name="png/universe" className="mr-4" />
+          <Icon name="png/enterdao" className="mr-4" />
           <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="bold" color="primary">
@@ -89,10 +89,10 @@ const DaoCard: FC = () => {
       {walletCtx.isActive && (
         <div className="card-row card-row-border p-24">
           <Text type="lb2" weight="semibold" color="secondary">
-            My {XyzToken.symbol} Rewards
+            My {EnterToken.symbol} Rewards
           </Text>
           <div className="flex flow-col">
-            <Icon name="png/universe" className="mr-4" />
+            <Icon name="png/enterdao" className="mr-4" />
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(daoReward.claimValue) ?? '-'}
             </Text>

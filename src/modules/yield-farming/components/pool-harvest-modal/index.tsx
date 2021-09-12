@@ -9,7 +9,7 @@ import Grid from 'components/custom/grid';
 import Icon, { IconNames } from 'components/custom/icon';
 import IconsSet from 'components/custom/icons-set';
 import { Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 
 import { useYFPools } from '../../providers/pools-provider';
 
@@ -50,7 +50,7 @@ const PoolHarvestButton: FC<PoolHarvestButtonProps> = props => {
             </Text>
             <Text type="p1" weight="semibold" color="primary" className="mr-4">
               {formatToken(reward, {
-                tokenName: XyzToken.symbol,
+                tokenName: EnterToken.symbol,
               }) ?? '-'}
             </Text>
           </div>
@@ -76,7 +76,7 @@ const PoolHarvestModal: FC<ModalProps> = props => {
       const yfPool = yfPoolsCtx.getYFKnownPoolByName(yfPoolID);
       await yfPool?.contract.claim();
       yfPool?.contract.loadUserData().catch(Error);
-      (XyzToken.contract as Erc20Contract).loadBalance().catch(Error);
+      (EnterToken.contract as Erc20Contract).loadBalance().catch(Error);
     } catch (e) {}
 
     setHarvesting(prevState => {
@@ -102,7 +102,7 @@ const PoolHarvestModal: FC<ModalProps> = props => {
               key={yfPool.name}
               icons={yfPool.icons}
               label={yfPool.label}
-              reward={yfPool.contract.toClaim?.unscaleBy(XyzToken.decimals)}
+              reward={yfPool.contract.toClaim?.unscaleBy(EnterToken.decimals)}
               loading={harvesting.get(yfPool.name) === true}
               onClick={() => handleHarvest(yfPool.name)}
             />

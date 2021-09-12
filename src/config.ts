@@ -19,27 +19,27 @@ const config = {
   },
   tokens: {
     usdc: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ADDR),
-    xyz: toLowerCase(process.env.REACT_APP_TOKEN_XYZ_ADDR),
+    entr: toLowerCase(process.env.REACT_APP_TOKEN_ENTR_ADDR),
+    mana: toLowerCase(process.env.REACT_APP_TOKEN_MANA_ADDR),
     bond: toLowerCase(process.env.REACT_APP_TOKEN_BOND_ADDR),
-    aave: toLowerCase(process.env.REACT_APP_TOKEN_AAVE_ADDR),
-    comp: toLowerCase(process.env.REACT_APP_TOKEN_COMP_ADDR),
+    xyz: toLowerCase(process.env.REACT_APP_TOKEN_XYZ_ADDR),
+    sand: toLowerCase(process.env.REACT_APP_TOKEN_SAND_ADDR),
     snx: toLowerCase(process.env.REACT_APP_TOKEN_SNX_ADDR),
-    sushi: toLowerCase(process.env.REACT_APP_TOKEN_SUSHI_ADDR),
-    link: toLowerCase(process.env.REACT_APP_TOKEN_LINK_ADDR),
+    axs: toLowerCase(process.env.REACT_APP_TOKEN_AXS_ADDR),
     ilv: toLowerCase(process.env.REACT_APP_TOKEN_ILV_ADDR),
-    usdcXyzSLP: toLowerCase(process.env.REACT_APP_TOKEN_USDC_XYZ_SLP_ADDR),
+    usdcEntrSLP: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ENTR_SUSHI_LP),
   },
   contracts: {
     yf: {
       staking: toLowerCase(process.env.REACT_APP_CONTRACT_YF_STAKING_ADDR),
+      mana: toLowerCase(process.env.REACT_APP_CONTRACT_YF_MANA_ADDR),
       bond: toLowerCase(process.env.REACT_APP_CONTRACT_YF_BOND_ADDR),
-      aave: toLowerCase(process.env.REACT_APP_CONTRACT_YF_AAVE_ADDR),
-      comp: toLowerCase(process.env.REACT_APP_CONTRACT_YF_COMP_ADDR),
+      xyz: toLowerCase(process.env.REACT_APP_CONTRACT_YF_XYZ_ADDR),
+      sand: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SAND_ADDR),
       snx: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SNX_ADDR),
-      sushi: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SUSHI_ADDR),
-      link: toLowerCase(process.env.REACT_APP_CONTRACT_YF_LINK_ADDR),
+      axs: toLowerCase(process.env.REACT_APP_CONTRACT_YF_AXS_ADDR),
       ilv: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ILV_ADDR),
-      usdcXyzSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_USDC_XYZ_SLP_ADDR),
+      usdcEntrSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_USDC_ENTR_SUSHI_LP),
     },
     dao: {
       governance: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),
@@ -79,8 +79,8 @@ const config = {
   },
 };
 
-export const XYZ_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.usdc}&outputCurrency=${config.tokens.xyz}`;
+export const XYZ_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.usdc}&outputCurrency=${config.tokens.entr}`;
 
-export const XYZ_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.usdc}/${config.tokens.xyz}`;
+export const XYZ_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.usdc}/${config.tokens.entr}`;
 
 export default config;

@@ -11,7 +11,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
@@ -44,7 +44,7 @@ const WalletWithdrawView: React.FC = () => {
   const [state, setState] = useMergeState<WalletWithdrawViewState>(InitialState);
 
   const { balance: stakedBalance, userLockedUntil } = daoCtx.daoBarn;
-  const xyzBalance = (XyzToken.contract as Erc20Contract).balance?.unscaleBy(XyzToken.decimals);
+  const xyzBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
   const hasStakedBalance = stakedBalance?.gt(ZERO_BIG_NUMBER);
   const formDisabled = !hasStakedBalance || isLocked;
@@ -62,7 +62,7 @@ const WalletWithdrawView: React.FC = () => {
       await daoCtx.daoBarn.actions.withdraw(amount, gasPrice.value);
       form.setFieldsValue(InitialFormValues);
       daoCtx.daoBarn.reload();
-      (XyzToken.contract as Erc20Contract).loadBalance().catch(Error);
+      (EnterToken.contract as Erc20Contract).loadBalance().catch(Error);
     } catch {}
 
     setState({ saving: false });
@@ -72,9 +72,9 @@ const WalletWithdrawView: React.FC = () => {
     <div className="card">
       <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/universe" width={40} height={40} />
+          <Icon name="png/enterdao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
-            {XyzToken.symbol}
+            {EnterToken.symbol}
           </Text>
         </Grid>
 
@@ -109,10 +109,10 @@ const WalletWithdrawView: React.FC = () => {
             <Grid flow="row" gap={32}>
               <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                 <TokenAmount
-                  tokenIcon="png/universe"
-                  name={XyzToken.symbol}
+                  tokenIcon="png/enterdao"
+                  name={EnterToken.symbol}
                   max={stakedBalance}
-                  maximumFractionDigits={XyzToken.decimals}
+                  maximumFractionDigits={EnterToken.decimals}
                   displayDecimals={4}
                   disabled={formDisabled || state.saving}
                   slider

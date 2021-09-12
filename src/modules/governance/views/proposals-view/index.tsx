@@ -11,7 +11,7 @@ import ExternalLink from 'components/custom/externalLink';
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { XyzToken } from 'components/providers/known-tokens-provider';
+import { EnterToken } from 'components/providers/known-tokens-provider';
 import useMergeState from 'hooks/useMergeState';
 import ProposalsProvider, { useProposals } from 'modules/governance/views/proposals-view/providers/ProposalsProvider';
 import { useWallet } from 'wallets/wallet';
@@ -93,7 +93,7 @@ const ProposalsViewInner: React.FC = () => {
                         <li>
                           <Text type="p2" weight="semibold" color="primary">
                             You don’t have enough voting power to create a proposal. The creator of a proposal needs to
-                            have a voting power of at least {daoCtx.minThreshold}% of the amount of ${XyzToken.symbol}{' '}
+                            have a voting power of at least {daoCtx.minThreshold}% of the amount of ${EnterToken.symbol}{' '}
                             staked in the DAO.
                           </Text>
                         </li>
