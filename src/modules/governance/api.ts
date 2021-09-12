@@ -76,13 +76,12 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
     cache: new InMemoryCache(),
   });
 
-  // TODO GraphQL sorting does not work since tokensStaked is String!
   return client
     .query({
 
       query: gql`
       query GetVoters ($limit: Int, $offset: Int) {
-        voters (first: $limit, skip: $offset){
+        voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc){
           id
           tokensStaked
           lockedUntil
@@ -384,7 +383,7 @@ export function fetchProposalVoters(
     .query({
       query: gql`
         query GetVotes ($proposalId: String, $limit: Int, $offset: Int, $support: Boolean) {
-          votes (proposalId: $proposalId, first: $limit, skip: $offset, where: {${(support != undefined) ? "support: $support" : ""}}) {
+          votes (proposalId: $proposalId, first: $limit, skip: $offset, orderBy: _powerWithoutDecimals, orderDirection: desc where: {${(support != undefined) ? "support: $support" : ""}}) {
             address
             support
             blockTimestamp
