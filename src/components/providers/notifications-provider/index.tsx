@@ -203,18 +203,8 @@ export function fetchNotifications({
   target?: string;
   timestamp?: number | null;
 }): Promise<NotificationType[]> {
-  const url = new URL('/api/notifications/list', config.api.baseUrl);
-  if (target) {
-    url.searchParams.set('target', target);
-  }
-
-  if (timestamp) {
-    url.searchParams.set('timestamp', String(timestamp));
-  }
-
-  return fetch(url.toString())
-    .then(result => result.json())
-    .then(result => result.data ?? []);
+  // TODO Notifications not supported
+  return new Promise<NotificationType[]>(resolve => {});
 }
 
 const notificationsNode = document.querySelector('#notifications-root');
