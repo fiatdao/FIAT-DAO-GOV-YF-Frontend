@@ -9,7 +9,6 @@
     "clean": "rimraf build/",
     "prebuild": "npm run clean",
     "build": "GENERATE_SOURCEMAP=false node ./scripts/build-non-split.js",
-    "build:test": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=.env.test.local",
     "build:prod": "react-scripts build",
     "start": "react-scripts start",
     "start:test": "node -r dotenv/config ./node_modules/.bin/react-scripts start dotenv_config_path=.env.test.local",
