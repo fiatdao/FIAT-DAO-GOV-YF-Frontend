@@ -118,7 +118,8 @@ const PoolRewards: React.FC = () => {
               </Grid>
             </>
           )}
-          <Divider type="vertical" />
+          {/* ToDo: Airdrop grid, uncomment when needed */}
+          {/* <Divider type="vertical" />
           <Grid flow="row" gap={2} className={s.item3}>
             <Grid flow="col" gap={8} align="center">
               <Hint text="You have claimable tokens from the $XYZ Airdrop. This balance will rise over time and as more people exit the pool and forfeit their additional rewards. Warning: You can only claim once.">
@@ -145,7 +146,7 @@ const PoolRewards: React.FC = () => {
                 </button>
               )}
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
       {harvestModalVisible && <PoolHarvestModal onCancel={() => showHarvestModal(false)} />}

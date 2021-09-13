@@ -174,8 +174,9 @@ const ConnectedWallet: React.FC = () => {
 
   return (
     <Grid flow="col" gap={20} justify="center" align="center">
-      <NotificationSection />
-      <Divider type="vertical" style={{ minHeight: 28 }} />
+      {/* ToDo: NotificationSection, uncomment if needed */}
+      {/* <NotificationSection /> */}
+      {/* <Divider type="vertical" style={{ minHeight: 28 }} /> */}
       {AccountSection}
     </Grid>
   );
