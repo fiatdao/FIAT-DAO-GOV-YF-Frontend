@@ -187,7 +187,7 @@ const AbrogationVoteModal: React.FC<AbrogationVoteModalProps> = props => {
         <Grid flow="row" gap={32} className={s.row}>
           {voteState === VoteAbrogationState.VoteInitiate && (
             <Form.Item name="description" label="Description" rules={[{ required: true, message: 'Required' }]}>
-              <Textarea placeholder="Placeholder" rows={4} disabled={state.submitting} />
+              <Textarea placeholder="Description" rows={4} disabled={state.submitting} />
             </Form.Item>
           )}
           {voteState === VoteAbrogationState.VoteChange && (
