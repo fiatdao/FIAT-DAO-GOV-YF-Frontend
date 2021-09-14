@@ -16479,7 +16479,7 @@ textarea.ant-mentions {
 }
 .ant-modal-content {
   position: relative;
-  background-color: #fff;
+  background-color: var(--theme-body-color);
   background-clip: padding-box;
   border: 0;
   border-radius: 4px;

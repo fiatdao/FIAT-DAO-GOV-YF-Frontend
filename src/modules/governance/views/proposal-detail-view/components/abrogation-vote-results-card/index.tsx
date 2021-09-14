@@ -26,7 +26,7 @@ const AbrogationVoteResultsCard: React.FC = () => {
         <Grid className="card-row p-24" flow="row">
           <Grid flow="col" justify="space-between">
             <Grid flow="row" gap={4}>
-              <Text type="small" weight="semibold" color="secondary">
+              <Text className="card-label" type="small" weight="semibold" color="secondary">
                 For
               </Text>
               <Grid flow="col" gap={8}>
@@ -39,7 +39,7 @@ const AbrogationVoteResultsCard: React.FC = () => {
               </Grid>
             </Grid>
             <Grid flow="row" gap={4} align="end">
-              <Text type="small" weight="semibold" color="secondary" align="right">
+              <Text className="card-label" type="small" weight="semibold" color="secondary" align="right">
                 Against
               </Text>
               <Grid flow="col" gap={8}>
