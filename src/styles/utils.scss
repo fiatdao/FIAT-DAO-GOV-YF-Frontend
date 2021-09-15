@@ -61,8 +61,9 @@
 
 .card {
   background-color: var(--theme-card-color);
-  border-radius: 12px;
+  border-radius: 4px;
   box-shadow: var(--theme-card-shadow);
+  border: 1px solid var(--theme-overlay-color);
 
   .card-row {
     display: flex;

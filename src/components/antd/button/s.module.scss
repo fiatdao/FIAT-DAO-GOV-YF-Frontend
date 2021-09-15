@@ -118,8 +118,8 @@
   --btn-select-border: 1px solid var(--btn-primary-border);
   --btn-select-border-hover: 1px solid var(--btn-primary-border-active);
   --btn-select-border-active: 1px solid var(--btn-primary-border-active);
-  --btn-select-bg: #202529;
-  --btn-select-bg-hover: #202529;
+  --btn-select-bg: #1F1B59;
+  --btn-select-bg-hover: #1F1B59;
 }
 
 .component:global(.ant-btn) {
@@ -198,7 +198,7 @@
         bottom: -1px;
         display: block;
         position: absolute;
-        background: linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+        background: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
         border-radius: 12px;
         z-index: 0 !important;
       }
@@ -294,7 +294,7 @@
         bottom: -1px;
         display: block;
         position: absolute;
-        background: linear-gradient(135deg, #BCEB00 15.57%, #00EAEA 84.88%);
+        background: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
         border-radius: 12px;
         z-index: 0 !important;
       }

@@ -1,5 +1,5 @@
 .footer {
-  background: #000;
+  background: #080629;
   grid-area: footer;
   margin-top: auto;
 
@@ -61,9 +61,9 @@
     height: 50px;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    background: #131044;
+    border: 1px solid #2E2978;
+    border-radius: 4px;
     color: #fff;
 
     @media (max-width: 768px) {
@@ -184,13 +184,13 @@
 
   .subscribeWrap {
     position: relative;
-    margin-top: 14px;
+    margin-top: 12px;
 
     .subscribeInput {
       background: #fff;
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
-      border-radius: 14px;
+      border-radius: 4px;
       font-family: inherit;
       font-size: 16px;
       font-style: normal;
@@ -210,7 +210,8 @@
     .subscribeButton {
       position: absolute;
       top: 50%;
-      right: 4px;
+      right: 8px;
+      padding: 8px;
       transform: translate(0, -50%);
 
       @media (max-width: 767px) {
