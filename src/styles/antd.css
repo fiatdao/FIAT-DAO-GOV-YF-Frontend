@@ -318,7 +318,7 @@ mark {
 }
 ::selection {
   color: #fff;
-  background: var(--gradient-green-safe);
+  background: var(--theme-selection-color);
 }
 .clearfix::before {
   display: table;

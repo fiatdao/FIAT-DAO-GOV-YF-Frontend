@@ -5,7 +5,7 @@
   display: flex;
   padding: 12px var(--horizontal-padding);
   position: relative;
-
+  box-shadow: var(--theme-header-shadow);
 
   @media (max-width: 1024px) {
     padding: 24px 12px;
