@@ -62,7 +62,7 @@ const LayoutHeader: React.FC = () => {
             address: EnterToken.address,
             symbol: EnterToken.symbol,
             decimals: EnterToken.decimals,
-            image: `${window.location.origin}/android-chrome-192x192.png`,
+            image: `${window.location.origin}/enterdao.png`,
           },
         });
       } catch (e) {
@@ -73,7 +73,7 @@ const LayoutHeader: React.FC = () => {
 
   return (
     <div className={s.component} ref={setReferenceElement}>
-      <ExternalLink href="https://universe.xyz/" target="_self">
+      <ExternalLink href="https://enterdao.xyz/" target="_self">
         <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
       </ExternalLink>
       <div className={s.titleDelimiter} />
