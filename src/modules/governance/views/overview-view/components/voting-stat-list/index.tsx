@@ -169,7 +169,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
               </Text>
             </Grid>
             <Text type="p1" color="secondary">
-              {overview?.kernelUsers} stakers & {overview?.voters} voters
+              {overview?.kernelUsers} stakers
             </Text>
           </Grid>
         </Grid>
