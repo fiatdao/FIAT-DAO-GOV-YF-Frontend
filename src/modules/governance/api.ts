@@ -17,7 +17,6 @@ type PaginatedResult<T extends Record<string, any>> = {
 export type APIOverviewData = {
   avgLockTimeSeconds: number;
   totalDelegatedPower: BigNumber;
-  TotalVKek: BigNumber;
   holders: number;
   holdersStakingExcluded: number;
   voters: number;
@@ -47,8 +46,7 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
       console.log(result);
       return {
         ...result.data.overview,
-        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18),
-        TotalVKek: BigNumber.ZERO, //TODO not supported
+        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18)
       }
     })
     .catch(e => {
@@ -79,7 +77,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
 
       query: gql`
       query GetVoters ($limit: Int, $offset: Int) {
-        voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc){
+        voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc, where:{isKernelUser:true}){
           id
           tokensStaked
           lockedUntil
@@ -367,6 +365,19 @@ export type APIVoteEntity = {
   blockTimestamp: number;
 };
 
+function computeCountBasedOnFilter(support: boolean | undefined, proposal: any) {
+  if (support == undefined) {
+    // No Filter applied
+    return proposal.votesCount
+  } else if (support) {
+    // Filter for "For Votes"
+    return proposal.forVotesCount;
+  } else {
+    // Filter for "Against Votes"
+    return proposal.againstVotesCount;
+  }
+}
+
 export function fetchProposalVoters(
   proposalId: number,
   page = 1,
@@ -383,6 +394,8 @@ export function fetchProposalVoters(
         query GetProposalVotes ($proposalId: String, $limit: Int, $offset: Int, $support: Boolean) {
           proposal (id: $proposalId) {
             votesCount
+            forVotesCount
+            againstVotesCount
             votingHistory (first: $limit, skip: $offset, orderBy: _powerWithoutDecimals, orderDirection: desc where: {${(support != undefined) ? "support: $support" : ""}}) {
               address
               support
@@ -400,12 +413,12 @@ export function fetchProposalVoters(
       },
     })
     .then(result => {
-      return {
+    return {
         data: (result.data.proposal.votingHistory ?? []).map((item: any) => ({
           ...item,
           power: getHumanValue(new BigNumber(item.power), 18)!
         })),
-        meta: {count: result.data.proposal.votesCount, block: 0}
+        meta: {count: computeCountBasedOnFilter(support, result.data.proposal), block: 0}
       }
     })
     .catch(e => {
@@ -487,6 +500,8 @@ export function fetchAbrogationVoters(
       query GetAbrogationVotes ($apId: String, $limit: Int, $offset: Int, $support: Boolean) {
         abrogationProposal (id: $apId) {
           votesCount
+          forVotesCount
+          againstVotesCount
           votingHistory (first: $limit, skip: $offset, orderBy: _powerWithoutDecimals, orderDirection: desc where: {${(support != undefined) ? "support: $support" : ""}}) {
             address
             support
@@ -510,7 +525,7 @@ export function fetchAbrogationVoters(
         ...item,
         power: getHumanValue(new BigNumber(item.power), 18)!
       })),
-      meta: {count: result.data.abrogationProposal.votesCount, block: 0}
+      meta: {count: computeCountBasedOnFilter(support, result.data.abrogationProposal), block: 0}
     }
   })
   .catch(e => {
