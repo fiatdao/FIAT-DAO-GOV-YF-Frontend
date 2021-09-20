@@ -108,7 +108,7 @@ export const IlvYfPool: YFPoolMeta = {
 export const UsdcEntrSLPYfPool: YFPoolMeta = {
   name: YFPoolID.USDC_ENTR_SLP,
   label: 'USDC_ENTR_SUSHI_LP',
-  icons: ['png/uslp'],
+  icons: ['png/eslp'],
   colors: ['var(--theme-red-color)'],
   tokens: [UsdcEntrSLPToken],
   contract: new YfPoolContract(config.contracts.yf.usdcEntrSLP),

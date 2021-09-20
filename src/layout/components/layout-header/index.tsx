@@ -223,7 +223,7 @@ const LayoutHeader: React.FC = () => {
       {!isMobile && wallet.isActive && wallet.connector?.id === 'metamask' && (
         <div className={s.addTokenWrapper}>
           <button type="button" onClick={handleAddProjectToken} className={s.addTokenButton}>
-            <Icon name="static/add-token" width={28} height={28} />
+            <Icon name="png/add-enter" width={32} height={32} />
           </button>
         </div>
       )}

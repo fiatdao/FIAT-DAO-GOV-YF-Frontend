@@ -21,7 +21,7 @@ const DaoCard: FC = () => {
     <div className="card">
       <div className={cn('card-header', s.cardTitleContainer)}>
         <div className={s.cardTitleTexts}>
-          <Icon name="static/uStar" width={40} height={40} className="mr-4" />
+          <Icon name="png/enter-star" width={40} height={40} className="mr-4" />
           <Text type="p1" weight="semibold" color="primary" ellipsis>
             DAO Rewards
           </Text>

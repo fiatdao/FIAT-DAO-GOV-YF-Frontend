@@ -139,7 +139,7 @@ export const UsdcEntrSLPToken: TokenMeta = {
   symbol: KnownTokens.USDC_ENTR_SLP,
   name: 'USDC ENTR SUSHI LP',
   decimals: 18,
-  icon: 'png/uslp',
+  icon: 'png/eslp',
   contract: new Erc20Contract([], config.tokens.usdcEntrSLP),
 };
 
