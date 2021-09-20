@@ -6,11 +6,14 @@ import ilvSrc from 'resources/png/token-ilv.png';
 import linkSrc from 'resources/png/token-link.png';
 import sushiSrc from 'resources/png/token-sushi.png';
 import uslpSrc from 'resources/png/token-uslp.png';
+import eslpSrc from 'resources/png/token-eslp.png';
 import universeSrc from 'resources/png/universe.png';
 import enterdaoSrc from 'resources/png/enterdao.png';
 import manaSrc from 'resources/png/mana.png';
 import sandSrc from 'resources/png/sandbox.png';
 import axsSrc from 'resources/png/axie.png';
+import addEnterSrc from 'resources/png/add-enter.png';
+import enterStarSrc from 'resources/png/enter-star.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
@@ -37,6 +40,7 @@ export type TokenIconNames =
   | 'token-usdt'
   | 'token-snx'
   | 'compound'
+  | 'png/enter-star'
   | 'png/universe'
   | 'png/mana'
   | 'png/sandbox'
@@ -46,6 +50,7 @@ export type TokenIconNames =
   | 'png/link'
   | 'png/ilv'
   | 'png/uslp'
+  | 'png/eslp'
   | 'cream_finance'
   | 'yearn_finance';
 
@@ -155,6 +160,7 @@ export type IconNames =
   | 'medium'
   | 'polymorphs'
   | 'core-drops'
+  | 'png/add-enter'
   | 'static/add-token';
 
 export type IconProps = {
@@ -197,6 +203,12 @@ const Icon: React.FC<IconProps> = props => {
           return sushiSrc;
         case 'png/uslp':
           return uslpSrc;
+        case 'png/eslp':
+          return eslpSrc;
+        case 'png/add-enter':
+          return addEnterSrc;
+        case 'png/enter-star':
+          return enterStarSrc;
         default:
           return '';
       }
