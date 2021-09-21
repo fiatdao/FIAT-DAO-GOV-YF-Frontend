@@ -36,6 +36,10 @@ const LayoutFooter: React.FC = () => {
     setLoading(false);
   };
 
+  const getYear = () => {
+    return new Date().getFullYear();
+  }
+
   return (
     <footer className={s.footer}>
       <div className="container-limit">
@@ -92,44 +96,10 @@ const LayoutFooter: React.FC = () => {
               <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
             </Link>
             <Text type="p1" color="white">
-              Launch your own community-driven NFT universe baked with social tools, media services, and distribution -
-              underpinned by the native $XYZ token.
+              EnterDAO is a decentralized autonomous organization (DAO) living on the Ethereum blockchain - governed by the ENTR token.
             </Text>
           </div>
           <div className={s.navBlocksWrap}>
-            <nav className={s.navBlock}>
-              <Text type="p1" color="white" font="secondary" className={s.navTitle}>
-                Products
-              </Text>
-              <span className={s.link} aria-disabled="true">
-                <Tooltip title="Coming soon" placement="top" hint>
-                  Auction house
-                </Tooltip>
-              </span>
-              <span className={s.link} aria-disabled="true">
-                <Tooltip title="Coming soon" placement="top" hint>
-                  NFT marketplace
-                </Tooltip>
-              </span>
-              <span className={s.link} aria-disabled="true">
-                <Tooltip title="Coming soon" placement="top" hint>
-                  Social media
-                </Tooltip>
-              </span>
-            </nav>
-            <nav className={s.navBlock}>
-              <Text type="p1" color="white" font="secondary" className={s.navTitle}>
-                NFT Drops
-              </Text>
-              <ExternalLink href="https://universe.xyz/polymorphs" className={s.link}>
-                Polymorphs
-              </ExternalLink>
-              <span className={s.link} aria-disabled="true">
-                <Tooltip title="Coming soon" placement="top" hint>
-                  Core Drops
-                </Tooltip>
-              </span>
-            </nav>
             <nav className={s.navBlock}>
               <Text type="p1" color="white" font="secondary" className={s.navTitle}>
                 Info
@@ -161,15 +131,7 @@ const LayoutFooter: React.FC = () => {
           </div>
         </div>
         <div className={cn(s.row, s.copyrightsBlock)}>
-          <div className={s.copyrightLink}>Universe.xyz © 2021. Open-sourced.</div>
-          <div className={s.copyrightLinks}>
-            <ExternalLink href={XYZ_MARKET_LINK} className={s.copyrightLink}>
-              SushiSwap USDC/XYZ market
-            </ExternalLink>
-            <ExternalLink href={XYZ_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
-              Add liquidity to SushiSwap USDC/XYZ pool
-            </ExternalLink>
-          </div>
+          <div className={s.copyrightLink}>Enterdao.xyz © {getYear()}. Open-sourced.</div>
         </div>
       </div>
     </footer>
