@@ -81,73 +81,6 @@ const LayoutHeader: React.FC = () => {
 
       <nav className={s.nav}>
         <Popover
-          visible={popper1visible}
-          onVisibleChange={setPopper1visible}
-          trigger={['click', 'hover']}
-          noPadding
-          content={
-            <div className={cn('card', s.dropdown)}>
-              <span className={s.dropdownLink} aria-disabled="true">
-                <Icon name="auction" width={20} height={20} className={s.dropdownIcon} />
-                <Tooltip title="Coming soon" placement="top" hint>
-                  <span>Auction house</span>
-                </Tooltip>
-              </span>
-              <span className={s.dropdownLink} aria-disabled="true">
-                <Icon name="marketplace" width={20} height={20} className={s.dropdownIcon} />
-                <Tooltip title="Coming soon" placement="top" hint>
-                  <span>NFT marketplace</span>
-                </Tooltip>
-              </span>
-              <span className={s.dropdownLink} aria-disabled="true">
-                <Icon name="social-media" width={20} height={20} className={s.dropdownIcon} />
-                <Tooltip title="Coming soon" placement="top" hint>
-                  <span>Social media</span>
-                </Tooltip>
-              </span>
-            </div>
-          }>
-          <Button type="link" className={s.navLink}>
-            <Grid flow="col" align="center">
-              <Text type="p1" weight="500" color="primary" className="mr-4">
-                Products
-              </Text>
-              <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />
-            </Grid>
-          </Button>
-        </Popover>
-        <Popover
-          visible={popper4visible}
-          onVisibleChange={setPopper4visible}
-          trigger={['click', 'hover']}
-          noPadding
-          content={
-            <div className={cn('card', s.dropdown)}>
-              <ExternalLink
-                href="https://universe.xyz/polymorphs"
-                className={s.dropdownLink}
-                onClick={() => setPopper4visible(false)}>
-                <Icon name="polymorphs" width={20} height={20} className={s.dropdownIcon} />
-                <span>Polymorphs</span>
-              </ExternalLink>
-              <span className={s.dropdownLink} aria-disabled="true">
-                <Icon name="core-drops" width={20} height={20} className={s.dropdownIcon} />
-                <Tooltip title="Coming soon" placement="top" hint>
-                  <span>Core drops</span>
-                </Tooltip>
-              </span>
-            </div>
-          }>
-          <Button type="link" className={s.navLink}>
-            <Grid flow="col" align="center">
-              <Text type="p1" weight="500" color="primary" className="mr-4">
-                🔥 NFT drops
-              </Text>
-              <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />
-            </Grid>
-          </Button>
-        </Popover>
-        <Popover
           visible={popper2visible}
           onVisibleChange={setPopper2visible}
           trigger={['click', 'hover']}
@@ -247,43 +180,6 @@ const LayoutHeader: React.FC = () => {
             {...attributes.popper}>
             <div className={s.mobileInner}>
               <div className={s.mobileMenuInner}>
-                <div className={s.mobileMenuBlock}>
-                  <h3>Products</h3>
-                  <span className={s.dropdownLink} aria-disabled="true">
-                    <Icon name="auction" width={20} height={20} className={s.dropdownIcon} />
-                    <Tooltip title="Coming soon" placement="top" hint>
-                      <span>Auction house</span>
-                    </Tooltip>
-                  </span>
-                  <span className={s.dropdownLink} aria-disabled="true">
-                    <Icon name="marketplace" width={20} height={20} className={s.dropdownIcon} />
-                    <Tooltip title="Coming soon" placement="top" hint>
-                      <span>NFT marketplace</span>
-                    </Tooltip>
-                  </span>
-                  <span className={s.dropdownLink} aria-disabled="true">
-                    <Icon name="social-media" width={20} height={20} className={s.dropdownIcon} />
-                    <Tooltip title="Coming soon" placement="top" hint>
-                      <span>Social media</span>
-                    </Tooltip>
-                  </span>
-                </div>
-                <div className={s.mobileMenuBlock}>
-                  <h3>NFT drops</h3>
-                  <ExternalLink
-                    href="https://universe.xyz/polymorphs"
-                    className={s.dropdownLink}
-                    onClick={() => setNavOpen(false)}>
-                    <Icon name="polymorphs" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Polymorphs</span>
-                  </ExternalLink>
-                  <span className={s.dropdownLink} aria-disabled="true">
-                    <Icon name="core-drops" width={20} height={20} className={s.dropdownIcon} />
-                    <Tooltip title="Coming soon" placement="top" hint>
-                      <span>Core drops</span>
-                    </Tooltip>
-                  </span>
-                </div>
                 <div className={s.mobileMenuBlock}>
                   <h3>Info</h3>
                   <ExternalLink
