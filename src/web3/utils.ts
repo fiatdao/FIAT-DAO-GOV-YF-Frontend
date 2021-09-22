@@ -281,11 +281,11 @@ export function formatUSDValue(value?: BigNumber | number, decimals = 2, minDeci
   return val.isPositive() ? `$${formattedValue}` : `-$${formattedValue}`;
 }
 
-export function formatXYZValue(value?: BigNumber): string {
+export function formatEntrValue(value?: BigNumber): string {
   return formatBigValue(value, 4);
 }
 
-export function isSmallXYZValue(value?: BigNumber): boolean {
+export function isSmallEntrValue(value?: BigNumber): boolean {
   return !!value && value.gt(ZERO_BIG_NUMBER) && value.lt(0.0001);
 }
 

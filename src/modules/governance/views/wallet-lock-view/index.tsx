@@ -12,7 +12,7 @@ import isBefore from 'date-fns/isBefore';
 import isSameDay from 'date-fns/isSameDay';
 import isSameHour from 'date-fns/isSameHour';
 import setDate from 'date-fns/set';
-import { ZERO_BIG_NUMBER, formatXYZValue } from 'web3/utils';
+import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
 import Button from 'components/antd/button';
@@ -158,7 +158,7 @@ const WalletLockView: React.FC = () => {
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
-            {formatXYZValue(stakedBalance)}
+            {formatEntrValue(stakedBalance)}
           </Text>
         </Grid>
 

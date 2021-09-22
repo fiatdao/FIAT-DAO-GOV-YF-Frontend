@@ -80,7 +80,7 @@ const DaoCard: FC = () => {
           <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="bold" color="primary">
-                {formatToken(daoReward.actions.getXYZRewards())}
+                {formatToken(daoReward.actions.getEntrRewards())}
               </Text>
             )}
           </UseLeftTime>

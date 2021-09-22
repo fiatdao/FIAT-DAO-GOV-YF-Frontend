@@ -31,7 +31,7 @@ const PoolStatistics: FC = () => {
   const [claiming, setClaiming] = useState(false);
   const [confirmClaimVisible, setConfirmClaimVisible] = useState(false);
 
-  const xyzContract = EnterToken.contract as Erc20Contract;
+  const entrContract = EnterToken.contract as Erc20Contract;
   const activeContract = activeToken?.contract as Erc20Contract;
 
   if (!walletCtx.isActive || !poolMeta) {
@@ -57,7 +57,7 @@ const PoolStatistics: FC = () => {
 
     try {
       await poolMeta.contract.claim(args.gasPrice);
-      xyzContract.loadBalance().catch(Error);
+      entrContract.loadBalance().catch(Error);
       (poolMeta.contract as YfPoolContract).loadUserData().catch(Error);
     } catch {}
 
@@ -82,7 +82,7 @@ const PoolStatistics: FC = () => {
             <div className="flex align-center">
               <Icon name={EnterToken.icon!} width={16} height={16} className="mr-8" />
               <Text type="p1" weight="semibold" color="primary">
-                {formatToken(xyzContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>
             </div>
           </div>

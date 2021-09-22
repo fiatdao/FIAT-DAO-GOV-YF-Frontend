@@ -203,7 +203,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 // ToDo: Check the ENTR price calculation
-async function getXyzPrice(): Promise<BigNumber> {
+async function getEntrPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
@@ -211,26 +211,26 @@ async function getXyzPrice(): Promise<BigNumber> {
     { method: 'getReserves' },
   ]);
 
-  let xyzReserve;
+  let entrReserve;
   let usdcReserve;
 
   if (String(token0).toLowerCase() === EnterToken.address) {
-    xyzReserve = new BigNumber(reserve0).unscaleBy(EnterToken.decimals);
+    entrReserve = new BigNumber(reserve0).unscaleBy(EnterToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    xyzReserve = new BigNumber(reserve1).unscaleBy(EnterToken.decimals);
+    entrReserve = new BigNumber(reserve1).unscaleBy(EnterToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
-  if (!usdcReserve || !xyzReserve || xyzReserve.eq(BigNumber.ZERO)) {
+  if (!usdcReserve || !entrReserve || entrReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  return usdcReserve.dividedBy(xyzReserve);
+  return usdcReserve.dividedBy(entrReserve);
 }
 
 // ToDo: Check the SLP price calculation
-async function getUsdcXyzSLPPrice(): Promise<BigNumber> {
+async function getUsdcEntrSLPPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
@@ -318,8 +318,8 @@ const KnownTokensProvider: FC = props => {
     (EnterToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      EnterToken.price = await getXyzPrice().catch(() => undefined);
-      UsdcEntrSLPToken.price = await getUsdcXyzSLPPrice().catch(() => undefined);
+      EnterToken.price = await getEntrPrice().catch(() => undefined);
+      UsdcEntrSLPToken.price = await getUsdcEntrSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
@@ -358,7 +358,7 @@ const KnownTokensProvider: FC = props => {
       token.contract?.setAccount(wallet.account);
     });
 
-    // load xyz balance for connected wallet
+    // load entr balance for connected wallet
     if (wallet.account) {
       (EnterToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }

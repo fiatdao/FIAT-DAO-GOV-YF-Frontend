@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { formatToken, formatUSD, formatXYZValue } from 'web3/utils';
+import { formatToken, formatUSD, formatEntrValue } from 'web3/utils';
 
 import ExternalLink from 'components/custom/externalLink';
 import Grid from 'components/custom/grid';
@@ -69,7 +69,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                   This counter shows the average amount of time ${EnterToken.symbol} stakers locked their deposits in
                   order to take advantage of the voting power bonus.
                 </Text>
-                <ExternalLink href="https://docs.universe.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                <ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
                 </ExternalLink>
               </Grid>
@@ -107,7 +107,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             <UseLeftTime end={(daoCtx.daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
               {() => (
                 <Text type="h2" weight="bold" color="primary">
-                  {formatToken(daoCtx.daoReward.actions.getXYZRewards())}
+                  {formatToken(daoCtx.daoReward.actions.getEntrRewards())}
                 </Text>
               )}
             </UseLeftTime>
@@ -126,7 +126,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                 <Text type="p2">
                   This number shows the amount of v{EnterToken.symbol} that is delegated to other addresses.
                 </Text>
-                <ExternalLink href="https://docs.universe.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                <ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
                 </ExternalLink>
               </Grid>
@@ -137,10 +137,10 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
           </Hint>
           <Grid flow="row" gap={4}>
             <Text type="h2" weight="bold" color="primary">
-              {formatXYZValue(overview?.totalDelegatedPower)}
+              {formatEntrValue(overview?.totalDelegatedPower)}
             </Text>
             <Text type="p1" color="secondary">
-              out of {formatXYZValue((EnterToken.contract as Erc20Contract).totalSupply?.unscaleBy(EnterToken.decimals))}
+              out of {formatEntrValue((EnterToken.contract as Erc20Contract).totalSupply?.unscaleBy(EnterToken.decimals))}
             </Text>
           </Grid>
         </Grid>

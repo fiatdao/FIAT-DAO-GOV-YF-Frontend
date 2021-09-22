@@ -50,7 +50,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
   const isPoolAvailable = poolMeta?.contract.isPoolAvailable;
   const apr =
     poolBalanceInUSD?.isGreaterThan(BigNumber.ZERO) && epochReward
-      ? convertTokenInUSD(epochReward * 52, KnownTokens.XYZ)?.dividedBy(poolBalanceInUSD)
+      ? convertTokenInUSD(epochReward * 52, KnownTokens.ENTR)?.dividedBy(poolBalanceInUSD)
       : undefined;
 
   function handleStaking() {
@@ -94,7 +94,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               Reward
             </Text>
             <div className="flex flow-col">
-              <Icon name="png/enterdao" className={s.xyzReward} />
+              <Icon name="png/enterdao" className={s.entrReward} />
               <Text type="p1" weight="semibold" color="primary">
                 {formatToken(epochReward) ?? '-'}
               </Text>
@@ -106,7 +106,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                 My Potential Reward
               </Text>
               <div className="flex flow-col">
-                <Icon name="png/enterdao" className={s.xyzReward} />
+                <Icon name="png/enterdao" className={s.entrReward} />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(potentialReward) ?? '-'}
                 </Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import AntdForm from 'antd/lib/form';
 import AntdSwitch from 'antd/lib/switch';
 import BigNumber from 'bignumber.js';
-import { ZERO_BIG_NUMBER, formatXYZValue } from 'web3/utils';
+import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
 import Button from 'components/antd/button';
@@ -55,7 +55,7 @@ const WalletDepositView: React.FC = () => {
   const [state, setState] = useMergeState<WalletDepositViewState>(InitialState);
 
   const { balance: stakedBalance, userLockedUntil } = daoCtx.daoBarn;
-  const xyzBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
+  const entrBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
   const barnAllowance = (EnterToken.contract as Erc20Contract).getAllowanceOf(config.contracts.dao.barn);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
 
@@ -123,7 +123,7 @@ const WalletDepositView: React.FC = () => {
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
-            {formatXYZValue(stakedBalance)}
+            {formatEntrValue(stakedBalance)}
           </Text>
         </Grid>
 
@@ -132,7 +132,7 @@ const WalletDepositView: React.FC = () => {
             Wallet Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
-            {formatXYZValue(xyzBalance)}
+            {formatEntrValue(entrBalance)}
           </Text>
         </Grid>
 
@@ -178,7 +178,7 @@ const WalletDepositView: React.FC = () => {
                 <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                   <TokenAmount
                     tokenIcon="png/enterdao"
-                    max={xyzBalance}
+                    max={entrBalance}
                     maximumFractionDigits={EnterToken.decimals}
                     name={EnterToken.symbol}
                     displayDecimals={4}

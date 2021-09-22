@@ -26,7 +26,7 @@ const PoolRewards: React.FC = () => {
   const [harvestModalVisible, showHarvestModal] = useState(false);
   const [airdropModalVisible, showAirdropModal] = useState(false);
 
-  const xyzContract = EnterToken.contract as Erc20Contract;
+  const entrContract = EnterToken.contract as Erc20Contract;
   const { currentEpoch } = yfPoolsCtx.stakingContract ?? {};
 
   const totalToClaim = yfPoolsCtx.yfPools.reduce((sum: BigNumber | undefined, { contract }) => {
@@ -92,7 +92,7 @@ const PoolRewards: React.FC = () => {
             </Text>
             <Grid flow="col" gap={4} align="center">
               <Text type="h3" weight="bold" color="primary">
-                {formatToken(xyzContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>
               <Icon name={EnterToken.icon!} width={40} height={40} />
             </Grid>
@@ -122,7 +122,7 @@ const PoolRewards: React.FC = () => {
           {/* <Divider type="vertical" />
           <Grid flow="row" gap={2} className={s.item3}>
             <Grid flow="col" gap={8} align="center">
-              <Hint text="You have claimable tokens from the $XYZ Airdrop. This balance will rise over time and as more people exit the pool and forfeit their additional rewards. Warning: You can only claim once.">
+              <Hint text="You have claimable tokens from the $ENTR Airdrop. This balance will rise over time and as more people exit the pool and forfeit their additional rewards. Warning: You can only claim once.">
                 <Text type="p2" color="secondary">
                   <span style={{ marginRight: 5 }}>Airdrop reward</span>
                   <span className={s.week}>
