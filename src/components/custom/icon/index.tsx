@@ -14,6 +14,7 @@ import sandSrc from 'resources/png/sandbox.png';
 import axsSrc from 'resources/png/axie.png';
 import addEnterSrc from 'resources/png/add-enter.png';
 import enterStarSrc from 'resources/png/enter-star.png';
+import telegramSrc from 'resources/png/telegram.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
@@ -161,6 +162,7 @@ export type IconNames =
   | 'polymorphs'
   | 'core-drops'
   | 'png/add-enter'
+  | 'png/telegram'
   | 'static/add-token';
 
 export type IconProps = {
@@ -209,6 +211,8 @@ const Icon: React.FC<IconProps> = props => {
           return addEnterSrc;
         case 'png/enter-star':
           return enterStarSrc;
+        case 'png/telegram':
+          return telegramSrc;
         default:
           return '';
       }
