@@ -60,17 +60,12 @@ const LayoutFooter: React.FC = () => {
               <ExternalLink href="https://twitter.com/EnterDao" className={s.sLink}>
                 <Icon name="twitter" width="20" height="20" />
               </ExternalLink>
-              <ExternalLink href="https://discord.com/invite/vau77wXCD3" className={s.sLink}>
+              <ExternalLink href="https://discord.gg/7QJvEctG2G" className={s.sLink}>
                 <Icon name="discord" width="20" height="20" />
               </ExternalLink>
               {/* TODO <ExternalLink href="https://www.coingecko.com/en/coins/enterDao" className={s.sLink}>*/}
               {/*  <Icon name="coingecko" width="20" height="20" />*/}
               {/*</ExternalLink>*/}
-              <ExternalLink
-                href="https://www.youtube.com/channel/UCWt00md9T2b4iTsHWp_Fapw?sub_confirmation=1"
-                className={s.sLink}>
-                <Icon name="youtube" width="20" height="20" />
-              </ExternalLink>
               <ExternalLink href="https://medium.com/enterdao" className={s.sLink}>
                 <Icon name="medium" width="20" height="20" />
               </ExternalLink>
