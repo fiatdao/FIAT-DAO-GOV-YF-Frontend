@@ -8,33 +8,13 @@ import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
+import config, { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
 
 import s from './s.module.scss';
 
 const LayoutFooter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const handlerSubscribe = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    fetch(`https://shielded-sands-48363.herokuapp.com/addContact?email=${email}`)
-      .then(() => {
-        setEmail('');
-        Antd.notification.success({
-          message: 'Thank you for subscribing!',
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        Antd.notification.error({
-          message: 'Sorry, something went wrong.',
-        });
-      });
-
-    setLoading(false);
-  };
 
   const getYear = () => {
     return new Date().getFullYear();
@@ -48,21 +28,28 @@ const LayoutFooter: React.FC = () => {
             <Text type="p1" weight="bold" color="white" font="secondary">
               Stay up to date with our newsletter
             </Text>
-            <form className={s.subscribeWrap} onSubmit={handlerSubscribe}>
-              <input
-                value={email}
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                className={s.subscribeInput}
-                onChange={e => setEmail(e.target.value)}
-                required
-                disabled={loading}
-              />
-              <button className={cn(s.subscribeButton, 'button-primary')} disabled={loading}>
+            <form className={s.subscribeWrap}  action={config.mailchimp.url} method="POST" noValidate target="_blank">
+                <input type="hidden" name="u" value={config.mailchimp.u}/>
+                <input type="hidden" name="id" value={config.mailchimp.id}/>
+                <input
+                    className={s.subscribeInput}
+                    placeholder="Enter your email"
+                    type="email"
+                    name="EMAIL"
+                    id="MERGE0"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                  />
+                <button type="submit" className={cn(s.subscribeButton, 'button-primary')} disabled={loading}>
                 {loading && <AntdSpin style={{ marginRight: 8 }} spinning />}
                 Subscribe
               </button>
+              <div style={{position: 'absolute', left: '-5000px'}} aria-hidden='true' aria-label="Please leave the following three fields empty">
+                  <label htmlFor="b_email">Email: </label>
+                  <input type="email" name="b_email" tabIndex={-1} value="" placeholder="youremail@gmail.com" id="b_email"/>
+              </div>
             </form>
           </div>
           <div className={s.sBlock}>
