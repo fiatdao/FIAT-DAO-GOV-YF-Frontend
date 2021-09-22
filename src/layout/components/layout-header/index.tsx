@@ -102,7 +102,7 @@ const LayoutHeader: React.FC = () => {
                 <span>Whitepaper</span>
               </ExternalLink>
               <ExternalLink
-                href="https://universe.xyz/team"
+                href="https://enterdao.xyz/team"
                 className={s.dropdownLink}
                 onClick={() => setPopper2visible(false)}>
                 <Icon name="team" width={20} height={20} className={s.dropdownIcon} />
