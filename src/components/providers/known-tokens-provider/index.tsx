@@ -19,7 +19,7 @@ export enum KnownTokens {
   MANA = 'MANA',
   AAVE = 'AAVE',
   SAND = 'SAND',
-  SNX = 'SNX',
+  SUSHI = 'SUSHI',
   AXS = 'AXS',
   ILV = 'ILV',
   USDC_ENTR_SLP = 'USDC_ENTR_SUSHI_LP',
@@ -104,14 +104,14 @@ export const SandToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.sand),
 };
 
-export const SnxToken: TokenMeta = {
-  address: config.tokens.snx,
-  symbol: KnownTokens.SNX,
-  name: 'Synthetix Network Token',
+export const SushiToken: TokenMeta = {
+  address: config.tokens.sushi,
+  symbol: KnownTokens.SUSHI,
+  name: 'Sushi Token',
   decimals: 18,
-  icon: 'token-snx',
-  coinGeckoId: 'havven',
-  contract: new Erc20Contract([], config.tokens.snx),
+  icon: 'png/sushi',
+  coinGeckoId: 'sushi',
+  contract: new Erc20Contract([], config.tokens.sushi),
 };
 
 export const AxsToken: TokenMeta = {
@@ -151,7 +151,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   ManaToken,
   XyzToken,
   SandToken,
-  SnxToken,
+  SushiToken,
   AxsToken,
   IlvToken,
   UsdcEntrSLPToken,

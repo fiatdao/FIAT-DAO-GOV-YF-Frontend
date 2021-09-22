@@ -8,8 +8,8 @@ const config = {
   isProd: String(process.env.REACT_APP_ENV) === 'production',
   isTestnet: String(process.env.REACT_APP_ENV) === 'testnet',
   graph: {
-    primaryUrl: `${String(process.env.REACT_APP_PRIMARY_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`,
-    fallbackUrl: `${String(process.env.REACT_APP_FALLBACK_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`
+    primaryUrl: String(process.env.REACT_APP_PRIMARY_GRAPH_URL),
+    fallbackUrl: String(process.env.REACT_APP_FALLBACK_GRAPH_URL)
   },
   zapper: {
     baseUrl: String(process.env.REACT_APP_ZAPPER_URL),
@@ -22,7 +22,7 @@ const config = {
     bond: toLowerCase(process.env.REACT_APP_TOKEN_BOND_ADDR),
     xyz: toLowerCase(process.env.REACT_APP_TOKEN_XYZ_ADDR),
     sand: toLowerCase(process.env.REACT_APP_TOKEN_SAND_ADDR),
-    snx: toLowerCase(process.env.REACT_APP_TOKEN_SNX_ADDR),
+    sushi: toLowerCase(process.env.REACT_APP_TOKEN_SUSHI_ADDR),
     axs: toLowerCase(process.env.REACT_APP_TOKEN_AXS_ADDR),
     ilv: toLowerCase(process.env.REACT_APP_TOKEN_ILV_ADDR),
     usdcEntrSLP: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ENTR_SUSHI_LP),
@@ -34,7 +34,7 @@ const config = {
       bond: toLowerCase(process.env.REACT_APP_CONTRACT_YF_BOND_ADDR),
       xyz: toLowerCase(process.env.REACT_APP_CONTRACT_YF_XYZ_ADDR),
       sand: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SAND_ADDR),
-      snx: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SNX_ADDR),
+      sushi: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SUSHI_ADDR),
       axs: toLowerCase(process.env.REACT_APP_CONTRACT_YF_AXS_ADDR),
       ilv: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ILV_ADDR),
       usdcEntrSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_USDC_ENTR_SUSHI_LP),

@@ -11,7 +11,7 @@ import {
   SandToken,
   IlvToken,
   AxsToken,
-  SnxToken,
+  SushiToken,
   TokenMeta,
   UsdcEntrSLPToken,
   useKnownTokens,
@@ -27,7 +27,7 @@ export enum YFPoolID {
   MANA = 'mana',
   XYZ = 'xyz',
   SAND = 'sand',
-  SNX = 'snx',
+  SUSHI = 'sushi',
   AXS = 'axs',
   ILV = 'ilv',
   USDC_ENTR_SLP = 'usdc-entr-slp',
@@ -78,13 +78,13 @@ export const SandYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.sand),
 };
 
-export const SnxYfPool: YFPoolMeta = {
-  name: YFPoolID.SNX,
-  label: 'SNX',
-  icons: ['token-snx'],
+export const SushiYfPool: YFPoolMeta = {
+  name: YFPoolID.SUSHI,
+  label: 'SUSHI',
+  icons: ['png/sushi'],
   colors: ['var(--theme-red-color)'],
-  tokens: [SnxToken],
-  contract: new YfPoolContract(config.contracts.yf.snx),
+  tokens: [SushiToken],
+  contract: new YfPoolContract(config.contracts.yf.sushi),
 };
 
 export const AxsYfPool: YFPoolMeta = {
@@ -119,7 +119,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   ManaYfPool,
   BondYfPool,
   SandYfPool,
-  SnxYfPool,
+  SushiYfPool,
   AxsYfPool,
   IlvYfPool,
   UsdcEntrSLPYfPool,
@@ -423,7 +423,7 @@ const YFPoolsProvider: FC = props => {
       <ContractListener contract={ManaYfPool.contract} />
       <ContractListener contract={XyzYfPool.contract} />
       <ContractListener contract={SandYfPool.contract} />
-      <ContractListener contract={SnxYfPool.contract} />
+      <ContractListener contract={SushiYfPool.contract} />
       <ContractListener contract={AxsYfPool.contract} />
       <ContractListener contract={IlvYfPool.contract} />
       <ContractListener contract={UsdcEntrSLPYfPool.contract} />
