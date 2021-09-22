@@ -91,9 +91,6 @@ const LayoutFooter: React.FC = () => {
               <Text type="p1" color="white" font="secondary" className={s.navTitle}>
                 Info
               </Text>
-              <ExternalLink href="https://docs.enterdao.xyz/" className={s.link}>
-                About
-              </ExternalLink>
               <ExternalLink href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8" className={s.link}>
                 Whitepaper
               </ExternalLink>
