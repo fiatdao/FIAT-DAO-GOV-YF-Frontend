@@ -13,6 +13,7 @@ import WindowStateProvider from 'components/providers/window-state';
 import LayoutView from 'layout';
 import { ReactComponent as StaticSprite } from 'resources/svg/static-sprite.svg';
 import Web3WalletProvider from 'wallets/wallet';
+import ScrollToTop from "./top-scroll";
 
 import { checkFlexGapSupport } from './checkFlexGap';
 import * as sw from './serviceWorker';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
             <Web3WalletProvider>
               <KnownTokensProvider>
                 <Router>
+                  <ScrollToTop />
                   <NotificationsProvider>
                     <LayoutView />
                   </NotificationsProvider>
