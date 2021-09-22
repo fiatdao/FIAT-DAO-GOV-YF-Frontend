@@ -26,7 +26,7 @@ const PoolHeader: FC = () => {
 
   const apr =
     poolBalance?.isGreaterThan(BigNumber.ZERO) && poolMeta?.contract.epochReward
-      ? convertTokenInUSD(poolMeta?.contract.epochReward * 52, KnownTokens.XYZ)?.dividedBy(poolBalance)
+      ? convertTokenInUSD(poolMeta?.contract.epochReward * 52, KnownTokens.ENTR)?.dividedBy(poolBalance)
       : undefined;
 
   return (

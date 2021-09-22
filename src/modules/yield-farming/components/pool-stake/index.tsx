@@ -159,7 +159,7 @@ const PoolStake: FC = () => {
             }
             className="mb-32"
           />
-          {activeToken.symbol === KnownTokens.XYZ && (
+          {activeToken.symbol === KnownTokens.ENTR && (
             <Alert
               className="mb-32"
               message={

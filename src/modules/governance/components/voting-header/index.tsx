@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, formatXYZValue, isSmallXYZValue } from 'web3/utils';
+import { formatBigValue, formatEntrValue, isSmallEntrValue } from 'web3/utils';
 
 import Button from 'components/antd/button';
 import Divider from 'components/antd/divider';
@@ -40,7 +40,7 @@ const VotingHeader: React.FC = () => {
   const [state, setState] = useMergeState<VotingHeaderState>(InitialState);
 
   const { claimValue } = daoCtx.daoReward;
-  const xyzBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
+  const entrBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
   const { votingPower, userLockedUntil, multiplier = 1 } = daoCtx.daoBarn;
 
   const loadedUserLockedUntil = (userLockedUntil ?? Date.now()) - Date.now();
@@ -77,8 +77,8 @@ const VotingHeader: React.FC = () => {
               <Tooltip title={<Text type="p2">{formatBigValue(claimValue, EnterToken.decimals)}</Text>}>
                 <Skeleton loading={claimValue === undefined}>
                   <Text type="h3" weight="bold" color="primary">
-                    {isSmallXYZValue(claimValue) && '> '}
-                    {formatXYZValue(claimValue)}
+                    {isSmallEntrValue(claimValue) && '> '}
+                    {formatEntrValue(claimValue)}
                   </Text>
                 </Skeleton>
               </Tooltip>
@@ -99,9 +99,9 @@ const VotingHeader: React.FC = () => {
               {EnterToken.symbol} Balance
             </Text>
             <Grid flow="col" align="center">
-              <Skeleton loading={xyzBalance === undefined}>
+              <Skeleton loading={entrBalance === undefined}>
                 <Text type="h3" weight="bold" color="primary">
-                  {formatXYZValue(xyzBalance)}
+                  {formatEntrValue(entrBalance)}
                 </Text>
               </Skeleton>
               <Icon name="png/enterdao" src={imgSrc} width={40} height={40} />
@@ -115,7 +115,7 @@ const VotingHeader: React.FC = () => {
             <div className="flex col-gap-16 align-center" style={{ height: `40px` }}>
               <Skeleton loading={votingPower === undefined}>
                 <Text type="h3" weight="bold" color="primary">
-                  {formatXYZValue(votingPower) || '-'}
+                  {formatEntrValue(votingPower) || '-'}
                 </Text>
               </Skeleton>
               <Button type="light" onClick={() => setState({ showDetailedView: true })}>

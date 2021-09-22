@@ -1,7 +1,7 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { ZERO_BIG_NUMBER, formatXYZValue } from 'web3/utils';
+import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Modal, { ModalProps } from 'components/antd/modal';
 import Icon from 'components/custom/icon';
@@ -28,7 +28,7 @@ const InitialState: VotingDetailedModalState = {
 
 const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
   const daoCtx = useDAO();
-  const { votingPower, userDelegatedTo, delegatedPower, userLockedUntil, balance: myXYZBalance } = daoCtx.daoBarn;
+  const { votingPower, userDelegatedTo, delegatedPower, userLockedUntil, balance: myEntrBalance } = daoCtx.daoBarn;
 
   const [state, setState] = useMergeState<VotingDetailedModalState>(InitialState);
 
@@ -42,7 +42,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
       let bonus = votingPower?.minus(delegatedPower ?? ZERO_BIG_NUMBER);
 
       if (!isDelegated) {
-        bonus = bonus?.minus(myXYZBalance ?? ZERO_BIG_NUMBER);
+        bonus = bonus?.minus(myEntrBalance ?? ZERO_BIG_NUMBER);
       }
 
       const leftBonus = bonus?.multipliedBy(leftTime).div(loadedUserLockedUntil);
@@ -59,7 +59,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
     setState({
       leftBonus: isDelegated
         ? ZERO_BIG_NUMBER
-        : votingPower?.minus(myXYZBalance ?? ZERO_BIG_NUMBER).minus(delegatedPower ?? ZERO_BIG_NUMBER),
+        : votingPower?.minus(myEntrBalance ?? ZERO_BIG_NUMBER).minus(delegatedPower ?? ZERO_BIG_NUMBER),
       leftTotalVotingPower: votingPower,
     });
   }, [isDelegated]);
@@ -73,7 +73,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
             My staked balance
           </dt>
           <dd className={s.data}>
-            {formatXYZValue(myXYZBalance)}
+            {formatEntrValue(myEntrBalance)}
             <Icon name="circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
           </dd>
         </div>
@@ -83,7 +83,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
             Delegated by me
           </dt>
           <dd className={s.data}>
-            {isDelegated ? formatXYZValue(myXYZBalance) : 0}
+            {isDelegated ? formatEntrValue(myEntrBalance) : 0}
             <Icon name="circle-minus-outlined" width={18} height={18} color="red" className={s.dataIcon} />
           </dd>
         </div>
@@ -94,7 +94,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
           </dt>
           <dd className={s.data}>
             {state.leftBonus?.gt(ZERO_BIG_NUMBER) ? '> ' : ''}
-            {formatXYZValue(state.leftBonus)}
+            {formatEntrValue(state.leftBonus)}
             <Icon name="circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
           </dd>
         </div>
@@ -104,7 +104,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
             Delegated to me
           </dt>
           <dd className={s.data}>
-            {formatXYZValue(delegatedPower)}
+            {formatEntrValue(delegatedPower)}
             <Icon name="circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
           </dd>
         </div>
@@ -114,7 +114,7 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
             <Icon name="stamp-outlined" width={20} height={20} className={s.termIcon} />
             My total voting power
           </dt>
-          <dd className={cn(s.data, s.dataTotal)}>{formatXYZValue(state.leftTotalVotingPower)}</dd>
+          <dd className={cn(s.data, s.dataTotal)}>{formatEntrValue(state.leftTotalVotingPower)}</dd>
         </div>
       </dl>
     </Modal>

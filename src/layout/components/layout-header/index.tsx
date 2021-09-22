@@ -88,14 +88,14 @@ const LayoutHeader: React.FC = () => {
           content={
             <div className={cn('card', s.dropdown)}>
               <ExternalLink
-                href="https://universe.xyz/about"
+                href="https://enterdao.xyz/about"
                 className={s.dropdownLink}
                 onClick={() => setPopper2visible(false)}>
                 <Icon name="about" width={20} height={20} className={s.dropdownIcon} />
                 <span>About</span>
               </ExternalLink>
               <ExternalLink
-                href="https://github.com/UniverseXYZ/UniverseXYZ-Whitepaper"
+                href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"
                 className={s.dropdownLink}
                 onClick={() => setPopper2visible(false)}>
                 <Icon name="whitepaper" width={20} height={20} className={s.dropdownIcon} />
@@ -109,7 +109,7 @@ const LayoutHeader: React.FC = () => {
                 <span>Team</span>
               </ExternalLink>
               <ExternalLink
-                href="https://docs.universe.xyz/"
+                href="https://docs.enterdao.xyz/"
                 className={s.dropdownLink}
                 onClick={() => setPopper3visible(false)}>
                 <Icon name="docs" width={20} height={20} className={s.dropdownIcon} />
@@ -183,28 +183,21 @@ const LayoutHeader: React.FC = () => {
                 <div className={s.mobileMenuBlock}>
                   <h3>Info</h3>
                   <ExternalLink
-                    href="https://universe.xyz/about"
-                    className={s.dropdownLink}
-                    onClick={() => setNavOpen(false)}>
-                    <Icon name="about" width={20} height={20} className={s.dropdownIcon} />
-                    <span>About</span>
-                  </ExternalLink>
-                  <ExternalLink
-                    href="https://github.com/UniverseXYZ/UniverseXYZ-Whitepaper"
+                    href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"
                     className={s.dropdownLink}
                     onClick={() => setNavOpen(false)}>
                     <Icon name="whitepaper" width={20} height={20} className={s.dropdownIcon} />
                     <span>Whitepaper</span>
                   </ExternalLink>
                   <ExternalLink
-                    href="https://universe.xyz/team"
+                    href="https://enterdao.xyz/team"
                     className={s.dropdownLink}
                     onClick={() => setNavOpen(false)}>
                     <Icon name="team" width={20} height={20} className={s.dropdownIcon} />
                     <span>Team</span>
                   </ExternalLink>
                   <ExternalLink
-                    href="https://docs.universe.xyz/"
+                    href="https://docs.enterdao.xyz/"
                     className={s.dropdownLink}
                     onClick={() => setNavOpen(false)}>
                     <Icon name="docs" width={20} height={20} className={s.dropdownIcon} />

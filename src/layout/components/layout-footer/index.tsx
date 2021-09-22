@@ -8,7 +8,7 @@ import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { XYZ_MARKET_LINK, XYZ_MARKET_LIQUIDITY_LINK } from 'config';
+import { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
 
 import s from './s.module.scss';
 
@@ -70,21 +70,21 @@ const LayoutFooter: React.FC = () => {
               Join the community
             </Text>
             <div className={s.sLinksWrap}>
-              <ExternalLink href="https://twitter.com/universe_xyz" className={s.sLink}>
+              <ExternalLink href="https://twitter.com/EnterDao" className={s.sLink}>
                 <Icon name="twitter" width="20" height="20" />
               </ExternalLink>
               <ExternalLink href="https://discord.com/invite/vau77wXCD3" className={s.sLink}>
                 <Icon name="discord" width="20" height="20" />
               </ExternalLink>
-              <ExternalLink href="https://www.coingecko.com/en/coins/universe-xyz" className={s.sLink}>
-                <Icon name="coingecko" width="20" height="20" />
-              </ExternalLink>
+              {/* TODO <ExternalLink href="https://www.coingecko.com/en/coins/enterDao" className={s.sLink}>*/}
+              {/*  <Icon name="coingecko" width="20" height="20" />*/}
+              {/*</ExternalLink>*/}
               <ExternalLink
                 href="https://www.youtube.com/channel/UCWt00md9T2b4iTsHWp_Fapw?sub_confirmation=1"
                 className={s.sLink}>
                 <Icon name="youtube" width="20" height="20" />
               </ExternalLink>
-              <ExternalLink href="https://medium.com/universe-xyz" className={s.sLink}>
+              <ExternalLink href="https://medium.com/enterdao" className={s.sLink}>
                 <Icon name="medium" width="20" height="20" />
               </ExternalLink>
             </div>
@@ -104,16 +104,16 @@ const LayoutFooter: React.FC = () => {
               <Text type="p1" color="white" font="secondary" className={s.navTitle}>
                 Info
               </Text>
-              <ExternalLink href="https://universe.xyz/about" className={s.link}>
+              <ExternalLink href="https://docs.enterdao.xyz/" className={s.link}>
                 About
               </ExternalLink>
-              <ExternalLink href="https://github.com/UniverseXYZ/UniverseXYZ-Whitepaper" className={s.link}>
+              <ExternalLink href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8" className={s.link}>
                 Whitepaper
               </ExternalLink>
-              <ExternalLink href="https://universe.xyz/team" className={s.link}>
+              <ExternalLink href="https://enterdao.xyz/team" className={s.link}>
                 Team
               </ExternalLink>
-              <ExternalLink href="https://docs.universe.xyz/" className={s.link}>
+              <ExternalLink href="https://docs.enterdao.xyz/" className={s.link}>
                 Docs
               </ExternalLink>
             </nav>
