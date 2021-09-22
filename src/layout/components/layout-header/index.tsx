@@ -88,13 +88,6 @@ const LayoutHeader: React.FC = () => {
           content={
             <div className={cn('card', s.dropdown)}>
               <ExternalLink
-                href="https://enterdao.xyz/about"
-                className={s.dropdownLink}
-                onClick={() => setPopper2visible(false)}>
-                <Icon name="about" width={20} height={20} className={s.dropdownIcon} />
-                <span>About</span>
-              </ExternalLink>
-              <ExternalLink
                 href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"
                 className={s.dropdownLink}
                 onClick={() => setPopper2visible(false)}>
