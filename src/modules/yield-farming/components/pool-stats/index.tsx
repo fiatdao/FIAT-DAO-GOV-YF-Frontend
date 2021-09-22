@@ -90,7 +90,8 @@ const PoolStats: React.FC<Props> = ({ className }) => {
         </div>
       </div>
 
-      <div className="card p-24">
+      {/* ToDo: Uncomment after SushiSwap deployment */}
+      {/* <div className="card p-24">
         <div className="flex flow-row justify-space-between full-height">
           <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48')}>
             {EnterToken.symbol} Price
@@ -106,7 +107,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             </ExternalLink>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {!isEnded && (
         <div className="card p-24">
