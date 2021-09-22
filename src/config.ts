@@ -75,6 +75,11 @@ const config = {
   dao: {
     activationThreshold: Number(process.env.REACT_APP_DAO_ACTIVATION_THRESHOLD),
   },
+  mailchimp: {
+    url: String(process.env.REACT_APP_MAILCHIMP_URL),
+    u: String(process.env.REACT_APP_MAILCHIMP_U),
+    id: String(process.env.REACT_APP_MAILCHIMP_ID),
+  },
 };
 
 export const XYZ_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.usdc}&outputCurrency=${config.tokens.entr}`;
