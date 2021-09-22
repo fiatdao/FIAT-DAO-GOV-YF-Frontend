@@ -8,7 +8,8 @@ const config = {
   isProd: String(process.env.REACT_APP_ENV) === 'production',
   isTestnet: String(process.env.REACT_APP_ENV) === 'testnet',
   graph: {
-    graphUrl: `${String(process.env.REACT_APP_BASE_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`,
+    primaryUrl: `${String(process.env.REACT_APP_PRIMARY_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`,
+    fallbackUrl: `${String(process.env.REACT_APP_FALLBACK_GRAPH_URL)}subgraphs/name/enterdao/DAO-Graph`
   },
   zapper: {
     baseUrl: String(process.env.REACT_APP_ZAPPER_URL),

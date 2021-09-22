@@ -1,11 +1,11 @@
 import BigNumber from 'bignumber.js';
-import QueryString from 'query-string';
 import {getHumanValue} from 'web3/utils';
 
 import config from 'config';
-import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
+import { gql } from "@apollo/client";
 import {VotingPower} from "./votingPower";
 import {ProposalHistory} from "./stateHistory";
+import { GraphClient } from "../../web3/graph/client";
 
 type PaginatedResult<T extends Record<string, any>> = {
   data: T[];
@@ -24,14 +24,8 @@ export type APIOverviewData = {
 };
 
 export function fetchOverviewData(): Promise<APIOverviewData> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
-
-  return client
-    .query({
-      query: gql`
+  return GraphClient.get({
+    query: gql`
       query GetOverview {
         overview(id: "OVERVIEW") {
           avgLockTimeSeconds
@@ -67,15 +61,8 @@ export type APIVoterEntity = {
 };
 
 export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVoterEntity>> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
-
-  return client
-    .query({
-
-      query: gql`
+  return GraphClient.get({
+    query: gql`
       query GetVoters ($limit: Int, $offset: Int) {
         voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc, where:{isKernelUser:true}){
           id
@@ -197,14 +184,9 @@ export function fetchProposals(
   limit = 10,
   state: string = 'ALL',
 ): Promise<PaginatedResult<APILiteProposalEntity>> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
-  let stateFilter = buildStateFilter(state.toUpperCase());
-  return client
-    .query({
 
+  let stateFilter = buildStateFilter(state.toUpperCase());
+  return GraphClient.get({
     query: gql`
       query GetProposals {
         proposals (first: 1000) {
@@ -234,8 +216,9 @@ export function fetchProposals(
         }
       }
     `,
-    })
+  })
     .then((async response => {
+      console.log(response);
       let result: PaginatedResult<APILiteProposalEntity> = {
         data: [],
         meta: {count: response.data.overview.proposals.length}
@@ -292,15 +275,9 @@ export type APIProposalEntity = APILiteProposalEntity & {
 };
 
 export function fetchProposal(proposalId: number): Promise<APIProposalEntity> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
+  return GraphClient.get({
 
-  return client
-    .query({
-
-      query: gql`
+    query: gql`
       query GetProposal($proposalId:String) {
         proposal (id: $proposalId) {
           id
@@ -384,12 +361,7 @@ export function fetchProposalVoters(
   limit = 10,
   support?: boolean,
 ): Promise<PaginatedResult<APIVoteEntity>> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
-  return client
-    .query({
+    return GraphClient.get({
       query: gql`
         query GetProposalVotes ($proposalId: String, $limit: Int, $offset: Int, $support: Boolean) {
           proposal (id: $proposalId) {
@@ -413,7 +385,8 @@ export function fetchProposalVoters(
       },
     })
     .then(result => {
-    return {
+      console.log(result);
+      return {
         data: (result.data.proposal.votingHistory ?? []).map((item: any) => ({
           ...item,
           power: getHumanValue(new BigNumber(item.power), 18)!
@@ -437,14 +410,9 @@ export type APIAbrogationEntity = {
 };
 
 export function fetchAbrogation(proposalId: number): Promise<APIAbrogationEntity> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
   let apId = `${proposalId.toString()}-AP`;
-  return client
-    .query({
-      query: gql`
+  return GraphClient.get({
+    query: gql`
       query GetAbrogation ($apId: String) {
         abrogationProposal (id: $apId) {
           id
@@ -489,13 +457,8 @@ export function fetchAbrogationVoters(
   limit = 10,
   support?: boolean,
 ): Promise<PaginatedResult<APIAbrogationVoteEntity>> {
-  const client = new ApolloClient({
-    uri: config.graph.graphUrl,
-    cache: new InMemoryCache(),
-  });
   let apId = `${proposalId.toString()}-AP`;
-  return client
-  .query({
+  return GraphClient.get({
     query: gql`
       query GetAbrogationVotes ($apId: String, $limit: Int, $offset: Int, $support: Boolean) {
         abrogationProposal (id: $apId) {
