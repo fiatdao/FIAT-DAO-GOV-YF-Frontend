@@ -37,7 +37,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
           <Hint
             text={
               <Text type="p2">
-                This number shows the amount of ${EnterToken.symbol} (and their USD value) currently staked in the DAO.
+                This number shows the amount of {EnterToken.symbol} currently staked in the DAO.
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
