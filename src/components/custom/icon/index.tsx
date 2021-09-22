@@ -39,7 +39,7 @@ export type TokenIconNames =
   | 'token-susd'
   | 'token-uniswap'
   | 'token-usdt'
-  | 'token-snx'
+  | 'token-sushi'
   | 'compound'
   | 'png/enter-star'
   | 'png/universe'
