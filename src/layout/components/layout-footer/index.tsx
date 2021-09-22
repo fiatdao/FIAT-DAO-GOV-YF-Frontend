@@ -99,6 +99,9 @@ const LayoutFooter: React.FC = () => {
               <ExternalLink href="https://docs.enterdao.xyz/" className={s.link}>
                 Docs
               </ExternalLink>
+              <ExternalLink href="https://github.com/EnterDAO" className={s.link}>
+                Github
+              </ExternalLink>
             </nav>
             <nav className={s.navBlock}>
               <Text type="p1" color="white" font="secondary" className={s.navTitle}>
