@@ -16,18 +16,6 @@ const LayoutFooter: React.FC = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handlerSubscribe = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    setEmail('');
-    Antd.notification.success({
-      message: 'Thank you for subscribing!',
-    });
-
-    setLoading(false);
-  };
-
   const getYear = () => {
     return new Date().getFullYear();
   }
