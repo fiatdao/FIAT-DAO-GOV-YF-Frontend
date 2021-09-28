@@ -205,7 +205,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
             <Text type="p2" weight="semibold" color="secondary" className="mb-4">
-              The ${poolMeta?.label} is not available yet. The pool will start shortly.
+              The ${poolMeta?.label} is not available yet. The pool will start shortly after epoch 2 starts.
             </Text>
           </Grid>
         </div>
