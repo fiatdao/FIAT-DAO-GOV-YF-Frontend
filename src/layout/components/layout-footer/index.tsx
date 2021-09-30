@@ -63,9 +63,9 @@ const LayoutFooter: React.FC = () => {
               <ExternalLink href="https://discord.gg/7QJvEctG2G" className={s.sLink}>
                 <Icon name="discord" width="20" height="20" />
               </ExternalLink>
-              {/* TODO <ExternalLink href="https://www.coingecko.com/en/coins/enterDao" className={s.sLink}>*/}
-              {/*  <Icon name="coingecko" width="20" height="20" />*/}
-              {/*</ExternalLink>*/}
+              <ExternalLink href="https://www.coingecko.com/en/coins/enterdao" className={s.sLink}>
+                <Icon name="coingecko" width="20" height="20" />
+              </ExternalLink>
 
               <ExternalLink href="https://t.me/joinchat/ftcnxgCO36owNGNk" className={s.sLink}>
                 <Icon name="png/telegram" width="20" height="20" />
