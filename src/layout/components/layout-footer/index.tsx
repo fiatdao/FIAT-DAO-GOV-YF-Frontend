@@ -118,6 +118,14 @@ const LayoutFooter: React.FC = () => {
         </div>
         <div className={cn(s.row, s.copyrightsBlock)}>
           <div className={s.copyrightLink}>Enterdao.xyz © {getYear()}. Open-sourced.</div>
+          <div className={s.copyrightLinks}>
+            <ExternalLink href={ENTR_MARKET_LINK} className={s.copyrightLink}>
+              SushiSwap USDC/ENTR market
+            </ExternalLink>
+            <ExternalLink href={ENTR_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
+              Add liquidity to SushiSwap USDC/ENTR pool
+            </ExternalLink>
+          </div>
         </div>
       </div>
     </footer>
