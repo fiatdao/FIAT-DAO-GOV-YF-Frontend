@@ -13,6 +13,7 @@ import s from './s.module.scss';
 
 const YieldFarmingView = lazy(() => import('modules/yield-farming'));
 const GovernanceView = lazy(() => import('modules/governance'));
+const MetapassView = lazy(() => import('modules/metapass'));
 
 const LayoutView: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const LayoutView: React.FC = () => {
                   <Route path="/yield-farming" component={YieldFarmingView} />
                   <Route path="/governance/:vt(\w+)" component={GovernanceView} />
                   <Route path="/governance" component={GovernanceView} />
+                  <Route path="/metapass" component={MetapassView} />
                   <Redirect from="/" to="/yield-farming" />
                 </Switch>
               </Suspense>

@@ -32,6 +32,7 @@ const LayoutHeader: React.FC = () => {
   const [popper2visible, setPopper2visible] = useState<boolean>(false);
   const [popper3visible, setPopper3visible] = useState<boolean>(false);
   const [popper4visible, setPopper4visible] = useState<boolean>(false);
+  const [popper5visible, setPopper5visible] = useState<boolean>(false);
   const wallet = useWallet();
   const { warns } = useWarning();
 
@@ -80,6 +81,27 @@ const LayoutHeader: React.FC = () => {
       <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>
 
       <nav className={s.nav}>
+        <Popover
+          noPadding
+          visible={popper5visible}
+          trigger={['click', 'hover']}
+          onVisibleChange={setPopper5visible}
+          content={
+            <div className={cn('card', s.dropdown)}>
+              <Link to="/metapass" className={s.dropdownLink} onClick={() => setPopper5visible(false)}>
+                <span>MetaPass</span>
+              </Link>
+            </div>
+          }>
+          <Button type="link" className={s.navLink}>
+            <Grid flow="col" align="center">
+              <Text type="p1" weight="500" color="primary" className="mr-4">
+                NFT Drops
+              </Text>
+              <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />
+            </Grid>
+          </Button>
+        </Popover>
         <Popover
           visible={popper2visible}
           onVisibleChange={setPopper2visible}
