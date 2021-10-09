@@ -158,3 +158,32 @@
     display: none !important;
   }
 }
+
+// ## Media queries ##
+// Small tablets and large smartphones (landscape view)
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+// Small tablets (portrait view)
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+
+// Tablets and small desktops
+@mixin lg {
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+
+// Large tablets and desktops
+@mixin xl {
+  @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}

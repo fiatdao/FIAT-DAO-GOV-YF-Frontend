@@ -1,0 +1,63 @@
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/utils.scss";
+
+.jumbotronContainer {
+    max-height: 691px; // Desktop
+    position: relative;
+
+    &::before {
+        content: "";
+        background-image: url('./assets/background.svg');
+        background-size: cover;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        opacity: 0.03;
+  }
+
+  .jumbotronRow {
+      height: 100%;
+
+      .jumbotronMyNFTsContainer {
+
+        @include md {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .wearSuitsHeading {
+          color: $pinkish;
+          font-size: $text-sm;
+
+          @include md {
+            font-size: $text-sm-mobile;
+          }
+        }
+
+        .myNFTsButton {
+          margin-top: 25px;
+
+          @include md {
+            margin-top: 20px;
+          }
+        }
+      }
+
+      .jumbotronImageContainer {
+          display: flex;
+          justify-content: center;
+
+          img {
+            width: 604px;
+
+            @include md {
+              width: 400px
+            }
+          }
+      }
+
+  }
+}

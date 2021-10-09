@@ -1,3 +1,6 @@
+@import "./variables.scss";
+@import "./utils.scss";
+
 @font-face {
   font-family: 'Poppins', sans-serif;
   font-style: normal;
@@ -208,4 +211,15 @@ $text-aligns: left, center, right;
 
 .fw-normal {
   font-weight: normal;
+}
+
+// Typography
+.h1-bold {
+  font-weight: $h1-bold;
+  color: $black;
+  font-size: $h1;
+
+  @include md {
+    font-size: $h1-mobile;
+  }
 }
