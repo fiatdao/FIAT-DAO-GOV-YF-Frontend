@@ -223,3 +223,18 @@ $text-aligns: left, center, right;
     font-size: $h1-mobile;
   }
 }
+
+.h2-bold {
+  font-weight: $h1-bold;
+  color: $black;
+  font-size: $h2;
+
+  @include md {
+    font-size: $h2-mobile;
+  }
+}
+
+.text {
+  font-size: $text;
+  color: $blackish;
+  }
