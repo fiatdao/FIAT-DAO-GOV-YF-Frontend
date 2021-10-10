@@ -1,0 +1,34 @@
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/utils.scss";
+
+.count-component-container {
+    margin: 150px 0px;
+
+    .count-holder {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .count {
+            font-size: 95px;
+            line-height: 95px;
+            color: $black;
+            font-weight: $h1-bold;
+        }
+        .message {
+            font-size: 32px;
+            line-height: 30px;
+            color: $pink;
+            font-weight: $h1-bold;
+        }
+    }
+
+    // Mobile
+    @include sm {
+        margin: 100px 0px;
+
+        .count-holder {
+            margin-bottom: 40px;
+        }
+    }
+}
