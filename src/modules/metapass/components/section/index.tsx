@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 
 import nftImage from './assets/nft.png';
 
-import s from './s.module.scss';
+import './index.scss';
 
 interface sectionProps {
   pictureLeft: boolean;
@@ -20,15 +20,17 @@ const sectionComponent: FC<sectionProps> = props => {
   const secondParagraph = parse(props.secondParagraphText);
   return (
     <>
-      <Row className={`${s.sectionContainer} ${pictureRight ? s.pictureRight : ''} `}>
-        <Col sm={24} md={10} className={`${s.imageContainer} ${pictureRight ? s.imageContainerRight : ''}`}>
+      <Row
+        gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
+        className={`section-container ${pictureRight ? 'picture-right' : ''} `}>
+        <Col sm={24} md={10} className={`image-container ${pictureRight ? 'image-container-right' : ''}`}>
           <img src={nftImage} alt="nftImage"></img>
         </Col>
         <Col sm={24} md={14}>
-          <div className={s.sectionTextContainer}>
+          <div className="section-text-container">
             <p className="h2-bold">{props.heading}</p>
-            <p className={`${s.firstParagraph} text`}>{firstParagraph}</p>
-            <p className={`${s.lastParagraph} text`}>{secondParagraph}</p>
+            <p className="first-paragraph text">{firstParagraph}</p>
+            <p className="last-paragraph text">{secondParagraph}</p>
           </div>
         </Col>
       </Row>

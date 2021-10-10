@@ -17,7 +17,7 @@ const MintView: React.FC = () => {
               points like access to metaverse land, its capital efficiency, as well as UX and onboarding of metaverse
               games."
           secondParagraphText="EnterDAO is set to build 2 core products — <b>LandWorks</b> and <b>MetaPortal</b>, as well as an NFT drop called
-            <b>MetaPass</>b."
+            <b>MetaPass</b>."
         />
         <SectionComponent
           pictureLeft={false}

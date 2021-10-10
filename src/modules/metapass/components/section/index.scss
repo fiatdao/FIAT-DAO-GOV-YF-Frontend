@@ -1,0 +1,86 @@
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/utils.scss";
+
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/utils.scss";
+
+.section-container {
+    padding-top: 100px;
+
+    &.picture-right {
+        flex-direction: row-reverse;
+
+        img {
+            -webkit-box-shadow: -5px -5px 15px 5px #f6f0f6;
+            box-shadow: -5px -5px 15px 5px #f6f0f6;
+        }
+    }
+
+    img {
+        max-width: 387px;
+        -webkit-box-shadow: 5px 5px 15px 5px #f6f0f6;
+        box-shadow: 5px 5px 15px 5px #f6f0f6;
+    }
+
+    .section-text-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .first-paragraph, .last-paragraph {
+            margin-top: 17px;
+        }
+    }
+
+
+    // Mobile and Tablet specifics
+    @include sm {
+        flex-direction: column-reverse;
+
+        &.picture-right {
+            flex-direction: column-reverse;
+        }
+    }
+
+    @include md {
+        padding-top: 50px;
+
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            img {
+                max-width: 287px;
+                margin-bottom: 20px;
+                margin-top: 14px;
+            }
+        }
+
+        .section-text-container {
+            text-align: center;
+
+            .first-paragraph, .last-paragraph {
+                margin-top: 14px;
+            }
+
+        }
+    }
+
+    // Desktop specifics
+    @include xl {
+        img {
+            width: 310px;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    @include lg-and-up {
+        .image-container-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

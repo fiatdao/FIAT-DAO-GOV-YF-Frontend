@@ -181,6 +181,12 @@
   }
 }
 
+@mixin lg-and-up {
+  @media (min-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+
 // Large tablets and desktops
 @mixin xl {
   @media (max-width: #{$screen-xl-max}) {
