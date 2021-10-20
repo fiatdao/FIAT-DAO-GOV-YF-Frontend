@@ -93,9 +93,8 @@
   border: 0;
   background-color: transparent;
   box-sizing: border-box;
-  border-radius: 12px;
-
-  font-weight: bold;
+  border-radius: 4px;
+  font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 
@@ -111,7 +110,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    border-radius: 12px;
+    border-radius: 4px;
     background: var(--gradient-pink);
     z-index: 0;
   }
@@ -124,8 +123,8 @@
     left: 1px;
     bottom: 1px;
     right: 1px;
-    border-radius: 12px;
-    background-color: var(--theme-card-color);
+    border-radius: 4px;
+    background-color: var(--theme-body-color);
     z-index: 0;
   }
 

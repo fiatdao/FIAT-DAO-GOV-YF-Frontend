@@ -11,6 +11,7 @@ import Spin from 'components/antd/spin';
 import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
 import { TokenAmount, TokenSelect } from 'components/custom/token-amount-new';
+// import { TokenAmount, TokenSelect } from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
 import { KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
 import config from 'config';

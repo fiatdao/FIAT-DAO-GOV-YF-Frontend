@@ -137,6 +137,8 @@ body.mobile-menu-open {
   --theme-tooltip-bg: #fff;
   --theme-tooltip-item-bg-active: rgba(0, 0, 0, 0.04);
 
+  --theme-secondary-block: #F9F9F9;
+
   --theme-header-shadow: 0px 0px 0.5px rgba(6, 10, 13, 0.4), 0px 8px 16px rgba(113, 121, 128, 0.08);
   --theme-selection-color: #EF9C92
 }
@@ -163,7 +165,7 @@ body.mobile-menu-open {
 
 [data-theme='dark'] {
   --theme-body-color: #171717;
-  --theme-card-color: linear-gradient(135deg, #252021 0%, #222020 100%);;
+  --theme-card-color: linear-gradient(135deg, #252021 0%, #222020 100%);
   --theme-overlay-color: #1F1B59;
   --theme-mask-color: rgba(32, 37, 41, 0.8);
   --theme-border-color: #303030;
@@ -184,6 +186,8 @@ body.mobile-menu-open {
 
   --theme-tooltip-bg: #262424;
   --theme-tooltip-item-bg-active: #202020;
+
+  --theme-secondary-block: #171717;
 
   --theme-header-shadow: none;
 }

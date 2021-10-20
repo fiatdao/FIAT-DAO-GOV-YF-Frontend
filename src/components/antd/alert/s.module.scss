@@ -23,9 +23,9 @@
   }
 
   &:global(.ant-alert-info) {
-    --alert-bg-color: linear-gradient(135deg, rgba(145, 79, 230, 0.04) 0%, rgba(49, 108, 223, 0.04) 100%);
-    --alert-text-color: var(--theme-blue-color);
-    --alert-border-color: rgba(49, 108, 223, 0.32);
+    --alert-bg-color: linear-gradient(90deg, rgba(255, 149, 116, 0.05) 0%, rgba(255, 76, 140, 0.05) 100%);
+    --alert-text-color: var(--gradient-secondary-pink);
+    --alert-border-color: var(--gradient-pink);
   }
 
   &:global(.ant-alert-success) {
@@ -74,8 +74,8 @@
       text-fill-color: transparent;
     }
     &:global(.ant-alert-info) :global(.ant-alert-message)::selection {
-      -webkit-text-fill-color: var(--theme-blue-color);
-      text-fill-color: var(--theme-blue-color);
+      -webkit-text-fill-color: var(--gradient-secondary-pink);
+      text-fill-color: var(--gradient-secondary-pink);
     }
     &:global(.ant-alert-success) :global(.ant-alert-message)::selection {
       -webkit-text-fill-color: var(--theme-green-color);

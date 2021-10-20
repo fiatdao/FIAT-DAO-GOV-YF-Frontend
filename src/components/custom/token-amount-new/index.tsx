@@ -86,7 +86,7 @@ export const TokenAmount: React.FC<TokenAmountType> = ({
                 }),
               )
             }>
-            <span>MAX</span>
+            <span>Max</span>
           </button>
         )}
       </div>

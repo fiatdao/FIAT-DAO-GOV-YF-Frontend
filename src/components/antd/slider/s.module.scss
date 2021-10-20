@@ -8,7 +8,7 @@
   :global(.ant-slider-track),
   &:global(.ant-slider:hover .ant-slider-track) {
     height: 8px;
-    background: var(--gradient-green);
+    background: var(--gradient-pink);
   }
 
   :global(.ant-slider-step) {
@@ -21,7 +21,7 @@
     border-radius: 100px;
     margin-top: -8px;
     border: 4px solid var(--theme-border-color) !important;
-    background: var(--gradient-green);
+    background: var(--gradient-pink);
 
     &::after {
       content: '';
