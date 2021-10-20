@@ -87,7 +87,7 @@ const PoolHeader: FC = () => {
             Epoch rewards
           </Text>
           <div className="flex align-center">
-            <Icon name="png/enterdao" width={24} height={24} className="mr-8" />
+            <Icon name="static/fiat-dao" width={24} height={24} className="mr-8" />
             <Text type="p1" weight="semibold" color="primary">
               {formatNumber(poolMeta.contract.epochReward) ?? '-'}
             </Text>

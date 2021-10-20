@@ -14,7 +14,7 @@
   }
 
   &:hover {
-    background: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+    background: var(--gradient-secondary-pink);
   }
 
   &:global(.ant-select-sm) {
@@ -36,7 +36,7 @@
   }
 
   &:global(.ant-select-open) {
-    background: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+    background: var(--gradient-secondary-pink);
 
     :global(.ant-select-arrow) svg {
       transform: rotate(-180deg);

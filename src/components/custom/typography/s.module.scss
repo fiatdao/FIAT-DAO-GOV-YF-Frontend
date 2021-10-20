@@ -2,9 +2,9 @@
 
 .text {
   font-weight: normal;
-
+  word-wrap: anywhere;
   &.font-secondary {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   &.weight-500 {

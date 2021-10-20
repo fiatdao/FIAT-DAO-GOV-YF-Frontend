@@ -9,7 +9,7 @@
 
   border: 0;
   background: var(--gradient-pink);
-  box-shadow: 0 10px 20px rgba(136, 120, 172, 0.2);
+  //box-shadow: 0 10px 20px rgba(136, 120, 172, 0.2);
 
   border-radius: 4px;
 
@@ -19,16 +19,16 @@
 
   text-align: center;
 
-  color: #000;
+  color: #fff;
 
   &:hover {
-    color: #000;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+    color: #fff;
+    background: linear-gradient(90deg, #FF9574 0%, #FF4C8C 100%);
   }
 
   &:active {
-    color: #000;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+    color: #fff;
+    background: linear-gradient(99.48deg, #FF9F81 27.44%, #FF4C8C 138.99%);
   }
 
   &:disabled,

@@ -75,7 +75,7 @@ const LayoutFooter: React.FC = () => {
         <div className={cn(s.row, s.navWrap)}>
           <div className={s.logoWrap}>
             <Link to="/" className={s.logoLink}>
-              <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
+              <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
             </Link>
             <Text type="p1" color="white">
               EnterDAO is a decentralized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.

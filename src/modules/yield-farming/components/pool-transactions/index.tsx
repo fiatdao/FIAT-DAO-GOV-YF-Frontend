@@ -338,6 +338,7 @@ const PoolTransactions: FC = () => {
         columns={tableColumns}
         dataSource={state.transactions}
         loading={state.loading}
+        locale={{ emptyText: <Icon width={200} height={176} name="png/empty-table" /> }}
         rowKey="transactionHash"
         pagination={{
           total: state.total,
