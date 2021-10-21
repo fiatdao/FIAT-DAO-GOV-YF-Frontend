@@ -8,12 +8,7 @@
   @media (max-width: 480px) {
     gap: 24px 8px;
     display: flex;
-    flex-wrap: wrap;
     min-height: inherit;
-
-    button {
-      width: 100%;
-    }
   }
 }
 
@@ -22,4 +17,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  @media (max-width: 480px) {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+  }
 }

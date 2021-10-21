@@ -75,7 +75,7 @@ export const TokenAmount: React.FC<TokenAmountType> = ({
         {max?.isFinite() && (
           <button
             type="button"
-            className="button-ghost"
+            className={cn('button-ghost', s.maxBtn)}
             style={{ alignSelf: 'center' }}
             disabled={rest.disabled || max?.isEqualTo(BigNumber.ZERO)}
             onClick={() =>

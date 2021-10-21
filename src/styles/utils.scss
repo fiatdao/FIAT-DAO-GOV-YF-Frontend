@@ -63,7 +63,7 @@
   background: var(--theme-card-color);
   border-radius: 4px;
   box-shadow: var(--theme-card-shadow);
-  border: 1px solid var(--theme-border-color);
+  overflow: hidden;
 
   .card-row {
     display: flex;
@@ -86,9 +86,12 @@
 }
 
 .card-header {
-  height: 70px;
   border-bottom: 1px solid var(--theme-border-color);
   padding: 24px;
+
+  @media (max-width: 480px) {
+    padding: 24px 17px;
+  }
 }
 
 .css-grid {

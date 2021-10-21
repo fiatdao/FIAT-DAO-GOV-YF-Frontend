@@ -69,7 +69,7 @@ const PoolRewards: React.FC = () => {
             <Text type="p2" color="secondary">
               Current reward
             </Text>
-            <Grid flow="col" align="center" gap={4}>
+            <Grid flow="col" align="center" gap={4} className={s.item1__grid}>
               <Text type="h3" weight="bold" color="primary">
                 {formatToken(totalToClaim?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>

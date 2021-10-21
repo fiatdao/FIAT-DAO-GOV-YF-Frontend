@@ -38,7 +38,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
       <div className="card p-24">
         <div className="flex flow-row justify-space-between full-height">
           <Hint
-            className="mb-48"
+            className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
                 This number shows the Total Value Locked across the staking pool(s). It is the USD and ETH conversion of
@@ -68,7 +68,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
       <div className="card p-24">
         <div className="flex flow-row justify-space-between full-height">
           <Hint
-            className="mb-48"
+            className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
                 This number shows the ${EnterToken.symbol} token rewards distributed so far out of the total of{' '}
@@ -92,7 +92,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
 
       <div className="card p-24">
         <div className="flex flow-row justify-space-between full-height">
-          <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48')}>
+          <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>
             {EnterToken.symbol} Price
           </Text>
           <div className="flex flow-row">
@@ -113,7 +113,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
           {currentEpoch === 0 && (
             <div className="flex flow-row justify-space-between full-height">
               <Hint
-                className="mb-48"
+                className="mb-48 sm-mb-24"
                 text={
                   <Text type="p2">
                     This counter shows the time left until the first epoch starts. The pool(s) below are synchronized
@@ -145,7 +145,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
           {currentEpoch !== 0 && (
             <div className="flex flow-row justify-space-between full-height">
               <Hint
-                className="mb-48"
+                className="mb-48 sm-mb-24"
                 text={
                   <Text type="p2">
                     This counter shows the time left in the current epoch. The pool(s) below are synchronized and have

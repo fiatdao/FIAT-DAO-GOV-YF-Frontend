@@ -6,13 +6,9 @@
 
   @media (max-width: 480px) {
     gap: 24px 8px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     min-height: inherit;
-
-    button {
-      width: 100%;
-    }
   }
 }
 
@@ -28,7 +24,7 @@
   padding: 16px;
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.16);
-  border-radius: 8px;
+  border-radius: 4px;
 
   [data-theme='dark'] & {
     background: rgba(255, 255, 255, 0.04);
