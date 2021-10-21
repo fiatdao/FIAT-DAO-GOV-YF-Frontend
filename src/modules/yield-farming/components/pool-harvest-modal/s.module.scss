@@ -1,0 +1,20 @@
+.grid {
+  grid-template-columns: repeat(3, 240px);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.item {
+  &__name {
+    align-items: start;
+
+    @media (max-width: 768px) {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      grid-gap: 12px;
+    }
+  }
+}

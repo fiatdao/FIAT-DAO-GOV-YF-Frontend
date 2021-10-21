@@ -2,7 +2,7 @@
 
 .component:global(.ant-alert) {
   padding: 16px 24px;
-  border-radius: 12px;
+  border-radius: 6px;
 
   background: var(--alert-bg-color);
   border: 1px solid var(--alert-border-color);
@@ -22,10 +22,16 @@
     @include font-p2-semi-bold;
   }
 
+  //&:global(.ant-alert-info) {
+  //  --alert-bg-color: linear-gradient(135deg, rgba(145, 79, 230, 0.04) 0%, rgba(49, 108, 223, 0.04) 100%);
+  //  --alert-text-color: var(--L2-D2);
+  //  --alert-border-color: var(--L4-D4);
+  //}
+
   &:global(.ant-alert-info) {
-    --alert-bg-color: linear-gradient(135deg, rgba(145, 79, 230, 0.04) 0%, rgba(49, 108, 223, 0.04) 100%);
-    --alert-text-color: var(--theme-blue-color);
-    --alert-border-color: rgba(49, 108, 223, 0.32);
+    --alert-bg-color: linear-gradient(135deg, rgba(255, 116, 57, 0.04) 0%, rgba(255, 57, 188, 0.04) 100%);
+    --alert-text-color: var(--gradient-red-safe);
+    --alert-border-color: rgba(239, 74, 71, 0.32);
   }
 
   &:global(.ant-alert-success) {
@@ -41,17 +47,20 @@
   &:global(.ant-alert-error) {
     --alert-bg-color: linear-gradient(135deg, rgba(255, 116, 57, 0.04) 0%, rgba(255, 57, 188, 0.04) 100%);
     --alert-text-color: var(--gradient-red-safe);
-    --alert-border-color: rgba(255, 57, 188, 0.32);
+    --alert-border-color: rgba(239, 74, 71, 0.32);
   }
 
   @supports ((background-clip: text) or (-webkit-background-clip: text)) and
   ((text-fill-color: transparent) or (-webkit-text-fill-color: transparent)) {
     &:global(.ant-alert-info) :global(.ant-alert-message) {
       --alert-bg-color: linear-gradient(135deg, rgba(145, 79, 230, 0.04) 0%, rgba(49, 108, 223, 0.04) 100%);
-      --alert-text-color: var(--gradient-blue);
+      //--alert-text-color: var(--L8-D8);
+      --alert-text-color: var(--theme-red-color);
     }
     &:global(.ant-alert-info) :global(.ant-alert-icon) {
-      color: rgb(145, 79, 230);
+      //color: var(--L10-D10);
+      --alert-bg-color: var(--theme-red-color-rgb);
+      --alert-text-color: var(--theme-red-color);
     }
     &:global(.ant-alert-success) :global(.ant-alert-message) {
       --alert-bg-color: var(--theme-green-color-rgb);
@@ -73,9 +82,13 @@
       -webkit-text-fill-color: transparent;
       text-fill-color: transparent;
     }
-    &:global(.ant-alert-info) :global(.ant-alert-message)::selection {
-      -webkit-text-fill-color: var(--theme-blue-color);
-      text-fill-color: var(--theme-blue-color);
+    //&:global(.ant-alert-info) :global(.ant-alert-message)::selection {
+    //  -webkit-text-fill-color: var(--L9-D9);
+    //  text-fill-color: var(--L9-D9);
+    //}
+    &:global(.ant-alert-info) :global(.ant-alert-info)::selection {
+      -webkit-text-fill-color: var(--theme-red-color);
+      text-fill-color: var(--theme-red-color);
     }
     &:global(.ant-alert-success) :global(.ant-alert-message)::selection {
       -webkit-text-fill-color: var(--theme-green-color);
@@ -89,11 +102,5 @@
       -webkit-text-fill-color: var(--theme-red-color);
       text-fill-color: var(--theme-red-color);
     }
-  }
-
-  > :global(.ant-alert-icon),
-  > :global(.ant-alert-content .ant-alert-message),
-  > :global(.ant-alert-content .ant-alert-description) {
-    color: var(--alert-text-color);
   }
 }

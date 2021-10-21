@@ -80,7 +80,7 @@ const PoolStatistics: FC = () => {
               {EnterToken.symbol} balance
             </Text>
             <div className="flex align-center">
-              <Icon name={EnterToken.icon!} width={16} height={16} className="mr-8" />
+              <Icon name={EnterToken.icon!} className="mr-8" />
               <Text type="p1" weight="semibold" color="primary">
                 {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>
@@ -92,7 +92,7 @@ const PoolStatistics: FC = () => {
                 Potential reward this epoch
               </Text>
               <div className="flex align-center">
-                <Icon name={EnterToken.icon!} width={16} height={16} className="mr-8" />
+                <Icon name={EnterToken.icon!}  className="mr-8" />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(poolMeta.contract.potentialReward) ?? '-'}
                 </Text>

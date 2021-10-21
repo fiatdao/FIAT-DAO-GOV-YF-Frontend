@@ -53,13 +53,13 @@
   // ghost regular
   --btn-ghost-shadow: none;
   --btn-ghost-border: 0;
-  --btn-ghost-bg: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+  --btn-ghost-bg: linear-gradient(135deg, #252021 0%, #222020 100%);
   --btn-ghost-text: var(--theme-primary-color);
 
   // ghost hover
   --btn-ghost-shadow-hover: none;
   --btn-ghost-border-hover: none;
-  --btn-ghost-bg-hover: linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+  --btn-ghost-bg-hover: linear-gradient(90deg, rgba(255, 116, 116, 0.04) 0%, rgba(255, 76, 140, 0.04) 100%);
   --btn-ghost-text-hover: var(--theme-secondary-color);
 
   // ghost active

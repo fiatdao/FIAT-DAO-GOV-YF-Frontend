@@ -8,10 +8,11 @@ import sushiSrc from 'resources/png/token-sushi.png';
 import uslpSrc from 'resources/png/token-uslp.png';
 import eslpSrc from 'resources/png/token-eslp.png';
 import universeSrc from 'resources/png/universe.png';
-import enterdaoSrc from 'resources/png/enterdao.png';
+// import enterdaoSrc from 'resources/png/enterdao.png';
 import manaSrc from 'resources/png/mana.png';
 import sandSrc from 'resources/png/sandbox.png';
 import axsSrc from 'resources/png/axie.png';
+import emptyTable from 'resources/png/empty-table.png';
 import addEnterSrc from 'resources/png/add-enter.png';
 import enterStarSrc from 'resources/png/enter-star.png';
 import telegramSrc from 'resources/png/telegram.png';
@@ -19,7 +20,7 @@ import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
 
-export type LogoIconNames = 'png/enterdao';
+export type LogoIconNames = 'static/fiat-dao';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -163,6 +164,7 @@ export type IconNames =
   | 'core-drops'
   | 'png/add-enter'
   | 'png/telegram'
+  | 'png/empty-table'
   | 'static/add-token';
 
 export type IconProps = {
@@ -182,11 +184,13 @@ const Icon: React.FC<IconProps> = props => {
   const isStatic = (name ?? '').indexOf('static/') === 0;
   const isPng = (name ?? '').indexOf('png/') === 0;
 
+  console.log('asdasdas===', name === 'static/fiat-dao', isStatic);
+
   if (isPng) {
     const getSrc = () => {
       switch (name) {
-        case 'png/enterdao':
-          return enterdaoSrc;
+        case 'png/empty-table':
+          return emptyTable;
         case 'png/universe':
           return universeSrc;
         case 'png/mana':

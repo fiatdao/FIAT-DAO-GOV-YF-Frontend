@@ -12,6 +12,7 @@ import { Text } from 'components/custom/typography';
 import { EnterToken } from 'components/providers/known-tokens-provider';
 
 import { useYFPools } from '../../providers/pools-provider';
+import s from './s.module.scss';
 
 type PoolHarvestButtonProps = {
   icons: string[];
@@ -96,7 +97,7 @@ const PoolHarvestModal: FC<ModalProps> = props => {
             Select the pool you want to claim your reward from
           </Text>
         </div>
-        <Grid flow="row" gap={24} colsTemplate="repeat(3, 240px)">
+        <Grid flow="row" gap={24} className={s.grid}>
           {yfPoolsCtx.yfPools.map(yfPool => (
             <PoolHarvestButton
               key={yfPool.name}

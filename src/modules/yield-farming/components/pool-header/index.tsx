@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BigNumber from 'bignumber.js';
+import cn from 'classnames';
 import { formatNumber, formatPercent, formatUSD } from 'web3/utils';
 
 import Icon, { IconNames } from 'components/custom/icon';
@@ -10,6 +11,8 @@ import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
 
 import { useYFPool } from '../../providers/pool-provider';
+
+import s from './s.module.scss';
 
 const PoolHeader: FC = () => {
   const yfPoolCtx = useYFPool();
@@ -53,7 +56,7 @@ const PoolHeader: FC = () => {
           </Text>
         </div>
       </div>
-      <div className="card p-24 flex col-gap-48 mb-24">
+      <div className={cn('card p-24 flex col-gap-48 mb-24', s.card)}>
         <div>
           <Text type="small" weight="semibold" color="secondary" className="mb-8">
             APR
@@ -87,7 +90,7 @@ const PoolHeader: FC = () => {
             Epoch rewards
           </Text>
           <div className="flex align-center">
-            <Icon name="png/enterdao" width={24} height={24} className="mr-8" />
+            <Icon name="static/fiat-dao" width={24} height={24} className="mr-8" />
             <Text type="p1" weight="semibold" color="primary">
               {formatNumber(poolMeta.contract.epochReward) ?? '-'}
             </Text>

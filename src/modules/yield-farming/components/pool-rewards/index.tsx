@@ -69,11 +69,11 @@ const PoolRewards: React.FC = () => {
             <Text type="p2" color="secondary">
               Current reward
             </Text>
-            <Grid flow="col" align="center" gap={4}>
+            <Grid flow="col" align="center" gap={4} className={s.item1__grid}>
               <Text type="h3" weight="bold" color="primary">
                 {formatToken(totalToClaim?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={EnterToken.icon!} width={40} height={40} />
+              <Icon name={EnterToken.icon!} />
               {walletCtx.isActive && (
                 <button
                   type="button"
@@ -94,7 +94,7 @@ const PoolRewards: React.FC = () => {
               <Text type="h3" weight="bold" color="primary">
                 {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={EnterToken.icon!} width={40} height={40} />
+              <Icon name={EnterToken.icon!}/>
             </Grid>
           </Grid>
           {!!currentEpoch && (
@@ -113,7 +113,7 @@ const PoolRewards: React.FC = () => {
                   <Text type="h3" weight="bold" color="primary">
                     {formatToken(totalPotentialReward) ?? '-'}
                   </Text>
-                  <Icon name={EnterToken.icon!} width={40} height={40} />
+                  <Icon name={EnterToken.icon!}/>
                 </Grid>
               </Grid>
             </>

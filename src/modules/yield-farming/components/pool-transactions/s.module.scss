@@ -1,0 +1,31 @@
+.tableHeader {
+  justify-content: space-between;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  @media (max-width: 768px) {
+    position: relative;
+    display: grid;
+    justify-content: normal;
+    grid-gap: 16px;
+    padding: 0;
+
+    > div {
+      padding: 0 17px;
+    }
+
+    &__tabs {
+      border-bottom: 1px solid var(--L4-D4);
+    }
+
+    &__select {
+      display: grid;
+      grid-gap: 16px;
+      margin-bottom: 16px;
+
+      > div {
+        width: 100%;
+      }
+    }
+  }
+}

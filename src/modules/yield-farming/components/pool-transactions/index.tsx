@@ -18,6 +18,9 @@ import { APIYFPoolActionType, APIYFPoolTransaction, fetchYFPoolTransactions } fr
 import { useYFPool } from '../../providers/pool-provider';
 import { useYFPools } from '../../providers/pools-provider';
 
+import s from './s.module.scss';
+import cn from 'classnames';
+
 type TableEntity = APIYFPoolTransaction;
 
 type State = {
@@ -285,10 +288,13 @@ const PoolTransactions: FC = () => {
 
   return (
     <div className="card mb-32">
-      <div className="card-header flex flow-col align-center justify-space-between pv-0" style={{ overflowX: 'auto' }}>
+      <div
+        className={cn('card-header flex flow-col align-center', s.tableHeader)}
+        style={{ overflowX: 'auto', border: '0' }}>
         <Tabs
           activeKey={activeTab}
           style={{ flexShrink: 0 }}
+          className={s.tableHeader__tabs}
           tabs={[
             ...(hasOwnTab
               ? [
@@ -305,7 +311,7 @@ const PoolTransactions: FC = () => {
           ]}
           onClick={setActiveTab}
         />
-        <div className="flex align-center">
+        <div className={cn('flex align-center', s.tableHeader__select)}>
           {tokens.length! > 1 && (
             <Select
               className="mr-16"
@@ -338,6 +344,7 @@ const PoolTransactions: FC = () => {
         columns={tableColumns}
         dataSource={state.transactions}
         loading={state.loading}
+        locale={{ emptyText: <Icon width={200} height={176} name="png/empty-table" /> }}
         rowKey="transactionHash"
         pagination={{
           total: state.total,

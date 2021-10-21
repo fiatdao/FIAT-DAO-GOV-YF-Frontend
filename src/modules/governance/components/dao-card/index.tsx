@@ -47,7 +47,7 @@ const DaoCard: FC = () => {
           {EnterToken.symbol} Staked
         </Text>
         <div className="flex flow-col">
-          <Icon name="png/enterdao" className="mr-4" />
+          <Icon name="static/fiat-dao" className="mr-4" />
           <Text type="p1" weight="semibold" color="primary">
             {formatToken(daoBarn.entrStaked) ?? '-'}
           </Text>
@@ -59,7 +59,7 @@ const DaoCard: FC = () => {
             My Staked Balance
           </Text>
           <div className="flex flow-col">
-            <Icon name="png/enterdao" className="mr-4" />
+            <Icon name="static/fiat-dao" className="mr-4" />
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(daoBarn.balance) ?? '-'}
             </Text>
@@ -76,7 +76,7 @@ const DaoCard: FC = () => {
           </Text>
         </div>
         <div className="flex flow-col">
-          <Icon name="png/enterdao" className="mr-4" />
+          <Icon name="static/fiat-dao" className="mr-4" />
           <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="bold" color="primary">
@@ -92,7 +92,7 @@ const DaoCard: FC = () => {
             My {EnterToken.symbol} Rewards
           </Text>
           <div className="flex flow-col">
-            <Icon name="png/enterdao" className="mr-4" />
+            <Icon name="static/fiat-dao" className="mr-4" />
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(daoReward.claimValue) ?? '-'}
             </Text>

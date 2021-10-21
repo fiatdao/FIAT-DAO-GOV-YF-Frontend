@@ -25,7 +25,7 @@ const LayoutFooter: React.FC = () => {
       <div className="container-limit">
         <div className={s.row}>
           <div className={s.subscribeBlock}>
-            <Text type="p1" weight="bold" color="white" font="secondary">
+            <Text type="p1" weight="bold" color="primary" font="secondary">
               Stay up to date with our newsletter
             </Text>
             <form className={s.subscribeWrap}  action={config.mailchimp.url} method="POST" noValidate target="_blank">
@@ -53,7 +53,7 @@ const LayoutFooter: React.FC = () => {
             </form>
           </div>
           <div className={s.sBlock}>
-            <Text type="p1" weight="bold" color="white" font="secondary">
+            <Text type="p1" weight="bold" color="primary" font="secondary">
               Join the community
             </Text>
             <div className={s.sLinksWrap}>
@@ -75,15 +75,15 @@ const LayoutFooter: React.FC = () => {
         <div className={cn(s.row, s.navWrap)}>
           <div className={s.logoWrap}>
             <Link to="/" className={s.logoLink}>
-              <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
+              <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
             </Link>
-            <Text type="p1" color="white">
+            <Text type="p1" color="primary">
               EnterDAO is a decentralized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.
             </Text>
           </div>
           <div className={s.navBlocksWrap}>
             <nav className={s.navBlock}>
-              <Text type="p1" color="white" font="secondary" className={s.navTitle}>
+              <Text type="p1" color="primary" font="secondary" className={s.navTitle}>
                 Info
               </Text>
               <ExternalLink href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8" className={s.link}>
@@ -100,7 +100,7 @@ const LayoutFooter: React.FC = () => {
               </ExternalLink>
             </nav>
             <nav className={s.navBlock}>
-              <Text type="p1" color="white" font="secondary" className={s.navTitle}>
+              <Text type="p1" color="primary" font="secondary" className={s.navTitle}>
                 DAO
               </Text>
               <Link to="/governance" className={s.link}>

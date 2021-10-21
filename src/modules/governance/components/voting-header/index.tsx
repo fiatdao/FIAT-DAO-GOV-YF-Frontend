@@ -82,7 +82,7 @@ const VotingHeader: React.FC = () => {
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/enterdao" width={40} height={40} />
+              <Icon name="static/fiat-dao" width={40} height={40} />
               <Button
                 type="primary"
                 size="small"
@@ -104,7 +104,7 @@ const VotingHeader: React.FC = () => {
                   {formatEntrValue(entrBalance)}
                 </Text>
               </Skeleton>
-              <Icon name="png/enterdao" src={imgSrc} width={40} height={40} />
+              <Icon name="static/fiat-dao" src={imgSrc} width={40} height={40} />
             </Grid>
           </Grid>
           <Divider type="vertical" />

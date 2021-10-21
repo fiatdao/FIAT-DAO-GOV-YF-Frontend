@@ -21,11 +21,11 @@ const PoolsView: React.FC = () => {
     <>
       {!isMobile && walletCtx.isActive && <PoolRewards />}
       <div className="content-container-fix content-container">
-        <PoolStats className="mb-64" />
-        <Text type="h1" weight="bold" color="primary" className="mb-16" font="secondary">
+        <PoolStats className="mb-64 sm-mb-24" />
+        <Text type="h1" weight="bold" color="primary" className="mb-16 sm-mb-4" font="secondary">
           Pools
         </Text>
-        <Text type="p1" weight="semibold" color="secondary" className="mb-32">
+        <Text type="p1" weight="semibold" color="secondary" className="mb-32 sm-mb-24">
           Overview
         </Text>
         <div className={s.poolCards}>

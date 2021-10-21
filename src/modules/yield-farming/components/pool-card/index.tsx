@@ -94,7 +94,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               Reward
             </Text>
             <div className="flex flow-col">
-              <Icon name="png/enterdao" className={s.entrReward} />
+              <Icon name="static/fiat-dao" className={s.entrReward} />
               <Text type="p1" weight="semibold" color="primary">
                 {formatToken(epochReward) ?? '-'}
               </Text>
@@ -106,7 +106,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                 My Potential Reward
               </Text>
               <div className="flex flow-col">
-                <Icon name="png/enterdao" className={s.entrReward} />
+                <Icon name="static/fiat-dao" className={s.entrReward} />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(potentialReward) ?? '-'}
                 </Text>
@@ -183,7 +183,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
       {isEnded && isPoolAvailable && (
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
-            <Text type="p2" weight="semibold" color="secondary" className="mb-4">
+            <Text type="p2" weight="500" color="secondary" className="mb-4">
               The ${poolMeta?.label} staking pool ended after {totalEpochs} epochs on {formattedEndDate}. Deposits are
               now disabled, but you can still withdraw your tokens and collect any unclaimed rewards.
             </Text>

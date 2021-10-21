@@ -74,7 +74,7 @@ const LayoutHeader: React.FC = () => {
   return (
     <div className={s.component} ref={setReferenceElement}>
       <ExternalLink href="https://enterdao.xyz/" target="_self">
-        <Icon name="png/enterdao" width="auto" height="auto" className={s.logo} />
+        <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
       </ExternalLink>
       <div className={s.titleDelimiter} />
       <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>

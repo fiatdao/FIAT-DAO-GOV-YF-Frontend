@@ -5,7 +5,7 @@
   display: flex;
   padding: 12px var(--horizontal-padding);
   position: relative;
-  box-shadow: var(--theme-header-shadow);
+  //box-shadow: var(--theme-header-shadow);
 
   @media (max-width: 1024px) {
     padding: 24px 12px;
@@ -18,7 +18,7 @@
   .burger {
     display: none;
     margin-left: 16px;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 10px !important;
     border: 1px solid var(--theme-border-color) !important;
     color: var(--theme-primary-color);
@@ -120,7 +120,7 @@
 }
 
 .title {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--theme-primary-color);
   font-size: 18px;
   font-style: normal;
@@ -243,9 +243,7 @@
 }
 
 .addTokenWrapper {
-  padding-right: 20px;
   margin-right: 20px;
-  border-right: 1px solid var(--theme-border-color);
 }
 
 .addTokenButton {

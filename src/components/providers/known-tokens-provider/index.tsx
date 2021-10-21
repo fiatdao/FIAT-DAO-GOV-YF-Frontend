@@ -50,7 +50,7 @@ export const EnterToken: TokenMeta = {
   symbol: KnownTokens.ENTR,
   name: 'EnterDAO Governance Token',
   decimals: 18,
-  icon: 'png/enterdao' as any,
+  icon: 'static/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.entr),
 };
 
