@@ -12,10 +12,18 @@ import { useWallet } from 'wallets/wallet';
 
 export enum KnownTokens {
   ETH = 'ETH',
-  ENTR = 'ENTR',
-  XYZ = 'XYZ',
   USDC = 'USDC',
   BOND = 'BOND',
+  UMA = 'UMA',
+  MKR = 'MKR',
+  YFI = 'YFI',
+  RGT = 'RGT',
+  wsOHM = 'wsOHM',
+  ETH_FTD_SLP = 'ETH_FTD_SLP',
+  sOHM_FTD_SLP = 'sOHM_FTD_SLP',
+
+  ENTR = 'ENTR',
+  XYZ = 'XYZ',
   MANA = 'MANA',
   AAVE = 'AAVE',
   SAND = 'SAND',
@@ -45,15 +53,6 @@ export const EthToken: TokenMeta = {
   coinGeckoId: 'ethereum',
 };
 
-export const EnterToken: TokenMeta = {
-  address: config.tokens.entr,
-  symbol: KnownTokens.ENTR,
-  name: 'EnterDAO Governance Token',
-  decimals: 18,
-  icon: 'static/fiat-dao' as any,
-  contract: new Erc20Contract([], config.tokens.entr),
-};
-
 export const UsdcToken: TokenMeta = {
   address: config.tokens.usdc,
   symbol: KnownTokens.USDC,
@@ -64,16 +63,6 @@ export const UsdcToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.usdc),
 };
 
-export const ManaToken: TokenMeta = {
-  address: config.tokens.mana,
-  symbol: KnownTokens.MANA,
-  name: 'MANA',
-  decimals: 18,
-  icon: 'png/mana',
-  coinGeckoId: 'decentraland',
-  contract: new Erc20Contract([], config.tokens.mana),
-};
-
 export const BondToken: TokenMeta = {
   address: config.tokens.bond,
   symbol: KnownTokens.BOND,
@@ -82,6 +71,94 @@ export const BondToken: TokenMeta = {
   icon: 'static/token-bond',
   coinGeckoId: 'barnbridge',
   contract: new Erc20Contract([], config.tokens.bond),
+};
+
+export const UMAToken: TokenMeta = {
+  address: config.tokens.uma,
+  symbol: KnownTokens.UMA,
+  name: 'UMA',
+  decimals: 18,
+  icon: 'static/token-bond',
+  coinGeckoId: 'uma',
+  contract: new Erc20Contract([], config.tokens.uma),
+};
+
+export const MKRToken: TokenMeta = {
+  address: config.tokens.mkr,
+  symbol: KnownTokens.MKR,
+  name: 'MKR',
+  decimals: 18,
+  icon: 'static/token-bond',
+  coinGeckoId: 'maker',
+  contract: new Erc20Contract([], config.tokens.mkr),
+};
+
+
+export const YFIToken: TokenMeta = {
+  address: config.tokens.yfi,
+  symbol: KnownTokens.YFI,
+  name: 'YFI',
+  decimals: 18,
+  icon: 'static/token-bond',
+  coinGeckoId: 'yearn-finance',
+  contract: new Erc20Contract([], config.tokens.yfi),
+};
+
+export const RGTToken: TokenMeta = {
+  address: config.tokens.rgt,
+  symbol: KnownTokens.RGT,
+  name: 'RGT',
+  decimals: 18,
+  icon: 'static/token-bond',
+  coinGeckoId: 'rari-governance-token',
+  contract: new Erc20Contract([], config.tokens.rgt),
+};
+
+export const wsOHMToken: TokenMeta = {
+  address: config.tokens.wsOHM,
+  symbol: KnownTokens.wsOHM,
+  name: 'wsOHM',
+  decimals: 18,
+  icon: 'static/token-bond',
+  coinGeckoId: 'wrapped-staked-olympus',
+  contract: new Erc20Contract([], config.tokens.wsOHM),
+};
+
+export const EthFtdSLPToken: TokenMeta = {
+  address: config.tokens.ethFTDSLP,
+  symbol: KnownTokens.ETH_FTD_SLP,
+  name: 'ETH FTD SUSHI LP',
+  decimals: 18,
+  icon: 'png/eslp',
+  contract: new Erc20Contract([], config.tokens.ethFTDSLP),
+};
+
+export const sOHMFtdSLPToken: TokenMeta = {
+  address: config.tokens.sOHMFTDSLP,
+  symbol: KnownTokens.sOHM_FTD_SLP,
+  name: 'sOHM FTD SUSHI LP',
+  decimals: 18,
+  icon: 'png/eslp',
+  contract: new Erc20Contract([], config.tokens.sOHMFTDSLP),
+};
+
+export const EnterToken: TokenMeta = {
+  address: config.tokens.entr,
+  symbol: KnownTokens.ENTR,
+  name: 'EnterDAO Governance Token',
+  decimals: 18,
+  icon: 'static/fiat-dao' as any,
+  contract: new Erc20Contract([], config.tokens.entr),
+};
+
+export const ManaToken: TokenMeta = {
+  address: config.tokens.mana,
+  symbol: KnownTokens.MANA,
+  name: 'MANA',
+  decimals: 18,
+  icon: 'png/mana',
+  coinGeckoId: 'decentraland',
+  contract: new Erc20Contract([], config.tokens.mana),
 };
 
 export const XyzToken: TokenMeta = {
@@ -145,16 +222,24 @@ export const UsdcEntrSLPToken: TokenMeta = {
 
 const KNOWN_TOKENS: TokenMeta[] = [
   EthToken,
-  EnterToken,
   UsdcToken,
   BondToken,
-  ManaToken,
-  XyzToken,
-  SandToken,
-  SushiToken,
-  AxsToken,
-  IlvToken,
-  UsdcEntrSLPToken,
+  UMAToken,
+  MKRToken,
+  YFIToken,
+  RGTToken,
+  wsOHMToken,
+  EthFtdSLPToken,
+  sOHMFtdSLPToken,
+
+  // EnterToken,
+  // ManaToken,
+  // XyzToken,
+  // SandToken,
+  // SushiToken,
+  // AxsToken,
+  // IlvToken,
+  // UsdcEntrSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;

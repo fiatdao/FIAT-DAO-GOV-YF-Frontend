@@ -17,9 +17,17 @@ const config = {
   },
   tokens: {
     usdc: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ADDR),
+    bond: toLowerCase(process.env.REACT_APP_TOKEN_BOND_ADDR),
+    uma: toLowerCase(process.env.REACT_APP_TOKEN_UMA_ADDR),
+    mkr: toLowerCase(process.env.REACT_APP_TOKEN_MKR_ADDR),
+    yfi: toLowerCase(process.env.REACT_APP_TOKEN_YFI_ADDR),
+    rgt: toLowerCase(process.env.REACT_APP_TOKEN_RGT_ADDR),
+    wsOHM: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_ADDR),
+    ethFTDSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
+    sOHMFTDSLP: toLowerCase(process.env.REACT_APP_TOKEN_sOHM_FDT_SUSHI_LP),
+
     entr: toLowerCase(process.env.REACT_APP_TOKEN_ENTR_ADDR),
     mana: toLowerCase(process.env.REACT_APP_TOKEN_MANA_ADDR),
-    bond: toLowerCase(process.env.REACT_APP_TOKEN_BOND_ADDR),
     xyz: toLowerCase(process.env.REACT_APP_TOKEN_XYZ_ADDR),
     sand: toLowerCase(process.env.REACT_APP_TOKEN_SAND_ADDR),
     sushi: toLowerCase(process.env.REACT_APP_TOKEN_SUSHI_ADDR),
@@ -29,9 +37,17 @@ const config = {
   },
   contracts: {
     yf: {
-      staking: toLowerCase(process.env.REACT_APP_CONTRACT_YF_STAKING_ADDR),
-      mana: toLowerCase(process.env.REACT_APP_CONTRACT_YF_MANA_ADDR),
       bond: toLowerCase(process.env.REACT_APP_CONTRACT_YF_BOND_ADDR),
+      staking: toLowerCase(process.env.REACT_APP_CONTRACT_YF_STAKING_ADDR),
+      uma: toLowerCase(process.env.REACT_APP_CONTRACT_YF_UMA_ADDR),
+      mkr: toLowerCase(process.env.REACT_APP_CONTRACT_YF_MKR_ADDR),
+      yfi: toLowerCase(process.env.REACT_APP_CONTRACT_YF_YFI_ADDR),
+      rgt: toLowerCase(process.env.REACT_APP_CONTRACT_YF_RGT_ADDR),
+      wsOHM: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_ADDR),
+      ethFTDSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ETH_FDT_SUSHI_LP),
+      sOHMFTDSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_sOHM_FDT_SUSHI_LP),
+
+      mana: toLowerCase(process.env.REACT_APP_CONTRACT_YF_MANA_ADDR),
       xyz: toLowerCase(process.env.REACT_APP_CONTRACT_YF_XYZ_ADDR),
       sand: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SAND_ADDR),
       sushi: toLowerCase(process.env.REACT_APP_CONTRACT_YF_SUSHI_ADDR),

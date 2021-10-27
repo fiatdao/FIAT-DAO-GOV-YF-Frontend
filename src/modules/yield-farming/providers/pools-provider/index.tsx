@@ -5,8 +5,16 @@ import MerkleDistributor from 'web3/merkleDistributor';
 import Web3Contract from 'web3/web3Contract';
 
 import {
-  XyzToken,
   BondToken,
+  UMAToken,
+  MKRToken,
+  YFIToken,
+  RGTToken,
+  wsOHMToken,
+  EthFtdSLPToken,
+  sOHMFtdSLPToken,
+
+  XyzToken,
   ManaToken,
   SandToken,
   IlvToken,
@@ -24,6 +32,14 @@ import { useWallet } from 'wallets/wallet';
 
 export enum YFPoolID {
   BOND = 'bond',
+  UMA = 'uma',
+  MKR = 'mkr',
+  YFI = 'yfi',
+  RGT = 'rgt',
+  wsOHM = 'wsOHM',
+  ETH_FTD_SLP = 'eth-ftd-slp',
+  sOHM_FTD_SLP = 'sOHM-ftd-slp',
+
   MANA = 'mana',
   XYZ = 'xyz',
   SAND = 'sand',
@@ -49,6 +65,69 @@ export const BondYfPool: YFPoolMeta = {
   colors: ['var(--theme-red-color)'],
   tokens: [BondToken],
   contract: new YfPoolContract(config.contracts.yf.bond),
+};
+
+export const UMAYfPool: YFPoolMeta = {
+  name: YFPoolID.UMA,
+  label: 'UMA',
+  icons: ['static/token-bond'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [UMAToken],
+  contract: new YfPoolContract(config.contracts.yf.uma),
+};
+
+export const MKRYfPool: YFPoolMeta = {
+  name: YFPoolID.MKR,
+  label: 'MKR',
+  icons: ['static/token-bond'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [MKRToken],
+  contract: new YfPoolContract(config.contracts.yf.mkr),
+};
+
+export const YFIYfPool: YFPoolMeta = {
+  name: YFPoolID.YFI,
+  label: 'YFI',
+  icons: ['static/token-bond'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [YFIToken],
+  contract: new YfPoolContract(config.contracts.yf.yfi),
+};
+
+export const RGTYfPool: YFPoolMeta = {
+  name: YFPoolID.RGT,
+  label: 'RGT',
+  icons: ['static/token-bond'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [RGTToken],
+  contract: new YfPoolContract(config.contracts.yf.rgt),
+};
+
+export const wsOHMYfPool: YFPoolMeta = {
+  name: YFPoolID.wsOHM,
+  label: 'wsOHM',
+  icons: ['static/token-bond'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [wsOHMToken],
+  contract: new YfPoolContract(config.contracts.yf.wsOHM),
+};
+
+export const EthFtdSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.ETH_FTD_SLP,
+  label: 'ETH_FTD_SUSHI_LP',
+  icons: ['png/eslp'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [EthFtdSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.ethFTDSLP),
+};
+
+export const sOHMFtdSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.sOHM_FTD_SLP,
+  label: 'sOHM_FTD_SUSHI_LP',
+  icons: ['png/eslp'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [sOHMFtdSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.sOHMFTDSLP),
 };
 
 export const XyzYfPool: YFPoolMeta = {
@@ -115,14 +194,22 @@ export const UsdcEntrSLPYfPool: YFPoolMeta = {
 };
 
 const KNOWN_POOLS: YFPoolMeta[] = [
-  XyzYfPool,
-  ManaYfPool,
   BondYfPool,
-  SandYfPool,
-  SushiYfPool,
-  AxsYfPool,
-  IlvYfPool,
-  UsdcEntrSLPYfPool,
+  UMAYfPool,
+  MKRYfPool,
+  YFIYfPool,
+  RGTYfPool,
+  wsOHMYfPool,
+  EthFtdSLPYfPool,
+  sOHMFtdSLPYfPool,
+
+  // XyzYfPool,
+  // ManaYfPool,
+  // SandYfPool,
+  // SushiYfPool,
+  // AxsYfPool,
+  // IlvYfPool,
+  // UsdcEntrSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {

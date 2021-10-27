@@ -29,17 +29,14 @@ const PoolsView: React.FC = () => {
           Overview
         </Text>
         <div className={s.poolCards}>
-          <DAOProvider>
-            <DaoCard />
-          </DAOProvider>
-          <PoolCard poolId={YFPoolID.USDC_ENTR_SLP} />
-          <PoolCard poolId={YFPoolID.SUSHI} />
-          <PoolCard poolId={YFPoolID.XYZ} />
-          <PoolCard poolId={YFPoolID.ILV} />
+          <PoolCard poolId={YFPoolID.ETH_FTD_SLP} />
+          <PoolCard poolId={YFPoolID.sOHM_FTD_SLP} />
           <PoolCard poolId={YFPoolID.BOND} />
-          <PoolCard poolId={YFPoolID.MANA} />
-          <PoolCard poolId={YFPoolID.AXS} />
-          <PoolCard poolId={YFPoolID.SAND} />
+          <PoolCard poolId={YFPoolID.UMA} />
+          <PoolCard poolId={YFPoolID.MKR} />
+          <PoolCard poolId={YFPoolID.YFI} />
+          <PoolCard poolId={YFPoolID.RGT} />
+          <PoolCard poolId={YFPoolID.wsOHM} />
         </div>
         <PoolTransactions />
       </div>
