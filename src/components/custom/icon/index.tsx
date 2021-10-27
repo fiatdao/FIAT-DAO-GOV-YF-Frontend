@@ -17,6 +17,11 @@ import addEnterSrc from 'resources/png/add-enter.png';
 import enterStarSrc from 'resources/png/enter-star.png';
 import telegramSrc from 'resources/png/telegram.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
+import MKRSrc from 'resources/png/MKR.png';
+import RGTSrc from 'resources/png/RGT.png';
+import UMASrc from 'resources/png/UMA.png';
+import wsOHMSrc from 'resources/png/wsOHM.png';
+import YFISrc from 'resources/png/YFI.png';
 
 import s from './s.module.scss';
 
@@ -54,6 +59,11 @@ export type TokenIconNames =
   | 'png/uslp'
   | 'png/eslp'
   | 'cream_finance'
+  | 'png/mkr'
+  | 'png/rgt'
+  | 'png/uma'
+  | 'png/wsOHM'
+  | 'png/YFI'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -184,11 +194,19 @@ const Icon: React.FC<IconProps> = props => {
   const isStatic = (name ?? '').indexOf('static/') === 0;
   const isPng = (name ?? '').indexOf('png/') === 0;
 
-  console.log('asdasdas===', name === 'static/fiat-dao', isStatic);
-
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/mkr':
+          return MKRSrc;
+        case 'png/rgt':
+          return RGTSrc;
+        case 'png/uma':
+          return UMASrc;
+        case 'png/wsOHM':
+          return wsOHMSrc;
+        case 'png/YFI':
+          return YFISrc;
         case 'png/empty-table':
           return emptyTable;
         case 'png/universe':

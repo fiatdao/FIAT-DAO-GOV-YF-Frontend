@@ -12,7 +12,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 import useMergeState from 'hooks/useMergeState';
 
 import config from '../../../../config';
@@ -55,15 +55,15 @@ const WalletDepositView: React.FC = () => {
   const [state, setState] = useMergeState<WalletDepositViewState>(InitialState);
 
   const { balance: stakedBalance, userLockedUntil } = daoCtx.daoBarn;
-  const entrBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
-  const barnAllowance = (EnterToken.contract as Erc20Contract).getAllowanceOf(config.contracts.dao.barn);
+  const entrBalance = (FTDToken.contract as Erc20Contract).balance?.unscaleBy(FTDToken.decimals);
+  const barnAllowance = (FTDToken.contract as Erc20Contract).getAllowanceOf(config.contracts.dao.comitium);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
 
   async function handleSwitchChange(checked: boolean) {
     setState({ enabling: true });
 
     try {
-      await (EnterToken.contract as Erc20Contract).approve(checked, config.contracts.dao.barn);
+      await (FTDToken.contract as Erc20Contract).approve(checked, config.contracts.dao.comitium);
     } catch (e) {
       console.error(e);
     }
@@ -84,7 +84,7 @@ const WalletDepositView: React.FC = () => {
       await daoCtx.daoBarn.actions.deposit(amount, gasPrice.value);
       form.setFieldsValue(InitialFormValues);
       daoCtx.daoBarn.reload();
-      (EnterToken.contract as Erc20Contract).loadBalance().catch(Error);
+      (FTDToken.contract as Erc20Contract).loadBalance().catch(Error);
     } catch {}
 
     setState({ saving: false });
@@ -114,7 +114,7 @@ const WalletDepositView: React.FC = () => {
         <Grid flow="col" gap={12} align="center">
           <Icon name="static/fiat-dao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
-            {EnterToken.symbol}
+            {FTDToken.symbol}
           </Text>
         </Grid>
 
@@ -179,8 +179,8 @@ const WalletDepositView: React.FC = () => {
                   <TokenAmount
                     tokenIcon="png/enterdao"
                     max={entrBalance}
-                    maximumFractionDigits={EnterToken.decimals}
-                    name={EnterToken.symbol}
+                    maximumFractionDigits={FTDToken.decimals}
+                    name={FTDToken.symbol}
                     displayDecimals={4}
                     disabled={state.saving}
                     slider

@@ -17,7 +17,7 @@ import { Text } from 'components/custom/typography';
 import { NotificationType, useNotifications } from 'components/providers/notifications-provider';
 import { useReload } from 'hooks/useReload';
 
-import { EnterToken } from '../../providers/known-tokens-provider';
+import { FTDToken } from '../../providers/known-tokens-provider';
 import ExternalLink from '../externalLink';
 import NotificationIcon from './icon';
 
@@ -59,7 +59,7 @@ function getData(n: NotificationType, reload: Function): [IconNames, [string, st
           <Text type="p2" weight="semibold" color="secondary" className="mb-16">
             Proposal {getProposalLink(n.metadata.proposalId)} has been created by{' '}
             {getStrongText(shortenAddr(n.metadata.proposer))} and entered the warm-up phase. You have{' '}
-            {getStrongText(getRelativeTime(n.metadata.displayDuration))} to stake your {EnterToken.symbol}
+            {getStrongText(getRelativeTime(n.metadata.displayDuration))} to stake your {FTDToken.symbol}
           </Text>
           <Link to="/governance/wallet/deposit" className="button-primary">
             Deposit now
@@ -213,7 +213,7 @@ function getData(n: NotificationType, reload: Function): [IconNames, [string, st
         colorPairs.blue,
         <Text type="p2" weight="semibold" color="secondary">
           {getStrongText(
-            `${getHumanValue(new BigNumber(n.metadata.amount ?? 0), EnterToken.decimals)?.toFixed()} v${EnterToken.symbol}`,
+            `${getHumanValue(new BigNumber(n.metadata.amount ?? 0), FTDToken.decimals)?.toFixed()} v${FTDToken.symbol}`,
           )}{' '}
           has been delegated to you from{' '}
           <ExternalLink href={getEtherscanAddressUrl(n.metadata.from)} className="link-blue">

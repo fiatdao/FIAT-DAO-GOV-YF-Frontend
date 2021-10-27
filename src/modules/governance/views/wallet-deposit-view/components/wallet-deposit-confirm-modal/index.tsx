@@ -7,7 +7,7 @@ import Modal, { ModalProps } from 'components/antd/modal';
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 
 import { getFormattedDuration } from 'utils';
 
@@ -30,7 +30,7 @@ const WalletDepositConfirmModal: React.FC<WalletDepositConfirmModalProps> = prop
             </Text>
 
             <Text type="p2" weight="semibold" color="secondary">
-              You are about to deposit {formatEntrValue(deposit)} ${EnterToken.symbol}.
+              You are about to deposit {formatEntrValue(deposit)} ${FTDToken.symbol}.
               <br />
               You have an active lock for {getFormattedDuration(0, lockDuration)}.
             </Text>

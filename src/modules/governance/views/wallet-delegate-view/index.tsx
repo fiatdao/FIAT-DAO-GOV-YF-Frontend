@@ -12,7 +12,7 @@ import TokenInput from 'components/custom/token-input';
 import { Text } from 'components/custom/typography';
 import useMergeState from 'hooks/useMergeState';
 
-import { EnterToken } from '../../../../components/providers/known-tokens-provider';
+import { FTDToken } from '../../../../components/providers/known-tokens-provider';
 import { useDAO } from '../../components/dao-provider';
 
 import { isValidAddress } from 'utils';
@@ -84,7 +84,7 @@ const WalletDelegateView: React.FC = () => {
         <Grid flow="col" gap={12} align="center">
           <Icon name="static/fiat-dao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
-            {EnterToken.symbol}
+            {FTDToken.symbol}
           </Text>
         </Grid>
 

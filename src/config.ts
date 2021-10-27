@@ -16,6 +16,7 @@ const config = {
     apiKey: String(process.env.REACT_APP_ZAPPER_API_KEY)
   },
   tokens: {
+    ftd: toLowerCase(process.env.REACT_APP_TOKEN_FTD_ADDR),
     usdc: toLowerCase(process.env.REACT_APP_TOKEN_USDC_ADDR),
     bond: toLowerCase(process.env.REACT_APP_TOKEN_BOND_ADDR),
     uma: toLowerCase(process.env.REACT_APP_TOKEN_UMA_ADDR),
@@ -57,7 +58,7 @@ const config = {
     },
     dao: {
       governance: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),
-      barn: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_BARN_ADDR),
+      comitium: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_COMITIUM_ADDR),
       reward: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_REWARD_ADDR),
     },
     merkleDistributor: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_ADDR),

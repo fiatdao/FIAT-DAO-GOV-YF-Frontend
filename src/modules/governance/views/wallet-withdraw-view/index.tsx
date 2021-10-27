@@ -11,7 +11,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
@@ -44,7 +44,7 @@ const WalletWithdrawView: React.FC = () => {
   const [state, setState] = useMergeState<WalletWithdrawViewState>(InitialState);
 
   const { balance: stakedBalance, userLockedUntil } = daoCtx.daoBarn;
-  const entrBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
+  const ftdBalance = (FTDToken.contract as Erc20Contract).balance?.unscaleBy(FTDToken.decimals);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
   const hasStakedBalance = stakedBalance?.gt(ZERO_BIG_NUMBER);
   const formDisabled = !hasStakedBalance || isLocked;
@@ -62,7 +62,7 @@ const WalletWithdrawView: React.FC = () => {
       await daoCtx.daoBarn.actions.withdraw(amount, gasPrice.value);
       form.setFieldsValue(InitialFormValues);
       daoCtx.daoBarn.reload();
-      (EnterToken.contract as Erc20Contract).loadBalance().catch(Error);
+      (FTDToken.contract as Erc20Contract).loadBalance().catch(Error);
     } catch {}
 
     setState({ saving: false });
@@ -74,7 +74,7 @@ const WalletWithdrawView: React.FC = () => {
         <Grid flow="col" gap={12} align="center">
           <Icon name="static/fiat-dao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
-            {EnterToken.symbol}
+            {FTDToken.symbol}
           </Text>
         </Grid>
 
@@ -92,7 +92,7 @@ const WalletWithdrawView: React.FC = () => {
             Wallet Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
-            {formatEntrValue(entrBalance)}
+            {formatEntrValue(ftdBalance)}
           </Text>
         </Grid>
 
@@ -110,9 +110,9 @@ const WalletWithdrawView: React.FC = () => {
               <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                 <TokenAmount
                   tokenIcon="png/enterdao"
-                  name={EnterToken.symbol}
+                  name={FTDToken.symbol}
                   max={stakedBalance}
-                  maximumFractionDigits={EnterToken.decimals}
+                  maximumFractionDigits={FTDToken.decimals}
                   displayDecimals={4}
                   disabled={formDisabled || state.saving}
                   slider

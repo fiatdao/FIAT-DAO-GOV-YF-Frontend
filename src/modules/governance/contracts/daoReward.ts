@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { ZERO_BIG_NUMBER, getHumanValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
 
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
@@ -27,7 +27,7 @@ function loadCommonData(): Promise<any> {
       method: 'pullFeature',
       transform: (value: DaoRewardPullFeature) => ({
         ...value,
-        totalAmount: getHumanValue(new BigNumber(value.totalAmount), EnterToken.decimals),
+        totalAmount: getHumanValue(new BigNumber(value.totalAmount), FTDToken.decimals),
       }),
     },
   ]).then(([poolFeature]) => {
@@ -48,7 +48,7 @@ function loadUserData(userAddress?: string): Promise<any> {
       callArgs: {
         from: userAddress,
       },
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals),
       onError: () => ZERO_BIG_NUMBER,
     },
   ]).then(([claimValue]) => {

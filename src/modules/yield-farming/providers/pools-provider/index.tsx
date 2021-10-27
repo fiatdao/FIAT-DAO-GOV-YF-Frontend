@@ -70,7 +70,7 @@ export const BondYfPool: YFPoolMeta = {
 export const UMAYfPool: YFPoolMeta = {
   name: YFPoolID.UMA,
   label: 'UMA',
-  icons: ['static/token-bond'],
+  icons: ['png/uma'],
   colors: ['var(--theme-red-color)'],
   tokens: [UMAToken],
   contract: new YfPoolContract(config.contracts.yf.uma),
@@ -79,7 +79,7 @@ export const UMAYfPool: YFPoolMeta = {
 export const MKRYfPool: YFPoolMeta = {
   name: YFPoolID.MKR,
   label: 'MKR',
-  icons: ['static/token-bond'],
+  icons: ['png/mkr'],
   colors: ['var(--theme-red-color)'],
   tokens: [MKRToken],
   contract: new YfPoolContract(config.contracts.yf.mkr),
@@ -88,7 +88,7 @@ export const MKRYfPool: YFPoolMeta = {
 export const YFIYfPool: YFPoolMeta = {
   name: YFPoolID.YFI,
   label: 'YFI',
-  icons: ['static/token-bond'],
+  icons: ['png/YFI'],
   colors: ['var(--theme-red-color)'],
   tokens: [YFIToken],
   contract: new YfPoolContract(config.contracts.yf.yfi),
@@ -97,7 +97,7 @@ export const YFIYfPool: YFPoolMeta = {
 export const RGTYfPool: YFPoolMeta = {
   name: YFPoolID.RGT,
   label: 'RGT',
-  icons: ['static/token-bond'],
+  icons: ['png/rgt'],
   colors: ['var(--theme-red-color)'],
   tokens: [RGTToken],
   contract: new YfPoolContract(config.contracts.yf.rgt),
@@ -106,7 +106,7 @@ export const RGTYfPool: YFPoolMeta = {
 export const wsOHMYfPool: YFPoolMeta = {
   name: YFPoolID.wsOHM,
   label: 'wsOHM',
-  icons: ['static/token-bond'],
+  icons: ['png/wsOHM'],
   colors: ['var(--theme-red-color)'],
   tokens: [wsOHMToken],
   contract: new YfPoolContract(config.contracts.yf.wsOHM),

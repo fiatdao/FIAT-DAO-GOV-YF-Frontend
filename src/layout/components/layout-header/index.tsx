@@ -14,7 +14,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 import { useWarning } from 'components/providers/warning-provider';
 import ConnectedWallet from 'wallets/components/connected-wallet';
 import { MetamaskConnector } from 'wallets/connectors/metamask';
@@ -59,9 +59,9 @@ const LayoutHeader: React.FC = () => {
         await connector.addToken({
           type: 'ERC20',
           options: {
-            address: EnterToken.address,
-            symbol: EnterToken.symbol,
-            decimals: EnterToken.decimals,
+            address: FTDToken.address,
+            symbol: FTDToken.symbol,
+            decimals: FTDToken.decimals,
             image: `${window.location.origin}/enterdao.png`,
           },
         });

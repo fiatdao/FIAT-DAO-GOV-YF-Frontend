@@ -11,6 +11,7 @@ import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
 export enum KnownTokens {
+  FTD = 'FTD',
   ETH = 'ETH',
   USDC = 'USDC',
   BOND = 'BOND',
@@ -42,6 +43,15 @@ export type TokenMeta = {
   coinGeckoId?: string;
   contract?: Web3Contract;
   price?: BigNumber;
+};
+
+export const FTDToken: TokenMeta = {
+  address: config.tokens.ftd,
+  symbol: KnownTokens.FTD,
+  name: 'FTD Token',
+  decimals: 18,
+  icon: 'static/fiat-dao' as any,
+  contract: new Erc20Contract([], config.tokens.ftd),
 };
 
 export const EthToken: TokenMeta = {
@@ -78,7 +88,7 @@ export const UMAToken: TokenMeta = {
   symbol: KnownTokens.UMA,
   name: 'UMA',
   decimals: 18,
-  icon: 'static/token-bond',
+  icon: 'png/uma',
   coinGeckoId: 'uma',
   contract: new Erc20Contract([], config.tokens.uma),
 };
@@ -88,7 +98,7 @@ export const MKRToken: TokenMeta = {
   symbol: KnownTokens.MKR,
   name: 'MKR',
   decimals: 18,
-  icon: 'static/token-bond',
+  icon: 'png/mkr',
   coinGeckoId: 'maker',
   contract: new Erc20Contract([], config.tokens.mkr),
 };
@@ -99,7 +109,7 @@ export const YFIToken: TokenMeta = {
   symbol: KnownTokens.YFI,
   name: 'YFI',
   decimals: 18,
-  icon: 'static/token-bond',
+  icon: 'png/YFI',
   coinGeckoId: 'yearn-finance',
   contract: new Erc20Contract([], config.tokens.yfi),
 };
@@ -109,7 +119,7 @@ export const RGTToken: TokenMeta = {
   symbol: KnownTokens.RGT,
   name: 'RGT',
   decimals: 18,
-  icon: 'static/token-bond',
+  icon: 'png/rgt',
   coinGeckoId: 'rari-governance-token',
   contract: new Erc20Contract([], config.tokens.rgt),
 };
@@ -119,7 +129,7 @@ export const wsOHMToken: TokenMeta = {
   symbol: KnownTokens.wsOHM,
   name: 'wsOHM',
   decimals: 18,
-  icon: 'static/token-bond',
+  icon: 'png/wsOHM',
   coinGeckoId: 'wrapped-staked-olympus',
   contract: new Erc20Contract([], config.tokens.wsOHM),
 };
@@ -221,6 +231,7 @@ export const UsdcEntrSLPToken: TokenMeta = {
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
+  FTDToken,
   EthToken,
   UsdcToken,
   BondToken,
@@ -288,7 +299,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 // ToDo: Check the ENTR price calculation
-async function getEntrPrice(): Promise<BigNumber> {
+async function getFtdPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
@@ -299,11 +310,11 @@ async function getEntrPrice(): Promise<BigNumber> {
   let entrReserve;
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === EnterToken.address) {
-    entrReserve = new BigNumber(reserve0).unscaleBy(EnterToken.decimals);
+  if (String(token0).toLowerCase() === FTDToken.address) {
+    entrReserve = new BigNumber(reserve0).unscaleBy(FTDToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    entrReserve = new BigNumber(reserve1).unscaleBy(EnterToken.decimals);
+    entrReserve = new BigNumber(reserve1).unscaleBy(FTDToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
@@ -315,8 +326,8 @@ async function getEntrPrice(): Promise<BigNumber> {
 }
 
 // ToDo: Check the SLP price calculation
-async function getUsdcEntrSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
+async function getEthFtdSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFtdSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -327,7 +338,35 @@ async function getUsdcEntrSLPPrice(): Promise<BigNumber> {
 
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === EnterToken.address) {
+  if (String(token0).toLowerCase() === FTDToken.address) {
+    usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
+  } else {
+    usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
+  }
+
+  const supply = totalSupply.unscaleBy(decimals);
+
+  if (!usdcReserve || !supply || supply.eq(BigNumber.ZERO)) {
+    return BigNumber.ZERO;
+  }
+
+  return usdcReserve.dividedBy(supply).multipliedBy(2);
+}
+
+// ToDo: Check the SLP price calculation
+async function getSOHMFtdSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, sOHMFtdSLPToken.address);
+
+  const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
+    { method: 'decimals', transform: Number },
+    { method: 'totalSupply', transform: value => new BigNumber(value) },
+    { method: 'token0' },
+    { method: 'getReserves' },
+  ]);
+
+  let usdcReserve;
+
+  if (String(token0).toLowerCase() === FTDToken.address) {
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
@@ -400,11 +439,12 @@ const KnownTokensProvider: FC = props => {
   const [reload, version] = useReload();
 
   useEffect(() => {
-    (EnterToken.contract as Erc20Contract).loadCommon().catch(Error);
+    (FTDToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      EnterToken.price = await getEntrPrice().catch(() => undefined);
-      UsdcEntrSLPToken.price = await getUsdcEntrSLPPrice().catch(() => undefined);
+      FTDToken.price = await getFtdPrice().catch(() => undefined);
+      EthFtdSLPToken.price = await getEthFtdSLPPrice().catch(() => undefined);
+      sOHMFtdSLPToken.price = await getSOHMFtdSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
@@ -445,7 +485,7 @@ const KnownTokensProvider: FC = props => {
 
     // load entr balance for connected wallet
     if (wallet.account) {
-      (EnterToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
+      (FTDToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }
   }, [wallet.account]);
 

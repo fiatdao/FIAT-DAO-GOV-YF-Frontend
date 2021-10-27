@@ -4,7 +4,7 @@ import { formatToken, formatUSD } from 'web3/utils';
 
 import ExternalLink from 'components/custom/externalLink';
 import { Hint, Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FTDToken } from 'components/providers/known-tokens-provider';
 import { ENTR_MARKET_LINK } from 'config';
 import { UseLeftTime } from 'hooks/useLeftTime';
 
@@ -71,12 +71,12 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
-                This number shows the ${EnterToken.symbol} token rewards distributed so far out of the total of{' '}
+                This number shows the ${FTDToken.symbol} token rewards distributed so far out of the total of{' '}
                 {formatToken(yfTotalSupply) ?? '-'} that are going to be available for Yield Farming.
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="primary" className={s.label}>
-              {EnterToken.symbol} Rewards
+              {FTDToken.symbol} Rewards
             </Text>
           </Hint>
           <div className="flex flow-row">
@@ -93,11 +93,11 @@ const PoolStats: React.FC<Props> = ({ className }) => {
       <div className="card p-24">
         <div className="flex flow-row justify-space-between full-height">
           <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>
-            {EnterToken.symbol} Price
+            {FTDToken.symbol} Price
           </Text>
           <div className="flex flow-row">
             <Text type="h2" weight="bold" color="primary" className="mb-4">
-              {formatUSD(EnterToken.price) ?? '-'}
+              {formatUSD(FTDToken.price) ?? '-'}
             </Text>
             <ExternalLink href={ENTR_MARKET_LINK} className="link-gradient">
               <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">

@@ -15,7 +15,7 @@ import { UseLeftTime } from 'hooks/useLeftTime';
 import useMergeState from 'hooks/useMergeState';
 import imgSrc from 'resources/png/enterdao.png';
 
-import { EnterToken } from '../../../../components/providers/known-tokens-provider';
+import { FTDToken } from '../../../../components/providers/known-tokens-provider';
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../dao-provider';
 import VotingDetailedModal from '../voting-detailed-modal';
@@ -40,7 +40,7 @@ const VotingHeader: React.FC = () => {
   const [state, setState] = useMergeState<VotingHeaderState>(InitialState);
 
   const { claimValue } = daoCtx.daoReward;
-  const entrBalance = (EnterToken.contract as Erc20Contract).balance?.unscaleBy(EnterToken.decimals);
+  const ftdBalance = (FTDToken.contract as Erc20Contract).balance?.unscaleBy(FTDToken.decimals);
   const { votingPower, userLockedUntil, multiplier = 1 } = daoCtx.daoBarn;
 
   const loadedUserLockedUntil = (userLockedUntil ?? Date.now()) - Date.now();
@@ -57,7 +57,7 @@ const VotingHeader: React.FC = () => {
       .catch(Error)
       .then(() => {
         daoCtx.daoReward.reload();
-        (EnterToken.contract as Erc20Contract).loadBalance().catch(Error);
+        (FTDToken.contract as Erc20Contract).loadBalance().catch(Error);
         setState({ claiming: false });
       });
   }
@@ -74,7 +74,7 @@ const VotingHeader: React.FC = () => {
               Current reward
             </Text>
             <Grid flow="col" align="center">
-              <Tooltip title={<Text type="p2">{formatBigValue(claimValue, EnterToken.decimals)}</Text>}>
+              <Tooltip title={<Text type="p2">{formatBigValue(claimValue, FTDToken.decimals)}</Text>}>
                 <Skeleton loading={claimValue === undefined}>
                   <Text type="h3" weight="bold" color="primary">
                     {isSmallEntrValue(claimValue) && '> '}
@@ -96,12 +96,12 @@ const VotingHeader: React.FC = () => {
           <Divider type="vertical" />
           <Grid flow="row" gap={4} className={s.item2}>
             <Text type="p2" color="secondary">
-              {EnterToken.symbol} Balance
+              {FTDToken.symbol} Balance
             </Text>
             <Grid flow="col" align="center">
-              <Skeleton loading={entrBalance === undefined}>
+              <Skeleton loading={ftdBalance === undefined}>
                 <Text type="h3" weight="bold" color="primary">
-                  {formatEntrValue(entrBalance)}
+                  {formatEntrValue(ftdBalance)}
                 </Text>
               </Skeleton>
               <Icon name="static/fiat-dao" src={imgSrc} width={40} height={40} />
