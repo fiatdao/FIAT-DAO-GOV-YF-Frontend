@@ -22,16 +22,6 @@ export enum KnownTokens {
   wsOHM = 'wsOHM',
   ETH_FTD_SLP = 'ETH_FTD_SLP',
   sOHM_FTD_SLP = 'sOHM_FTD_SLP',
-
-  ENTR = 'ENTR',
-  XYZ = 'XYZ',
-  MANA = 'MANA',
-  AAVE = 'AAVE',
-  SAND = 'SAND',
-  SUSHI = 'SUSHI',
-  AXS = 'AXS',
-  ILV = 'ILV',
-  USDC_ENTR_SLP = 'USDC_ENTR_SUSHI_LP',
 }
 
 export type TokenMeta = {
@@ -152,84 +142,6 @@ export const sOHMFtdSLPToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.sOHMFTDSLP),
 };
 
-export const EnterToken: TokenMeta = {
-  address: config.tokens.entr,
-  symbol: KnownTokens.ENTR,
-  name: 'EnterDAO Governance Token',
-  decimals: 18,
-  icon: 'static/fiat-dao' as any,
-  contract: new Erc20Contract([], config.tokens.entr),
-};
-
-export const ManaToken: TokenMeta = {
-  address: config.tokens.mana,
-  symbol: KnownTokens.MANA,
-  name: 'MANA',
-  decimals: 18,
-  icon: 'png/mana',
-  coinGeckoId: 'decentraland',
-  contract: new Erc20Contract([], config.tokens.mana),
-};
-
-export const XyzToken: TokenMeta = {
-  address: config.tokens.xyz,
-  symbol: KnownTokens.XYZ,
-  name: 'XYZ',
-  decimals: 18,
-  icon: 'png/universe',
-  coinGeckoId: 'universe-xyz',
-  contract: new Erc20Contract([], config.tokens.xyz),
-};
-
-export const SandToken: TokenMeta = {
-  address: config.tokens.sand,
-  symbol: KnownTokens.SAND,
-  name: 'Sandbox',
-  decimals: 18,
-  icon: 'png/sandbox',
-  coinGeckoId: 'the-sandbox',
-  contract: new Erc20Contract([], config.tokens.sand),
-};
-
-export const SushiToken: TokenMeta = {
-  address: config.tokens.sushi,
-  symbol: KnownTokens.SUSHI,
-  name: 'Sushi Token',
-  decimals: 18,
-  icon: 'png/sushi',
-  coinGeckoId: 'sushi',
-  contract: new Erc20Contract([], config.tokens.sushi),
-};
-
-export const AxsToken: TokenMeta = {
-  address: config.tokens.axs,
-  symbol: KnownTokens.AXS,
-  name: 'Axie Infinity',
-  decimals: 18,
-  icon: 'png/axie',
-  coinGeckoId: 'axie-infinity',
-  contract: new Erc20Contract([], config.tokens.axs),
-};
-
-export const IlvToken: TokenMeta = {
-  address: config.tokens.ilv,
-  symbol: KnownTokens.ILV,
-  name: 'Illuvium',
-  decimals: 18,
-  icon: 'png/ilv',
-  coinGeckoId: 'illuvium',
-  contract: new Erc20Contract([], config.tokens.ilv),
-};
-
-export const UsdcEntrSLPToken: TokenMeta = {
-  address: config.tokens.usdcEntrSLP,
-  symbol: KnownTokens.USDC_ENTR_SLP,
-  name: 'USDC ENTR SUSHI LP',
-  decimals: 18,
-  icon: 'png/eslp',
-  contract: new Erc20Contract([], config.tokens.usdcEntrSLP),
-};
-
 const KNOWN_TOKENS: TokenMeta[] = [
   FTDToken,
   EthToken,
@@ -242,15 +154,6 @@ const KNOWN_TOKENS: TokenMeta[] = [
   wsOHMToken,
   EthFtdSLPToken,
   sOHMFtdSLPToken,
-
-  // EnterToken,
-  // ManaToken,
-  // XyzToken,
-  // SandToken,
-  // SushiToken,
-  // AxsToken,
-  // IlvToken,
-  // UsdcEntrSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -300,7 +203,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 
 // ToDo: Check the ENTR price calculation
 async function getFtdPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFtdSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },

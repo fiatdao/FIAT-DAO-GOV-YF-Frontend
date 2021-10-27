@@ -50,7 +50,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
   const isPoolAvailable = poolMeta?.contract.isPoolAvailable;
   const apr =
     poolBalanceInUSD?.isGreaterThan(BigNumber.ZERO) && epochReward
-      ? convertTokenInUSD(epochReward * 52, KnownTokens.ENTR)?.dividedBy(poolBalanceInUSD)
+      ? convertTokenInUSD(epochReward * 52, KnownTokens.FTD)?.dividedBy(poolBalanceInUSD)
       : undefined;
 
   function handleStaking() {
@@ -201,7 +201,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
           </Grid>
         </div>
       )}
-      {poolId === YFPoolID.USDC_ENTR_SLP && !isPoolAvailable && (
+      {poolId === YFPoolID.ETH_FTD_SLP && !isPoolAvailable && (
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
             <Text type="p2" weight="semibold" color="secondary" className="mb-4">

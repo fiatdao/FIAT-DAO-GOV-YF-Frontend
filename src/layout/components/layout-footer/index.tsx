@@ -8,7 +8,7 @@ import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import config, { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
+import config, { FTD_MARKET_LINK, FTD_MARKET_LIQUIDITY_LINK } from 'config';
 
 import s from './s.module.scss';
 
@@ -115,10 +115,10 @@ const LayoutFooter: React.FC = () => {
         <div className={cn(s.row, s.copyrightsBlock)}>
           <div className={s.copyrightLink}>Enterdao.xyz © {getYear()}. Open-sourced.</div>
           <div className={s.copyrightLinks}>
-            <ExternalLink href={ENTR_MARKET_LINK} className={s.copyrightLink}>
+            <ExternalLink href={FTD_MARKET_LINK} className={s.copyrightLink}>
               SushiSwap USDC/ENTR market
             </ExternalLink>
-            <ExternalLink href={ENTR_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
+            <ExternalLink href={FTD_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
               Add liquidity to SushiSwap USDC/ENTR pool
             </ExternalLink>
           </div>

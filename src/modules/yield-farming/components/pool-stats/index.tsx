@@ -5,7 +5,7 @@ import { formatToken, formatUSD } from 'web3/utils';
 import ExternalLink from 'components/custom/externalLink';
 import { Hint, Text } from 'components/custom/typography';
 import { FTDToken } from 'components/providers/known-tokens-provider';
-import { ENTR_MARKET_LINK } from 'config';
+import { FTD_MARKET_LINK } from 'config';
 import { UseLeftTime } from 'hooks/useLeftTime';
 
 import { useYFPool } from '../../providers/pool-provider';
@@ -99,7 +99,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             <Text type="h2" weight="bold" color="primary" className="mb-4">
               {formatUSD(FTDToken.price) ?? '-'}
             </Text>
-            <ExternalLink href={ENTR_MARKET_LINK} className="link-gradient">
+            <ExternalLink href={FTD_MARKET_LINK} className="link-gradient">
               <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">
                 SushiSwap market
               </Text>
