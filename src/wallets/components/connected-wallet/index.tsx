@@ -162,7 +162,8 @@ const ConnectedWallet: React.FC = () => {
       }>
       <Button type="link" className={s.accountLink}>
         <Grid flow="col" align="center">
-          <Identicon address={wallet.account} width={24} height={24} className="mr-8" />
+          {/*<Identicon address={wallet.account} width={24} height={24} className="mr-8" />*/}
+          <Icon name="png/account" width="32" height="32" className="mr-8" />
           <Text type="p1" color="primary" className={cn(s.walletAddress, 'mr-4')}>
             {shortenAddr(wallet.account, 4, 3)}
           </Text>

@@ -74,77 +74,86 @@ const LayoutHeader: React.FC = () => {
   return (
     <div className={s.component} ref={setReferenceElement}>
       <ExternalLink href="https://enterdao.xyz/" target="_self">
-        <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
+        <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="auto" height="auto" className={s.logo} />
       </ExternalLink>
-      <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>
+      {/*<div className={s.titleDelimiter} />*/}
+      <h1 className={s.title} />
 
       <nav className={s.nav}>
-        <Popover
-          visible={popper2visible}
-          onVisibleChange={setPopper2visible}
-          trigger={['click', 'hover']}
-          noPadding
-          content={
-            <div className={cn('card', s.dropdown)}>
-              <ExternalLink
-                href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"
-                className={s.dropdownLink}
-                onClick={() => setPopper2visible(false)}>
-                <Icon name="whitepaper" width={20} height={20} className={s.dropdownIcon} />
-                <span>Whitepaper</span>
-              </ExternalLink>
-              <ExternalLink
-                href="https://enterdao.xyz/team"
-                className={s.dropdownLink}
-                onClick={() => setPopper2visible(false)}>
-                <Icon name="team" width={20} height={20} className={s.dropdownIcon} />
-                <span>Team</span>
-              </ExternalLink>
-              <ExternalLink
-                href="https://docs.enterdao.xyz/"
-                className={s.dropdownLink}
-                onClick={() => setPopper3visible(false)}>
-                <Icon name="docs" width={20} height={20} className={s.dropdownIcon} />
-                <span>Docs</span>
-              </ExternalLink>
-            </div>
-          }>
-          <Button type="link" className={s.navLink}>
-            <Grid flow="col" align="center">
-              <Text type="p1" weight="500" color="primary" className="mr-4">
-                Info
-              </Text>
-              <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />
-            </Grid>
-          </Button>
-        </Popover>
-        <Popover
-          noPadding
-          visible={popper3visible}
-          trigger={['click', 'hover']}
-          onVisibleChange={setPopper3visible}
-          content={
-            <div className={cn('card', s.dropdown)}>
-              <Link to="/governance" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>
-                <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />
-                <span>Governance</span>
-              </Link>
-              <Link to="/yield-farming" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>
-                <Icon name="yield-farming" width={20} height={20} className={s.dropdownIcon} />
-                <span>Yield farming</span>
-              </Link>
-            </div>
-          }>
-          <Button type="link" className={s.navLink}>
-            <Grid flow="col" align="center">
-              <Text type="p1" weight="500" color="primary" className="mr-4">
-                DAO
-              </Text>
-              <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />
-            </Grid>
-          </Button>
-        </Popover>
+        <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+          <span>Home</span>
+        </Link>
+        <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+          <span>Liquidity mining</span>
+        </Link>
+        <Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+          <span>FIAT DAO</span>
+        </Link>
+        {/*<Popover*/}
+        {/*  visible={popper2visible}*/}
+        {/*  onVisibleChange={setPopper2visible}*/}
+        {/*  trigger={['click', 'hover']}*/}
+        {/*  noPadding*/}
+        {/*  content={*/}
+        {/*    <div className={cn('card', s.dropdown)}>*/}
+        {/*      <ExternalLink*/}
+        {/*        href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"*/}
+        {/*        className={s.dropdownLink}*/}
+        {/*        onClick={() => setPopper2visible(false)}>*/}
+        {/*        <Icon name="whitepaper" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Whitepaper</span>*/}
+        {/*      </ExternalLink>*/}
+        {/*      <ExternalLink*/}
+        {/*        href="https://enterdao.xyz/team"*/}
+        {/*        className={s.dropdownLink}*/}
+        {/*        onClick={() => setPopper2visible(false)}>*/}
+        {/*        <Icon name="team" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Team</span>*/}
+        {/*      </ExternalLink>*/}
+        {/*      <ExternalLink*/}
+        {/*        href="https://docs.enterdao.xyz/"*/}
+        {/*        className={s.dropdownLink}*/}
+        {/*        onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="docs" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Docs</span>*/}
+        {/*      </ExternalLink>*/}
+        {/*    </div>*/}
+        {/*  }>*/}
+        {/*  <Button type="link" className={s.navLink}>*/}
+        {/*    <Grid flow="col" align="center">*/}
+        {/*      <Text type="p1" weight="500" color="primary" className="mr-4">*/}
+        {/*        Info*/}
+        {/*      </Text>*/}
+        {/*      <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />*/}
+        {/*    </Grid>*/}
+        {/*  </Button>*/}
+        {/*</Popover>*/}
+        {/*<Popover*/}
+        {/*  noPadding*/}
+        {/*  visible={popper3visible}*/}
+        {/*  trigger={['click', 'hover']}*/}
+        {/*  onVisibleChange={setPopper3visible}*/}
+        {/*  content={*/}
+        {/*    <div className={cn('card', s.dropdown)}>*/}
+        {/*      <Link to="/governance" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Governance</span>*/}
+        {/*      </Link>*/}
+        {/*      <Link to="/yield-farming" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="yield-farming" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Yield farming</span>*/}
+        {/*      </Link>*/}
+        {/*    </div>*/}
+        {/*  }>*/}
+        {/*  <Button type="link" className={s.navLink}>*/}
+        {/*    <Grid flow="col" align="center">*/}
+        {/*      <Text type="p1" weight="500" color="primary" className="mr-4">*/}
+        {/*        DAO*/}
+        {/*      </Text>*/}
+        {/*      <Icon name="dropdown-arrow" width={12} height={12} className={s.dropdownArrow} />*/}
+        {/*    </Grid>*/}
+        {/*  </Button>*/}
+        {/*</Popover>*/}
       </nav>
       {!isMobile && wallet.isActive && wallet.connector?.id === 'metamask' && (
         <div className={s.addTokenWrapper}>
@@ -174,38 +183,15 @@ const LayoutHeader: React.FC = () => {
             <div className={s.mobileInner}>
               <div className={s.mobileMenuInner}>
                 <div className={s.mobileMenuBlock}>
-                  <h3>Info</h3>
-                  <ExternalLink
-                    href="https://medium.com/enterdao/enterdao-whitepaper-27447f7400c8"
-                    className={s.dropdownLink}
-                    onClick={() => setNavOpen(false)}>
-                    <Icon name="whitepaper" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Whitepaper</span>
-                  </ExternalLink>
-                  <ExternalLink
-                    href="https://enterdao.xyz/team"
-                    className={s.dropdownLink}
-                    onClick={() => setNavOpen(false)}>
-                    <Icon name="team" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Team</span>
-                  </ExternalLink>
-                  <ExternalLink
-                    href="https://docs.enterdao.xyz/"
-                    className={s.dropdownLink}
-                    onClick={() => setNavOpen(false)}>
-                    <Icon name="docs" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Docs</span>
-                  </ExternalLink>
-                </div>
-                <div className={s.mobileMenuBlock}>
-                  <h3>DAO</h3>
-                  <Link to="/governance" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Governance</span>
+                  {/*<h3>Info</h3>*/}
+                  <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Home</span>
                   </Link>
-                  <Link to="/yield-farming" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <Icon name="yield-farming" width={20} height={20} className={s.dropdownIcon} />
-                    <span>Yield farming</span>
+                  <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Liquidity mining</span>
+                  </Link>
+                  <Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>FIAT DAO</span>
                   </Link>
                 </div>
                 {!wallet.isActive && !isMobile ? (
