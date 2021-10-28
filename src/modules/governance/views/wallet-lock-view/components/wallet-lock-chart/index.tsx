@@ -151,7 +151,7 @@ const WalletLockChart: React.FC<WalletLockChartProps> = props => {
   const { lockEndDate } = props;
 
   const daoCtx = useDAO();
-  const { balance: stakedBalance } = daoCtx.daoBarn;
+  const { balance: stakedBalance } = daoCtx.daoComitium;
 
   const multiplier = React.useMemo<number>(() => getPeriodRate(addYears(new Date(), 1), new Date(), lockEndDate), [
     lockEndDate,

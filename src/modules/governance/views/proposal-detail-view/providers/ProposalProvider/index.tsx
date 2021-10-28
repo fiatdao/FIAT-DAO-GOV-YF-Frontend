@@ -120,11 +120,11 @@ const ProposalProvider: React.FC<ProposalProviderProps> = props => {
       againstRate,
     });
 
-    daoCtx.daoBarn.actions.fdtStakedAtTs(createTime + warmUpDuration).then(entrStakedAt => {
+    daoCtx.daoComitium.actions.fdtStakedAtTs(createTime + warmUpDuration).then(fdtStakedAt => {
       let quorum: number | undefined;
 
-      if (entrStakedAt?.gt(ZERO_BIG_NUMBER)) {
-        quorum = total.multipliedBy(100).div(entrStakedAt).toNumber();
+      if (fdtStakedAt?.gt(ZERO_BIG_NUMBER)) {
+        quorum = total.multipliedBy(100).div(fdtStakedAt).toNumber();
       }
 
       setState({ quorum });
@@ -142,22 +142,22 @@ const ProposalProvider: React.FC<ProposalProviderProps> = props => {
       thresholdRate: undefined,
     });
 
-    const { entrStaked } = daoCtx.daoBarn;
+    const { fdtStaked } = daoCtx.daoComitium;
 
-    if (!state.proposal || !entrStaked || entrStaked.isEqualTo(ZERO_BIG_NUMBER)) {
+    if (!state.proposal || !fdtStaked || fdtStaked.isEqualTo(ZERO_BIG_NUMBER)) {
       return;
     }
 
     const { proposer } = state.proposal;
 
-    daoCtx.daoBarn.actions.votingPower(proposer).then(votingPower => {
+    daoCtx.daoComitium.actions.votingPower(proposer).then(votingPower => {
       if (votingPower) {
         setState({
-          thresholdRate: votingPower.div(entrStaked).multipliedBy(100).toNumber(),
+          thresholdRate: votingPower.div(fdtStaked).multipliedBy(100).toNumber(),
         });
       }
     });
-  }, [state.proposal, daoCtx.daoBarn.entrStaked]);
+  }, [state.proposal, daoCtx.daoComitium.fdtStaked]);
 
   React.useEffect(() => {
     setState({
@@ -175,7 +175,7 @@ const ProposalProvider: React.FC<ProposalProviderProps> = props => {
       setState({ receipt });
     });
 
-    daoCtx.daoBarn.actions.votingPowerAtTs(createTime + warmUpDuration).then(votingPower => {
+    daoCtx.daoComitium.actions.votingPowerAtTs(createTime + warmUpDuration).then(votingPower => {
       setState({ votingPower });
     });
   }, [state.proposal, wallet.account]);

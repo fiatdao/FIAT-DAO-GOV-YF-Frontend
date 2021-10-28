@@ -43,7 +43,7 @@ const WalletWithdrawView: React.FC = () => {
 
   const [state, setState] = useMergeState<WalletWithdrawViewState>(InitialState);
 
-  const { balance: stakedBalance, userLockedUntil } = daoCtx.daoBarn;
+  const { balance: stakedBalance, userLockedUntil } = daoCtx.daoComitium;
   const fdtBalance = (FDTToken.contract as Erc20Contract).balance?.unscaleBy(FDTToken.decimals);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
   const hasStakedBalance = stakedBalance?.gt(ZERO_BIG_NUMBER);
@@ -59,9 +59,9 @@ const WalletWithdrawView: React.FC = () => {
     setState({ saving: true });
 
     try {
-      await daoCtx.daoBarn.actions.withdraw(amount, gasPrice.value);
+      await daoCtx.daoComitium.actions.withdraw(amount, gasPrice.value);
       form.setFieldsValue(InitialFormValues);
-      daoCtx.daoBarn.reload();
+      daoCtx.daoComitium.reload();
       (FDTToken.contract as Erc20Contract).loadBalance().catch(Error);
     } catch {}
 

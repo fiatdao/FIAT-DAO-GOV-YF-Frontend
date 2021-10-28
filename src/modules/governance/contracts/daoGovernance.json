@@ -589,7 +589,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "barnAddr",
+        "name": "comitiumAddr",
         "type": "address"
       }
     ],

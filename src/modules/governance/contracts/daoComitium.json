@@ -248,7 +248,7 @@
   },
   {
     "inputs": [],
-    "name": "entrStaked",
+    "name": "fdtStaked",
     "outputs": [
       {
         "internalType": "uint256",
@@ -378,7 +378,7 @@
         "type": "address"
       }
     ],
-    "name": "initBarn",
+    "name": "initComitium",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -477,7 +477,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct LibBarnStorage.Stake",
+        "internalType": "struct LibComitiumStorage.Stake",
         "name": "",
         "type": "tuple"
       }

@@ -60,7 +60,7 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Grid flow="col" gap={8} align="center">
           <Icon name="static/fiat-dao" width={32} height={32} />
           <Text type="p1" weight="bold" color="primary">
-            {formatEntrValue(dao.entrStaked)}
+            {formatEntrValue(dao.fdtStaked)}
           </Text>
           <Text type="p1" weight="semibold" color="secondary">
             / {formatEntrValue(dao.activationThreshold)} already staked.

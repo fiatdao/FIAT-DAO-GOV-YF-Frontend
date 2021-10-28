@@ -28,7 +28,7 @@ const InitialState: VotingDetailedModalState = {
 
 const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
   const daoCtx = useDAO();
-  const { votingPower, userDelegatedTo, delegatedPower, userLockedUntil, balance: myEntrBalance } = daoCtx.daoBarn;
+  const { votingPower, userDelegatedTo, delegatedPower, userLockedUntil, balance: myEntrBalance } = daoCtx.daoComitium;
 
   const [state, setState] = useMergeState<VotingDetailedModalState>(InitialState);
 

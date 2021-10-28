@@ -93,7 +93,7 @@ const WalletLockView: React.FC = () => {
   const daoCtx = useDAO();
   const [state, setState] = useMergeState<WalletLockViewState>(InitialState);
 
-  const { balance: stakedBalance, userLockedUntil, userDelegatedTo } = daoCtx.daoBarn;
+  const { balance: stakedBalance, userLockedUntil, userDelegatedTo } = daoCtx.daoComitium;
 
   const hasStakedBalance = stakedBalance?.gt(ZERO_BIG_NUMBER);
   const hasDelegation = isValidAddress(userDelegatedTo);
@@ -129,9 +129,9 @@ const WalletLockView: React.FC = () => {
     setState({ saving: true });
 
     try {
-      await daoCtx.daoBarn.actions.lock(getUnixTime(lockEndDate), gasPrice.value);
+      await daoCtx.daoComitium.actions.lock(getUnixTime(lockEndDate), gasPrice.value);
       form.setFieldsValue(InitialFormValues);
-      daoCtx.daoBarn.reload();
+      daoCtx.daoComitium.reload();
     } catch {}
 
     setState({ saving: false });

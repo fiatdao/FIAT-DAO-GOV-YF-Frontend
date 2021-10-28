@@ -43,7 +43,7 @@ const WalletDelegateView: React.FC = () => {
   const daoCtx = useDAO();
   const [state, setState] = useMergeState<WalletDelegateViewState>(InitialState);
 
-  const { balance: stakedBalance, userDelegatedTo, userLockedUntil } = daoCtx.daoBarn;
+  const { balance: stakedBalance, userDelegatedTo, userLockedUntil } = daoCtx.daoComitium;
   const isDelegated = isValidAddress(userDelegatedTo);
   const isLocked = (userLockedUntil ?? 0) > Date.now();
   const hasStakedBalance = stakedBalance?.gt(ZERO_BIG_NUMBER);
@@ -66,13 +66,13 @@ const WalletDelegateView: React.FC = () => {
 
     try {
       if (delegateAddress !== userDelegatedTo) {
-        await daoCtx.daoBarn.actions.delegate(delegateAddress, gasPrice.value);
+        await daoCtx.daoComitium.actions.delegate(delegateAddress, gasPrice.value);
       } else {
-        await daoCtx.daoBarn.actions.stopDelegate(gasPrice.value);
+        await daoCtx.daoComitium.actions.stopDelegate(gasPrice.value);
       }
 
       form.setFieldsValue(InitialFormValues);
-      daoCtx.daoBarn.reload();
+      daoCtx.daoComitium.reload();
     } catch {}
 
     setState({ saving: false });

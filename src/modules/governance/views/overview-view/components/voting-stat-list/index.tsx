@@ -47,14 +47,14 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
           <Grid flow="row" gap={4}>
             <Grid flow="col" gap={4} align="end">
               <Text type="h2" weight="bold" color="primary">
-                {formatToken(daoCtx.daoBarn.entrStaked)}
+                {formatToken(daoCtx.daoComitium.fdtStaked)}
               </Text>
               <Text type="p1" color="secondary">
                 {FDTToken.symbol}
               </Text>
             </Grid>
             <Text type="p1" color="secondary">
-              {formatUSD(convertTokenInUSD(daoCtx.daoBarn.entrStaked, FDTToken.symbol))}
+              {formatUSD(convertTokenInUSD(daoCtx.daoComitium.fdtStaked, FDTToken.symbol))}
             </Text>
           </Grid>
         </Grid>

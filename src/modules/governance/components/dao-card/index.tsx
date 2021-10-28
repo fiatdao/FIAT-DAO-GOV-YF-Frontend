@@ -15,7 +15,7 @@ import s from './s.module.scss';
 const DaoCard: FC = () => {
   const walletCtx = useWallet();
   const daoCtx = useDAO();
-  const { daoBarn, daoReward } = daoCtx;
+  const { daoComitium, daoReward } = daoCtx;
 
   return (
     <div className="card">
@@ -49,7 +49,7 @@ const DaoCard: FC = () => {
         <div className="flex flow-col">
           <Icon name="static/fiat-dao" className="mr-4" />
           <Text type="p1" weight="semibold" color="primary">
-            {formatToken(daoBarn.entrStaked) ?? '-'}
+            {formatToken(daoComitium.fdtStaked) ?? '-'}
           </Text>
         </div>
       </div>
@@ -61,7 +61,7 @@ const DaoCard: FC = () => {
           <div className="flex flow-col">
             <Icon name="static/fiat-dao" className="mr-4" />
             <Text type="p1" weight="semibold" color="primary">
-              {formatToken(daoBarn.balance) ?? '-'}
+              {formatToken(daoComitium.balance) ?? '-'}
             </Text>
           </div>
         </div>

@@ -41,12 +41,12 @@ const VotingHeader: React.FC = () => {
 
   const { claimValue } = daoCtx.daoReward;
   const fdtBalance = (FDTToken.contract as Erc20Contract).balance?.unscaleBy(FDTToken.decimals);
-  const { votingPower, userLockedUntil, multiplier = 1 } = daoCtx.daoBarn;
+  const { votingPower, userLockedUntil, multiplier = 1 } = daoCtx.daoComitium;
 
   const loadedUserLockedUntil = (userLockedUntil ?? Date.now()) - Date.now();
 
   function handleLeftTimeEnd() {
-    daoCtx.daoBarn.reload();
+    daoCtx.daoComitium.reload();
   }
 
   function handleClaim() {

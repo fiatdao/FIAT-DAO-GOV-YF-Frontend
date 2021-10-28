@@ -9,21 +9,21 @@ import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
-import DAO_BARN_ABI from './daoBarn.json';
+import DAO_COMITIUM_ABI from './daoComitium.json';
 
 import { getNowTs } from 'utils';
 
-const Contract = new Web3Contract(DAO_BARN_ABI as Web3ContractAbiItem[], config.contracts.dao.comitium, 'Community');
+const Contract = new Web3Contract(DAO_COMITIUM_ABI as Web3ContractAbiItem[], config.contracts.dao.comitium, 'Community');
 
 function loadCommonData(): Promise<any> {
   return Contract.batch([
     {
-      method: 'entrStaked',
+      method: 'fdtStaked',
       transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
-  ]).then(([entrStaked]) => {
+  ]).then(([fdtStaked]) => {
     return {
-      entrStaked,
+      fdtStaked,
     };
   });
 }
@@ -124,10 +124,10 @@ function lockSend(timestamp: number, from: string, gasPrice: number): Promise<vo
   });
 }
 
-export type DAOBarnContractData = {
+export type DAOComitiumContractData = {
   contract: Web3Contract;
   activationThreshold?: BigNumber;
-  entrStaked?: BigNumber;
+  fdtStaked?: BigNumber;
   balance?: BigNumber;
   votingPower?: BigNumber;
   multiplier?: number;
@@ -136,10 +136,10 @@ export type DAOBarnContractData = {
   userDelegatedTo?: string;
 };
 
-const InitialState: DAOBarnContractData = {
+const InitialState: DAOComitiumContractData = {
   contract: Contract,
   activationThreshold: new BigNumber(config.dao.activationThreshold),
-  entrStaked: undefined,
+  fdtStaked: undefined,
   balance: undefined,
   votingPower: undefined,
   multiplier: undefined,
@@ -148,7 +148,7 @@ const InitialState: DAOBarnContractData = {
   userDelegatedTo: undefined,
 };
 
-export type DAOBarnContract = DAOBarnContractData & {
+export type DAOComitiumContract = DAOComitiumContractData & {
   reload(): void;
   actions: {
     fdtStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
@@ -162,15 +162,15 @@ export type DAOBarnContract = DAOBarnContractData & {
   };
 };
 
-export function useDAOBarnContract(): DAOBarnContract {
+export function useDAOComitiumContract(): DAOComitiumContract {
   const wallet = useWallet();
 
-  const [state, setState] = useMergeState<DAOBarnContractData>(InitialState);
+  const [state, setState] = useMergeState<DAOComitiumContractData>(InitialState);
   const [reload, version] = useReload();
 
   React.useEffect(() => {
     setState({
-      entrStaked: undefined,
+      fdtStaked: undefined,
     });
 
     loadCommonData().then(setState).catch(Error);

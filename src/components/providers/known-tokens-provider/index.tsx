@@ -210,22 +210,22 @@ async function getFdtPrice(): Promise<BigNumber> {
     { method: 'getReserves' },
   ]);
 
-  let entrReserve;
+  let fdtReserve;
   let usdcReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
-    entrReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
+    fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    entrReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
+    fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
-  if (!usdcReserve || !entrReserve || entrReserve.eq(BigNumber.ZERO)) {
+  if (!usdcReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  return usdcReserve.dividedBy(entrReserve);
+  return usdcReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
@@ -386,7 +386,7 @@ const KnownTokensProvider: FC = props => {
       token.contract?.setAccount(wallet.account);
     });
 
-    // load entr balance for connected wallet
+    // load fdt balance for connected wallet
     if (wallet.account) {
       (FDTToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }
