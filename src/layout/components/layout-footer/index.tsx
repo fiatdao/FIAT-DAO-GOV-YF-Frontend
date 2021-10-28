@@ -46,17 +46,23 @@ const LayoutFooter: React.FC = () => {
             <div className={s.copyrightLink}>fiatdao.com © {getYear()}. Open-sourced.</div>
             <div className={s.copyrightLinks}>
               <div className={s.sLinksWrap}>
-                <ExternalLink href="https://twitter.com/EnterDao" className={s.sLink}>
+                <ExternalLink href="#" className={s.sLink}>
                   <Icon name="twitter" width="20" height="20" />
                 </ExternalLink>
-                <ExternalLink href="https://discord.gg/7QJvEctG2G" className={s.sLink}>
+                <ExternalLink href="#" className={s.sLink}>
                   <Icon name="discord" width="20" height="20" />
                 </ExternalLink>
-                <ExternalLink href="https://www.coingecko.com/en/coins/enterdao" className={s.sLink}>
-                  <Icon name="coingecko" width="20" height="20" />
-                </ExternalLink>
-                <ExternalLink href="https://medium.com/enterdao" className={s.sLink}>
+                <ExternalLink href="#" className={s.sLink}>
                   <Icon name="medium" width="20" height="20" />
+                </ExternalLink>
+                <ExternalLink href="#" className={s.sLink}>
+                  <Icon name="youtube" width="20" height="20" />
+                </ExternalLink>
+                <ExternalLink href="#" className={s.sLink}>
+                  <Icon name="git" width="20" height="20" />
+                </ExternalLink>
+                <ExternalLink href="#" className={s.sLink}>
+                  <Icon name="coingecko" width="20" height="20" />
                 </ExternalLink>
               </div>
             </div>
