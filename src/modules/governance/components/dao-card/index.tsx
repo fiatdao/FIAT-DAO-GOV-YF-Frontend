@@ -5,7 +5,7 @@ import { formatPercent, formatToken } from 'web3/utils';
 
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import { UseLeftTime } from 'hooks/useLeftTime';
 import { useDAO } from 'modules/governance/components/dao-provider';
 import { useWallet } from 'wallets/wallet';
@@ -44,7 +44,7 @@ const DaoCard: FC = () => {
       </div>
       <div className="card-row card-row-border p-24">
         <Text type="lb2" weight="semibold" color="secondary">
-          {FTDToken.symbol} Staked
+          {FDTToken.symbol} Staked
         </Text>
         <div className="flex flow-col">
           <Icon name="static/fiat-dao" className="mr-4" />
@@ -69,7 +69,7 @@ const DaoCard: FC = () => {
       <div className="card-row card-row-border p-24">
         <div className="flex flow-row">
           <Text type="lb2" weight="semibold" color="secondary" className="mb-4">
-            {FTDToken.symbol} Rewards
+            {FDTToken.symbol} Rewards
           </Text>
           <Text type="p2" color="secondary">
             out of {formatToken(daoReward.poolFeature?.totalAmount)}
@@ -89,7 +89,7 @@ const DaoCard: FC = () => {
       {walletCtx.isActive && (
         <div className="card-row card-row-border p-24">
           <Text type="lb2" weight="semibold" color="secondary">
-            My {FTDToken.symbol} Rewards
+            My {FDTToken.symbol} Rewards
           </Text>
           <div className="flex flow-col">
             <Icon name="static/fiat-dao" className="mr-4" />

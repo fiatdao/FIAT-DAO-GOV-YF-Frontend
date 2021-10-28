@@ -9,7 +9,7 @@ import Modal, { ModalProps } from 'components/antd/modal';
 import Spin from 'components/antd/spin';
 import Grid from 'components/custom/grid';
 import { Text } from 'components/custom/typography';
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import BalanceTree from 'merkle-distributor/balance-tree';
 import { useWallet } from 'wallets/wallet';
@@ -85,7 +85,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
           </Text>
           <br></br>
           <Text type="p1" weight="bold" color="primary" className="mb-8">
-            Available to claim now: {formatToken(adjustedAmount?.unscaleBy(FTDToken.decimals))}
+            Available to claim now: {formatToken(adjustedAmount?.unscaleBy(FDTToken.decimals))}
           </Text>
         </div>
         <Grid flow="col" justify="space-between">

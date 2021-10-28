@@ -11,7 +11,7 @@ import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
 export enum KnownTokens {
-  FTD = 'FTD',
+  FDT = 'FDT',
   ETH = 'ETH',
   USDC = 'USDC',
   BOND = 'BOND',
@@ -20,8 +20,8 @@ export enum KnownTokens {
   YFI = 'YFI',
   RGT = 'RGT',
   wsOHM = 'wsOHM',
-  ETH_FTD_SLP = 'ETH_FTD_SLP',
-  sOHM_FTD_SLP = 'sOHM_FTD_SLP',
+  ETH_FDT_SLP = 'ETH_FDT_SLP',
+  sOHM_FDT_SLP = 'sOHM_FDT_SLP',
 }
 
 export type TokenMeta = {
@@ -35,13 +35,13 @@ export type TokenMeta = {
   price?: BigNumber;
 };
 
-export const FTDToken: TokenMeta = {
-  address: config.tokens.ftd,
-  symbol: KnownTokens.FTD,
-  name: 'FTD Token',
+export const FDTToken: TokenMeta = {
+  address: config.tokens.fdt,
+  symbol: KnownTokens.FDT,
+  name: 'FDT Token',
   decimals: 18,
   icon: 'static/fiat-dao' as any,
-  contract: new Erc20Contract([], config.tokens.ftd),
+  contract: new Erc20Contract([], config.tokens.fdt),
 };
 
 export const EthToken: TokenMeta = {
@@ -124,26 +124,26 @@ export const wsOHMToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.wsOHM),
 };
 
-export const EthFtdSLPToken: TokenMeta = {
-  address: config.tokens.ethFTDSLP,
-  symbol: KnownTokens.ETH_FTD_SLP,
-  name: 'ETH FTD SUSHI LP',
+export const EthFdtSLPToken: TokenMeta = {
+  address: config.tokens.ethFDTSLP,
+  symbol: KnownTokens.ETH_FDT_SLP,
+  name: 'ETH FDT SUSHI LP',
   decimals: 18,
   icon: 'png/eslp',
-  contract: new Erc20Contract([], config.tokens.ethFTDSLP),
+  contract: new Erc20Contract([], config.tokens.ethFDTSLP),
 };
 
-export const sOHMFtdSLPToken: TokenMeta = {
-  address: config.tokens.sOHMFTDSLP,
-  symbol: KnownTokens.sOHM_FTD_SLP,
-  name: 'sOHM FTD SUSHI LP',
+export const sOHMFdtSLPToken: TokenMeta = {
+  address: config.tokens.sOHMFDTSLP,
+  symbol: KnownTokens.sOHM_FDT_SLP,
+  name: 'sOHM FDT SUSHI LP',
   decimals: 18,
   icon: 'png/eslp',
-  contract: new Erc20Contract([], config.tokens.sOHMFTDSLP),
+  contract: new Erc20Contract([], config.tokens.sOHMFDTSLP),
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
-  FTDToken,
+  FDTToken,
   EthToken,
   UsdcToken,
   BondToken,
@@ -152,8 +152,8 @@ const KNOWN_TOKENS: TokenMeta[] = [
   YFIToken,
   RGTToken,
   wsOHMToken,
-  EthFtdSLPToken,
-  sOHMFtdSLPToken,
+  EthFdtSLPToken,
+  sOHMFdtSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -202,8 +202,8 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 // ToDo: Check the ENTR price calculation
-async function getFtdPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFtdSLPToken.address);
+async function getFdtPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFdtSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
@@ -213,11 +213,11 @@ async function getFtdPrice(): Promise<BigNumber> {
   let entrReserve;
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === FTDToken.address) {
-    entrReserve = new BigNumber(reserve0).unscaleBy(FTDToken.decimals);
+  if (String(token0).toLowerCase() === FDTToken.address) {
+    entrReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    entrReserve = new BigNumber(reserve1).unscaleBy(FTDToken.decimals);
+    entrReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
@@ -229,8 +229,8 @@ async function getFtdPrice(): Promise<BigNumber> {
 }
 
 // ToDo: Check the SLP price calculation
-async function getEthFtdSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFtdSLPToken.address);
+async function getEthFdtSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFdtSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -241,7 +241,7 @@ async function getEthFtdSLPPrice(): Promise<BigNumber> {
 
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === FTDToken.address) {
+  if (String(token0).toLowerCase() === FDTToken.address) {
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
@@ -257,8 +257,8 @@ async function getEthFtdSLPPrice(): Promise<BigNumber> {
 }
 
 // ToDo: Check the SLP price calculation
-async function getSOHMFtdSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, sOHMFtdSLPToken.address);
+async function getSOHMFdtSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, sOHMFdtSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -269,7 +269,7 @@ async function getSOHMFtdSLPPrice(): Promise<BigNumber> {
 
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === FTDToken.address) {
+  if (String(token0).toLowerCase() === FDTToken.address) {
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
@@ -342,12 +342,12 @@ const KnownTokensProvider: FC = props => {
   const [reload, version] = useReload();
 
   useEffect(() => {
-    (FTDToken.contract as Erc20Contract).loadCommon().catch(Error);
+    (FDTToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      FTDToken.price = await getFtdPrice().catch(() => undefined);
-      EthFtdSLPToken.price = await getEthFtdSLPPrice().catch(() => undefined);
-      sOHMFtdSLPToken.price = await getSOHMFtdSLPPrice().catch(() => undefined);
+      FDTToken.price = await getFdtPrice().catch(() => undefined);
+      EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
+      sOHMFdtSLPToken.price = await getSOHMFdtSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
@@ -388,7 +388,7 @@ const KnownTokensProvider: FC = props => {
 
     // load entr balance for connected wallet
     if (wallet.account) {
-      (FTDToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
+      (FDTToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }
   }, [wallet.account]);
 

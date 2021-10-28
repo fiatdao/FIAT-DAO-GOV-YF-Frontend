@@ -29,8 +29,8 @@ const PoolsView: React.FC = () => {
           Overview
         </Text>
         <div className={s.poolCards}>
-          <PoolCard poolId={YFPoolID.ETH_FTD_SLP} />
-          <PoolCard poolId={YFPoolID.sOHM_FTD_SLP} />
+          <PoolCard poolId={YFPoolID.ETH_FDT_SLP} />
+          <PoolCard poolId={YFPoolID.sOHM_FDT_SLP} />
           <PoolCard poolId={YFPoolID.BOND} />
           <PoolCard poolId={YFPoolID.UMA} />
           <PoolCard poolId={YFPoolID.MKR} />

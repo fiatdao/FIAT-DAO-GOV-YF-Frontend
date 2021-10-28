@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { getGasValue, getHumanValue, getNonHumanValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
 
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
@@ -19,7 +19,7 @@ function loadCommonData(): Promise<any> {
   return Contract.batch([
     {
       method: 'entrStaked',
-      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
   ]).then(([entrStaked]) => {
     return {
@@ -37,17 +37,17 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'balanceOf',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'votingPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'multiplierAtTs',
       methodArgs: [userAddress, getNowTs()],
-      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals)?.toNumber(),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals)?.toNumber(),
     },
     {
       method: 'userLockedUntil',
@@ -57,7 +57,7 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'delegatedPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), FTDToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'userDelegatedTo',
@@ -73,9 +73,9 @@ function loadUserData(userAddress?: string): Promise<any> {
   }));
 }
 
-function ftdStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
-  return Contract.call('ftdStakedAtTs', [timestamp], {}).then((value: string) =>
-    getHumanValue(new BigNumber(value), FTDToken.decimals),
+function fdtStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
+  return Contract.call('fdtStakedAtTs', [timestamp], {}).then((value: string) =>
+    getHumanValue(new BigNumber(value), FDTToken.decimals),
   );
 }
 
@@ -151,7 +151,7 @@ const InitialState: DAOBarnContractData = {
 export type DAOBarnContract = DAOBarnContractData & {
   reload(): void;
   actions: {
-    ftdStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
+    fdtStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
     votingPower(address: string): Promise<BigNumber | undefined>;
     votingPowerAtTs(timestamp: number): Promise<BigNumber | undefined>;
     deposit(amount: BigNumber, gasPrice: number): Promise<any>;
@@ -193,8 +193,8 @@ export function useDAOBarnContract(): DAOBarnContract {
     ...state,
     reload,
     actions: {
-      ftdStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
-        return ftdStakedAtTsCall(timestamp);
+      fdtStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
+        return fdtStakedAtTsCall(timestamp);
       },
       votingPower(address: string): Promise<BigNumber | undefined> {
         return votingPowerCall(address);

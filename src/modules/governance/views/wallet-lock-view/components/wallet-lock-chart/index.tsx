@@ -24,7 +24,7 @@ import { formatBigValue, formatEntrValue } from 'web3/utils';
 
 import ExternalLink from 'components/custom/externalLink';
 import { Hint, Text } from 'components/custom/typography';
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { useDAO } from '../../../../components/dao-provider';
 
@@ -176,18 +176,18 @@ const WalletLockChart: React.FC<WalletLockChartProps> = props => {
           text={
             <>
               <Text type="p2">
-                The multiplier mechanic allows users to lock ${FTDToken.symbol} for a period up to 1 year and get a
-                bonus of up to 2x v{FTDToken.symbol}. The bonus is linear, as per the following example:
+                The multiplier mechanic allows users to lock ${FDTToken.symbol} for a period up to 1 year and get a
+                bonus of up to 2x v{FDTToken.symbol}. The bonus is linear, as per the following example:
               </Text>
               <ul>
                 <li>
                   <Text type="p2">
-                    lock 1000 ${FTDToken.symbol} for 1 year → get back 2000 v{FTDToken.symbol}
+                    lock 1000 ${FDTToken.symbol} for 1 year → get back 2000 v{FDTToken.symbol}
                   </Text>
                 </li>
                 <li>
                   <Text type="p2">
-                    lock 1000 ${FTDToken.symbol} for 6 months → get back 1500 v{FTDToken.symbol}
+                    lock 1000 ${FDTToken.symbol} for 6 months → get back 1500 v{FDTToken.symbol}
                   </Text>
                 </li>
               </ul>
@@ -196,7 +196,7 @@ const WalletLockChart: React.FC<WalletLockChartProps> = props => {
           }>
           <Text type="small" weight="semibold">
             {formatEntrValue(myBonus)}
-            <span> v{FTDToken.symbol} bonus - </span>
+            <span> v{FDTToken.symbol} bonus - </span>
             {inRange(multiplier, 1, 1.01) ? '>' : ''}
             {formatBigValue(multiplier, 2)}x<span> for </span>
             {formatDistanceToNow(lockEndDate)}

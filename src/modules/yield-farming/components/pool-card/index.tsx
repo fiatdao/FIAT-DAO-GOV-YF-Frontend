@@ -12,7 +12,7 @@ import Grid from 'components/custom/grid';
 import Icon, { IconNames } from 'components/custom/icon';
 import IconsSet from 'components/custom/icons-set';
 import { Hint, Text } from 'components/custom/typography';
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import { YFPoolID, useYFPools } from 'modules/yield-farming/providers/pools-provider';
@@ -50,7 +50,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
   const isPoolAvailable = poolMeta?.contract.isPoolAvailable;
   const apr =
     poolBalanceInUSD?.isGreaterThan(BigNumber.ZERO) && epochReward
-      ? convertTokenInUSD(epochReward * 52, KnownTokens.FTD)?.dividedBy(poolBalanceInUSD)
+      ? convertTokenInUSD(epochReward * 52, KnownTokens.FDT)?.dividedBy(poolBalanceInUSD)
       : undefined;
 
   function handleStaking() {
@@ -187,7 +187,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               The ${poolMeta?.label} staking pool ended after {totalEpochs} epochs on {formattedEndDate}. Deposits are
               now disabled, but you can still withdraw your tokens and collect any unclaimed rewards.
             </Text>
-            {poolMeta?.tokens.some(tk => tk === FTDToken) && (
+            {poolMeta?.tokens.some(tk => tk === FDTToken) && (
               <Link to="/governance" className="link-gradient">
                 <Text
                   type="p2"
@@ -201,7 +201,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
           </Grid>
         </div>
       )}
-      {poolId === YFPoolID.ETH_FTD_SLP && !isPoolAvailable && (
+      {poolId === YFPoolID.ETH_FDT_SLP && !isPoolAvailable && (
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
             <Text type="p2" weight="semibold" color="secondary" className="mb-4">

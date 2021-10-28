@@ -8,7 +8,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import Identicon from 'components/custom/identicon';
 import { Hint, Text } from 'components/custom/typography';
-import { FTDToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import { APIProposalState } from 'modules/governance/api';
 import { useWallet } from 'wallets/wallet';
 
@@ -80,7 +80,7 @@ const ProposalDetailsCard: React.FC = () => {
         </div>
         <div>
           <Hint
-            text={`If the creator’s v${FTDToken.symbol} balance falls below ${minThreshold}% of the total amount of $${FTDToken.symbol} staked in the DAO the proposal can be cancelled by anyone.`}>
+            text={`If the creator’s v${FDTToken.symbol} balance falls below ${minThreshold}% of the total amount of $${FDTToken.symbol} staked in the DAO the proposal can be cancelled by anyone.`}>
             <Text type="small" weight="semibold" color="secondary" className="mb-4">
               Creator threshold
             </Text>

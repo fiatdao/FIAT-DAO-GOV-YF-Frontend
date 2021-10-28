@@ -11,8 +11,8 @@ import {
   YFIToken,
   RGTToken,
   wsOHMToken,
-  EthFtdSLPToken,
-  sOHMFtdSLPToken,
+  EthFdtSLPToken,
+  sOHMFdtSLPToken,
   TokenMeta,
   useKnownTokens,
 } from 'components/providers/known-tokens-provider';
@@ -29,8 +29,8 @@ export enum YFPoolID {
   YFI = 'yfi',
   RGT = 'rgt',
   wsOHM = 'wsOHM',
-  ETH_FTD_SLP = 'eth-ftd-slp',
-  sOHM_FTD_SLP = 'sOHM-ftd-slp',
+  ETH_FDT_SLP = 'eth-fdt-slp',
+  sOHM_FDT_SLP = 'sOHM-fdt-slp',
 }
 
 export type YFPoolMeta = {
@@ -96,22 +96,22 @@ export const wsOHMYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.wsOHM),
 };
 
-export const EthFtdSLPYfPool: YFPoolMeta = {
-  name: YFPoolID.ETH_FTD_SLP,
-  label: 'ETH_FTD_SUSHI_LP',
+export const EthFdtSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.ETH_FDT_SLP,
+  label: 'ETH_FDT_SUSHI_LP',
   icons: ['png/eslp'],
   colors: ['var(--theme-red-color)'],
-  tokens: [EthFtdSLPToken],
-  contract: new YfPoolContract(config.contracts.yf.ethFTDSLP),
+  tokens: [EthFdtSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.ethFDTSLP),
 };
 
-export const sOHMFtdSLPYfPool: YFPoolMeta = {
-  name: YFPoolID.sOHM_FTD_SLP,
-  label: 'sOHM_FTD_SUSHI_LP',
+export const sOHMFdtSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.sOHM_FDT_SLP,
+  label: 'sOHM_FDT_SUSHI_LP',
   icons: ['png/eslp'],
   colors: ['var(--theme-red-color)'],
-  tokens: [sOHMFtdSLPToken],
-  contract: new YfPoolContract(config.contracts.yf.sOHMFTDSLP),
+  tokens: [sOHMFdtSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.sOHMFDTSLP),
 };
 
 const KNOWN_POOLS: YFPoolMeta[] = [
@@ -121,8 +121,8 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   YFIYfPool,
   RGTYfPool,
   wsOHMYfPool,
-  EthFtdSLPYfPool,
-  sOHMFtdSLPYfPool,
+  EthFdtSLPYfPool,
+  sOHMFdtSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
@@ -424,8 +424,8 @@ const YFPoolsProvider: FC = props => {
       <ContractListener contract={YFIYfPool.contract} />
       <ContractListener contract={RGTYfPool.contract} />
       <ContractListener contract={wsOHMYfPool.contract} />
-      <ContractListener contract={EthFtdSLPToken.contract} />
-      <ContractListener contract={sOHMFtdSLPToken.contract} />
+      <ContractListener contract={EthFdtSLPToken.contract} />
+      <ContractListener contract={sOHMFdtSLPToken.contract} />
     </YFPoolsContext.Provider>
   );
 };
