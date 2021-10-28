@@ -162,6 +162,7 @@ export type IconNames =
   | 'theme-switcher-moon'
   | 'coingecko'
   | 'youtube'
+  | 'git'
   | 'medium'
   | 'polymorphs'
   | 'core-drops'
