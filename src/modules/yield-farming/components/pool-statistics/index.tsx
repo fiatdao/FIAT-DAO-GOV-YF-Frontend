@@ -10,7 +10,7 @@ import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
 import { Tabs as ElasticTabs } from 'components/custom/tabs';
 import { Text } from 'components/custom/typography';
-import { EnterToken, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
+import { FDTToken, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
 import { YfPoolContract } from 'modules/yield-farming/contracts/yfPool';
 import { useWallet } from 'wallets/wallet';
 
@@ -31,7 +31,7 @@ const PoolStatistics: FC = () => {
   const [claiming, setClaiming] = useState(false);
   const [confirmClaimVisible, setConfirmClaimVisible] = useState(false);
 
-  const entrContract = EnterToken.contract as Erc20Contract;
+  const fdtContract = FDTToken.contract as Erc20Contract;
   const activeContract = activeToken?.contract as Erc20Contract;
 
   if (!walletCtx.isActive || !poolMeta) {
@@ -57,7 +57,7 @@ const PoolStatistics: FC = () => {
 
     try {
       await poolMeta.contract.claim(args.gasPrice);
-      entrContract.loadBalance().catch(Error);
+      fdtContract.loadBalance().catch(Error);
       (poolMeta.contract as YfPoolContract).loadUserData().catch(Error);
     } catch {}
 
@@ -77,12 +77,12 @@ const PoolStatistics: FC = () => {
         <div className="p-24">
           <div className="flex align-center justify-space-between mb-24">
             <Text type="small" weight="semibold" color="secondary">
-              {EnterToken.symbol} balance
+              {FDTToken.symbol} balance
             </Text>
             <div className="flex align-center">
-              <Icon name={EnterToken.icon!} className="mr-8" />
+              <Icon name={FDTToken.icon!} className="mr-8" />
               <Text type="p1" weight="semibold" color="primary">
-                {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
             </div>
           </div>
@@ -92,7 +92,7 @@ const PoolStatistics: FC = () => {
                 Potential reward this epoch
               </Text>
               <div className="flex align-center">
-                <Icon name={EnterToken.icon!}  className="mr-8" />
+                <Icon name={FDTToken.icon!}  className="mr-8" />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(poolMeta.contract.potentialReward) ?? '-'}
                 </Text>
@@ -106,8 +106,8 @@ const PoolStatistics: FC = () => {
               <div className="flex align-center mb-4">
                 <Tooltip
                   title={
-                    formatToken(poolMeta.contract.toClaim?.unscaleBy(EnterToken.decimals), {
-                      decimals: EnterToken.decimals,
+                    formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      decimals: FDTToken.decimals,
                     }) ?? '-'
                   }>
                   <Text
@@ -116,12 +116,12 @@ const PoolStatistics: FC = () => {
                     color="primary"
                     className="mr-8 text-ellipsis"
                     style={{ maxWidth: '120px' }}>
-                    {formatToken(poolMeta.contract.toClaim?.unscaleBy(EnterToken.decimals), {
-                      decimals: EnterToken.decimals,
+                    {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      decimals: FDTToken.decimals,
                     }) ?? '-'}
                   </Text>
                 </Tooltip>
-                <Icon name={EnterToken.icon!} width={24} height={24} />
+                <Icon name={FDTToken.icon!} width={24} height={24} />
               </div>
               <Text type="small" weight="semibold" color="secondary">
                 Current reward
@@ -234,9 +234,9 @@ const PoolStatistics: FC = () => {
           header={
             <div className="flex col-gap-8 align-center justify-center">
               <Text type="h2" weight="semibold" color="primary">
-                {formatToken(poolMeta.contract.toClaim?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={EnterToken.icon!} width={32} height={32} />
+              <Icon name={FDTToken.icon!} width={32} height={32} />
             </div>
           }
           submitText="Claim"

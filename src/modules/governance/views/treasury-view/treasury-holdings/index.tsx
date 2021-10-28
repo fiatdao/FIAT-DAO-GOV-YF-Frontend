@@ -398,7 +398,7 @@ const TreasuryHoldings: React.FC = () => {
           rowKey="transactionHash"
           loading={state.history.loading}
           locale={{
-            emptyText: 'No entries',
+            emptyText: 'No fdies',
           }}
           scroll={{
             x: true,

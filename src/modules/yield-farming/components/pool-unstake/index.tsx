@@ -145,13 +145,13 @@ const PoolUnstake: FC = () => {
             }
             className="mb-32"
           />
-          {activeToken.symbol === KnownTokens.ENTR && (
+          {activeToken.symbol === KnownTokens.FDT && (
             <Alert
               className="mb-32"
               message={
                 <div className="flex flow-row row-gap-16 align-start">
                   <Text type="p2" weight="semibold" color="blue">
-                    You can still deposit {KnownTokens.ENTR} in the DAO governance to earn interest for your funds.
+                    You can still deposit {KnownTokens.FDT} in the DAO governance to earn interest for your funds.
                   </Text>
                   <Link to="/governance" className="link-blue">
                     <Text type="p2" weight="bold" className="text-underline">

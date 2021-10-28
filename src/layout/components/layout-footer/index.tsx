@@ -8,7 +8,7 @@ import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import config, { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
+import config, { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from 'config';
 
 import s from './s.module.scss';
 import { useGeneral } from '../../../components/providers/general-provider';

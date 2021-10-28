@@ -8,7 +8,7 @@ import Icon from 'components/custom/icon';
 import ProgressNew from 'components/custom/progress';
 import { Hint, Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { useDAO } from '../../../../components/dao-provider';
 
@@ -37,8 +37,8 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Hint
           text={
             <Text type="p2">
-              For the {EnterToken.symbol} to be activated, a threshold of {formatEntrValue(dao.activationThreshold)}{' '}
-              {EnterToken.symbol}
+              For the {FDTToken.symbol} to be activated, a threshold of {formatEntrValue(dao.activationThreshold)}{' '}
+              {FDTToken.symbol}
               tokens staked has to be met.
             </Text>
           }>
@@ -60,7 +60,7 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Grid flow="col" gap={8} align="center">
           <Icon name="static/fiat-dao" width={32} height={32} />
           <Text type="p1" weight="bold" color="primary">
-            {formatEntrValue(dao.entrStaked)}
+            {formatEntrValue(dao.fdtStaked)}
           </Text>
           <Text type="p1" weight="semibold" color="secondary">
             / {formatEntrValue(dao.activationThreshold)} already staked.

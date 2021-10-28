@@ -10,7 +10,7 @@ import Divider from 'components/antd/divider';
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Hint, Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import { useWallet } from 'wallets/wallet';
 
 import AirdropModal from '../../components/pool-airdrop-modal';
@@ -26,7 +26,7 @@ const PoolRewards: React.FC = () => {
   const [harvestModalVisible, showHarvestModal] = useState(false);
   const [airdropModalVisible, showAirdropModal] = useState(false);
 
-  const entrContract = EnterToken.contract as Erc20Contract;
+  const fdtContract = FDTToken.contract as Erc20Contract;
   const { currentEpoch } = yfPoolsCtx.stakingContract ?? {};
 
   const totalToClaim = yfPoolsCtx.yfPools.reduce((sum: BigNumber | undefined, { contract }) => {
@@ -71,9 +71,9 @@ const PoolRewards: React.FC = () => {
             </Text>
             <Grid flow="col" align="center" gap={4} className={s.item1__grid}>
               <Text type="h3" weight="bold" color="primary">
-                {formatToken(totalToClaim?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(totalToClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={EnterToken.icon!} />
+              <Icon name={FDTToken.icon!} />
               {walletCtx.isActive && (
                 <button
                   type="button"
@@ -88,13 +88,13 @@ const PoolRewards: React.FC = () => {
           <Divider type="vertical" />
           <Grid flow="row" gap={2} className={s.item2}>
             <Text type="p2" color="secondary">
-              {EnterToken.symbol} Balance
+              {FDTToken.symbol} Balance
             </Text>
             <Grid flow="col" gap={4} align="center">
               <Text type="h3" weight="bold" color="primary">
-                {formatToken(entrContract.balance?.unscaleBy(EnterToken.decimals)) ?? '-'}
+                {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={EnterToken.icon!}/>
+              <Icon name={FDTToken.icon!}/>
             </Grid>
           </Grid>
           {!!currentEpoch && (
@@ -103,7 +103,7 @@ const PoolRewards: React.FC = () => {
               <Grid flow="row" gap={2} className={s.item4}>
                 <Grid flow="col" gap={8} align="center">
                   <Hint
-                    text={`This number shows the $${EnterToken.symbol} rewards you would potentially be able to harvest this epoch, but is subject to change - in case more users deposit, or you withdraw some of your stake.`}>
+                    text={`This number shows the $${FDTToken.symbol} rewards you would potentially be able to harvest this epoch, but is subject to change - in case more users deposit, or you withdraw some of your stake.`}>
                     <Text type="p2" color="secondary">
                       Potential reward this epoch
                     </Text>
@@ -113,7 +113,7 @@ const PoolRewards: React.FC = () => {
                   <Text type="h3" weight="bold" color="primary">
                     {formatToken(totalPotentialReward) ?? '-'}
                   </Text>
-                  <Icon name={EnterToken.icon!}/>
+                  <Icon name={FDTToken.icon!}/>
                 </Grid>
               </Grid>
             </>

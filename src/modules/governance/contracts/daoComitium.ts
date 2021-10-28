@@ -3,27 +3,27 @@ import BigNumber from 'bignumber.js';
 import { getGasValue, getHumanValue, getNonHumanValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
 
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
-import DAO_BARN_ABI from './daoBarn.json';
+import DAO_COMITIUM_ABI from './daoComitium.json';
 
 import { getNowTs } from 'utils';
 
-const Contract = new Web3Contract(DAO_BARN_ABI as Web3ContractAbiItem[], config.contracts.dao.barn, 'Kernel');
+const Contract = new Web3Contract(DAO_COMITIUM_ABI as Web3ContractAbiItem[], config.contracts.dao.comitium, 'Community');
 
 function loadCommonData(): Promise<any> {
   return Contract.batch([
     {
-      method: 'entrStaked',
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
+      method: 'fdtStaked',
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
-  ]).then(([entrStaked]) => {
+  ]).then(([fdtStaked]) => {
     return {
-      entrStaked,
+      fdtStaked,
     };
   });
 }
@@ -37,17 +37,17 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'balanceOf',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'votingPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'multiplierAtTs',
       methodArgs: [userAddress, getNowTs()],
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals)?.toNumber(),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals)?.toNumber(),
     },
     {
       method: 'userLockedUntil',
@@ -57,7 +57,7 @@ function loadUserData(userAddress?: string): Promise<any> {
     {
       method: 'delegatedPower',
       methodArgs: [userAddress],
-      transform: (value: string) => getHumanValue(new BigNumber(value), EnterToken.decimals),
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
     },
     {
       method: 'userDelegatedTo',
@@ -73,9 +73,9 @@ function loadUserData(userAddress?: string): Promise<any> {
   }));
 }
 
-function entrStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
-  return Contract.call('entrStakedAtTs', [timestamp], {}).then((value: string) =>
-    getHumanValue(new BigNumber(value), EnterToken.decimals),
+function fdtStakedAtTsCall(timestamp: number): Promise<BigNumber | undefined> {
+  return Contract.call('fdtStakedAtTs', [timestamp], {}).then((value: string) =>
+    getHumanValue(new BigNumber(value), FDTToken.decimals),
   );
 }
 
@@ -124,10 +124,10 @@ function lockSend(timestamp: number, from: string, gasPrice: number): Promise<vo
   });
 }
 
-export type DAOBarnContractData = {
+export type DAOComitiumContractData = {
   contract: Web3Contract;
   activationThreshold?: BigNumber;
-  entrStaked?: BigNumber;
+  fdtStaked?: BigNumber;
   balance?: BigNumber;
   votingPower?: BigNumber;
   multiplier?: number;
@@ -136,10 +136,10 @@ export type DAOBarnContractData = {
   userDelegatedTo?: string;
 };
 
-const InitialState: DAOBarnContractData = {
+const InitialState: DAOComitiumContractData = {
   contract: Contract,
   activationThreshold: new BigNumber(config.dao.activationThreshold),
-  entrStaked: undefined,
+  fdtStaked: undefined,
   balance: undefined,
   votingPower: undefined,
   multiplier: undefined,
@@ -148,10 +148,10 @@ const InitialState: DAOBarnContractData = {
   userDelegatedTo: undefined,
 };
 
-export type DAOBarnContract = DAOBarnContractData & {
+export type DAOComitiumContract = DAOComitiumContractData & {
   reload(): void;
   actions: {
-    entrStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
+    fdtStakedAtTs(timestamp: number): Promise<BigNumber | undefined>;
     votingPower(address: string): Promise<BigNumber | undefined>;
     votingPowerAtTs(timestamp: number): Promise<BigNumber | undefined>;
     deposit(amount: BigNumber, gasPrice: number): Promise<any>;
@@ -162,15 +162,15 @@ export type DAOBarnContract = DAOBarnContractData & {
   };
 };
 
-export function useDAOBarnContract(): DAOBarnContract {
+export function useDAOComitiumContract(): DAOComitiumContract {
   const wallet = useWallet();
 
-  const [state, setState] = useMergeState<DAOBarnContractData>(InitialState);
+  const [state, setState] = useMergeState<DAOComitiumContractData>(InitialState);
   const [reload, version] = useReload();
 
   React.useEffect(() => {
     setState({
-      entrStaked: undefined,
+      fdtStaked: undefined,
     });
 
     loadCommonData().then(setState).catch(Error);
@@ -193,8 +193,8 @@ export function useDAOBarnContract(): DAOBarnContract {
     ...state,
     reload,
     actions: {
-      entrStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
-        return entrStakedAtTsCall(timestamp);
+      fdtStakedAtTs(timestamp: number): Promise<BigNumber | undefined> {
+        return fdtStakedAtTsCall(timestamp);
       },
       votingPower(address: string): Promise<BigNumber | undefined> {
         return votingPowerCall(address);

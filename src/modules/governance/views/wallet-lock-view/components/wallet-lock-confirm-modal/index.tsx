@@ -7,7 +7,7 @@ import Modal, { ModalProps } from 'components/antd/modal';
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { getFormattedDuration } from 'utils';
 
@@ -29,7 +29,7 @@ const WalletLockConfirmModal: React.FC<WalletLockConfirmModalProps> = props => {
               Are you sure you want to lock your balance?
             </Text>
             <Text type="p2" weight="semibold" color="secondary">
-              You are about to lock {formatEntrValue(balance)} ${EnterToken.symbol} for {getFormattedDuration(0, duration)}
+              You are about to lock {formatEntrValue(balance)} ${FDTToken.symbol} for {getFormattedDuration(0, duration)}
               .
               <br />
               <br />

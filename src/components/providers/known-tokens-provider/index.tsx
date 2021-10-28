@@ -11,18 +11,17 @@ import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
 export enum KnownTokens {
+  FDT = 'FDT',
   ETH = 'ETH',
-  ENTR = 'ENTR',
-  XYZ = 'XYZ',
   USDC = 'USDC',
   BOND = 'BOND',
-  MANA = 'MANA',
-  AAVE = 'AAVE',
-  SAND = 'SAND',
-  SUSHI = 'SUSHI',
-  AXS = 'AXS',
-  ILV = 'ILV',
-  USDC_ENTR_SLP = 'USDC_ENTR_SUSHI_LP',
+  UMA = 'UMA',
+  MKR = 'MKR',
+  YFI = 'YFI',
+  RGT = 'RGT',
+  wsOHM = 'wsOHM',
+  ETH_FDT_SLP = 'ETH_FDT_SLP',
+  sOHM_FDT_SLP = 'sOHM_FDT_SLP',
 }
 
 export type TokenMeta = {
@@ -36,6 +35,15 @@ export type TokenMeta = {
   price?: BigNumber;
 };
 
+export const FDTToken: TokenMeta = {
+  address: config.tokens.fdt,
+  symbol: KnownTokens.FDT,
+  name: 'FDT Token',
+  decimals: 18,
+  icon: 'static/fiat-dao' as any,
+  contract: new Erc20Contract([], config.tokens.fdt),
+};
+
 export const EthToken: TokenMeta = {
   symbol: KnownTokens.ETH,
   name: 'Ether',
@@ -43,15 +51,6 @@ export const EthToken: TokenMeta = {
   decimals: 18,
   icon: 'token-eth',
   coinGeckoId: 'ethereum',
-};
-
-export const EnterToken: TokenMeta = {
-  address: config.tokens.entr,
-  symbol: KnownTokens.ENTR,
-  name: 'EnterDAO Governance Token',
-  decimals: 18,
-  icon: 'static/fiat-dao' as any,
-  contract: new Erc20Contract([], config.tokens.entr),
 };
 
 export const UsdcToken: TokenMeta = {
@@ -64,16 +63,6 @@ export const UsdcToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.usdc),
 };
 
-export const ManaToken: TokenMeta = {
-  address: config.tokens.mana,
-  symbol: KnownTokens.MANA,
-  name: 'MANA',
-  decimals: 18,
-  icon: 'png/mana',
-  coinGeckoId: 'decentraland',
-  contract: new Erc20Contract([], config.tokens.mana),
-};
-
 export const BondToken: TokenMeta = {
   address: config.tokens.bond,
   symbol: KnownTokens.BOND,
@@ -84,77 +73,87 @@ export const BondToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.bond),
 };
 
-export const XyzToken: TokenMeta = {
-  address: config.tokens.xyz,
-  symbol: KnownTokens.XYZ,
-  name: 'XYZ',
+export const UMAToken: TokenMeta = {
+  address: config.tokens.uma,
+  symbol: KnownTokens.UMA,
+  name: 'UMA',
   decimals: 18,
-  icon: 'png/universe',
-  coinGeckoId: 'universe-xyz',
-  contract: new Erc20Contract([], config.tokens.xyz),
+  icon: 'png/uma',
+  coinGeckoId: 'uma',
+  contract: new Erc20Contract([], config.tokens.uma),
 };
 
-export const SandToken: TokenMeta = {
-  address: config.tokens.sand,
-  symbol: KnownTokens.SAND,
-  name: 'Sandbox',
+export const MKRToken: TokenMeta = {
+  address: config.tokens.mkr,
+  symbol: KnownTokens.MKR,
+  name: 'MKR',
   decimals: 18,
-  icon: 'png/sandbox',
-  coinGeckoId: 'the-sandbox',
-  contract: new Erc20Contract([], config.tokens.sand),
+  icon: 'png/mkr',
+  coinGeckoId: 'maker',
+  contract: new Erc20Contract([], config.tokens.mkr),
 };
 
-export const SushiToken: TokenMeta = {
-  address: config.tokens.sushi,
-  symbol: KnownTokens.SUSHI,
-  name: 'Sushi Token',
+
+export const YFIToken: TokenMeta = {
+  address: config.tokens.yfi,
+  symbol: KnownTokens.YFI,
+  name: 'YFI',
   decimals: 18,
-  icon: 'png/sushi',
-  coinGeckoId: 'sushi',
-  contract: new Erc20Contract([], config.tokens.sushi),
+  icon: 'png/YFI',
+  coinGeckoId: 'yearn-finance',
+  contract: new Erc20Contract([], config.tokens.yfi),
 };
 
-export const AxsToken: TokenMeta = {
-  address: config.tokens.axs,
-  symbol: KnownTokens.AXS,
-  name: 'Axie Infinity',
+export const RGTToken: TokenMeta = {
+  address: config.tokens.rgt,
+  symbol: KnownTokens.RGT,
+  name: 'RGT',
   decimals: 18,
-  icon: 'png/axie',
-  coinGeckoId: 'axie-infinity',
-  contract: new Erc20Contract([], config.tokens.axs),
+  icon: 'png/rgt',
+  coinGeckoId: 'rari-governance-token',
+  contract: new Erc20Contract([], config.tokens.rgt),
 };
 
-export const IlvToken: TokenMeta = {
-  address: config.tokens.ilv,
-  symbol: KnownTokens.ILV,
-  name: 'Illuvium',
+export const wsOHMToken: TokenMeta = {
+  address: config.tokens.wsOHM,
+  symbol: KnownTokens.wsOHM,
+  name: 'wsOHM',
   decimals: 18,
-  icon: 'png/ilv',
-  coinGeckoId: 'illuvium',
-  contract: new Erc20Contract([], config.tokens.ilv),
+  icon: 'png/wsOHM',
+  coinGeckoId: 'wrapped-staked-olympus',
+  contract: new Erc20Contract([], config.tokens.wsOHM),
 };
 
-export const UsdcEntrSLPToken: TokenMeta = {
-  address: config.tokens.usdcEntrSLP,
-  symbol: KnownTokens.USDC_ENTR_SLP,
-  name: 'USDC ENTR SUSHI LP',
+export const EthFdtSLPToken: TokenMeta = {
+  address: config.tokens.ethFDTSLP,
+  symbol: KnownTokens.ETH_FDT_SLP,
+  name: 'ETH FDT SUSHI LP',
   decimals: 18,
   icon: 'png/eslp',
-  contract: new Erc20Contract([], config.tokens.usdcEntrSLP),
+  contract: new Erc20Contract([], config.tokens.ethFDTSLP),
+};
+
+export const sOHMFdtSLPToken: TokenMeta = {
+  address: config.tokens.sOHMFDTSLP,
+  symbol: KnownTokens.sOHM_FDT_SLP,
+  name: 'sOHM FDT SUSHI LP',
+  decimals: 18,
+  icon: 'png/eslp',
+  contract: new Erc20Contract([], config.tokens.sOHMFDTSLP),
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
+  FDTToken,
   EthToken,
-  EnterToken,
   UsdcToken,
   BondToken,
-  ManaToken,
-  XyzToken,
-  SandToken,
-  SushiToken,
-  AxsToken,
-  IlvToken,
-  UsdcEntrSLPToken,
+  UMAToken,
+  MKRToken,
+  YFIToken,
+  RGTToken,
+  wsOHMToken,
+  EthFdtSLPToken,
+  sOHMFdtSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -203,35 +202,35 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 // ToDo: Check the ENTR price calculation
-async function getEntrPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
+async function getFdtPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFdtSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
     { method: 'getReserves' },
   ]);
 
-  let entrReserve;
+  let fdtReserve;
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === EnterToken.address) {
-    entrReserve = new BigNumber(reserve0).unscaleBy(EnterToken.decimals);
+  if (String(token0).toLowerCase() === FDTToken.address) {
+    fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
-    entrReserve = new BigNumber(reserve1).unscaleBy(EnterToken.decimals);
+    fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
   }
 
-  if (!usdcReserve || !entrReserve || entrReserve.eq(BigNumber.ZERO)) {
+  if (!usdcReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  return usdcReserve.dividedBy(entrReserve);
+  return usdcReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
-async function getUsdcEntrSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, UsdcEntrSLPToken.address);
+async function getEthFdtSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFdtSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -242,7 +241,35 @@ async function getUsdcEntrSLPPrice(): Promise<BigNumber> {
 
   let usdcReserve;
 
-  if (String(token0).toLowerCase() === EnterToken.address) {
+  if (String(token0).toLowerCase() === FDTToken.address) {
+    usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
+  } else {
+    usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
+  }
+
+  const supply = totalSupply.unscaleBy(decimals);
+
+  if (!usdcReserve || !supply || supply.eq(BigNumber.ZERO)) {
+    return BigNumber.ZERO;
+  }
+
+  return usdcReserve.dividedBy(supply).multipliedBy(2);
+}
+
+// ToDo: Check the SLP price calculation
+async function getSOHMFdtSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, sOHMFdtSLPToken.address);
+
+  const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
+    { method: 'decimals', transform: Number },
+    { method: 'totalSupply', transform: value => new BigNumber(value) },
+    { method: 'token0' },
+    { method: 'getReserves' },
+  ]);
+
+  let usdcReserve;
+
+  if (String(token0).toLowerCase() === FDTToken.address) {
     usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
   } else {
     usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
@@ -315,11 +342,12 @@ const KnownTokensProvider: FC = props => {
   const [reload, version] = useReload();
 
   useEffect(() => {
-    (EnterToken.contract as Erc20Contract).loadCommon().catch(Error);
+    (FDTToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      EnterToken.price = await getEntrPrice().catch(() => undefined);
-      UsdcEntrSLPToken.price = await getUsdcEntrSLPPrice().catch(() => undefined);
+      FDTToken.price = await getFdtPrice().catch(() => undefined);
+      EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
+      sOHMFdtSLPToken.price = await getSOHMFdtSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
@@ -358,9 +386,9 @@ const KnownTokensProvider: FC = props => {
       token.contract?.setAccount(wallet.account);
     });
 
-    // load entr balance for connected wallet
+    // load fdt balance for connected wallet
     if (wallet.account) {
-      (EnterToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
+      (FDTToken.contract as Erc20Contract).loadBalance().then(reload).catch(Error);
     }
   }, [wallet.account]);
 

@@ -13,7 +13,7 @@
       },
       {
         "internalType": "address",
-        "name": "_barn",
+        "name": "_comitium",
         "type": "address"
       }
     ],
@@ -80,10 +80,10 @@
   },
   {
     "inputs": [],
-    "name": "barn",
+    "name": "comitium",
     "outputs": [
       {
-        "internalType": "contract IBarn",
+        "internalType": "contract IComitium",
         "name": "",
         "type": "address"
       }
@@ -232,11 +232,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_barn",
+        "name": "_comitium",
         "type": "address"
       }
     ],
-    "name": "setBarn",
+    "name": "setComitium",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

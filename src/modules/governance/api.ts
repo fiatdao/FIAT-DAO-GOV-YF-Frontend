@@ -20,7 +20,7 @@ export type APIOverviewData = {
   holders: number;
   holdersStakingExcluded: number;
   voters: number;
-  kernelUsers: number;
+  comitiumUsers: number;
 };
 
 export function fetchOverviewData(): Promise<APIOverviewData> {
@@ -31,7 +31,7 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
           avgLockTimeSeconds
           totalDelegatedPower
           voters
-          kernelUsers
+          comitiumUsers
           holders
         }
       }
@@ -64,7 +64,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
   return GraphClient.get({
     query: gql`
       query GetVoters ($limit: Int, $offset: Int) {
-        voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc, where:{isKernelUser:true}){
+        voters (first: $limit, skip: $offset, orderBy: _tokensStakedWithoutDecimals, orderDirection: desc, where:{isComitiumUser:true}){
           id
           tokensStaked
           lockedUntil
@@ -74,7 +74,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
           hasActiveDelegation
         }
         overview (id: "OVERVIEW") {
-          kernelUsers
+          comitiumUsers
         }
       }
       `,
@@ -97,7 +97,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
           proposals: voter.proposals,
           votingPower: getHumanValue(VotingPower.calculate(voter), 18)
         })),
-        meta: {count: result.data.overview.kernelUsers, block: 0}
+        meta: {count: result.data.overview.comitiumUsers, block: 0}
       };
     }))
     .catch(e => {

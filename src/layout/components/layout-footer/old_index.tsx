@@ -8,7 +8,7 @@ import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
-import config, { ENTR_MARKET_LINK, ENTR_MARKET_LIQUIDITY_LINK } from 'config';
+import config, { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from 'config';
 
 import s from './s.module.scss';
 
@@ -78,7 +78,7 @@ const LayoutFooter: React.FC = () => {
               <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
             </Link>
             <Text type="p1" color="primary">
-              EnterDAO is a decentralized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.
+              EnterDAO is a decfdtalized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.
             </Text>
           </div>
           <div className={s.navBlocksWrap}>
@@ -115,10 +115,10 @@ const LayoutFooter: React.FC = () => {
         <div className={cn(s.row, s.copyrightsBlock)}>
           <div className={s.copyrightLink}>Enterdao.xyz © {getYear()}. Open-sourced.</div>
           <div className={s.copyrightLinks}>
-            <ExternalLink href={ENTR_MARKET_LINK} className={s.copyrightLink}>
+            <ExternalLink href={FDT_MARKET_LINK} className={s.copyrightLink}>
               SushiSwap USDC/ENTR market
             </ExternalLink>
-            <ExternalLink href={ENTR_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
+            <ExternalLink href={FDT_MARKET_LIQUIDITY_LINK} className={s.copyrightLink}>
               Add liquidity to SushiSwap USDC/ENTR pool
             </ExternalLink>
           </div>

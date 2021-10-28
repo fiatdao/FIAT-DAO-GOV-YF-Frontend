@@ -5,7 +5,7 @@ import Button from 'components/antd/button';
 import Popover from 'components/antd/popover';
 import Grid from 'components/custom/grid';
 import { Text } from 'components/custom/typography';
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import useMergeState from 'hooks/useMergeState';
 
 import { APIProposalState } from '../../../../api';
@@ -58,7 +58,7 @@ const ProposalAbrogationCard: React.FC = () => {
               <ul>
                 <li>
                   <Text type="p1" color="primary">
-                    Acceptance criteria: 50% of staked {EnterToken.symbol}
+                    Acceptance criteria: 50% of staked {FDTToken.symbol}
                   </Text>
                 </li>
                 <li>
@@ -111,7 +111,7 @@ const ProposalAbrogationCard: React.FC = () => {
                         <Text type="p2" weight="semibold" color="primary">
                           You don’t have enough voting power to create an abrogation proposal. The creator of an
                           abrogation proposal needs to have a voting power of at least {daoCtx.minThreshold}% of the
-                          amount of ${EnterToken.symbol} staked in the DAO.
+                          amount of ${FDTToken.symbol} staked in the DAO.
                         </Text>
                       }
                       visible={state.showWhyReason}

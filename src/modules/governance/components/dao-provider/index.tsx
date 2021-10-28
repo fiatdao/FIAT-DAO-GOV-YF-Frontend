@@ -4,10 +4,10 @@ import ContractListener from 'web3/components/contract-listener';
 import Erc20Contract from 'web3/erc20Contract';
 import { ZERO_BIG_NUMBER } from 'web3/utils';
 
-import { EnterToken } from 'components/providers/known-tokens-provider';
+import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
-import { DAOBarnContract, useDAOBarnContract } from 'modules/governance/contracts/daoBarn';
+import { DAOComitiumContract, useDAOComitiumContract } from 'modules/governance/contracts/daoComitium';
 import { DAOGovernanceContract, useDAOGovernanceContract } from 'modules/governance/contracts/daoGovernance';
 import { DAORewardContract, useDAORewardContract } from 'modules/governance/contracts/daoReward';
 import { useWallet } from 'wallets/wallet';
@@ -17,7 +17,7 @@ import { APIProposalStateId } from '../../api';
 export type DAOProviderState = {
   minThreshold: number;
   isActive?: boolean;
-  entrStaked?: BigNumber;
+  fdtStaked?: BigNumber;
   activationThreshold?: BigNumber;
   activationRate?: number;
   thresholdRate?: number;
@@ -26,7 +26,7 @@ export type DAOProviderState = {
 const InitialState: DAOProviderState = {
   minThreshold: 1,
   isActive: undefined,
-  entrStaked: undefined,
+  fdtStaked: undefined,
   activationThreshold: undefined,
   activationRate: undefined,
   thresholdRate: undefined,
@@ -34,7 +34,7 @@ const InitialState: DAOProviderState = {
 
 type DAOContextType = DAOProviderState & {
   apr?: BigNumber;
-  daoBarn: DAOBarnContract;
+  daoComitium: DAOComitiumContract;
   daoReward: DAORewardContract;
   daoGovernance: DAOGovernanceContract;
   actions: {
@@ -47,7 +47,7 @@ type DAOContextType = DAOProviderState & {
 const DAOContext = React.createContext<DAOContextType>({
   ...InitialState,
   apr: undefined,
-  daoBarn: undefined as any,
+  daoComitium: undefined as any,
   daoReward: undefined as any,
   daoGovernance: undefined as any,
   actions: {
@@ -66,76 +66,76 @@ const DAOProvider: React.FC = props => {
 
   const walletCtx = useWallet();
 
-  const daoBarn = useDAOBarnContract();
+  const daoComitium = useDAOComitiumContract();
   const daoReward = useDAORewardContract();
   const daoGovernance = useDAOGovernanceContract();
 
   const [state, setState] = useMergeState<DAOProviderState>(InitialState);
 
   React.useEffect(() => {
-    daoBarn.contract.setProvider(walletCtx.provider);
+    daoComitium.contract.setProvider(walletCtx.provider);
     daoReward.contract.setProvider(walletCtx.provider);
     daoGovernance.contract.setProvider(walletCtx.provider);
   }, [walletCtx.provider]);
 
   React.useEffect(() => {
-    const entrContract = EnterToken.contract as Erc20Contract;
+    const fdtContract = FDTToken.contract as Erc20Contract;
 
-    entrContract.setAccount(walletCtx.account);
-    daoBarn.contract.setAccount(walletCtx.account);
+    fdtContract.setAccount(walletCtx.account);
+    daoComitium.contract.setAccount(walletCtx.account);
     daoReward.contract.setAccount(walletCtx.account);
     daoGovernance.contract.setAccount(walletCtx.account);
 
     if (walletCtx.isActive) {
-      entrContract.loadAllowance(config.contracts.dao.barn).catch(Error);
+      fdtContract.loadAllowance(config.contracts.dao.comitium).catch(Error);
     }
   }, [walletCtx.account]);
 
   React.useEffect(() => {
     const { isActive } = daoGovernance;
-    const { entrStaked, activationThreshold, votingPower } = daoBarn;
+    const { fdtStaked, activationThreshold, votingPower } = daoComitium;
 
     let activationRate: number | undefined;
 
-    if (entrStaked && activationThreshold?.gt(ZERO_BIG_NUMBER)) {
-      activationRate = entrStaked.multipliedBy(100).div(activationThreshold).toNumber();
+    if (fdtStaked && activationThreshold?.gt(ZERO_BIG_NUMBER)) {
+      activationRate = fdtStaked.multipliedBy(100).div(activationThreshold).toNumber();
       activationRate = Math.min(activationRate, 100);
     }
 
     let thresholdRate: number | undefined;
 
-    if (votingPower && entrStaked?.gt(ZERO_BIG_NUMBER)) {
-      thresholdRate = votingPower.multipliedBy(100).div(entrStaked).toNumber();
+    if (votingPower && fdtStaked?.gt(ZERO_BIG_NUMBER)) {
+      thresholdRate = votingPower.multipliedBy(100).div(fdtStaked).toNumber();
       thresholdRate = Math.min(thresholdRate, 100);
     }
 
     setState({
       isActive,
-      entrStaked,
+      fdtStaked,
       activationThreshold,
       activationRate,
       thresholdRate,
     });
-  }, [daoGovernance.isActive, daoBarn.entrStaked, daoBarn.activationThreshold, daoBarn.votingPower]);
+  }, [daoGovernance.isActive, daoComitium.fdtStaked, daoComitium.activationThreshold, daoComitium.votingPower]);
 
   const apr = useMemo(() => {
     const { poolFeature } = daoReward;
-    const { entrStaked } = daoBarn;
+    const { fdtStaked } = daoComitium;
 
-    if (!poolFeature || !entrStaked || poolFeature.endTs < Date.now() / 1_000) {
+    if (!poolFeature || !fdtStaked || poolFeature.endTs < Date.now() / 1_000) {
       return undefined;
     }
 
     const duration = Number(poolFeature.totalDuration);
     const yearInSeconds = 365 * 24 * 60 * 60;
 
-    return poolFeature.totalAmount.div(entrStaked).div(duration).multipliedBy(yearInSeconds);
-  }, [daoReward.poolFeature, daoBarn.entrStaked]);
+    return poolFeature.totalAmount.div(fdtStaked).div(duration).multipliedBy(yearInSeconds);
+  }, [daoReward.poolFeature, daoComitium.fdtStaked]);
 
   function activate() {
     return daoGovernance.actions.activate().then(() => {
       daoGovernance.reload();
-      daoBarn.reload();
+      daoComitium.reload();
     });
   }
 
@@ -170,7 +170,7 @@ const DAOProvider: React.FC = props => {
       value={{
         ...state,
         apr,
-        daoBarn,
+        daoComitium,
         daoReward,
         daoGovernance,
         actions: {
@@ -180,7 +180,7 @@ const DAOProvider: React.FC = props => {
         },
       }}>
       {children}
-      <ContractListener contract={daoBarn.contract} />
+      <ContractListener contract={daoComitium.contract} />
       <ContractListener contract={daoReward.contract} />
       <ContractListener contract={daoGovernance.contract} />
     </DAOContext.Provider>

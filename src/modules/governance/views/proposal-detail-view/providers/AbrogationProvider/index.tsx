@@ -110,11 +110,11 @@ const AbrogationProvider: React.FC = props => {
       againstRate,
     });
 
-    daoCtx.daoBarn.actions.entrStakedAtTs(createTime - 1).then(entrStakedAt => {
+    daoCtx.daoComitium.actions.fdtStakedAtTs(createTime - 1).then(fdtStakedAt => {
       let approvalRate: number | undefined;
 
-      if (entrStakedAt?.gt(ZERO_BIG_NUMBER)) {
-        approvalRate = forVotes.multipliedBy(100).div(entrStakedAt).toNumber();
+      if (fdtStakedAt?.gt(ZERO_BIG_NUMBER)) {
+        approvalRate = forVotes.multipliedBy(100).div(fdtStakedAt).toNumber();
         approvalRate = Math.min(approvalRate, 100);
       }
 
@@ -135,7 +135,7 @@ const AbrogationProvider: React.FC = props => {
 
     const { proposalId, createTime } = state.abrogation;
 
-    daoCtx.daoBarn.actions.votingPowerAtTs(createTime - 1).then(votingPower => {
+    daoCtx.daoComitium.actions.votingPowerAtTs(createTime - 1).then(votingPower => {
       setState({
         votingPower,
       });
