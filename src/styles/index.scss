@@ -84,6 +84,9 @@ body.mobile-menu-open {
   --theme-icon-color: #aaafb3; // grey300
   --theme-icon-hover-color: #060a0d; // grey900
 
+  --theme-social-bg-color: #F1F1F1;
+  --theme-social-link-color: #505050;
+
   --theme-primary-color: #171717;
   --theme-secondary-color: #B5B5B5;
   --theme-secondary-color-rgb: 113, 121, 128; // grey500
@@ -194,6 +197,9 @@ body.mobile-menu-open {
   --theme-secondary-block: #171717;
 
   --theme-header-shadow: none;
+
+  --theme-social-bg-color: #202020;
+  --theme-social-link-color: #FFFFFF;
 }
 
 :focus:not(:focus-visible) {
