@@ -15,8 +15,11 @@ import axsSrc from 'resources/png/axie.png';
 import emptyTable from 'resources/png/empty-table.png';
 import addEnterSrc from 'resources/png/add-enter.png';
 import enterStarSrc from 'resources/png/enter-star.png';
+import logoDarkSrc from 'resources/png/logo_dark.png';
+import logoLightSrc from 'resources/png/logo_light.png';
 import telegramSrc from 'resources/png/telegram.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
+import accountImg from 'resources/png/account_img.png';
 
 import s from './s.module.scss';
 
@@ -163,8 +166,11 @@ export type IconNames =
   | 'polymorphs'
   | 'core-drops'
   | 'png/add-enter'
+  | 'png/logo-dark'
+  | 'png/logo-light'
   | 'png/telegram'
   | 'png/empty-table'
+  | 'png/account'
   | 'static/add-token';
 
 export type IconProps = {
@@ -215,8 +221,14 @@ const Icon: React.FC<IconProps> = props => {
           return addEnterSrc;
         case 'png/enter-star':
           return enterStarSrc;
+        case 'png/logo-dark':
+          return logoDarkSrc;
+        case 'png/logo-light':
+          return logoLightSrc;
         case 'png/telegram':
           return telegramSrc;
+        case 'png/account':
+          return accountImg;
         default:
           return '';
       }

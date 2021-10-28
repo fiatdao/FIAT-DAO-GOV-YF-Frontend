@@ -66,14 +66,14 @@
 
 .mobileMenuInner {
   background: var(--theme-card-color);
-  padding: 20px 0;
+  padding: 20px;
   border-radius: 0 0 12px 12px;
   display: flex;
   flex-wrap: wrap;
 
   .mobileMenuBlock {
     display: inline-block;
-    margin: 20px;
+    //margin: 20px;
   }
 
   h3 {
@@ -110,13 +110,7 @@
 
 .logo {
   margin-right: 3px;
-  width: 56px;
-  height: 56px;
-
-  @media (max-width: 1023px) {
-    width: 44px;
-    height: 44px;
-  }
+  height: 64px;
 }
 
 .title {
@@ -140,8 +134,9 @@
 .nav {
   display: flex;
   border-right: 1px solid var(--theme-border-color);
-  margin-right: 20px;
+  margin-right: 32px;
   min-height: 28px;
+  padding-right: 16px;
 
   @media (max-width: 768px) {
     display: none;
@@ -179,7 +174,7 @@
   display: flex;
   align-items: center;
   color: var(--theme-primary-color);
-  padding: 16px 12px 14px;
+  padding: 16px;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -193,7 +188,7 @@
 }
 
 .dropdownLink:hover {
-  background: var(--theme-overlay-color);
+  //background: var(--theme-overlay-color);
   color: var(--theme-primary-color);
 
   .dropdownIcon {
@@ -243,16 +238,18 @@
 }
 
 .addTokenWrapper {
-  margin-right: 20px;
+  margin-right: 32px;
 }
 
 .addTokenButton {
-  width: 28px;
-  height: 28px;
+  //width: 28px;
+  //height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
   background: transparent;
-  padding: 0;
+  border-right: 1px solid var(--theme-border-color);
+  height: 50px;
+  padding: 0 32px 0 0;
 }
