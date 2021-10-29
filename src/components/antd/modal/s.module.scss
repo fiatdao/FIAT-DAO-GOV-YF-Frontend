@@ -30,9 +30,9 @@
     border-radius: 12px 12px 0 0;
 
     :global(.ant-modal-title) {
-      @include font-p1-semi-bold;
+      @include font-p1-bold;
       color: var(--theme-primary-color);
-      font-size: 14px;
+      font-size: 18px;
       font-family: 'Inter', sans-serif;
     }
   }

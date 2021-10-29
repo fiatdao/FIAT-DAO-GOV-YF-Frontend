@@ -29,10 +29,14 @@ import ETH_FDT_SLPImg from 'resources/png/ETH_FDT_SLP.png';
 import sOHM_FDT_SUSHI_LPImg from 'resources/png/sOHM_FDT_SUSHI_LP.png';
 import logoTextLImg from 'resources/png/logo_light_text.png';
 import logoTextDImg from 'resources/png/logo_dark_text.png';
+import fdIconDImg from 'resources/png/fd_icon.png';
+import txProgressImg from 'resources/png/tx-progress.png';
+import txFailureImg from 'resources/png/tx-failure.png';
+import txSuccessImg from 'resources/png/tx-success.png';
 
 import s from './s.module.scss';
 
-export type LogoIconNames = 'static/fiat-dao';
+export type LogoIconNames = 'png/fiat-dao';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -190,6 +194,9 @@ export type IconNames =
   | 'png/telegram'
   | 'png/empty-table'
   | 'png/account'
+  | 'png/tx-progress'
+  | 'png/tx-success'
+  | 'png/tx-failure'
   | 'static/add-token';
 
 export type IconProps = {
@@ -212,6 +219,14 @@ const Icon: React.FC<IconProps> = props => {
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/tx-progress':
+          return txProgressImg;
+        case 'png/tx-success':
+          return txSuccessImg;
+        case 'png/tx-failure':
+          return txFailureImg;
+        case 'png/fiat-dao':
+          return fdIconDImg;
         case 'png/ETH_FDT_SLP':
           return ETH_FDT_SLPImg;
         case 'png/sOHM_FDT_SUSHI_LP':

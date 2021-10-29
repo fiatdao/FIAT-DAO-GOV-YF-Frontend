@@ -54,13 +54,13 @@
   }
 
   &:global(.ant-radio-wrapper-checked) {
-    background: var(--gradient-green);
+    background: var(--gradient-pink);
     &::after {
-      background: linear-gradient(135deg, rgba(188, 235, 0, 0.1) 15.57%, rgba(0, 234, 234, 0.1) 84.88%);
+      background: linear-gradient(90deg, rgba(255, 149, 116, 0.04) 0%, rgba(255, 76, 140, 0.04) 100%);
     }
     :global(.ant-radio-inner) {
       border: 0;
-      background: linear-gradient(135deg, #DD3DCB 15.57%, #EF9C92 84.88%);
+      background: var(--gradient-pink);
 
       &::before {
         content: '';

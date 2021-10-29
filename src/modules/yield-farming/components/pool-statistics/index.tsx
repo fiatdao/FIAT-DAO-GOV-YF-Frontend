@@ -70,30 +70,30 @@ const PoolStatistics: FC = () => {
     <div className={cn(s.component, 'flex flow-row')}>
       <div className="card mb-24">
         <div className="card-header">
-          <Text type="p1" weight="semibold" color="primary">
+          <Text type="p1" weight="500" color="primary">
             My rewards
           </Text>
         </div>
         <div className="p-24">
           <div className="flex align-center justify-space-between mb-24">
-            <Text type="small" weight="semibold" color="secondary">
+            <Text type="small" weight="500" color="secondary">
               {FDTToken.symbol} balance
             </Text>
             <div className="flex align-center">
-              <Icon name={FDTToken.icon!} className="mr-8" />
-              <Text type="p1" weight="semibold" color="primary">
+              <Icon width={16} height={16} name={FDTToken.icon!} className="mr-8" />
+              <Text type="p1" weight="500" color="primary">
                 {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
             </div>
           </div>
           {!isEnded && !!lastActiveEpoch && (
             <div className="flex align-center justify-space-between">
-              <Text type="small" weight="semibold" color="secondary">
+              <Text type="small" weight="500" color="secondary">
                 Potential reward this epoch
               </Text>
               <div className="flex align-center">
-                <Icon name={FDTToken.icon!}  className="mr-8" />
-                <Text type="p1" weight="semibold" color="primary">
+                <Icon width={16} height={16}  name={FDTToken.icon!}  className="mr-8" />
+                <Text type="p1" weight="500" color="primary">
                   {formatToken(poolMeta.contract.potentialReward) ?? '-'}
                 </Text>
               </div>
@@ -112,7 +112,7 @@ const PoolStatistics: FC = () => {
                   }>
                   <Text
                     type="h2"
-                    weight="semibold"
+                    weight="500"
                     color="primary"
                     className="mr-8 text-ellipsis"
                     style={{ maxWidth: '120px' }}>
@@ -123,7 +123,7 @@ const PoolStatistics: FC = () => {
                 </Tooltip>
                 <Icon name={FDTToken.icon!} width={24} height={24} />
               </div>
-              <Text type="small" weight="semibold" color="secondary">
+              <Text type="small" weight="500" color="secondary">
                 Current reward
               </Text>
             </div>
@@ -141,7 +141,7 @@ const PoolStatistics: FC = () => {
 
       <div className="card flex-grow">
         <div className="card-header">
-          <Text type="p1" weight="semibold" color="primary">
+          <Text type="p1" weight="500" color="primary">
             My stake
           </Text>
         </div>
@@ -164,7 +164,7 @@ const PoolStatistics: FC = () => {
           )}
           <div className="flex flow-row">
             <div className="flex align-center justify-space-between mb-24">
-              <Text type="small" weight="semibold" color="secondary">
+              <Text type="small" weight="500" color="secondary">
                 Staked balance
               </Text>
               <Tooltip
@@ -176,7 +176,7 @@ const PoolStatistics: FC = () => {
                     ),
                   ) ?? '-'
                 }>
-                <Text type="p1" weight="semibold" color="primary">
+                <Text type="p1" weight="500" color="primary">
                   {formatToken(selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken?.decimals), {
                     decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                   }) ?? '-'}
@@ -186,7 +186,7 @@ const PoolStatistics: FC = () => {
 
             {!!lastActiveEpoch && (
               <div className="flex align-center justify-space-between mb-24">
-                <Text type="small" weight="semibold" color="secondary">
+                <Text type="small" weight="500" color="secondary">
                   Effective Staked balance
                 </Text>
                 <Tooltip
@@ -198,7 +198,7 @@ const PoolStatistics: FC = () => {
                       ),
                     ) ?? '-'
                   }>
-                  <Text type="p1" weight="semibold" color="primary">
+                  <Text type="p1" weight="500" color="primary">
                     {formatToken(selectedStakedToken?.currentEpochUserBalance?.unscaleBy(activeToken?.decimals), {
                       decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                     }) ?? '-'}
@@ -208,7 +208,7 @@ const PoolStatistics: FC = () => {
             )}
 
             <div className="flex align-center justify-space-between">
-              <Text type="small" weight="semibold" color="secondary">
+              <Text type="small" weight="500" color="secondary">
                 Wallet balance
               </Text>
               <Tooltip
@@ -217,7 +217,7 @@ const PoolStatistics: FC = () => {
                     convertTokenInUSD(activeContract.balance?.unscaleBy(activeToken?.decimals), activeToken?.symbol!),
                   ) ?? '-'
                 }>
-                <Text type="p1" weight="semibold" color="primary">
+                <Text type="p1" weight="500" color="primary">
                   {formatToken(activeContract.balance?.unscaleBy(activeToken?.decimals), {
                     decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                   }) ?? '-'}
@@ -233,7 +233,7 @@ const PoolStatistics: FC = () => {
           title="Confirm your claim"
           header={
             <div className="flex col-gap-8 align-center justify-center">
-              <Text type="h2" weight="semibold" color="primary">
+              <Text type="h2" weight="500" color="primary">
                 {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
               <Icon name={FDTToken.icon!} width={32} height={32} />

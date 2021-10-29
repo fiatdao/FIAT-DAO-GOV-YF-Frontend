@@ -64,7 +64,7 @@ const TxConfirmModal: React.FC<Props> = props => {
         {header && (
           <>
             {header}
-            <Divider className={s.divider} />
+            {/*<Divider className={s.divider} />*/}
           </>
         )}
         <Grid flow="row" gap={32}>
@@ -74,9 +74,11 @@ const TxConfirmModal: React.FC<Props> = props => {
             <GasFeeList disabled={submitting} />
           </Form.Item>
 
-          <Button htmlType="submit" type="primary" loading={submitting}>
+          <button
+            type="submit"
+            className="button-primary" disabled={submitting}>
             {submitText}
-          </Button>
+          </button>
         </Grid>
       </Form>
     </Modal>

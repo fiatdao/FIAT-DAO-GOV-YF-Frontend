@@ -2,3 +2,12 @@
   background: var(--theme-secondary-block);
   border-radius: 4px;
 }
+
+.confirmModalHeader {
+  padding: 24px 32px;
+  margin-bottom: 32px;
+  background: var(--theme-secondary-block);
+  p {
+    font-size: 16px;
+  }
+}

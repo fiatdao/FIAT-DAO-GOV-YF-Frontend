@@ -73,7 +73,7 @@ const PoolRewards: React.FC = () => {
               <Text type="h3" weight="bold" color="primary">
                 {formatToken(totalToClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={FDTToken.icon!} />
+              <Icon name={FDTToken.icon!} width={24} height={24} />
               {walletCtx.isActive && (
                 <button
                   type="button"
@@ -94,7 +94,7 @@ const PoolRewards: React.FC = () => {
               <Text type="h3" weight="bold" color="primary">
                 {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={FDTToken.icon!}/>
+              <Icon name={FDTToken.icon!} width={24} height={24} />
             </Grid>
           </Grid>
           {!!currentEpoch && (
@@ -113,7 +113,7 @@ const PoolRewards: React.FC = () => {
                   <Text type="h3" weight="bold" color="primary">
                     {formatToken(totalPotentialReward) ?? '-'}
                   </Text>
-                  <Icon name={FDTToken.icon!}/>
+                  <Icon name={FDTToken.icon!} width={24} height={24} />
                 </Grid>
               </Grid>
             </>

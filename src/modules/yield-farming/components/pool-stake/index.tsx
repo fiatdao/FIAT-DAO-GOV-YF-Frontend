@@ -220,13 +220,13 @@ const PoolStake: FC = () => {
         <TxConfirmModal
           title="Stake"
           header={
-            <div className="flex align-center justify-center">
-              <Text type="h2" weight="bold" color="primary" className="mr-8">
+            <div className={cn('flex align-center', s.confirmModalHeader)}>
+              <Text tag="p" type="p2" weight="semibold" className="mr-8">
                 {formatToken(bnAmount, {
                   decimals: activeToken.decimals,
                 })}
               </Text>
-              <Icon name={activeToken.icon!} />
+              <Icon width={24} height={24} name={activeToken.icon!} />
             </div>
           }
           submitText={`Confirm your stake`}

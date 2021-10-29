@@ -40,7 +40,7 @@ export const FDTToken: TokenMeta = {
   symbol: KnownTokens.FDT,
   name: 'FDT Token',
   decimals: 18,
-  icon: 'static/fiat-dao' as any,
+  icon: 'png/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.fdt),
 };
 

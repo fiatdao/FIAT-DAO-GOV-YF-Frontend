@@ -82,7 +82,7 @@ const WalletDelegateView: React.FC = () => {
     <div className="card">
       <Grid className="card-header" flow="col" gap={24} colsTemplate="auto" align="start">
         <Grid flow="col" gap={12} align="center">
-          <Icon name="static/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={40} height={40} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
