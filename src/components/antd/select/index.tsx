@@ -49,7 +49,7 @@ const Select: React.FC<SelectProps<AntdSelectValue>> = <T extends AntdSelectValu
                   {label}
                 </Text>
               )}
-              <Text type="p2" weight="semibold" color="primary">
+              <Text type="p2" weight="500" color="primary">
                 {option.label}
               </Text>
             </Grid>

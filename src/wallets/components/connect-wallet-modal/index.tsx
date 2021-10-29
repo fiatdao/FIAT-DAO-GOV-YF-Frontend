@@ -63,7 +63,7 @@ const ConnectWalletModal: React.FC<ConnectWalletModalProps> = props => {
             Select Wallet
           </Text>
           <Text type="p1" color="secondary" align="center">
-            Please pick a wallet to connect to EnterDAO
+            Please pick a wallet to connect to FIAT DAO
           </Text>
         </Grid>
 

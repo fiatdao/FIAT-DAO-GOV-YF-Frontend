@@ -25,6 +25,10 @@ import UMASrc from 'resources/png/UMA.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import accountImg from 'resources/png/account_img.png';
+import ETH_FDT_SLPImg from 'resources/png/ETH_FDT_SLP.png';
+import sOHM_FDT_SUSHI_LPImg from 'resources/png/sOHM_FDT_SUSHI_LP.png';
+import logoTextLImg from 'resources/png/logo_light_text.png';
+import logoTextDImg from 'resources/png/logo_dark_text.png';
 
 import s from './s.module.scss';
 
@@ -67,6 +71,8 @@ export type TokenIconNames =
   | 'png/uma'
   | 'png/wsOHM'
   | 'png/YFI'
+  | 'png/ETH_FDT_SLP'
+  | 'png/sOHM_FDT_SUSHI_LP'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -179,6 +185,8 @@ export type IconNames =
   | 'png/add-enter'
   | 'png/logo-dark'
   | 'png/logo-light'
+  | 'png/logo-light-text'
+  | 'png/logo-dark-text'
   | 'png/telegram'
   | 'png/empty-table'
   | 'png/account'
@@ -204,6 +212,10 @@ const Icon: React.FC<IconProps> = props => {
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/ETH_FDT_SLP':
+          return ETH_FDT_SLPImg;
+        case 'png/sOHM_FDT_SUSHI_LP':
+          return sOHM_FDT_SUSHI_LPImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':
@@ -242,6 +254,10 @@ const Icon: React.FC<IconProps> = props => {
           return enterStarSrc;
         case 'png/logo-dark':
           return logoDarkSrc;
+        case 'png/logo-light-text':
+          return logoTextLImg;
+        case 'png/logo-dark-text':
+          return logoTextDImg;
         case 'png/logo-light':
           return logoLightSrc;
         case 'png/telegram':

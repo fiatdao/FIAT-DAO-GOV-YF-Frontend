@@ -88,11 +88,11 @@
   --btn-select-shadow: none;
   --btn-select-shadow-hover: 0 16px 32px rgba(255, 67, 57, 0.04);
   --btn-select-shadow-active: 0 16px 32px rgba(255, 67, 57, 0.04);
-  --btn-select-border: 1px solid var(--btn-primary-border);
+  --btn-select-border: 1px solid var(--theme-card-color);
   --btn-select-border-hover: 1px solid var(--btn-primary-border-active);
   --btn-select-border-active: 1px solid var(--btn-primary-border-active);
-  --btn-select-bg: #F1DBEE;
-  --btn-select-selected-bg: #F1DBEE;
+  --btn-select-bg: var(--theme-card-color);
+  --btn-select-selected-bg: var(--gradient-secondary-pink);
 }
 
 [data-theme='dark'] .component {
@@ -115,11 +115,11 @@
   --btn-link-text-active: #{$color-blue500};
 
   // select
-  --btn-select-border: 1px solid var(--btn-primary-border);
+  --btn-select-border: 1px solid var(--theme-card-color);
   --btn-select-border-hover: 1px solid var(--btn-primary-border-active);
   --btn-select-border-active: 1px solid var(--btn-primary-border-active);
-  --btn-select-bg: #1F1B59;
-  --btn-select-bg-hover: #1F1B59;
+  --btn-select-bg: var(--theme-card-color);
+  --btn-select-selected-bg: var(--gradient-secondary-pink);
 }
 
 .component:global(.ant-btn) {

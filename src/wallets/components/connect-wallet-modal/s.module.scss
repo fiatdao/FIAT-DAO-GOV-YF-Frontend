@@ -3,7 +3,7 @@
   max-height: 96px;
 
   &:hover {
-    background-color: #1F1B59 !important;
+    //background: var(--gradient-secondary-pink) !important;
   }
 
   .walletIcon {
@@ -11,6 +11,7 @@
     transition: filter 0.2s ease-out !important;
     color: var(--theme-primary-color);
     width: 100%;
+
   }
 
   &:hover .walletIcon {

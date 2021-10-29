@@ -67,9 +67,9 @@ const PoolCard: React.FC<PoolCardProps> = props => {
           <Text type="p1" weight="semibold" color="primary" ellipsis>
             {poolMeta?.label ?? '-'}
           </Text>
-          <Text type="lb2" weight="semibold" color="primary" ellipsis>
-            EPOCH {lastActiveEpoch ?? '-'} / {totalEpochs ?? '-'}
-          </Text>
+          {/*<Text type="lb2" weight="semibold" color="primary" ellipsis>*/}
+          {/*  EPOCH {lastActiveEpoch ?? '-'} / {totalEpochs ?? '-'}*/}
+          {/*</Text>*/}
         </div>
         {walletCtx.isActive && isPoolAvailable && (
           <button type="button" disabled={!enabled} onClick={handleStaking} className="button-primary">

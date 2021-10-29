@@ -62,7 +62,7 @@ const LayoutHeader: React.FC = () => {
             address: FDTToken.address,
             symbol: FDTToken.symbol,
             decimals: FDTToken.decimals,
-            image: `${window.location.origin}/enterdao.png`,
+            image: `${window.location.origin}/fiatdao.png`,
           },
         });
       } catch (e) {
@@ -73,9 +73,9 @@ const LayoutHeader: React.FC = () => {
 
   return (
     <div className={s.component} ref={setReferenceElement}>
-      <ExternalLink href="https://enterdao.xyz/" target="_self">
-        <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="auto" height="auto" className={s.logo} />
-      </ExternalLink>
+      <Link to="/">
+        <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
+      </Link>
       {/*<div className={s.titleDelimiter} />*/}
       <h1 className={s.title} />
 
@@ -86,9 +86,9 @@ const LayoutHeader: React.FC = () => {
         <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
           <span>Liquidity mining</span>
         </Link>
-        <Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-          <span>FIAT DAO</span>
-        </Link>
+        {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
+        {/*  <span>FIAT DAO</span>*/}
+        {/*</Link>*/}
         {/*<Popover*/}
         {/*  visible={popper2visible}*/}
         {/*  onVisibleChange={setPopper2visible}*/}
@@ -190,9 +190,9 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Liquidity mining</span>
                   </Link>
-                  <Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>FIAT DAO</span>
-                  </Link>
+                  {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
+                  {/*  <span>FIAT DAO</span>*/}
+                  {/*</Link>*/}
                 </div>
                 {!wallet.isActive && !isMobile ? (
                   <div style={{ textAlign: 'center', padding: '0 20px', width: '100%' }}>
@@ -205,7 +205,7 @@ const LayoutHeader: React.FC = () => {
                         wallet.showWalletsModal();
                       }}
                       style={{ margin: '20px auto 0' }}>
-                      <span>Sign in</span>
+                      <span>Connect wallet</span>
                     </button>
                   </div>
                 ) : null}
