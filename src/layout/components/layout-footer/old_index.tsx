@@ -75,10 +75,10 @@ const LayoutFooter: React.FC = () => {
         <div className={cn(s.row, s.navWrap)}>
           <div className={s.logoWrap}>
             <Link to="/" className={s.logoLink}>
-              <Icon name="static/fiat-dao" width="auto" height="auto" className={s.logo} />
+              <Icon name="png/fiat-dao" width="auto" height="auto" className={s.logo} />
             </Link>
             <Text type="p1" color="primary">
-              EnterDAO is a decfdtalized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.
+              FIAT DAO is a decfdtalized autonomous organization on the Ethereum blockchain founded with the mission to build products enabling new markets within the metaverse economy. EnterDAO is governed by the ENTR token.
             </Text>
           </div>
           <div className={s.navBlocksWrap}>

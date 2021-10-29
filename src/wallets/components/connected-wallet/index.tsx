@@ -87,14 +87,14 @@ const ConnectedWallet: React.FC = () => {
             </Grid>
             <Divider style={{ minHeight: 28 }} />
             <Grid padding={24}>
-              <button type="button" className="button button-ghost" onClick={() => wallet.disconnect()}>
+              <button type="button" className="button-ghost" onClick={() => wallet.disconnect()}>
                 <span>Disconnect</span>
               </button>
             </Grid>
           </div>
         }
         trigger="click">
-        <Button type="primary">Connecting...</Button>
+        <button type="button" className="button-primary"><span>Connecting...</span></button>
       </Popover>
     );
   }
@@ -102,7 +102,7 @@ const ConnectedWallet: React.FC = () => {
   if (!wallet.isActive) {
     return !isMobile ? (
       <button type="button" className="button-ghost" onClick={() => wallet.showWalletsModal()}>
-        <span>Sign in</span>
+        <span>Connect wallet</span>
       </button>
     ) : null;
   }
@@ -118,7 +118,7 @@ const ConnectedWallet: React.FC = () => {
           <Grid className="card-header" flow="col" gap={16} align="center" justify="start">
             <Identicon address={wallet.account} width={40} height={40} />
             <ExternalLink href={getEtherscanAddressUrl(wallet.account!)}>
-              <Text type="p1" weight="semibold" color="blue">
+              <Text tag="p" type="p1" weight="semibold" className={s.addressStr}>
                 {shortenAddr(wallet.account, 8, 8)}
               </Text>
             </ExternalLink>
@@ -129,7 +129,7 @@ const ConnectedWallet: React.FC = () => {
               <Text type="p1" color="secondary">
                 Status
               </Text>
-              <Text type="lb2" weight="semibold" color="green" className={s.statusTag}>
+              <Text tag="p" type="lb2" weight="semibold" className={s.statusTag}>
                 Connected
               </Text>
             </Grid>

@@ -67,7 +67,7 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
                 {entity.actionType === APIYFPoolActionType.DEPOSIT && 'Deposit'}
                 {entity.actionType === APIYFPoolActionType.WITHDRAW && 'Withdraw'}
               </Text>
-              <Text type="small" weight="semibold" wrap={false}>
+              <Text type="small" wrap={false}>
                 {knownToken.name}
               </Text>
             </div>
@@ -95,7 +95,7 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
               weight="semibold"
               wrap={false}
               color={isStake ? 'var(--gradient-green-safe)' : 'var(--gradient-red-safe)'}
-              textGradient={isStake ? 'var(--gradient-green)' : 'var(--gradient-red)'}
+              textGradient={isStake ? 'var(--gradient-green-safe)' : 'var(--gradient-red-safe)'}
               className="mb-4">
               {isStake ? '+' : '-'}
               {formatToken(amount, {
@@ -352,7 +352,7 @@ const PoolTransactions: FC = () => {
           pageSize: state.pageSize,
           position: ['bottomRight'],
           showTotal: (total: number, [from, to]: [number, number]) => (
-            <Text type="p2" weight="semibold" color="secondary">
+            <Text type="p2" weight="500" color="secondary">
               Showing {from} to {to} the most recent {total}
             </Text>
           ),

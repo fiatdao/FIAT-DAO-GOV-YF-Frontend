@@ -51,9 +51,9 @@ const PoolHeader: FC = () => {
           <Text type="p1" weight="semibold" color="primary" className="mb-4">
             {poolMeta.label}
           </Text>
-          <Text type="small" weight="semibold" color="primary">
-            Epoch {poolMeta.contract.lastActiveEpoch ?? '-'} / {poolMeta.contract.totalEpochs ?? '-'}
-          </Text>
+          {/*<Text type="small" weight="semibold" color="primary">*/}
+          {/*  Epoch {poolMeta.contract.lastActiveEpoch ?? '-'} / {poolMeta.contract.totalEpochs ?? '-'}*/}
+          {/*</Text>*/}
         </div>
       </div>
       <div className={cn('card p-24 flex col-gap-48 mb-24', s.card)}>
@@ -90,7 +90,7 @@ const PoolHeader: FC = () => {
             Epoch rewards
           </Text>
           <div className="flex align-center">
-            <Icon name="static/fiat-dao" width={24} height={24} className="mr-8" />
+            <Icon name="png/fiat-dao" width={16} height={16} className="mr-8" />
             <Text type="p1" weight="semibold" color="primary">
               {formatNumber(poolMeta.contract.epochReward) ?? '-'}
             </Text>

@@ -26,7 +26,7 @@ const LayoutFooter: React.FC = () => {
     <footer className={s.footer}>
       <div className="container-limit">
         <div className={s.row}>
-          <div><Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="auto" height="auto" className={s.logo} /></div>
+          <div><Icon name={isDarkTheme ? 'png/logo-dark-text' : 'png/logo-light-text'} width="auto" className={s.logo} /></div>
           <div className={s.nav}>
             <Link to="/" className={s.dropdownLink}>
               <span>Home</span>
@@ -34,9 +34,9 @@ const LayoutFooter: React.FC = () => {
             <Link to="/liquidity-mining" className={s.dropdownLink}>
               <span>Liquidity mining</span>
             </Link>
-            <Link to="/fiat-dao" className={s.dropdownLink}>
-              <span>FIAT DAO</span>
-            </Link>
+            {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
+            {/*  <span>FIAT DAO</span>*/}
+            {/*</Link>*/}
           </div>
         </div>
       </div>
@@ -47,23 +47,23 @@ const LayoutFooter: React.FC = () => {
             <div className={s.copyrightLinks}>
               <div className={s.sLinksWrap}>
                 <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="twitter" width="20" height="20" />
+                  <Icon name="twitter" width="15" />
                 </ExternalLink>
                 <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="discord" width="20" height="20" />
+                  <Icon name="discord" width="15" />
                 </ExternalLink>
                 <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="medium" width="20" height="20" />
+                  <Icon name="medium" width="15" />
                 </ExternalLink>
+                {/*<ExternalLink href="#" className={s.sLink}>*/}
+                {/*  <Icon name="youtube" width="15" />*/}
+                {/*</ExternalLink>*/}
                 <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="youtube" width="20" height="20" />
+                  <Icon name="git" width="15" />
                 </ExternalLink>
-                <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="git" width="20" height="20" />
-                </ExternalLink>
-                <ExternalLink href="#" className={s.sLink}>
-                  <Icon name="coingecko" width="20" height="20" />
-                </ExternalLink>
+                {/*<ExternalLink href="#" className={s.sLink}>*/}
+                {/*  <Icon name="coingecko" width="15" />*/}
+                {/*</ExternalLink>*/}
               </div>
             </div>
           </div>

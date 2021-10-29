@@ -25,10 +25,18 @@ import UMASrc from 'resources/png/UMA.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import accountImg from 'resources/png/account_img.png';
+import ETH_FDT_SLPImg from 'resources/png/ETH_FDT_SLP.png';
+import sOHM_FDT_SUSHI_LPImg from 'resources/png/sOHM_FDT_SUSHI_LP.png';
+import logoTextLImg from 'resources/png/logo_light_text.png';
+import logoTextDImg from 'resources/png/logo_dark_text.png';
+import fdIconDImg from 'resources/png/fd_icon.png';
+import txProgressImg from 'resources/png/tx-progress.png';
+import txFailureImg from 'resources/png/tx-failure.png';
+import txSuccessImg from 'resources/png/tx-success.png';
 
 import s from './s.module.scss';
 
-export type LogoIconNames = 'static/fiat-dao';
+export type LogoIconNames = 'png/fiat-dao';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -67,6 +75,8 @@ export type TokenIconNames =
   | 'png/uma'
   | 'png/wsOHM'
   | 'png/YFI'
+  | 'png/ETH_FDT_SLP'
+  | 'png/sOHM_FDT_SUSHI_LP'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -179,9 +189,14 @@ export type IconNames =
   | 'png/add-enter'
   | 'png/logo-dark'
   | 'png/logo-light'
+  | 'png/logo-light-text'
+  | 'png/logo-dark-text'
   | 'png/telegram'
   | 'png/empty-table'
   | 'png/account'
+  | 'png/tx-progress'
+  | 'png/tx-success'
+  | 'png/tx-failure'
   | 'static/add-token';
 
 export type IconProps = {
@@ -204,6 +219,18 @@ const Icon: React.FC<IconProps> = props => {
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/tx-progress':
+          return txProgressImg;
+        case 'png/tx-success':
+          return txSuccessImg;
+        case 'png/tx-failure':
+          return txFailureImg;
+        case 'png/fiat-dao':
+          return fdIconDImg;
+        case 'png/ETH_FDT_SLP':
+          return ETH_FDT_SLPImg;
+        case 'png/sOHM_FDT_SUSHI_LP':
+          return sOHM_FDT_SUSHI_LPImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':
@@ -242,6 +269,10 @@ const Icon: React.FC<IconProps> = props => {
           return enterStarSrc;
         case 'png/logo-dark':
           return logoDarkSrc;
+        case 'png/logo-light-text':
+          return logoTextLImg;
+        case 'png/logo-dark-text':
+          return logoTextDImg;
         case 'png/logo-light':
           return logoLightSrc;
         case 'png/telegram':

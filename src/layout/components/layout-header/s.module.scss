@@ -110,7 +110,7 @@
 
 .logo {
   margin-right: 3px;
-  height: 64px;
+  //height: 40px;
 }
 
 .title {
@@ -174,7 +174,7 @@
   display: flex;
   align-items: center;
   color: var(--theme-primary-color);
-  padding: 16px;
+  margin: 16px;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -189,7 +189,7 @@
 
 .dropdownLink:hover {
   //background: var(--theme-overlay-color);
-  color: var(--theme-primary-color);
+  //color: var(--theme-primary-color);
 
   .dropdownIcon {
     color: var(--theme-primary-color);
@@ -197,8 +197,8 @@
 }
 
 .dropdownLink:active {
-  background: var(--theme-overlay-color);
-  color: var(--theme-primary-color);
+  //background: var(--theme-overlay-color);
+  //color: var(--theme-primary-color);
 
   .dropdownIcon {
     color: var(--theme-primary-color);

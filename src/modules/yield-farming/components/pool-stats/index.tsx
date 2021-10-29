@@ -41,7 +41,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
-                This number shows the Total Value Locked across the staking pool(s). It is the USD and ETH conversion of
+                This number shows the Total Value Locked across the staking pool(s). It is the USD conversion of
                 the amounts in the pool balance(s).
               </Text>
             }>
@@ -50,7 +50,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             </Text>
           </Hint>
           <div className="flex flow-row">
-            <Text type="h2" weight="bold" color="primary" className="mb-4">
+            <Text type="h2" weight="semibold" color="primary" className="mb-4">
               {formatUSD(yfTotalStakedInUSD, {
                 decimals: 0,
               }) ?? '-'}
@@ -71,7 +71,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
-                This number shows the ${FDTToken.symbol} token rewards distributed so far out of the total of{' '}
+                This number shows the {FDTToken.symbol} token rewards distributed so far out of the total of{' '}
                 {formatToken(yfTotalSupply) ?? '-'} that are going to be available for Yield Farming.
               </Text>
             }>
@@ -80,7 +80,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             </Text>
           </Hint>
           <div className="flex flow-row">
-            <Text type="h2" weight="bold" color="primary" className="mb-4">
+            <Text type="h2" weight="semibold" color="primary" className="mb-4">
               {formatToken(yfDistributedRewards) ?? '-'}
             </Text>
             <Text type="p1" color="secondary">
@@ -90,23 +90,23 @@ const PoolStats: React.FC<Props> = ({ className }) => {
         </div>
       </div>
 
-      <div className="card p-24">
-        <div className="flex flow-row justify-space-between full-height">
-          <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>
-            {FDTToken.symbol} Price
-          </Text>
-          <div className="flex flow-row">
-            <Text type="h2" weight="bold" color="primary" className="mb-4">
-              {formatUSD(FDTToken.price) ?? '-'}
-            </Text>
-            <ExternalLink href={FDT_MARKET_LINK} className="link-gradient">
-              <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">
-                SushiSwap market
-              </Text>
-            </ExternalLink>
-          </div>
-        </div>
-      </div>
+      {/*<div className="card p-24">*/}
+      {/*  <div className="flex flow-row justify-space-between full-height">*/}
+      {/*    <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>*/}
+      {/*      {FDTToken.symbol} Price*/}
+      {/*    </Text>*/}
+      {/*    <div className="flex flow-row">*/}
+      {/*      <Text type="h2" weight="semibold" color="primary" className="mb-4">*/}
+      {/*        {formatUSD(FDTToken.price) ?? '-'}*/}
+      {/*      </Text>*/}
+      {/*      <ExternalLink href={FDT_MARKET_LINK} className="link-gradient">*/}
+      {/*        <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">*/}
+      {/*          SushiSwap market*/}
+      {/*        </Text>*/}
+      {/*      </ExternalLink>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {!isEnded && (
         <div className="card p-24">
@@ -128,7 +128,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
                 {epochStart ? (
                   <UseLeftTime end={epochStart * 1_000} delay={1_000}>
                     {leftTime => (
-                      <Text type="h2" weight="bold" color="primary" className="mb-4">
+                      <Text type="h2" weight="semibold" color="primary" className="mb-4">
                         {leftTime > 0 ? getFormattedDuration(0, epochStart * 1_000) : '0s'}
                       </Text>
                     )}
@@ -162,7 +162,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
                 {epochEndDate ? (
                   <UseLeftTime end={epochEndDate} delay={1_000}>
                     {leftTime => (
-                      <Text type="h2" weight="bold" color="primary" className="mb-4">
+                      <Text type="h2" weight="semibold" color="primary" className="mb-4">
                         {leftTime > 0 ? getFormattedDuration(0, epochEndDate) : '0s'}
                       </Text>
                     )}

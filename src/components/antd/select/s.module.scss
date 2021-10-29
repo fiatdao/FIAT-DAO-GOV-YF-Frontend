@@ -59,7 +59,7 @@
 
     :global(.ant-select-selection-item),
     :global(.ant-select-selection-placeholder) {
-      @include font-p1-semi-bold;
+      @include font-p1-regular;
       color: var(--theme-primary-color);
     }
   }
@@ -96,12 +96,12 @@
     }
 
     :global(.ant-select-item-option-selected .ant-select-item-option-content) {
-      @include font-p2-semi-bold;
+      @include font-p2-regular;
       color: var(--theme-primary-color);
     }
 
     :global(.ant-select-item-option-content) {
-      @include font-p2-semi-bold;
+      @include font-p2-semi-500;
       color: var(--theme-secondary-color);
     }
 

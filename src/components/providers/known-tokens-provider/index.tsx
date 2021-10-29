@@ -40,7 +40,7 @@ export const FDTToken: TokenMeta = {
   symbol: KnownTokens.FDT,
   name: 'FDT Token',
   decimals: 18,
-  icon: 'static/fiat-dao' as any,
+  icon: 'png/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.fdt),
 };
 
@@ -129,7 +129,7 @@ export const EthFdtSLPToken: TokenMeta = {
   symbol: KnownTokens.ETH_FDT_SLP,
   name: 'ETH FDT SUSHI LP',
   decimals: 18,
-  icon: 'png/eslp',
+  icon: 'png/ETH_FDT_SLP',
   contract: new Erc20Contract([], config.tokens.ethFDTSLP),
 };
 
@@ -138,7 +138,7 @@ export const sOHMFdtSLPToken: TokenMeta = {
   symbol: KnownTokens.sOHM_FDT_SLP,
   name: 'sOHM FDT SUSHI LP',
   decimals: 18,
-  icon: 'png/eslp',
+  icon: 'png/sOHM_FDT_SUSHI_LP',
   contract: new Erc20Contract([], config.tokens.sOHMFDTSLP),
 };
 

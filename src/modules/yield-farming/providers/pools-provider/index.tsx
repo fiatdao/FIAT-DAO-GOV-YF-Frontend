@@ -99,7 +99,7 @@ export const wsOHMYfPool: YFPoolMeta = {
 export const EthFdtSLPYfPool: YFPoolMeta = {
   name: YFPoolID.ETH_FDT_SLP,
   label: 'ETH_FDT_SUSHI_LP',
-  icons: ['png/eslp'],
+  icons: ['png/ETH_FDT_SLP'],
   colors: ['var(--theme-red-color)'],
   tokens: [EthFdtSLPToken],
   contract: new YfPoolContract(config.contracts.yf.ethFDTSLP),
@@ -108,7 +108,7 @@ export const EthFdtSLPYfPool: YFPoolMeta = {
 export const sOHMFdtSLPYfPool: YFPoolMeta = {
   name: YFPoolID.sOHM_FDT_SLP,
   label: 'sOHM_FDT_SUSHI_LP',
-  icons: ['png/eslp'],
+  icons: ['png/sOHM_FDT_SUSHI_LP'],
   colors: ['var(--theme-red-color)'],
   tokens: [sOHMFdtSLPToken],
   contract: new YfPoolContract(config.contracts.yf.sOHMFDTSLP),

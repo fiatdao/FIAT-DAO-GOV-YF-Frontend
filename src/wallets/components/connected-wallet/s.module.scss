@@ -7,6 +7,12 @@
   }
 }
 
+.addressStr {
+  background: linear-gradient(90deg, #FF9574 0%, #FF4C8C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .popover {
   :global(.ant-popover-inner) {
     box-shadow: var(--theme-card-shadow);
@@ -23,9 +29,21 @@
 }
 
 .statusTag {
-  background: rgba(0, 211, 149, 0.1);
-  border-radius: 12px;
+  position: relative;
+  background: var(--gradient-secondary-pink);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   padding: 4px 12px;
+  &:before {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, rgba(255, 149, 116, 0.1) 0%, rgba(255, 76, 140, 0.1) 100%);
+  }
 }
 
 .notifications {

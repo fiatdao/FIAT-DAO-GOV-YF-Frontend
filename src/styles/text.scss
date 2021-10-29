@@ -86,6 +86,10 @@
   @include font(var(--font-size-p2), calc(var(--font-size-p2) + 10px), 600);
 }
 
+@mixin font-p2-semi-500 {
+  @include font(var(--font-size-p2), calc(var(--font-size-p2) + 10px), 500);
+}
+
 @mixin font-p2-regular {
   @include font(var(--font-size-p2), calc(var(--font-size-p2) + 10px));
 }
