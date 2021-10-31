@@ -60,7 +60,7 @@ const PoolRewards: React.FC = () => {
   return (
     <div className={cn(s.component, 'pv-24')}>
       <div className="container-limit">
-        <Text type="lb2" weight="semibold" color="primary">
+        <Text type="lb2" weight="semibold" className="sm-mb-16" color="primary">
           My Rewards
         </Text>
 

@@ -287,7 +287,7 @@ const PoolTransactions: FC = () => {
   }
 
   return (
-    <div className="card mb-32">
+    <div className="card mb-32 sm-mb-16">
       <div
         className={cn('card-header flex flow-col align-center', s.tableHeader)}
         style={{ overflowX: 'auto', border: '0' }}>

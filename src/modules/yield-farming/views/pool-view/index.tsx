@@ -41,7 +41,7 @@ const PoolViewInner: FC = () => {
   return (
     <div className="content-container-fix content-container">
       <PoolHeader />
-      <Spin spinning={!isInitialized} wrapperClassName="mb-32">
+      <Spin spinning={!isInitialized} wrapperClassName="mb-32 sm-mb-16">
         <div className="flexbox-grid">
           <div className={cn('card', s.stakeCard)}>
             <div className={cn('card-header pv-0', s.stakeCardHeader)}>
