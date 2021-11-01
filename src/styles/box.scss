@@ -10,7 +10,7 @@
   position: relative;
 }
 
-$margins: 4, 8, 12, 16, 24, 32, 40, 48, 64;
+$margins: 0, 4, 8, 12, 16, 24, 32, 40, 48, 64;
 
 @each $margin in $margins {
   .mr-#{$margin}.mr-#{$margin} {

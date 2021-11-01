@@ -5,6 +5,10 @@
   @media (max-width: 900px) {
     max-width: none;
   }
+
+  @media (max-width: 992px) {
+    gap: 0 !important;
+  }
 }
 
 .claimBlock {

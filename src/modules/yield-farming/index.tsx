@@ -17,11 +17,11 @@ const YieldFarmingView: React.FC = () => {
     let warningDestructor: () => void;
 
     if (isMobile) {
-      warningDestructor = warning.addWarn({
-        text: 'Transactions can only be made from the desktop version using Metamask',
-        closable: true,
-        storageIdentity: 'bb_desktop_metamask_tx_warn',
-      });
+      // warningDestructor = warning.addWarn({
+      //   text: 'Transactions can only be made from the desktop version using Metamask',
+      //   closable: true,
+      //   storageIdentity: 'bb_desktop_metamask_tx_warn',
+      // });
     } else {
       warningDestructor = warning.addWarn({
         text: 'Do not send funds directly to the contract!',

@@ -65,6 +65,16 @@
   box-shadow: var(--theme-card-shadow);
   overflow: hidden;
 
+  &-header {
+    .button {
+      &-primary {
+        @media (max-width: 767px) {
+          padding: 12px 28px;
+        }
+      }
+    }
+  }
+
   .card-row {
     display: flex;
     justify-content: space-between;

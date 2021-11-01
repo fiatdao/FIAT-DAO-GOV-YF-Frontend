@@ -34,13 +34,13 @@ const PoolHeader: FC = () => {
 
   return (
     <>
-      <Link to="/yield-farming" className="flex inline align-center mb-16">
-        <Icon name="arrow-back" width={14} height={14} className="mr-8" />
-        <Text type="p1" weight="semibold" color="secondary">
+      <Link to="/yield-farming" className="flex inline align-center mb-16 sm-mb-8">
+        <Icon name="arrow-back" width={18} height={18} className="mr-8" />
+        <Text type="p1" weight="500" color="secondary">
           Pools
         </Text>
       </Link>
-      <div className="flex align-center mb-40">
+      <div className="flex align-center mb-40 sm-mb-24">
         <IconsSet
           icons={poolMeta.icons.map(icon => (
             <Icon key={icon} name={icon as IconNames} />
@@ -48,50 +48,50 @@ const PoolHeader: FC = () => {
           className="mr-16"
         />
         <div>
-          <Text type="p1" weight="semibold" color="primary" className="mb-4">
+          <Text type="p1" weight="500" color="primary" className="mb-4">
             {poolMeta.label}
           </Text>
-          {/*<Text type="small" weight="semibold" color="primary">*/}
-          {/*  Epoch {poolMeta.contract.lastActiveEpoch ?? '-'} / {poolMeta.contract.totalEpochs ?? '-'}*/}
-          {/*</Text>*/}
+          <Text type="small" weight="semibold" color="primary">
+            Epoch {poolMeta.contract.lastActiveEpoch ?? '-'}/{poolMeta.contract.totalEpochs ?? '-'}
+          </Text>
         </div>
       </div>
       <div className={cn('card p-24 flex col-gap-48 mb-24', s.card)}>
         <div>
-          <Text type="small" weight="semibold" color="secondary" className="mb-8">
+          <Text type="small" weight="500" color="secondary" className="mb-8">
             APR
           </Text>
           <div className="flex align-center">
-            <Text type="p1" weight="semibold" color="primary">
+            <Text type="p1" weight="500" color="primary">
               {formatPercent(apr) ?? '-'}
             </Text>
           </div>
         </div>
         <div>
-          <Text type="small" weight="semibold" color="secondary" className="mb-8">
+          <Text type="small" weight="500" color="secondary" className="mb-8">
             Pool balance
           </Text>
-          <Text type="p1" weight="semibold" color="primary">
+          <Text type="p1" weight="500" color="primary">
             {formatUSD(poolBalance) ?? '-'}
           </Text>
         </div>
         {!!poolMeta.contract.lastActiveEpoch && (
           <div>
-            <Text type="small" weight="semibold" color="secondary" className="mb-8">
+            <Text type="small" weight="500" color="secondary" className="mb-8">
               Effective pool balance
             </Text>
-            <Text type="p1" weight="semibold" color="primary">
+            <Text type="p1" weight="500" color="primary">
               {formatUSD(effectivePoolBalance) ?? '-'}
             </Text>
           </div>
         )}
         <div>
-          <Text type="small" weight="semibold" color="secondary" className="mb-8">
+          <Text type="small" weight="500" color="secondary" className="mb-8">
             Epoch rewards
           </Text>
           <div className="flex align-center">
             <Icon name="png/fiat-dao" width={16} height={16} className="mr-8" />
-            <Text type="p1" weight="semibold" color="primary">
+            <Text type="p1" weight="500" color="primary">
               {formatNumber(poolMeta.contract.epochReward) ?? '-'}
             </Text>
           </div>

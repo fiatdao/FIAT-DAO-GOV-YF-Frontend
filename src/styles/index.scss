@@ -64,7 +64,7 @@ body.mobile-menu-open {
 }
 
 :root {
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'inter', sans-serif;
   --font-size-h1: 32px;
   --font-size-h2: 24px;
   --font-size-h3: 18px;
@@ -74,25 +74,25 @@ body.mobile-menu-open {
   --font-size-lb2: 12px;
   --font-size-sm: 12px;
 
-  --theme-body-color: #F8F8F9;
+  --theme-body-color: #f8f8f9;
   --theme-card-color: #fff;
   --theme-amount-color: #fff;
-  --theme-overlay-color: #F8F8F9;
+  --theme-overlay-color: #f8f8f9;
   --theme-mask-color: rgba(0, 0, 0, 0.08);
-  --theme-border-color: #E1E1E1; // grey100
-  --theme-amount-border: #E1E1E1;
+  --theme-border-color: #e1e1e1; // grey100
+  --theme-amount-border: #e1e1e1;
   --theme-icon-color: #aaafb3; // grey300
   --theme-icon-hover-color: #060a0d; // grey900
 
-  --theme-social-bg-color: #F1F1F1;
+  --theme-social-bg-color: #f1f1f1;
   --theme-social-link-color: #505050;
 
   --theme-primary-color: #171717;
-  --theme-secondary-color: #B5B5B5;
+  --theme-secondary-color: #b5b5b5;
   --theme-secondary-color-rgb: 113, 121, 128; // grey500
   --theme-default-color: #aaafb3; // grey300
 
-  --theme-card-shadow: 0px 0px 0.5px rgba(6, 10, 13, 0.4), 0px 8px 16px rgba(113, 121, 128, 0.08);;
+  --theme-card-shadow: 0 0 0.5px rgba(6, 10, 13, 0.4), 0 8px 16px rgba(113, 121, 128, 0.08);
   --theme-modal-shadow: 0 0 1px rgba(6, 10, 13, 0.4), 0 16px 32px rgba(19, 32, 43, 0.4);
   --theme-overlay-shadow: 0 0 1px rgba(0, 0, 0, 0.4), 0 32px 64px rgba(113, 121, 128, 0.32);
 
@@ -126,26 +126,26 @@ body.mobile-menu-open {
 
   --horizontal-padding: 64px;
 
-  --gradient-green: linear-gradient(135deg, #2DD867 15.57%, #27DDC3 84.88%); // rgb(188, 235, 0) rgb(0, 234, 234)
+  --gradient-green: linear-gradient(135deg, #2dd867 15.57%, #27ddc3 84.88%); // rgb(188, 235, 0) rgb(0, 234, 234)
   --gradient-green-opacity: linear-gradient(135deg, rgba(188, 235, 0, 0.16) 15.57%, rgba(0, 234, 234, 0.16) 84.88%);
-  --gradient-green-safe: #52CD74;
-  --gradient-red: linear-gradient(135deg, #DE4B4B 0%, #F15E1F 100%); // rgb(255, 116, 57) rgb(255, 57, 188)
+  --gradient-green-safe: #52cd74;
+  --gradient-red: linear-gradient(135deg, #de4b4b 0%, #f15e1f 100%); // rgb(255, 116, 57) rgb(255, 57, 188)
   --gradient-red-opacity: linear-gradient(135deg, rgba(255, 116, 57, 0.16) 15.57%, rgba(255, 57, 188, 0.16) 84.88%);
-  --gradient-red-safe: #E36666;
-  --gradient-blue: linear-gradient(135deg, #914FE6 0%, #316CDF 100%); // rgb(145, 79, 230) rgb(49, 108, 223)
+  --gradient-red-safe: #e36666;
+  --gradient-blue: linear-gradient(135deg, #914fe6 0%, #316cdf 100%); // rgb(145, 79, 230) rgb(49, 108, 223)
   --gradient-blue-opacity: linear-gradient(135deg, rgba(145, 79, 230, 0.16) 15.57%, rgba(49, 108, 223, 0.16) 84.88%);
-  --gradient-blue-safe: #316CDF;
+  --gradient-blue-safe: #316cdf;
   --gradient-pink-safe: #ff5388;
-  --gradient-pink: linear-gradient(90deg, #FF7474 0%, #FF4C8C 100%);
-  --gradient-secondary-pink: linear-gradient(90deg, #FF9574 0%, #FF4C8C 100%);
+  --gradient-pink: linear-gradient(90deg, #ff7474 0%, #ff4c8c 100%);
+  --gradient-secondary-pink: linear-gradient(90deg, #ff9574 0%, #ff4c8c 100%);
 
   --theme-tooltip-bg: #fff;
   --theme-tooltip-item-bg-active: rgba(0, 0, 0, 0.04);
 
-  --theme-secondary-block: #F9F9F9;
+  --theme-secondary-block: #f9f9f9;
 
-  --theme-header-shadow: 0px 0px 0.5px rgba(6, 10, 13, 0.4), 0px 8px 16px rgba(113, 121, 128, 0.08);
-  --theme-selection-color: #EF9C92
+  --theme-header-shadow: 0 0 0.5px rgba(6, 10, 13, 0.4), 0 8px 16px rgba(113, 121, 128, 0.08);
+  --theme-selection-color: #ef9c92;
 }
 
 @media (max-width: 1024px) {
@@ -178,15 +178,15 @@ body.mobile-menu-open {
   --theme-amount-border: #171717;
   --theme-icon-color: #606268;
   --theme-icon-hover-color: #fff;
-  --theme-icon-hover-gradient: linear-gradient(135deg, #DD3DCB 15%, #EF9C92 85%);
+  --theme-icon-hover-gradient: linear-gradient(135deg, #dd3dcb 15%, #ef9c92 85%);
 
   --theme-primary-color: #fff;
-  --theme-secondary-color: #B5B5B5;
-  --theme-default-color: #B5B5B5;
+  --theme-secondary-color: #b5b5b5;
+  --theme-default-color: #b5b5b5;
 
   --theme-card-shadow: none;
-  --theme-modal-shadow: 0px 12px 25px #161344;
-  --theme-overlay-shadow: 0px 12px 25px #161344;
+  --theme-modal-shadow: 0 0 1px rgba(0, 0, 0, 0.4), 0 32px 64px rgba(0, 0, 0, 0.32);
+  --theme-overlay-shadow: 0 0 1px rgba(0, 0, 0, 0.4), 0 32px 64px rgba(0, 0, 0, 0.32);
 
   --theme-input-background: #1d1d1d;
   --theme-input-placeholder: #606268;
@@ -199,7 +199,11 @@ body.mobile-menu-open {
   --theme-header-shadow: none;
 
   --theme-social-bg-color: #202020;
-  --theme-social-link-color: #FFFFFF;
+  --theme-social-link-color: #fff;
+
+  @media (max-width: 992px) {
+    --theme-social-bg-color: #171717;
+  }
 }
 
 :focus:not(:focus-visible) {

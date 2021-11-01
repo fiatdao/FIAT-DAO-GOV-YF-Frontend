@@ -70,7 +70,7 @@ const TxConfirmModal: React.FC<Props> = props => {
         <Grid flow="row" gap={32}>
           {children?.({ form, submitting })}
 
-          <Form.Item name="gasPrice" label="Gas Fee (Gwei)" rules={[{ required: true, message: 'Required' }]}>
+          <Form.Item name="gasPrice" label="Gas Fee (Gwei)" colon={false} rules={[{ required: true, message: 'Required' }]}>
             <GasFeeList disabled={submitting} />
           </Form.Item>
 

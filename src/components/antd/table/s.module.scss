@@ -112,10 +112,10 @@
       }
 
       > a {
-        color: #83767F;
+        color: #83767f;
 
         [data-theme='dark'] & {
-          color: #B3B1CF;
+          color: #b3b1cf;
         }
       }
     }
@@ -123,12 +123,12 @@
     @media (max-width: 768px) {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: center;
 
       :global(.ant-pagination-total-text) {
         flex: 1 1 100%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         margin: 0 0 8px;
       }
     }

@@ -1,13 +1,30 @@
 .stakeBlock {
   background: var(--theme-secondary-block);
   border-radius: 4px;
+
+  @media (max-width: 767px) {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    > div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
 }
+
+//.select {
+//  mt
+//}
 
 .confirmModalHeader {
   padding: 24px 32px;
   margin-bottom: 32px;
   background: var(--theme-secondary-block);
+
   p {
     font-size: 16px;
+    color: var(--theme-primary-color);
   }
 }

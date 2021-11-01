@@ -68,7 +68,7 @@ const PoolStatistics: FC = () => {
 
   return (
     <div className={cn(s.component, 'flex flow-row')}>
-      <div className="card mb-24">
+      <div className="card mb-24 sm-mb-16">
         <div className="card-header">
           <Text type="p1" weight="500" color="primary">
             My rewards
