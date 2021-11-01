@@ -267,8 +267,8 @@
           d="M18.223 5.777L14.401 9.6M16.676 7.323l-10.899 10.9M18.223 18.223L5.778 5.777"/>
   </symbol>
   <!-- DROPDOWN ARROW -->
-  <symbol id="icon__dropdown-arrow" viewBox="0 0 12 12" fill="none">
-    <path d="M9.00073 4.50025L6.00085 7.50012L3.00098 4.5" stroke="currentColor" />
+  <symbol id="icon__dropdown-arrow" viewBox="0 0 24 24" fill="none">
+    <path d="M11.2947 14.2929L7.70896 10.7071C7.079 10.0771 7.52516 9 8.41607 9H15.5876C16.4785 9 16.9247 10.0771 16.2947 10.7071L12.709 14.2929C12.3184 14.6834 11.6853 14.6834 11.2947 14.2929Z" fill="#B5B5B5"/>
   </symbol>
   <!-- THEME SWITCHER MOON -->
   <symbol id="icon__theme-switcher-moon" viewBox="0 0 24 24" fill="none">

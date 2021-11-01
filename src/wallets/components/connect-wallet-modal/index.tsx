@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 import Button from 'components/antd/button';
 import Modal, { ModalProps } from 'components/antd/modal';
@@ -67,7 +68,7 @@ const ConnectWalletModal: React.FC<ConnectWalletModalProps> = props => {
           </Text>
         </Grid>
 
-        <Grid gap={24} colsTemplate="repeat(auto-fit, minmax(120px, 240px))">
+        <Grid gap={24} colsTemplate={!isMobile ? 'repeat(auto-fit, minmax(120px, 240px))' : ''}>
           {WalletConnectors.map(connector => (
             <Button
               key={connector.id}

@@ -76,8 +76,8 @@ const LayoutHeader: React.FC = () => {
       <Link to="/">
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
-      {/*<div className={s.titleDelimiter} />*/}
-      <h1 className={s.title} />
+      <div className={s.titleDelimiter} />
+      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>
 
       <nav className={s.nav}>
         <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>

@@ -51,9 +51,9 @@ const PoolHeader: FC = () => {
           <Text type="p1" weight="500" color="primary" className="mb-4">
             {poolMeta.label}
           </Text>
-          {/*<Text type="small" weight="semibold" color="primary">*/}
-          {/*  Epoch {poolMeta.contract.lastActiveEpoch ?? '-'} / {poolMeta.contract.totalEpochs ?? '-'}*/}
-          {/*</Text>*/}
+          <Text type="small" weight="semibold" color="primary">
+            Epoch {poolMeta.contract.lastActiveEpoch ?? '-'}/{poolMeta.contract.totalEpochs ?? '-'}
+          </Text>
         </div>
       </div>
       <div className={cn('card p-24 flex col-gap-48 mb-24', s.card)}>

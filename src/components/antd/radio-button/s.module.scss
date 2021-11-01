@@ -8,7 +8,7 @@
   padding: 24px;
   background: var(--theme-border-color); // border
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
   position: relative;
   color: var(--theme-primary-color);
 
@@ -22,7 +22,7 @@
     right: 1px;
     bottom: 1px;
     z-index: 0;
-    border-radius: 12px;
+    border-radius: 4px;
   }
   &::before {
     background: var(--theme-card-color); //bg dark stable
