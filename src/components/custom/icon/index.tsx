@@ -33,6 +33,9 @@ import fdIconDImg from 'resources/png/fd_icon.png';
 import txProgressImg from 'resources/png/tx-progress.png';
 import txFailureImg from 'resources/png/tx-failure.png';
 import txSuccessImg from 'resources/png/tx-success.png';
+import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
+import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
+import plugBgImg from 'resources/png/plug-bg.png';
 
 import s from './s.module.scss';
 
@@ -197,6 +200,9 @@ export type IconNames =
   | 'png/tx-progress'
   | 'png/tx-success'
   | 'png/tx-failure'
+  | 'png/plug-bg-mobile'
+  | 'png/plug-bg-tablet'
+  | 'png/plug-bg'
   | 'static/add-token';
 
 export type IconProps = {
@@ -210,6 +216,7 @@ export type IconProps = {
   src?: string;
 };
 
+
 const Icon: React.FC<IconProps> = props => {
   const { name, width = 24, height = 24, rotate, color, className, style, src, ...rest } = props;
 
@@ -219,6 +226,12 @@ const Icon: React.FC<IconProps> = props => {
   if (isPng) {
     const getSrc = () => {
       switch (name) {
+        case 'png/plug-bg-mobile':
+          return plugBgMobileImg;
+        case 'png/plug-bg-tablet':
+          return plugBgTabletImg;
+        case 'png/plug-bg':
+          return plugBgImg;
         case 'png/tx-progress':
           return txProgressImg;
         case 'png/tx-success':
