@@ -20,22 +20,22 @@ const LayoutView: React.FC = () => {
     <div className={s.layout}>
       <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <WarningProvider>
-          {/*<LayoutHeader />*/}
+          <LayoutHeader />
           <main className={s.main}>
             <ErrorBoundary>
               <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
                 <Switch>
-                  <Route path="/" component={PlugView} />
+                  {/*<Route path="/" component={PlugView} />*/}
                   <Route path="/liquidity-mining" component={YieldFarmingView} />
                   <Route path="/governance/:vt(\w+)" component={GovernanceView} />
                   <Route path="/governance" component={GovernanceView} />
-                  {/*<Redirect from="/" to="/liquidity-mining" />*/}
+                  <Redirect from="/" to="/liquidity-mining" />
                 </Switch>
               </Suspense>
             </ErrorBoundary>
           </main>
-          {/*<LayoutFooter />*/}
-          {/*<ThemeSwitcher />*/}
+          <LayoutFooter />
+          <ThemeSwitcher />
         </WarningProvider>
       </div>
     </div>
