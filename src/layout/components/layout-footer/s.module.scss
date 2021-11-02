@@ -270,7 +270,6 @@
     .copyrightLink {
       color: var(--theme-icon-color);
       font-size: 12px;
-      font-weight: 500;
       line-height: 17px;
     }
 
@@ -310,7 +309,7 @@
     .dropdownLink {
       display: flex;
       align-items: center;
-      color: var(--theme-primary-color);
+      color: var(--theme-secondary-color);
       padding: 16px;
       font-size: 14px;
       font-style: normal;
@@ -318,7 +317,11 @@
       line-height: 20px;
       border-radius: 6px;
 
-      @media (max-width: 768px) {
+      &_active {
+        color: var(--theme-primary-color);
+      }
+
+        @media (max-width: 768px) {
         padding: 12px 0;
       }
 

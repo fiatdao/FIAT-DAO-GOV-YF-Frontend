@@ -39,9 +39,9 @@ const YieldFarmingView: React.FC = () => {
     <YFPoolsProvider>
       <Suspense fallback={<AntdSpin />}>
         <Switch>
-          <Route path="/yield-farming" exact component={PoolsView} />
-          <Route path="/yield-farming/:poolId" exact component={PoolView} />
-          <Redirect to="/yield-farming" />
+          <Route path="/liquidity-mining" exact component={PoolsView} />
+          <Route path="/liquidity-mining/:poolId" exact component={PoolView} />
+          <Redirect to="/liquidity-mining" />
         </Switch>
       </Suspense>
     </YFPoolsProvider>

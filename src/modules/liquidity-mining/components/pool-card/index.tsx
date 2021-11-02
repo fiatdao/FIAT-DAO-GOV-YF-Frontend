@@ -15,7 +15,7 @@ import { Hint, Text } from 'components/custom/typography';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
-import { YFPoolID, useYFPools } from 'modules/yield-farming/providers/pools-provider';
+import { YFPoolID, useYFPools } from 'modules/liquidity-mining/providers/pools-provider';
 import { useWallet } from 'wallets/wallet';
 
 import s from './s.module.scss';
@@ -54,7 +54,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
       : undefined;
 
   function handleStaking() {
-    history.push(`/yield-farming/${poolId}`);
+    history.push(`/liquidity-mining/${poolId}`);
   }
 
   return (
@@ -64,10 +64,10 @@ const PoolCard: React.FC<PoolCardProps> = props => {
           icons={poolMeta?.icons.map(icon => <Icon key={icon} name={icon as IconNames} width={40} height={40} />) ?? []}
         />
         <div className={s.cardTitleTexts}>
-          <Text type="p1" weight="semibold" color="primary" ellipsis>
+          <Text type="p1" weight="500" color="primary" ellipsis>
             {poolMeta?.label ?? '-'}
           </Text>
-          <Text type="lb2" weight="semibold" color="primary" ellipsis>
+          <Text type="lb2" weight="500" color="primary" ellipsis>
             EPOCH {lastActiveEpoch ?? '-'}/{totalEpochs ?? '-'}
           </Text>
         </div>
@@ -80,34 +80,34 @@ const PoolCard: React.FC<PoolCardProps> = props => {
       {!isEnded && isPoolAvailable && (
         <>
           <div className="card-row card-row-border p-24">
-            <Text type="lb2" weight="semibold" color="secondary">
+            <Text type="lb2" weight="500" color="secondary">
               APR
             </Text>
             <div className="flex flow-col">
-              <Text type="p1" weight="semibold" color="primary">
+              <Text type="p1" weight="500" color="primary">
                 {formatPercent(apr) ?? '-'}
               </Text>
             </div>
           </div>
           <div className="card-row card-row-border p-24">
-            <Text type="lb2" weight="semibold" color="secondary">
+            <Text type="lb2" weight="500" color="secondary">
               Reward
             </Text>
             <div className="flex flow-col align-center">
               <Icon name="png/fiat-dao" width={16} height={16} className={s.fdReward} />
-              <Text type="p1" weight="semibold" color="primary">
+              <Text type="p1" weight="500" color="primary">
                 {formatToken(epochReward) ?? '-'}
               </Text>
             </div>
           </div>
           {walletCtx.isActive && !!lastActiveEpoch && (
             <div className="card-row card-row-border p-24">
-              <Text type="lb2" weight="semibold" color="secondary">
+              <Text type="lb2" weight="500" color="secondary">
                 My Potential Reward
               </Text>
               <div className="flex flow-col align-center">
                 <Icon width={16} height={16} name="png/fiat-dao" className={s.fdReward} />
-                <Text type="p1" weight="semibold" color="primary">
+                <Text type="p1" weight="500" color="primary">
                   {formatToken(potentialReward) ?? '-'}
                 </Text>
               </div>
@@ -128,12 +128,12 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                     balance will differ in most cases.
                   </span>
                 }>
-                <Text type="lb2" weight="semibold" color="secondary">
+                <Text type="lb2" weight="500" color="secondary">
                   Pool Balance
                 </Text>
               </Hint>
 
-              <Text type="p1" weight="semibold" color="primary" className="mb-4">
+              <Text type="p1" weight="500" color="primary" className="mb-4">
                 {formatUSD(poolBalanceInUSD) ?? '-'}
               </Text>
             </div>
@@ -164,11 +164,11 @@ const PoolCard: React.FC<PoolCardProps> = props => {
                 pool balance will differ in most cases.
               </span>
             }>
-            <Text type="lb2" weight="semibold" color="secondary">
+            <Text type="lb2" weight="500" color="secondary">
               My Pool Balance
             </Text>
           </Hint>
-          <Text type="p1" weight="semibold" color="primary">
+          <Text type="p1" weight="500" color="primary">
             {formatUSD(myPoolBalanceInUSD)}
           </Text>
           {!isEnded && isPoolAvailable && !!lastActiveEpoch && (
@@ -204,7 +204,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
       {poolId === YFPoolID.ETH_FDT_SLP && !isPoolAvailable && (
         <div className={s.box}>
           <Grid className="card-row" flow="row" align="start">
-            <Text type="p2" weight="semibold" color="secondary" className="mb-4">
+            <Text type="p2" weight="500" color="secondary" className="mb-4">
               The ${poolMeta?.label} is not available yet. The pool will start shortly after epoch 2 starts.
             </Text>
           </Grid>

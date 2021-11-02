@@ -67,7 +67,7 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
                 {entity.actionType === APIYFPoolActionType.DEPOSIT && 'Deposit'}
                 {entity.actionType === APIYFPoolActionType.WITHDRAW && 'Withdraw'}
               </Text>
-              <Text type="small" wrap={false}>
+              <Text type="small" weight="500" wrap={false}>
                 {knownToken.name}
               </Text>
             </div>
@@ -103,7 +103,7 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
                 decimals: knownToken.decimals,
               }) ?? '-'}
             </Text>
-            <Text type="small" weight="semibold" wrap={false}>
+            <Text type="small" weight="500" wrap={false}>
               {formatUSD(convertTokenInUSD(amount, knownToken.symbol))}
             </Text>
           </>

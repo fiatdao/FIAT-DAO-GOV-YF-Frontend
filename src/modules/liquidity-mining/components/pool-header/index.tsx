@@ -34,7 +34,7 @@ const PoolHeader: FC = () => {
 
   return (
     <>
-      <Link to="/yield-farming" className="flex inline align-center mb-16 sm-mb-8">
+      <Link to="/liquidity-mining" className="flex inline align-center mb-16 sm-mb-8">
         <Icon name="arrow-back" width={18} height={18} className="mr-8" />
         <Text type="p1" weight="500" color="secondary">
           Pools
@@ -71,7 +71,7 @@ const PoolHeader: FC = () => {
           <Text type="small" weight="500" color="secondary" className="mb-8">
             Pool balance
           </Text>
-          <Text type="p1" weight="500" color="primary">
+          <Text type="p1" weight="semibold" color="primary">
             {formatUSD(poolBalance) ?? '-'}
           </Text>
         </div>
@@ -80,7 +80,7 @@ const PoolHeader: FC = () => {
             <Text type="small" weight="500" color="secondary" className="mb-8">
               Effective pool balance
             </Text>
-            <Text type="p1" weight="500" color="primary">
+            <Text type="p1" weight="semibold" color="primary">
               {formatUSD(effectivePoolBalance) ?? '-'}
             </Text>
           </div>
@@ -91,7 +91,7 @@ const PoolHeader: FC = () => {
           </Text>
           <div className="flex align-center">
             <Icon name="png/fiat-dao" width={16} height={16} className="mr-8" />
-            <Text type="p1" weight="500" color="primary">
+            <Text type="p1" weight="semibold" color="primary">
               {formatNumber(poolMeta.contract.epochReward) ?? '-'}
             </Text>
           </div>

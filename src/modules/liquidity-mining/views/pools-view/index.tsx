@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 import { Text } from 'components/custom/typography';
 import DaoCard from 'modules/governance/components/dao-card';
 import DAOProvider from 'modules/governance/components/dao-provider';
-import PoolCard from 'modules/yield-farming/components/pool-card';
+import PoolCard from 'modules/liquidity-mining/components/pool-card';
 import { useWallet } from 'wallets/wallet';
 
 import PoolRewards from '../../components/pool-rewards';

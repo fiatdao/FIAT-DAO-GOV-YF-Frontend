@@ -69,11 +69,11 @@ const PoolRewards: React.FC = () => {
             <Text type="p2" color="secondary">
               Current reward
             </Text>
-            <Grid flow="col" align="center" gap={4} className={s.item1__grid}>
-              <Text type="h3" weight="bold" color="primary">
+            <Grid flow="col" align="center" gap={8} className={s.item1__grid}>
+              <Text type="h3" weight="semibold" color="primary">
                 {formatToken(totalToClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={FDTToken.icon!} width={24} height={24} />
+              <Icon name={FDTToken.icon!} width={27} height={27} />
               {walletCtx.isActive && (
                 <button
                   type="button"
@@ -90,11 +90,11 @@ const PoolRewards: React.FC = () => {
             <Text type="p2" color="secondary">
               {FDTToken.symbol} Balance
             </Text>
-            <Grid flow="col" gap={4} align="center">
-              <Text type="h3" weight="bold" color="primary">
+            <Grid flow="col" gap={8} align="center">
+              <Text type="h3" weight="semibold" color="primary">
                 {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
-              <Icon name={FDTToken.icon!} width={24} height={24} />
+              <Icon name={FDTToken.icon!} width={27} height={27} />
             </Grid>
           </Grid>
           {!!currentEpoch && (
@@ -109,11 +109,11 @@ const PoolRewards: React.FC = () => {
                     </Text>
                   </Hint>
                 </Grid>
-                <Grid flow="col" gap={4} align="center">
-                  <Text type="h3" weight="bold" color="primary">
+                <Grid flow="col" gap={8} align="center">
+                  <Text type="h3" weight="semibold" color="primary">
                     {formatToken(totalPotentialReward) ?? '-'}
                   </Text>
-                  <Icon name={FDTToken.icon!} width={24} height={24} />
+                  <Icon name={FDTToken.icon!} width={27} height={27} />
                 </Grid>
               </Grid>
             </>

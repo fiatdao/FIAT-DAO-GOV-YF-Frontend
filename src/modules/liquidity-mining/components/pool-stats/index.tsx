@@ -72,7 +72,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             text={
               <Text type="p2">
                 This number shows the {FDTToken.symbol} token rewards distributed so far out of the total of{' '}
-                {formatToken(yfTotalSupply) ?? '-'} that are going to be available for Yield Farming.
+                {formatToken(yfTotalSupply) ?? '-'} that are going to be available for Liquidity Mining.
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="primary" className={s.label}>

@@ -33,7 +33,7 @@ const PoolViewInner: FC = () => {
   }, [poolMeta?.contract.isPoolEnded]);
 
   if (!poolMeta || !poolMeta.contract.isPoolAvailable) {
-    return <Redirect to="/yield-farming" />;
+    return <Redirect to="/liquidity-mining" />;
   }
 
   const isInitialized = poolMeta.contract.isPoolEnded !== undefined;

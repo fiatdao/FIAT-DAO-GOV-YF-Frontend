@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import cn from 'classnames';
 
 import Button from 'components/antd/button';
@@ -34,6 +34,8 @@ const LayoutHeader: React.FC = () => {
   const [popper4visible, setPopper4visible] = useState<boolean>(false);
   const wallet = useWallet();
   const { warns } = useWarning();
+  const { location: { pathname } } = useHistory();
+
 
   const { styles, attributes, forceUpdate, state } = usePopper(referenceElement, popperElement, {
     placement: 'bottom',
@@ -77,13 +79,13 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Yield Farming'}</h1>
+      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Liquidity Mining'}</h1>
 
       <nav className={s.nav}>
-        <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+        <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
           <span>Home</span>
-        </Link>
-        <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+        </a>
+        <Link to="/liquidity-mining" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'liquidity-mining' })} onClick={() => setNavOpen(false)}>
           <span>Liquidity mining</span>
         </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
@@ -139,8 +141,8 @@ const LayoutHeader: React.FC = () => {
         {/*        <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />*/}
         {/*        <span>Governance</span>*/}
         {/*      </Link>*/}
-        {/*      <Link to="/yield-farming" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
-        {/*        <Icon name="yield-farming" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*      <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="liquidity-mining" width={20} height={20} className={s.dropdownIcon} />*/}
         {/*        <span>Yield farming</span>*/}
         {/*      </Link>*/}
         {/*    </div>*/}
