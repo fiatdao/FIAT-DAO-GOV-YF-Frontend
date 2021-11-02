@@ -180,6 +180,19 @@ body.mobile-menu-open {
   --theme-icon-hover-color: #fff;
   --theme-icon-hover-gradient: linear-gradient(135deg, #dd3dcb 15%, #ef9c92 85%);
 
+  --gradient-green: linear-gradient(135deg, #2dd867 15.57%, #27ddc3 84.88%); // rgb(188, 235, 0) rgb(0, 234, 234)
+  --gradient-green-opacity: linear-gradient(135deg, rgba(188, 235, 0, 0.16) 15.57%, rgba(0, 234, 234, 0.16) 84.88%);
+  --gradient-green-safe: #52cd74;
+  --gradient-red: linear-gradient(135deg, #de4b4b 0%, #f15e1f 100%); // rgb(255, 116, 57) rgb(255, 57, 188)
+  --gradient-red-opacity: linear-gradient(135deg, rgba(255, 116, 57, 0.16) 15.57%, rgba(255, 57, 188, 0.16) 84.88%);
+  --gradient-red-safe: #e36666;
+  --gradient-blue: linear-gradient(135deg, #914fe6 0%, #316cdf 100%); // rgb(145, 79, 230) rgb(49, 108, 223)
+  --gradient-blue-opacity: linear-gradient(135deg, rgba(145, 79, 230, 0.16) 15.57%, rgba(49, 108, 223, 0.16) 84.88%);
+  --gradient-blue-safe: #316cdf;
+  --gradient-pink-safe: #ff5388;
+  --gradient-pink: linear-gradient(90deg, #ff7474 0%, #ff4c8c 100%);
+  --gradient-secondary-pink: linear-gradient(90deg, #ff9574 0%, #ff4c8c 100%);
+
   --theme-primary-color: #fff;
   --theme-secondary-color: #b5b5b5;
   --theme-default-color: #b5b5b5;

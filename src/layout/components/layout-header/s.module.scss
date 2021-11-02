@@ -140,7 +140,7 @@
 .nav {
   display: flex;
   border-right: 1px solid var(--theme-border-color);
-  margin-right: 32px;
+  margin-right: 25px;
   min-height: 28px;
   padding-right: 16px;
 
@@ -179,13 +179,17 @@
 .dropdownLink {
   display: flex;
   align-items: center;
-  color: var(--theme-primary-color);
+  color: var(--theme-secondary-color);
   margin: 16px;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
   border-radius: 6px;
+
+  &_active {
+    color: var(--theme-primary-color);
+  }
 
   @media (max-width: 767px) {
     font-family: Times New Roman, sans-serif;
@@ -257,7 +261,7 @@
 }
 
 .addTokenWrapper {
-  margin-right: 32px;
+  margin-right: 25px;
 
   @media (max-width: 767px) {
     margin-right: 16px;
@@ -274,7 +278,7 @@
   background: transparent;
   border-right: 1px solid var(--theme-border-color);
   height: 50px;
-  padding: 0 32px 0 0;
+  padding: 0 25px 0 0;
 
   @media (max-width: 767px) {
     border: 0;

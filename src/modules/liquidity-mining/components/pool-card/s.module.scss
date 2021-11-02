@@ -1,0 +1,38 @@
+.cardTitleContainer {
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  gap: 16px;
+  min-height: 88px;
+
+  @media (max-width: 480px) {
+    gap: 24px 8px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    min-height: inherit;
+  }
+}
+
+.cardTitleTexts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.box {
+  margin: 24px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+
+  [data-theme='dark'] & {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+}
+
+.fdReward {
+  margin-right: 2px;
+}
+

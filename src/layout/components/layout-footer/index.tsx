@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import cn from 'classnames';
 
 import Icon from 'components/custom/icon';
@@ -13,6 +13,8 @@ const LayoutFooter: React.FC = () => {
   const { isDarkTheme } = useGeneral();
   const isMobile = useMediaQuery(992);
 
+  const { location: { pathname } } = useHistory();
+
   const getYear = () => {
     return new Date().getFullYear();
   }
@@ -23,12 +25,16 @@ const LayoutFooter: React.FC = () => {
         <div className={s.row}>
           {!isMobile ? (
               <>
-                <div><Icon name={isDarkTheme ? 'png/logo-dark-text' : 'png/logo-light-text'} width="auto" className={s.logo} /></div>
-                <div className={s.nav}>
-                  <Link to="/" className={s.dropdownLink}>
-                    <span>Home</span>
+                <div>
+                  <Link to="/" >
+                    <Icon name={isDarkTheme ? 'png/logo-dark-text' : 'png/logo-light-text'} width="auto" className={s.logo} />
                   </Link>
-                  <Link to="/liquidity-mining" className={s.dropdownLink}>
+                </div>
+                <div className={s.nav}>
+                  <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
+                    <span>Home</span>
+                  </a>
+                  <Link to="/liquidity-mining"  className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'liquidity-mining'  })}>
                     <span>Liquidity mining</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
@@ -47,9 +53,9 @@ const LayoutFooter: React.FC = () => {
             {isMobile && (
               <>
                 <div className={s.nav}>
-                  <Link to="/" className={s.dropdownLink}>
+                  <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
                     <span>Home</span>
-                  </Link>
+                  </a>
                   <Link to="/liquidity-mining" className={s.dropdownLink}>
                     <span>Liquidity mining</span>
                   </Link>
@@ -57,7 +63,9 @@ const LayoutFooter: React.FC = () => {
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
                 </div>
-                <Icon name={isDarkTheme ? 'png/logo-dark-text' : 'png/logo-light-text'} width="auto" className={s.logo} />
+                <Link to="/" >
+                  <Icon name={isDarkTheme ? 'png/logo-dark-text' : 'png/logo-light-text'} width="auto" className={s.logo} />
+                </Link>
               </>
             )}
             <div className={s.copyrightLink}>fiatdao.com © {getYear()}. Open-sourced.</div>

@@ -1,0 +1,12 @@
+.poolCards {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(336px, 1fr));
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-bottom: 16px;
+  }
+}
