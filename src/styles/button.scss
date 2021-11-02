@@ -39,8 +39,8 @@
     cursor: not-allowed;
 
     [data-theme='dark'] & {
-      background: rgba(255, 255, 255, 0.1);
-      color: rgba(255, 255, 255, 0.3);
+      background: #202020;
+      color: #505050;
     }
   }
 }
@@ -124,7 +124,7 @@
     bottom: 1px;
     right: 1px;
     border-radius: 4px;
-    background-color: var(--theme-card-color);
+    background-color: var(--theme-amount-color);
     z-index: 0;
   }
 
@@ -151,12 +151,28 @@
   &:disabled,
   &[disabled] {
     cursor: not-allowed;
+    color: #505050;
 
     &::before {
       background: rgba(0, 0, 0, 0.2);
 
       [data-theme='dark'] & {
         background: rgba(255, 255, 255, 0.2);
+      }
+    }
+    &:hover {
+      &::after {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      [data-theme='dark'] & {
+        &::after {
+          background: rgba(0, 0, 0, 0.2);
+        }
+      }
+
+      span {
+        opacity: 0.8;
       }
     }
 

@@ -43,7 +43,7 @@ const PoolHeader: FC = () => {
       <div className="flex align-center mb-40 sm-mb-24">
         <IconsSet
           icons={poolMeta.icons.map(icon => (
-            <Icon key={icon} name={icon as IconNames} />
+            <Icon key={icon} name={icon as IconNames} width={40} height={40} />
           ))}
           className="mr-16"
         />
