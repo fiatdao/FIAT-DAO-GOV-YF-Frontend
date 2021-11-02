@@ -18,6 +18,7 @@ import ScrollToTop from "./top-scroll";
 import { checkFlexGapSupport } from './checkFlexGap';
 import * as sw from './serviceWorker';
 
+
 const App: React.FC = () => {
   return (
     <ErrorBoundary>
