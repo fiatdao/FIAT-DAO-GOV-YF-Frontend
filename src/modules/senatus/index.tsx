@@ -104,6 +104,7 @@ const SenatusViewInternal: React.FC = () => {
           }
         />
       </Tabs>
+
       <div className="content-container-fix content-container">
         <Switch>
           <Route path="/senatus/overview" exact component={OverviewView} />
