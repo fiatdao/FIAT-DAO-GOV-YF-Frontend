@@ -4,7 +4,7 @@
   --input-shadow: none;
   --input-shadow-focused: 0px 0px 0px 3px rgba(255, 76, 140, 0.15);
   --input-border: 1px solid #e3e4e6;
-  --input-border-focused: 1px solid transparent;
+  --input-border-focused: 1px solid var(--gradient-pink-safe);
   --input-border-disabled: 1px solid #e3e4e6;
   --input-bg: #fff;
   --input-bg-disabled: #f8f8f9;

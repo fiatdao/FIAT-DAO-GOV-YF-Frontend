@@ -12,8 +12,8 @@ import ThemeSwitcher from './components/theme-switcher';
 import s from './s.module.scss';
 
 const PlugView = lazy(() => import('modules/plug'));
-const YieldFarmingView = lazy(() => import('modules/liquidity-mining'));
-const GovernanceView = lazy(() => import('modules/governance'));
+const RewardsView = lazy(() => import('modules/rewards'));
+const SenatusView = lazy(() => import('modules/senatus'));
 
 const LayoutView: React.FC = () => {
   return (
@@ -26,9 +26,9 @@ const LayoutView: React.FC = () => {
               <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
                 <Switch>
                   {/*<Route path="/" component={PlugView} />*/}
-                  <Route path="/liquidity-mining" component={YieldFarmingView} />
-                  <Route path="/governance/:vt(\w+)" component={GovernanceView} />
-                  <Route path="/governance" component={GovernanceView} />
+                  <Route path="/rewards" component={RewardsView} />
+                  <Route path="/senatus/:vt(\w+)" component={SenatusView} />
+                  <Route path="/senatus" component={SenatusView} />
                   <Redirect from="/" to="/liquidity-mining" />
                 </Switch>
               </Suspense>
