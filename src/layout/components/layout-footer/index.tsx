@@ -34,8 +34,8 @@ const LayoutFooter: React.FC = () => {
                   <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
                     <span>Home</span>
                   </a>
-                  <Link to="/liquidity-mining"  className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'liquidity-mining'  })}>
-                    <span>Liquidity mining</span>
+                  <Link to="/rewards"  className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards'  })}>
+                    <span>Rewards</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}
@@ -56,8 +56,8 @@ const LayoutFooter: React.FC = () => {
                   <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
                     <span>Home</span>
                   </a>
-                  <Link to="/liquidity-mining" className={s.dropdownLink}>
-                    <span>Liquidity mining</span>
+                  <Link to="/rewards" className={s.dropdownLink}>
+                    <span>Rewards</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}

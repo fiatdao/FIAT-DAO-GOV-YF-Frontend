@@ -17,7 +17,7 @@ import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
 import { KnownTokens, convertTokenInUSD, useKnownTokens, FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
-import { YfPoolContract } from 'modules/liquidity-mining/contracts/yfPool';
+import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
 
 import { useYFPool } from '../../providers/pool-provider';
 import { useYFPools } from '../../providers/pools-provider';

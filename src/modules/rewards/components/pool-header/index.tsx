@@ -34,7 +34,7 @@ const PoolHeader: FC = () => {
 
   return (
     <>
-      <Link to="/liquidity-mining" className="flex inline align-center mb-16 sm-mb-8">
+      <Link to="/rewards" className="flex inline align-center mb-16 sm-mb-8">
         <Icon name="arrow-back" width={18} height={18} className="mr-8" />
         <Text type="p1" weight="500" color="secondary">
           Pools

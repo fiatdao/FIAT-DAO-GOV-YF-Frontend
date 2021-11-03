@@ -15,7 +15,7 @@ import { Hint, Text } from 'components/custom/typography';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
-import { YFPoolID, useYFPools } from 'modules/liquidity-mining/providers/pools-provider';
+import { YFPoolID, useYFPools } from 'modules/rewards/providers/pools-provider';
 import { useWallet } from 'wallets/wallet';
 
 import s from './s.module.scss';
@@ -54,7 +54,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
       : undefined;
 
   function handleStaking() {
-    history.push(`/liquidity-mining/${poolId}`);
+    history.push(`/rewards/${poolId}`);
   }
 
   return (

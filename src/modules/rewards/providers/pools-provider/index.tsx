@@ -18,8 +18,8 @@ import {
 } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import { useReload } from 'hooks/useReload';
-import { YfPoolContract } from 'modules/liquidity-mining/contracts/yfPool';
-import { YfStakingContract } from 'modules/liquidity-mining/contracts/yfStaking';
+import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
+import { YfStakingContract } from 'modules/rewards/contracts/yfStaking';
 import { useWallet } from 'wallets/wallet';
 
 export enum YFPoolID {

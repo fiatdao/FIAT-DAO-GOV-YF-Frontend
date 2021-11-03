@@ -106,8 +106,8 @@ const LayoutFooter: React.FC = () => {
               <Link to="/governance" className={s.link}>
                 Governance
               </Link>
-              <Link to="/liquidity-mining" className={s.link}>
-                Liquidity Mining
+              <Link to="/rewards" className={s.link}>
+                Rewards
               </Link>
             </nav>
           </div>

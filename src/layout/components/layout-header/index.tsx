@@ -79,14 +79,14 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Liquidity Mining'}</h1>
+      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Rewards'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
-        <Link to="/liquidity-mining" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'liquidity-mining' })} onClick={() => setNavOpen(false)}>
-          <span>Liquidity mining</span>
+        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
+          <span>Rewards</span>
         </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
@@ -141,8 +141,8 @@ const LayoutHeader: React.FC = () => {
         {/*        <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />*/}
         {/*        <span>Governance</span>*/}
         {/*      </Link>*/}
-        {/*      <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
-        {/*        <Icon name="liquidity-mining" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*      <Link to="/rewards" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="rewards" width={20} height={20} className={s.dropdownIcon} />*/}
         {/*        <span>Yield farming</span>*/}
         {/*      </Link>*/}
         {/*    </div>*/}
@@ -190,8 +190,8 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Home</span>
                   </Link>
-                  <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>Liquidity mining</span>
+                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Rewards</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
