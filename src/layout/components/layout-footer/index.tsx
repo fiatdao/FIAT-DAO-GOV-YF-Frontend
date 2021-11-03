@@ -68,7 +68,11 @@ const LayoutFooter: React.FC = () => {
                 </Link>
               </>
             )}
-            <div className={s.copyrightLink}>fiatdao.com © {getYear()}. Open-sourced.</div>
+            <div className={s.copyrightLink}>
+              <a href='https://fiatdao.com/' target="_blank" rel="noopener">
+              <span>fiatdao.com </span>
+            </a>
+              © {getYear()}. Open-sourced.</div>
             {!isMobile && (
             <div className={s.copyrightLinks}>
                 <Socials />

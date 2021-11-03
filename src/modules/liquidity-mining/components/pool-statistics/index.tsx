@@ -76,12 +76,12 @@ const PoolStatistics: FC = () => {
         </div>
         <div className="p-24">
           <div className="flex align-center justify-space-between mb-24">
-            <Text type="small" weight="500" color="secondary">
+            <Text type="small" weight="semibold" color="secondary">
               {FDTToken.symbol} balance
             </Text>
             <div className="flex align-center">
               <Icon width={16} height={16} name={FDTToken.icon!} className="mr-8" />
-              <Text type="p1" weight="500" color="primary">
+              <Text type="p1" weight="semibold" color="primary">
                 {formatToken(fdtContract.balance?.unscaleBy(FDTToken.decimals)) ?? '-'}
               </Text>
             </div>
@@ -93,7 +93,7 @@ const PoolStatistics: FC = () => {
               </Text>
               <div className="flex align-center">
                 <Icon width={16} height={16}  name={FDTToken.icon!}  className="mr-8" />
-                <Text type="p1" weight="500" color="primary">
+                <Text type="p1" weight="semibold" color="primary">
                   {formatToken(poolMeta.contract.potentialReward) ?? '-'}
                 </Text>
               </div>
@@ -112,7 +112,7 @@ const PoolStatistics: FC = () => {
                   }>
                   <Text
                     type="h2"
-                    weight="500"
+                    weight="semibold"
                     color="primary"
                     className="mr-8 text-ellipsis"
                     style={{ maxWidth: '120px' }}>
@@ -176,7 +176,7 @@ const PoolStatistics: FC = () => {
                     ),
                   ) ?? '-'
                 }>
-                <Text type="p1" weight="500" color="primary">
+                <Text type="p1" weight="semibold" color="primary">
                   {formatToken(selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken?.decimals), {
                     decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                   }) ?? '-'}
@@ -198,7 +198,7 @@ const PoolStatistics: FC = () => {
                       ),
                     ) ?? '-'
                   }>
-                  <Text type="p1" weight="500" color="primary">
+                  <Text type="p1" weight="semibold" color="primary">
                     {formatToken(selectedStakedToken?.currentEpochUserBalance?.unscaleBy(activeToken?.decimals), {
                       decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                     }) ?? '-'}
@@ -217,7 +217,7 @@ const PoolStatistics: FC = () => {
                     convertTokenInUSD(activeContract.balance?.unscaleBy(activeToken?.decimals), activeToken?.symbol!),
                   ) ?? '-'
                 }>
-                <Text type="p1" weight="500" color="primary">
+                <Text type="p1" weight="semibold" color="primary">
                   {formatToken(activeContract.balance?.unscaleBy(activeToken?.decimals), {
                     decimals: (activeToken?.decimals || 12) >= 6 ? 6 : activeToken?.decimals,
                   }) ?? '-'}

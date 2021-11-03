@@ -96,7 +96,7 @@ const PoolUnstake: FC = () => {
   return (
     <>
       <div className={cn('flexbox-list p-16', s.stakeBlock)}>
-        <div className="flex flow-row mr-16">
+        <div className="flex flow-row mr-16 sm-mr-0">
           <Text type="small" weight="500" color="secondary" className="mb-8">
             Staked balance
           </Text>

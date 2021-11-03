@@ -271,6 +271,9 @@
       color: var(--theme-icon-color);
       font-size: 12px;
       line-height: 17px;
+      a {
+        color: var(--theme-icon-color);
+      }
     }
 
     a.copyrightLink:hover {

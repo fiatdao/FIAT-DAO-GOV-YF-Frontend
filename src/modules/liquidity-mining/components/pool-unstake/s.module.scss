@@ -1,4 +1,14 @@
 .stakeBlock {
   background: var(--theme-body-color);
   border-radius: 4px;
+  @media (max-width: 767px) {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    > div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
 }

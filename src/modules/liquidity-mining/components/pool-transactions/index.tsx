@@ -134,7 +134,7 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
               {shortenAddr(entity.transactionHash)}
             </Text>
           </ExternalLink>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             {format(entity.blockTimestamp * 1_000, 'MM.dd.yyyy HH:mm')}
           </Text>
         </>

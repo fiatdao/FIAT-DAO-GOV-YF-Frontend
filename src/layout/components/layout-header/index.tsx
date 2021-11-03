@@ -166,7 +166,8 @@ const LayoutHeader: React.FC = () => {
       )}
       <ConnectedWallet />
       <Button type="link" className={s.burger} onClick={() => setNavOpen(prevState => !prevState)}>
-        <Icon name={navOpen ? 'burger-close' : 'burger'} style={{ color: 'var(--theme-primary-color)' }} />
+        {navOpen && <Icon name="burger-close" width={15} height={15} style={{ color: 'var(--theme-primary-color)' }} />}
+        {!navOpen && <Icon name="burger" style={{ color: 'var(--theme-primary-color)' }} />}
       </Button>
       {navOpen &&
         ReactDOM.createPortal(
