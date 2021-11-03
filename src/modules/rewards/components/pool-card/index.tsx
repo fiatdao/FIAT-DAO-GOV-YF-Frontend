@@ -188,7 +188,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
               now disabled, but you can still withdraw your tokens and collect any unclaimed rewards.
             </Text>
             {poolMeta?.tokens.some(tk => tk === FDTToken) && (
-              <Link to="/governance" className="link-gradient">
+              <Link to="/senatus" className="link-gradient">
                 <Text
                   type="p2"
                   weight="bold"

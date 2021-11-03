@@ -52,7 +52,7 @@ const LayoutHeader: React.FC = () => {
     }
   }, [window.innerWidth]);
 
-  const isGovernancePage = useRouteMatch('/governance');
+  const isSenatusPage = useRouteMatch('/senatus');
 
   async function handleAddProjectToken() {
     if (wallet.connector?.id === 'metamask') {
@@ -79,7 +79,7 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Rewards'}</h1>
+      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : 'Rewards'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
@@ -137,9 +137,9 @@ const LayoutHeader: React.FC = () => {
         {/*  onVisibleChange={setPopper3visible}*/}
         {/*  content={*/}
         {/*    <div className={cn('card', s.dropdown)}>*/}
-        {/*      <Link to="/governance" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
-        {/*        <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />*/}
-        {/*        <span>Governance</span>*/}
+        {/*      <Link to="/senatus" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="senatus" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Senatus</span>*/}
         {/*      </Link>*/}
         {/*      <Link to="/rewards" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
         {/*        <Icon name="rewards" width={20} height={20} className={s.dropdownIcon} />*/}

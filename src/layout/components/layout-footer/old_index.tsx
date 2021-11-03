@@ -103,8 +103,8 @@ const LayoutFooter: React.FC = () => {
               <Text type="p1" color="primary" font="secondary" className={s.navTitle}>
                 DAO
               </Text>
-              <Link to="/governance" className={s.link}>
-                Governance
+              <Link to="/senatus" className={s.link}>
+                Senatus
               </Link>
               <Link to="/rewards" className={s.link}>
                 Rewards

@@ -10,7 +10,7 @@ import YFPoolsProvider from './providers/pools-provider';
 const PoolsView = lazy(() => import('./views/pools-view'));
 const PoolView = lazy(() => import('./views/pool-view'));
 
-const YieldFarmingView: React.FC = () => {
+const RewardsView: React.FC = () => {
   const warning = useWarning();
 
   React.useEffect(() => {
@@ -48,4 +48,4 @@ const YieldFarmingView: React.FC = () => {
   );
 };
 
-export default YieldFarmingView;
+export default RewardsView;

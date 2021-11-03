@@ -172,7 +172,7 @@ const PoolStake: FC = () => {
                       <Text type="p2" weight="semibold" color="blue">
                         You can still deposit {activeToken.symbol} in the DAO governance to earn interest for your funds.
                       </Text>
-                      <Link to="/governance" className="link-blue">
+                      <Link to="/senatus" className="link-blue">
                         <Text type="p2" weight="bold" style={{ textDecoration: 'underline' }}>
                           Go to governance staking
                         </Text>

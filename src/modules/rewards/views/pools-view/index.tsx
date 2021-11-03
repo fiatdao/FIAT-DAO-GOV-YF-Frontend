@@ -2,8 +2,8 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { Text } from 'components/custom/typography';
-import DaoCard from 'modules/governance/components/dao-card';
-import DAOProvider from 'modules/governance/components/dao-provider';
+import DaoCard from 'modules/senatus/components/dao-card';
+import DAOProvider from 'modules/senatus/components/dao-provider';
 import PoolCard from 'modules/rewards/components/pool-card';
 import { useWallet } from 'wallets/wallet';
 
