@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import BigNumber from 'bignumber.js';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatToken } from 'web3/utils';
+import cn from 'classnames';
 
 import Modal, { ModalProps } from 'components/antd/modal';
 import Spin from 'components/antd/spin';
@@ -27,36 +28,37 @@ const PoolHarvestButton: FC<PoolHarvestButtonProps> = props => {
 
   return (
     <Spin spinning={loading}>
-      <button
-        type="button"
-        className="button-ghost p-24"
-        style={{ width: '100%' }}
-        disabled={loading || !reward?.gt(BigNumber.ZERO)}
-        onClick={onClick}>
+      <div
+        className={cn('p-24', s.block)}
+        style={{ width: '100%' }}>
         <div className="flex flow-row align-start" style={{ width: '100%', zIndex: 1 }}>
-          <div className="flex flow-row align-start mb-24">
+          <div className="flex align-center mb-24">
             <IconsSet
               icons={icons.map(icon => (
                 <Icon key={icon} name={icon as IconNames} width={40} height={40} />
               ))}
-              className="mb-8"
+              className="mr-8"
             />
             <Text type="p1" weight="semibold" color="primary">
               {label}
             </Text>
           </div>
           <div className="flex flow-row align-start">
-            <Text type="lb2" weight="semibold" color="secondary" className="mb-8">
-              Reward
+            <Text type="lb2" weight="500" color="secondary" className="mb-8">
+              Current REWARD
             </Text>
-            <Text type="p1" weight="semibold" color="primary" className="mr-4">
-              {formatToken(reward, {
-                tokenName: FDTToken.symbol,
-              }) ?? '-'}
-            </Text>
+            <div className="flex align-center">
+              <Text type="p1" weight="semibold" color="primary" className="mr-12">
+                {formatToken(reward) ?? '-'}
+              </Text>
+              <Icon className="mr-12" name={FDTToken.icon!} width={24} height={24} />
+              <button type="button" className="button-primary button-small" onClick={onClick} disabled={loading || !reward?.gt(BigNumber.ZERO)}>
+                Claim
+              </button>
+            </div>
           </div>
         </div>
-      </button>
+      </div>
     </Spin>
   );
 };

@@ -6,6 +6,12 @@
   }
 }
 
+.block {
+  border-radius: 4px;
+  border: 1px solid var(--theme-border-color);
+  background-color: var(--theme-amount-color);
+}
+
 .item {
   &__name {
     align-items: start;
