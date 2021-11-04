@@ -118,6 +118,7 @@ const PoolStatistics: FC = () => {
                     style={{ maxWidth: '120px' }}>
                     {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
                       decimals: FDTToken.decimals,
+                      compact: true
                     }) ?? '-'}
                   </Text>
                 </Tooltip>

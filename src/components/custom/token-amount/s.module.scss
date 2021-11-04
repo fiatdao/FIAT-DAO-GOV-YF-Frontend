@@ -16,5 +16,7 @@
 }
 
 .maxBtn {
-  padding: 14px;
+  @media (max-width: 767px) {
+    padding: 14px;
+  }
 }
