@@ -1,5 +1,6 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
+import { isMobile } from 'react-device-detect';
 import cn from 'classnames';
 import { MAX_UINT_256, formatBigValue } from 'web3/utils';
 
@@ -65,14 +66,16 @@ const TokenAmount: React.FC<TokenAmountProps> = props => {
             {typeof tokenIcon === 'string' && <Icon name={tokenIcon as TokenIconNames} width={32} height={32} />}
             {typeof tokenIcon === 'object' && tokenIcon}
             <div className="mr-8" />
-            <Text type="lb1" weight="semibold" color="primary">
-              {name}
-            </Text>
+            {!isMobile && (
+              <Text type="lb1" weight="semibold" color="primary">
+                {name}
+              </Text>
+            )}
           </div>
         }
         addonAfter={
           max !== undefined ? (
-            <button type="button" className="button-ghost" disabled={disabled} onClick={onMaxHandle}>
+            <button type="button" className={cn('button-ghost', s.maxBtn)} disabled={disabled} onClick={onMaxHandle}>
               <span>MAX</span>
             </button>
           ) : null

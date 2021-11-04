@@ -12,30 +12,30 @@ import ThemeSwitcher from './components/theme-switcher';
 import s from './s.module.scss';
 
 const PlugView = lazy(() => import('modules/plug'));
-const YieldFarmingView = lazy(() => import('modules/liquidity-mining'));
-const GovernanceView = lazy(() => import('modules/governance'));
+const RewardsView = lazy(() => import('modules/rewards'));
+const SenatusView = lazy(() => import('modules/senatus'));
 
 const LayoutView: React.FC = () => {
   return (
     <div className={s.layout}>
       <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         <WarningProvider>
-          {/*<LayoutHeader />*/}
+          <LayoutHeader />
           <main className={s.main}>
             <ErrorBoundary>
               <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
                 <Switch>
-                  <Route path="/" component={PlugView} />
-                  <Route path="/liquidity-mining" component={YieldFarmingView} />
-                  <Route path="/governance/:vt(\w+)" component={GovernanceView} />
-                  <Route path="/governance" component={GovernanceView} />
-                  {/*<Redirect from="/" to="/liquidity-mining" />*/}
+                  {/*<Route path="/" component={PlugView} />*/}
+                  <Route path="/rewards" component={RewardsView} />
+                  <Route path="/senatus/:vt(\w+)" component={SenatusView} />
+                  <Route path="/senatus" component={SenatusView} />
+                  <Redirect from="/" to="/rewards" />
                 </Switch>
               </Suspense>
             </ErrorBoundary>
           </main>
-          {/*<LayoutFooter />*/}
-          {/*<ThemeSwitcher />*/}
+          <LayoutFooter />
+          <ThemeSwitcher />
         </WarningProvider>
       </div>
     </div>

@@ -52,7 +52,7 @@ const LayoutHeader: React.FC = () => {
     }
   }, [window.innerWidth]);
 
-  const isGovernancePage = useRouteMatch('/governance');
+  const isSenatusPage = useRouteMatch('/senatus');
 
   async function handleAddProjectToken() {
     if (wallet.connector?.id === 'metamask') {
@@ -79,14 +79,14 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isGovernancePage ? 'Governance' : 'Liquidity Mining'}</h1>
+      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : 'Rewards'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
-        <Link to="/liquidity-mining" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'liquidity-mining' })} onClick={() => setNavOpen(false)}>
-          <span>Liquidity mining</span>
+        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
+          <span>Rewards</span>
         </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
@@ -137,12 +137,12 @@ const LayoutHeader: React.FC = () => {
         {/*  onVisibleChange={setPopper3visible}*/}
         {/*  content={*/}
         {/*    <div className={cn('card', s.dropdown)}>*/}
-        {/*      <Link to="/governance" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
-        {/*        <Icon name="governance" width={20} height={20} className={s.dropdownIcon} />*/}
-        {/*        <span>Governance</span>*/}
+        {/*      <Link to="/senatus" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="senatus" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*        <span>Senatus</span>*/}
         {/*      </Link>*/}
-        {/*      <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
-        {/*        <Icon name="liquidity-mining" width={20} height={20} className={s.dropdownIcon} />*/}
+        {/*      <Link to="/rewards" className={s.dropdownLink} onClick={() => setPopper3visible(false)}>*/}
+        {/*        <Icon name="rewards" width={20} height={20} className={s.dropdownIcon} />*/}
         {/*        <span>Yield farming</span>*/}
         {/*      </Link>*/}
         {/*    </div>*/}
@@ -166,7 +166,8 @@ const LayoutHeader: React.FC = () => {
       )}
       <ConnectedWallet />
       <Button type="link" className={s.burger} onClick={() => setNavOpen(prevState => !prevState)}>
-        <Icon name={navOpen ? 'burger-close' : 'burger'} style={{ color: 'var(--theme-primary-color)' }} />
+        {navOpen && <Icon name="burger-close" width={15} height={15} style={{ color: 'var(--theme-primary-color)' }} />}
+        {!navOpen && <Icon name="burger" style={{ color: 'var(--theme-primary-color)' }} />}
       </Button>
       {navOpen &&
         ReactDOM.createPortal(
@@ -189,8 +190,8 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Home</span>
                   </Link>
-                  <Link to="/liquidity-mining" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>Liquidity mining</span>
+                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Rewards</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
