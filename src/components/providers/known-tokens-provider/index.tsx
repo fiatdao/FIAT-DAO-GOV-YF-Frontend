@@ -110,7 +110,7 @@ export const RGTToken: TokenMeta = {
   name: 'RGT',
   decimals: 18,
   icon: 'png/rgt',
-  coinGeckoId: 'rari-senatus-token',
+  coinGeckoId: 'rari-governance-token',
   contract: new Erc20Contract([], config.tokens.rgt),
 };
 
