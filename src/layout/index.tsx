@@ -29,7 +29,7 @@ const LayoutView: React.FC = () => {
                   <Route path="/rewards" component={RewardsView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />
-                  <Redirect from="/" to="/liquidity-mining" />
+                  <Redirect from="/" to="/rewards" />
                 </Switch>
               </Suspense>
             </ErrorBoundary>
