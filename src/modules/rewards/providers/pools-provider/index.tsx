@@ -121,8 +121,8 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   YFIYfPool,
   RGTYfPool,
   wsOHMYfPool,
-  EthFdtSLPYfPool,
-  sOHMFdtSLPYfPool,
+  // EthFdtSLPYfPool,
+  // sOHMFdtSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {

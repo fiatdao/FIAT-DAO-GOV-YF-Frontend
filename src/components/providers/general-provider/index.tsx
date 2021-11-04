@@ -11,8 +11,7 @@ export type GeneralContextType = {
 
 const GeneralContext = React.createContext<GeneralContextType>({} as any);
 
-const mqlDark = window.matchMedia('(prefers-color-scheme: dark)');
-const defaultTheme = mqlDark.matches ? 'dark' : 'light';
+const defaultTheme = 'dark';
 
 type Props = {
   children: React.ReactNode;

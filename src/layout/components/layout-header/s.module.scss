@@ -27,6 +27,8 @@
 
     @media (max-width: 768px) {
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -251,10 +253,6 @@
   backdrop-filter: blur(10px);
   border-radius: 4px;
   color: #fff;
-
-  @media (max-width: 992px) {
-    border-radius: 0;
-  }
 
   svg {
     color: #fff;
