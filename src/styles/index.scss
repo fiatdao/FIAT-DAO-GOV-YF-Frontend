@@ -75,7 +75,7 @@ body.mobile-menu-open {
   --font-size-sm: 12px;
 
   --theme-body-color: #f8f8f9;
-  --theme-card-color: #fff;
+  --theme-card-color: rgba(255, 255, 255, 0.7);
   --theme-amount-color: #fff;
   --theme-overlay-color: #f8f8f9;
   --theme-mask-color: rgba(0, 0, 0, 0.08);
@@ -170,7 +170,7 @@ body.mobile-menu-open {
 
 [data-theme='dark'] {
   --theme-body-color: #171717;
-  --theme-card-color: linear-gradient(135deg, #252021 0%, #222020 100%);
+  --theme-card-color: rgba(23, 23, 23, 0.7);
   --theme-amount-color: #171717;
   --theme-overlay-color: #171717;
   --theme-mask-color: rgba(32, 37, 41, 0.8);
