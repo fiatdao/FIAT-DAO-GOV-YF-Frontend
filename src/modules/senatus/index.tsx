@@ -76,14 +76,14 @@ const SenatusViewInternal: React.FC = () => {
             </>
           }
         />
-        <Tabs.Tab
-          key="treasury"
-          tab={
-            <>
-              <Icon name="treasury-outlined" /> Treasury
-            </>
-          }
-        />
+        {/*<Tabs.Tab*/}
+        {/*  key="treasury"*/}
+        {/*  tab={*/}
+        {/*    <>*/}
+        {/*      <Icon name="treasury-outlined" /> Treasury*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*/>*/}
         <Tabs.Tab
           key="signal"
           tab={

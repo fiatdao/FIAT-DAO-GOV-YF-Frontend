@@ -94,7 +94,7 @@ const VotingHeader: React.FC = () => {
             </Grid>
           </Grid>
           <Divider type="vertical" />
-          <Grid flow="row" gap={4} className={s.item2}>
+          <Grid gap={4} className={s.item2}>
             <Text type="p2" color="secondary">
               {FDTToken.symbol} Balance
             </Text>
@@ -112,7 +112,7 @@ const VotingHeader: React.FC = () => {
             <Text type="p2" color="secondary">
               Total voting power
             </Text>
-            <div className="flex col-gap-16 align-center" style={{ height: `40px` }}>
+            <div className="flex col-gap-16 align-center">
               <Skeleton loading={votingPower === undefined}>
                 <Text type="h3" weight="bold" color="primary">
                   {formatEntrValue(votingPower) || '-'}
@@ -121,8 +121,7 @@ const VotingHeader: React.FC = () => {
               <button
                 type="button"
                 className="button-primary button-small"
-                onClick={() => setState({ showDetailedView: true })}
-                style={{ marginLeft: 15 }}>
+                onClick={() => setState({ showDetailedView: true })}>
                 Detailed view
               </button>
               {state.showDetailedView && <VotingDetailedModal onCancel={() => setState({ showDetailedView: false })} />}
