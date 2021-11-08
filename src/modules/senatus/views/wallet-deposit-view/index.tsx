@@ -112,7 +112,7 @@ const WalletDepositView: React.FC = () => {
     <div className="card">
       <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
@@ -158,9 +158,7 @@ const WalletDepositView: React.FC = () => {
                 expanded: !prevState.expanded,
               }))
             }>
-            <span>
-              <Icon name="chevron-right" rotate={state.expanded ? 270 : 0} />
-            </span>
+            <Icon name="chevron-right" rotate={state.expanded ? 270 : 0} />
           </button>
         )}
       </Grid>
@@ -177,7 +175,7 @@ const WalletDepositView: React.FC = () => {
               <Grid flow="row" gap={32}>
                 <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                   <TokenAmount
-                    tokenIcon="png/enterdao"
+                    tokenIcon={FDTToken.icon}
                     max={fdtBalance}
                     maximumFractionDigits={FDTToken.decimals}
                     name={FDTToken.symbol}
@@ -198,9 +196,9 @@ const WalletDepositView: React.FC = () => {
                 </Form.Item>
               </Grid>
             </Grid>
-            <Button type="primary" htmlType="submit" loading={state.saving} style={{ justifySelf: 'start' }}>
+            <button type="submit" className="button-primary" disabled={state.saving} style={{ justifySelf: 'start' }}>
               Deposit
-            </Button>
+            </button>
           </Grid>
         </Form>
       )}

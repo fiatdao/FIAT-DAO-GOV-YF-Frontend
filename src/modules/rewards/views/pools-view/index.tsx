@@ -19,7 +19,7 @@ const PoolsView: React.FC = () => {
 
   return (
     <>
-      {!isMobile && walletCtx.isActive && <PoolRewards />}
+      {walletCtx.isActive && <PoolRewards />}
       <div className="content-container-fix content-container">
         <PoolStats className="mb-64 sm-mb-24" />
         <Text type="h1" weight="bold" color="primary" className="mb-16 sm-mb-4" font="secondary">

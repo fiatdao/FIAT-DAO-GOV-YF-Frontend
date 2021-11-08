@@ -82,15 +82,15 @@ const VotingHeader: React.FC = () => {
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/fiat-dao" width={40} height={40} />
-              <Button
-                type="primary"
-                size="small"
+              <Icon name="png/fiat-dao" width={30} height={30}  style={{ marginLeft: 10 }} />
+              <button
+                type="button"
+                className="button-primary button-small"
                 disabled={claimValue?.isZero()}
                 onClick={handleClaim}
-                style={{ marginLeft: 4 }}>
+                style={{ marginLeft: 15 }}>
                 {!state.claiming ? 'Claim' : <Spin spinning />}
-              </Button>
+              </button>
             </Grid>
           </Grid>
           <Divider type="vertical" />
@@ -104,7 +104,7 @@ const VotingHeader: React.FC = () => {
                   {formatEntrValue(fdtBalance)}
                 </Text>
               </Skeleton>
-              <Icon name="png/fiat-dao" src={imgSrc} width={40} height={40} />
+              {/*<Icon name="png/fiat-dao" width={40} height={40} />*/}
             </Grid>
           </Grid>
           <Divider type="vertical" />
@@ -118,12 +118,13 @@ const VotingHeader: React.FC = () => {
                   {formatEntrValue(votingPower) || '-'}
                 </Text>
               </Skeleton>
-              <Button type="light" onClick={() => setState({ showDetailedView: true })}>
-                <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
-                  Detailed view
-                </Text>
-              </Button>
-
+              <button
+                type="button"
+                className="button-primary button-small"
+                onClick={() => setState({ showDetailedView: true })}
+                style={{ marginLeft: 15 }}>
+                Detailed view
+              </button>
               {state.showDetailedView && <VotingDetailedModal onCancel={() => setState({ showDetailedView: false })} />}
             </div>
           </Grid>

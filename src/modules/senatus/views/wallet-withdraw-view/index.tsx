@@ -72,7 +72,7 @@ const WalletWithdrawView: React.FC = () => {
     <div className="card">
       <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
@@ -109,7 +109,7 @@ const WalletWithdrawView: React.FC = () => {
             <Grid flow="row" gap={32}>
               <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                 <TokenAmount
-                  tokenIcon="png/enterdao"
+                  tokenIcon={FDTToken.icon}
                   name={FDTToken.symbol}
                   max={stakedBalance}
                   maximumFractionDigits={FDTToken.decimals}
@@ -130,14 +130,13 @@ const WalletWithdrawView: React.FC = () => {
               </Form.Item>
             </Grid>
           </Grid>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={state.saving}
-            disabled={formDisabled}
+          <button
+            type="submit"
+            className="button-primary"
+            disabled={state.saving || formDisabled}
             style={{ justifySelf: 'start' }}>
             Withdraw
-          </Button>
+          </button>
         </Grid>
       </Form>
     </div>

@@ -135,6 +135,7 @@ body.mobile-menu-open {
   --gradient-blue: linear-gradient(135deg, #914fe6 0%, #316cdf 100%); // rgb(145, 79, 230) rgb(49, 108, 223)
   --gradient-blue-opacity: linear-gradient(135deg, rgba(145, 79, 230, 0.16) 15.57%, rgba(49, 108, 223, 0.16) 84.88%);
   --gradient-blue-safe: #316cdf;
+  --pink-rgba: rgb(255, 83, 136);
   --gradient-pink-safe: #ff5388;
   --gradient-pink: linear-gradient(90deg, #ff7474 0%, #ff4c8c 100%);
   --gradient-secondary-pink: linear-gradient(90deg, #ff9574 0%, #ff4c8c 100%);
@@ -253,7 +254,7 @@ button {
 }
 
 .ant-switch.ant-switch[aria-checked='true'] {
-  background: var(--gradient-green);
+  background: var(--gradient-secondary-pink);
 }
 
 

@@ -87,7 +87,7 @@ const SenatusViewInternal: React.FC = () => {
         <Tabs.Tab
           key="signal"
           tab={
-            <ExternalLink href="https://snapshot.org/#/enterdao.xyz" style={{ color: 'inherit', position: 'relative' }}>
+            <ExternalLink href="" style={{ color: 'inherit', position: 'relative' }}>
               <Grid flow="col" gap={8} align="center">
                 <Icon name="chats-outlined" />
                 <Text type="p1" weight="semibold">
