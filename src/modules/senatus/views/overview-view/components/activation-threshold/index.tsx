@@ -12,6 +12,8 @@ import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { useDAO } from '../../../../components/dao-provider';
 
+import s from './s.module.scss';
+
 export type ActivationThresholdProps = {
   className?: string;
 };
@@ -57,7 +59,7 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
           />
           <Icon name="ribbon-outlined" />
         </Grid>
-        <Grid flow="col" gap={8} align="center">
+        <Grid className={s.col}>
           <Icon name="png/fiat-dao" width={32} height={32} />
           <Text type="p1" weight="bold" color="primary">
             {formatEntrValue(dao.fdtStaked)}

@@ -1,0 +1,28 @@
+.cardHeader {
+  grid-template-columns: 1fr 1fr 1fr 1fr 42px;
+  align-items: start;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+
+    > div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+
+      &.empty {
+        display: none;
+      }
+    }
+  }
+}
+
+.cardCont {
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 64px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
+}

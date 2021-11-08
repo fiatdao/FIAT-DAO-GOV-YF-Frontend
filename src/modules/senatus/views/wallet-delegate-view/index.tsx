@@ -16,6 +16,9 @@ import { useDAO } from '../../components/dao-provider';
 
 import { isValidAddress } from 'utils';
 
+import s from './s.module.scss';
+import cn from 'classnames';
+
 type DelegateFormData = {
   delegateAddress?: string;
   gasPrice?: {
@@ -79,7 +82,7 @@ const WalletDelegateView: React.FC = () => {
 
   return (
     <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="auto" align="start">
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
           <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
@@ -107,7 +110,7 @@ const WalletDelegateView: React.FC = () => {
           </Grid>
         )}
 
-        <div />
+        <div className={s.empty} />
       </Grid>
       <Form
         className="p-24"
@@ -116,7 +119,7 @@ const WalletDelegateView: React.FC = () => {
         validateTrigger={['onSubmit']}
         onFinish={handleSubmit}>
         <Grid flow="row" gap={32}>
-          <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+          <Grid className={s.cardCont}>
             <Grid flow="row" gap={32}>
               <Form.Item
                 name="delegateAddress"

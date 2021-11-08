@@ -9,12 +9,14 @@ import WalletDepositView from 'modules/senatus/views/wallet-deposit-view';
 import WalletLockView from 'modules/senatus/views/wallet-lock-view';
 import WalletWithdrawView from 'modules/senatus/views/wallet-withdraw-view';
 import { useWallet } from 'wallets/wallet';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 type WalletViewRouteParams = {
   action: string;
 };
 
 const WalletView: React.FC = () => {
+  const isMobile = useMediaQuery(992);
   const history = useHistory();
   const wallet = useWallet();
   const {
@@ -42,7 +44,7 @@ const WalletView: React.FC = () => {
   }
 
   return (
-    <Grid flow="row" gap={32}>
+    <Grid flow="row" gap={isMobile ? 16 : 32}>
       <Text type="h2" weight="bold" color="primary" font="secondary">
         Wallet
       </Text>

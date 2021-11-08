@@ -1,0 +1,14 @@
+.cardHeader {
+  grid-template-columns: 1fr 1fr 1fr 1fr 42px;
+  align-items: start;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+
+    > div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+}

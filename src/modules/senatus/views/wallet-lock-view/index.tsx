@@ -32,6 +32,8 @@ import WalletLockConfirmModal from './components/wallet-lock-confirm-modal';
 
 import { getFormattedDuration, isValidAddress } from 'utils';
 
+import s from './s.module.scss';
+
 type WalletLockViewState = {
   lockDurationOption?: string;
   showLockConfirmModal: boolean;
@@ -145,7 +147,7 @@ const WalletLockView: React.FC = () => {
 
   return (
     <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
           <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
@@ -175,7 +177,7 @@ const WalletLockView: React.FC = () => {
           </UseLeftTime>
         </Grid>
 
-        <div />
+        <div className={s.empty} />
       </Grid>
 
       <Form
@@ -186,7 +188,7 @@ const WalletLockView: React.FC = () => {
         onValuesChange={handleValuesChange}
         onFinish={handleFinish}>
         <Grid flow="row" gap={32}>
-          <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+          <Grid className={s.cardCont}>
             <Grid flow="row" gap={32}>
               <Form.Item label="Add lock duration" dependencies={['lockEndDate']}>
                 {() => (
