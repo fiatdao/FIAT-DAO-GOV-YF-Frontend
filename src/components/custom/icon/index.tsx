@@ -36,6 +36,7 @@ import txSuccessImg from 'resources/png/tx-success.png';
 import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
 import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
 import plugBgImg from 'resources/png/plug-bg.png';
+import circlePlusOutlinedImg from 'resources/png/circle-plus-outlined.png';
 
 import s from './s.module.scss';
 
@@ -135,6 +136,7 @@ export type IconNames =
   | 'handshake-outlined'
   | 'stamp-outlined'
   | 'circle-plus-outlined'
+  | 'png/circle-plus-outlined'
   | 'circle-minus-outlined'
   | 'senior_tranche'
   | 'junior_tranche'
@@ -228,6 +230,8 @@ const Icon: React.FC<IconProps> = props => {
       switch (name) {
         case 'png/plug-bg-mobile':
           return plugBgMobileImg;
+        case 'png/circle-plus-outlined':
+          return circlePlusOutlinedImg;
         case 'png/plug-bg-tablet':
           return plugBgTabletImg;
         case 'png/plug-bg':

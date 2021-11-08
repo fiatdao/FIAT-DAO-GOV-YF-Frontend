@@ -126,7 +126,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                 <Text type="p2">
                   This number shows the amount of v{FDTToken.symbol} that is delegated to other addresses.
                 </Text>
-                <ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                <ExternalLink href="" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
                 </ExternalLink>
               </Grid>
