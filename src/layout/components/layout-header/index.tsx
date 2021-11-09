@@ -163,7 +163,7 @@ const LayoutHeader: React.FC = () => {
       {wallet.isActive && wallet.connector?.id === 'metamask' && (
         <div className={s.addTokenWrapper}>
           <button type="button" onClick={handleAddProjectToken} className={s.addTokenButton}>
-            <Icon name="png/fiat-dao" width={32} height={32} />
+            <Icon name="png/fdt_add" width={32} height={32} />
           </button>
         </div>
       )}

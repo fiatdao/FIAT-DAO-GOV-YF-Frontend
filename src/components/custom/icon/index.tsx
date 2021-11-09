@@ -37,6 +37,7 @@ import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
 import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
 import plugBgImg from 'resources/png/plug-bg.png';
 import circlePlusOutlinedImg from 'resources/png/circle-plus-outlined.png';
+import fdtAddImg from 'resources/png/fdt_add.png';
 
 import s from './s.module.scss';
 
@@ -205,6 +206,7 @@ export type IconNames =
   | 'png/plug-bg-mobile'
   | 'png/plug-bg-tablet'
   | 'png/plug-bg'
+  | 'png/fdt_add'
   | 'static/add-token';
 
 export type IconProps = {
@@ -230,6 +232,8 @@ const Icon: React.FC<IconProps> = props => {
       switch (name) {
         case 'png/plug-bg-mobile':
           return plugBgMobileImg;
+        case 'png/fdt_add':
+          return fdtAddImg;
         case 'png/circle-plus-outlined':
           return circlePlusOutlinedImg;
         case 'png/plug-bg-tablet':
