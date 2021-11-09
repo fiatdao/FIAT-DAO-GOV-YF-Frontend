@@ -174,7 +174,7 @@ const WalletDepositView: React.FC = () => {
           validateTrigger={['onSubmit']}
           onFinish={handleFinish}>
           <Grid flow="row" gap={32}>
-            <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+            <Grid className={s.cardCont}>
               <Grid flow="row" gap={32}>
                 <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                   <TokenAmount
