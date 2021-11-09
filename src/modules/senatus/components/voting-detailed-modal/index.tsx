@@ -69,12 +69,12 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
       <dl className={s.list}>
         <div className={s.row}>
           <dt className={s.term}>
-            <Icon name="wallet-outlined" width={20} height={20} className={s.termIcon} />
+            <Icon name="wallet-outlined" width={24} height={24} className={s.termIcon} />
             My staked balance
           </dt>
           <dd className={s.data}>
             {formatEntrValue(myEntrBalance)}
-            <Icon name="png/circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
+            <Icon name="png/circle-plus-outlined" width={16} height={16} color="green" className={s.dataIcon} />
           </dd>
         </div>
         {/*<div className={s.row}>*/}
@@ -89,29 +89,29 @@ const VotingDetailedModal: React.FC<VotingDetailedModalProps> = props => {
         {/*</div>*/}
         <div className={s.row}>
           <dt className={s.term}>
-            <Icon name="rate-outlined" width={20} height={20} className={s.termIcon} />
+            <Icon name="rate-outlined" width={24} height={24} className={s.termIcon} />
             Locked balance bonus
           </dt>
           <dd className={s.data}>
             {state.leftBonus?.gt(ZERO_BIG_NUMBER) ? '> ' : ''}
             {formatEntrValue(state.leftBonus)}
-            <Icon name="png/circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
+            <Icon name="png/circle-plus-outlined" width={16} height={16} color="green" className={s.dataIcon} />
           </dd>
         </div>
         <div className={s.row}>
           <dt className={s.term}>
-            <Icon name="handshake-outlined" width={20} height={20} className={s.termIcon} />
+            <Icon name="handshake-outlined" width={24} height={24} className={s.termIcon} />
             Delegated to me
           </dt>
           <dd className={s.data}>
             {formatEntrValue(delegatedPower)}
-            <Icon name="png/circle-plus-outlined" width={18} height={18} color="green" className={s.dataIcon} />
+            <Icon name="png/circle-plus-outlined" width={16} height={16} color="green" className={s.dataIcon} />
           </dd>
         </div>
         <div className={s.separator} />
         <div className={s.row}>
           <dt className={s.term}>
-            <Icon name="stamp-outlined" width={20} height={20} className={s.termIcon} />
+            <Icon name="stamp-outlined" width={24} height={24} className={s.termIcon} />
             My total voting power
           </dt>
           <dd className={cn(s.data, s.dataTotal)}>{formatEntrValue(state.leftTotalVotingPower)}</dd>

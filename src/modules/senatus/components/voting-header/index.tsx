@@ -82,7 +82,7 @@ const VotingHeader: React.FC = () => {
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/fiat-dao" width={30} height={30}  style={{ marginLeft: 10 }} />
+              <Icon name="png/fiat-dao" width={27} height={27}  style={{ marginLeft: 10 }} />
               <button
                 type="button"
                 className="button-primary button-small"

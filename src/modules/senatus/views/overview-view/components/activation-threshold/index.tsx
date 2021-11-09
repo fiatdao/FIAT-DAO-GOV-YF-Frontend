@@ -60,7 +60,7 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
           <Icon name="ribbon-outlined" />
         </Grid>
         <Grid className={s.col}>
-          <Icon name="png/fiat-dao" width={32} height={32} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="bold" color="primary">
             {formatEntrValue(dao.fdtStaked)}
           </Text>

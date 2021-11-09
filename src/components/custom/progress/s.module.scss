@@ -5,13 +5,13 @@
   --bg-component: rgba(var(--pink-rgba), 0.16);
 
   position: relative;
-  border-radius: 0;
+  border-radius: 4px;
   width: 100%;
 }
 
 .progress {
   height: var(--height);
-  border-radius: 0;
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
 
@@ -34,7 +34,7 @@
     background: linear-gradient(96.42deg, #FF9574 14.8%, #FF4C8C 92.84%);
     left: 0;
     width: var(--percent, 0%);
-    border-radius: 0;
+    border-radius: 2px;
   }
 }
 
@@ -55,17 +55,17 @@
     display: block;
     left: 0;
     background: var(--acceptance-bg);
-    width: 4px;
+    width: 2px;
     height: calc(var(--height, 8px) / 2);
   }
 
   &::before {
     top: calc(var(--height, 8px) / -2);
-    border-radius: 0;
+    border-radius: 4px;
   }
 
   &::after {
     bottom: calc(var(--height, 8px) / -2);
-    border-radius: 0;
+    border-radius: 2px;
   }
 }
