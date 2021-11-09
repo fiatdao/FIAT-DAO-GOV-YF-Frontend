@@ -197,7 +197,7 @@ const LayoutHeader: React.FC = () => {
                     <span>Rewards</span>
                   </Link>
                   <Link to="/senatus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>Rewards</span>
+                    <span>Senatus</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}

@@ -45,14 +45,30 @@ const WalletView: React.FC = () => {
 
   return (
     <Grid flow="row" gap={isMobile ? 16 : 32}>
-      <Text type="h2" weight="bold" color="primary" font="secondary">
+      <Text type="h2" weight="semibold" color="primary" font="secondary">
         Wallet
       </Text>
       <Tabs activeKey={activeTab} simple onChange={handleTabChange}>
-        <Tabs.Tab key="deposit" tab="Deposit" />
-        <Tabs.Tab key="lock" tab="Lock" />
-        <Tabs.Tab key="delegate" tab="Delegate" />
-        <Tabs.Tab key="withdraw" tab="Withdraw" />
+        <Tabs.Tab key="deposit"
+                  tab={
+                    <Text type="p1" weight="500" >
+                      Deposit
+                    </Text>} />
+        <Tabs.Tab key="lock"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Lock
+                    </Text>} />
+        <Tabs.Tab key="delegate"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Delegate
+                    </Text>} />
+        <Tabs.Tab key="withdraw"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Withdraw
+                    </Text>} />
       </Tabs>
       <Switch>
         <Route path="/senatus/wallet/deposit" exact component={WalletDepositView} />

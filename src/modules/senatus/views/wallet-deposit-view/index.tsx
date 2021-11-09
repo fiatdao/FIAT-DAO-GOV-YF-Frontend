@@ -122,7 +122,7 @@ const WalletDepositView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -131,7 +131,7 @@ const WalletDepositView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Wallet Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -140,7 +140,7 @@ const WalletDepositView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Enable Token
           </Text>
           <AntdSwitch

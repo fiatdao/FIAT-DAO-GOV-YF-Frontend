@@ -65,7 +65,7 @@ const VotingHeader: React.FC = () => {
   return (
     <div className={cn(s.component, 'pv-24')}>
       <div className="container-limit">
-        <Text type="lb2" weight="semibold" color="primary" className="mb-16">
+        <Text type="lb2" weight="500" color="primary" className="mb-16">
           My Voting Power
         </Text>
         <Grid flow="col" gap={24} className={s.items}>
@@ -76,7 +76,7 @@ const VotingHeader: React.FC = () => {
             <Grid flow="col" align="center">
               <Tooltip title={<Text type="p2">{formatBigValue(claimValue, FDTToken.decimals)}</Text>}>
                 <Skeleton loading={claimValue === undefined}>
-                  <Text type="h3" weight="bold" color="primary">
+                  <Text type="h3" weight="semibold" color="primary">
                     {isSmallEntrValue(claimValue) && '> '}
                     {formatEntrValue(claimValue)}
                   </Text>
@@ -100,7 +100,7 @@ const VotingHeader: React.FC = () => {
             </Text>
             <Grid flow="col" align="center">
               <Skeleton loading={fdtBalance === undefined}>
-                <Text type="h3" weight="bold" color="primary">
+                <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(fdtBalance)}
                 </Text>
               </Skeleton>
@@ -114,7 +114,7 @@ const VotingHeader: React.FC = () => {
             </Text>
             <div className="flex col-gap-16 align-center">
               <Skeleton loading={votingPower === undefined}>
-                <Text type="h3" weight="bold" color="primary">
+                <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(votingPower) || '-'}
                 </Text>
               </Skeleton>
@@ -144,14 +144,14 @@ const VotingHeader: React.FC = () => {
                     </Text>
                     <Grid flow="col" gap={8} align="center">
                       <Tooltip title={`x${leftMultiplier}`}>
-                        <Text type="lb1" weight="bold" color="red" className={s.ratio}>
+                        <Text type="lb1" weight="semibold" color="red" className={s.ratio}>
                           {inRange(multiplier, 1, 1.01) ? '>' : ''} {formatBigValue(leftMultiplier, 2, '-', 2)}x
                         </Text>
                       </Tooltip>
                       <Text type="p2" color="secondary">
                         for
                       </Text>
-                      <Text type="h3" weight="bold" color="primary">
+                      <Text type="h3" weight="semibold" color="primary">
                         {getFormattedDuration(0, userLockedUntil)}
                       </Text>
                     </Grid>

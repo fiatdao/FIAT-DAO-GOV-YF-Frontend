@@ -91,7 +91,7 @@ const WalletDelegateView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Current Voting Type
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -101,7 +101,7 @@ const WalletDelegateView: React.FC = () => {
 
         {isDelegated && (
           <Grid flow="row" gap={4}>
-            <Text type="small" weight="semibold" color="secondary">
+            <Text type="small" weight="500" color="secondary">
               Delegated Address
             </Text>
             <Text type="p1" weight="semibold" color="primary">

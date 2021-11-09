@@ -156,7 +156,7 @@ const WalletLockView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -165,7 +165,7 @@ const WalletLockView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Lock Duration
           </Text>
           <UseLeftTime end={userLockedUntil ?? 0} delay={1_000}>
