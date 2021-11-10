@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, formatEntrValue, isSmallEntrValue } from 'web3/utils';
+import { formatBigValue, formatEntrValue, formatToken, isSmallEntrValue } from 'web3/utils';
 
 import Button from 'components/antd/button';
 import Divider from 'components/antd/divider';
@@ -23,6 +23,7 @@ import VotingDetailedModal from '../voting-detailed-modal';
 import { getFormattedDuration, inRange } from 'utils';
 
 import s from './s.module.scss';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 type VotingHeaderState = {
   claiming: boolean;
@@ -36,6 +37,7 @@ const InitialState: VotingHeaderState = {
 
 const VotingHeader: React.FC = () => {
   const daoCtx = useDAO();
+  const isMobile = useMediaQuery(767);
 
   const [state, setState] = useMergeState<VotingHeaderState>(InitialState);
 
@@ -73,7 +75,7 @@ const VotingHeader: React.FC = () => {
             <Text type="p2" color="secondary">
               Current reward
             </Text>
-            <Grid flow="col" align="center">
+            <Grid flow="col" align="center" className={s.item1__grid}>
               <Tooltip title={<Text type="p2">{formatBigValue(claimValue, FDTToken.decimals)}</Text>}>
                 <Skeleton loading={claimValue === undefined}>
                   <Text type="h3" weight="semibold" color="primary">
@@ -88,36 +90,41 @@ const VotingHeader: React.FC = () => {
                 className="button-primary button-small"
                 disabled={claimValue?.isZero()}
                 onClick={handleClaim}
-                style={{ marginLeft: 15 }}>
+                style={{ marginLeft: isMobile ? 0 : 15 }}>
                 {!state.claiming ? 'Claim' : <Spin spinning />}
               </button>
             </Grid>
           </Grid>
           <Divider type="vertical" />
-          <Grid gap={4} className={s.item2}>
-            <Text type="p2" color="secondary">
+
+
+          <Grid flow="row" gap={2} className={s.item2}>
+            <Text type="p2" color="secondary" className="mb-4">
               {FDTToken.symbol} Balance
             </Text>
-            <Grid flow="col" align="center">
-              <Skeleton loading={fdtBalance === undefined}>
-                <Text type="h3" weight="semibold" color="primary">
-                  {formatEntrValue(fdtBalance)}
-                </Text>
-              </Skeleton>
-              {/*<Icon name="png/fiat-dao" width={40} height={40} />*/}
+            <Skeleton loading={fdtBalance === undefined}>
+            <Grid flow="col" gap={8} align="center">
+              <Text type="h3" weight="semibold" color="primary">
+                {formatEntrValue(fdtBalance)}
+              </Text>
+              <Icon name={FDTToken.icon!} width={27} height={27} />
             </Grid>
+            </Skeleton>
           </Grid>
+
           <Divider type="vertical" />
-          <Grid flow="row" gap={4} className={s.item3}>
-            <Text type="p2" color="secondary">
+          <Grid flow="row" gap={4} className={s.item4}>
+            <Text type="p2" color="secondary" className="sm-mb-8">
               Total voting power
             </Text>
-            <div className="flex col-gap-16 align-center">
+            <div className={cn('flex col-gap-16 align-center', s.item4__flex)}>
               <Skeleton loading={votingPower === undefined}>
                 <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(votingPower) || '-'}
                 </Text>
+                <Icon name={FDTToken.icon!} width={27} height={27} />
               </Skeleton>
+              <div className={s.break} />
               <button
                 type="button"
                 className="button-primary button-small"
