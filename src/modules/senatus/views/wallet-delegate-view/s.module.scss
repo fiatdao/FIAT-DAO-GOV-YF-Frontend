@@ -1,7 +1,11 @@
+.card {
+  border-radius: 8px;
+}
+
 .cardHeader {
   grid-template-columns: auto;
   grid-auto-flow: column;
-  align-items: start;
+  align-items: center;
 
   @media (max-width: 992px) {
     grid-template-columns: 1fr;

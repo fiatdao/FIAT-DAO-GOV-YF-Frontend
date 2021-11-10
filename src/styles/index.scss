@@ -257,6 +257,10 @@ button {
   background: var(--gradient-secondary-pink);
 }
 
+.ant-slider:hover .ant-slider-handle {
+  border-color: var(--theme-secondary-block) !important;
+}
+
 
 .ant-spin .ant-spin-dot {
   color: var(--theme-secondary-color);

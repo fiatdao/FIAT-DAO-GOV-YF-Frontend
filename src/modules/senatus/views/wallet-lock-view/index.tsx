@@ -146,7 +146,7 @@ const WalletLockView: React.FC = () => {
   }, [userLockedUntil]);
 
   return (
-    <div className="card">
+    <div className={cn('card', s.card)}>
       <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
           <Icon name="png/fiat-dao" width={27} height={27} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import AntdForm from 'antd/lib/form';
 import AntdSwitch from 'antd/lib/switch';
+import { isMobile } from 'react-device-detect';
 import BigNumber from 'bignumber.js';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
@@ -112,7 +113,7 @@ const WalletDepositView: React.FC = () => {
   }, [comitiumAllowance]);
 
   return (
-    <div className="card">
+    <div className={cn('card', s.card)}>
       <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
           <Icon name="png/fiat-dao" width={27} height={27} />
@@ -151,7 +152,7 @@ const WalletDepositView: React.FC = () => {
           />
         </Grid>
 
-        {state.enabled && (
+        {state.enabled && !isMobile && (
           <button
             type="button"
             className="button-ghost-monochrome p-8"
