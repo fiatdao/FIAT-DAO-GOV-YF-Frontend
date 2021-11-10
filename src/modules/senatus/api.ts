@@ -18,6 +18,7 @@ export type APIOverviewData = {
   avgLockTimeSeconds: number;
   totalDelegatedPower: BigNumber;
   holders: number;
+  totalVFDT: BigNumber;
   holdersStakingExcluded: number;
   voters: number;
   comitiumUsers: number;
@@ -32,6 +33,7 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
           totalDelegatedPower
           voters
           comitiumUsers
+          totalVFDT
           holders
         }
       }
@@ -40,7 +42,8 @@ export function fetchOverviewData(): Promise<APIOverviewData> {
       console.log(result);
       return {
         ...result.data.overview,
-        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18)
+        totalDelegatedPower: getHumanValue(new BigNumber(result.data.overview.totalDelegatedPower), 18),
+        totalVFDT: getHumanValue(new BigNumber(result.data.overview.totalVFDT), 18),
       }
     })
     .catch(e => {

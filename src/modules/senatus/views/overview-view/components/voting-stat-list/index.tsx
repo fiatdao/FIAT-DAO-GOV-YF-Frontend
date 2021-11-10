@@ -66,6 +66,33 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             text={
               <Grid flow="row" gap={8} align="start">
                 <Text type="p2">
+                  This number shows the amount of v{FDTToken.symbol} currently minted. This number may differ from the
+                  amount of ${FDTToken.symbol}
+                  staked because of the multiplier mechanic
+                </Text>
+                <ExternalLink href="https://docs.universe.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                  Learn more
+                </ExternalLink>
+              </Grid>
+            }>
+            <Text type="lb2" weight="semibold" color="secondary">
+              v{FDTToken.symbol}
+            </Text>
+          </Hint>
+          <Grid flow="row" gap={4}>
+            <Text type="h2" weight="bold" color="primary">
+              {formatEntrValue(overview?.totalVFDT)}
+            </Text>
+          </Grid>
+        </Grid>
+      </div>
+
+      <div className="card p-24">
+        <Grid flow="row" gap={48}>
+          <Hint
+            text={
+              <Grid flow="row" gap={8} align="start">
+                <Text type="p2">
                   This counter shows the average amount of time ${FDTToken.symbol} stakers locked their deposits in
                   order to take advantage of the voting power bonus.
                 </Text>
