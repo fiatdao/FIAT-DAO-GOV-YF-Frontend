@@ -1,29 +1,29 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BigNumber from 'bignumber.js';
 import AntdForm from 'antd/lib/form';
+import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import TxConfirmModal from 'web3/components/tx-confirm-modal';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatToken, formatUSD } from 'web3/utils';
 
-import Form from 'components/antd/form';
 import Alert from 'components/antd/alert';
+import Form from 'components/antd/form';
 import Spin from 'components/antd/spin';
 import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
 // import { TokenAmount, TokenSelect } from 'components/custom/token-amount-new';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { KnownTokens, convertTokenInUSD, useKnownTokens, FDTToken } from 'components/providers/known-tokens-provider';
+import { FDTToken, KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
 
+import Divider from '../../../../components/antd/divider';
 import { useYFPool } from '../../providers/pool-provider';
 import { useYFPools } from '../../providers/pools-provider';
 
 import s from './s.module.scss';
-import Divider from '../../../../components/antd/divider';
 
 type StakeFormData = {
   amount?: BigNumber;
@@ -71,7 +71,7 @@ const PoolStake: FC = () => {
   }
 
   function handleStake({ amount }: any) {
-    setBnAmount(amount)
+    setBnAmount(amount);
     setConfirmModalVisible(true);
   }
 
@@ -134,11 +134,7 @@ const PoolStake: FC = () => {
           </Tooltip>
         </div>
       </div>
-      <Form
-        validateTrigger={['onSubmit']}
-        initialValues={{ amount: undefined }}
-        onFinish={handleStake}
-        form={form}>
+      <Form validateTrigger={['onSubmit']} initialValues={{ amount: undefined }} onFinish={handleStake} form={form}>
         <Form.Item name="amount" rules={[{ required: true, message: 'Required' }]}>
           <TokenAmount
             tokenIcon={activeToken.icon}
@@ -150,15 +146,15 @@ const PoolStake: FC = () => {
             slider
           />
         </Form.Item>
-        <Form.Item >
+        <Form.Item>
           {poolMeta.contract.isPoolEnded === true && (
             <>
               <Alert
                 message={
                   <div className="flex flow-row row-gap-16 align-start">
                     <Text type="p2" weight="semibold" color="blue">
-                      Deposits made after an epoch started will be considered as pro-rata figures in relation to the length
-                      of the epoch.
+                      Deposits made after an epoch started will be considered as pro-rata figures in relation to the
+                      length of the epoch.
                     </Text>
                   </div>
                 }
@@ -170,7 +166,8 @@ const PoolStake: FC = () => {
                   message={
                     <div className="flex flow-row row-gap-16 align-start">
                       <Text type="p2" weight="semibold" color="blue">
-                        You can still deposit {activeToken.symbol} in the DAO governance to earn interest for your funds.
+                        You can still deposit {activeToken.symbol} in the DAO governance to earn interest for your
+                        funds.
                       </Text>
                       <Link to="/senatus" className="link-blue">
                         <Text type="p2" weight="bold" style={{ textDecoration: 'underline' }}>
@@ -193,14 +190,7 @@ const PoolStake: FC = () => {
         </Form.Item>
 
         <div style={{ display: 'flex' }}>
-          <button
-            type="submit"
-            className="button-primary"
-            disabled={
-              !allowance?.gt(BigNumber.ZERO) ||
-              staking
-            }
-           >
+          <button type="submit" className="button-primary" disabled={!allowance?.gt(BigNumber.ZERO) || staking}>
             {staking && <Spin spinning />}
             Stake
           </button>

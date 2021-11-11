@@ -11,6 +11,10 @@
     font-weight: 500;
   }
 
+  &.weight-700 {
+    font-weight: 700;
+  }
+
   &.weight-semibold {
     font-weight: 600;
   }
@@ -41,6 +45,11 @@
 
   &.p2 {
     font-size: var(--font-size-p2);
+    line-height: calc(var(--font-size-p2) + 10px);
+  }
+
+  &.p3 {
+    font-size: var(--font-size-lb2);
     line-height: calc(var(--font-size-p2) + 10px);
   }
 

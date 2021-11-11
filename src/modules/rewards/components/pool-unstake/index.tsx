@@ -1,17 +1,17 @@
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BigNumber from 'bignumber.js';
 import AntdForm from 'antd/lib/form';
+import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import TxConfirmModal from 'web3/components/tx-confirm-modal';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatNumber, formatToken, formatUSD } from 'web3/utils';
 
-import Form from 'components/antd/form';
 import Alert from 'components/antd/alert';
+import Divider from 'components/antd/divider';
+import Form from 'components/antd/form';
 import Spin from 'components/antd/spin';
 import Tooltip from 'components/antd/tooltip';
-import Divider from 'components/antd/divider';
 import Icon from 'components/custom/icon';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
@@ -58,7 +58,7 @@ const PoolUnstake: FC = () => {
   }
 
   function handleUnstake({ amount }: any) {
-    setBnAmount(amount)
+    setBnAmount(amount);
     setConfirmModalVisible(true);
   }
 
@@ -121,11 +121,7 @@ const PoolUnstake: FC = () => {
           </Tooltip>
         </div>
       </div>
-      <Form
-        validateTrigger={['onSubmit']}
-        initialValues={{ amount: undefined }}
-        onFinish={handleUnstake}
-        form={form}>
+      <Form validateTrigger={['onSubmit']} initialValues={{ amount: undefined }} onFinish={handleUnstake} form={form}>
         <Form.Item name="amount" rules={[{ required: true, message: 'Required' }]}>
           <TokenAmount
             tokenIcon={activeToken.icon}
@@ -137,7 +133,7 @@ const PoolUnstake: FC = () => {
             slider
           />
         </Form.Item>
-        <Form.Item >
+        <Form.Item>
           {poolMeta.contract.isPoolEnded === true && (
             <>
               <Alert
@@ -177,10 +173,7 @@ const PoolUnstake: FC = () => {
             />
           )}
         </Form.Item>
-        <button
-          type="submit"
-          className="button-primary"
-          disabled={unstaking}>
+        <button type="submit" className="button-primary" disabled={unstaking}>
           {unstaking && <Spin spinning />}
           Unstake
         </button>
@@ -190,17 +183,17 @@ const PoolUnstake: FC = () => {
         <TxConfirmModal
           title="Unstake"
           header={
-           <div className="mb-24">
-             <div className="flex align-center justify-center pb-24">
-               <Text type="h2" weight="bold" color="primary" className="mr-8">
-                 {formatToken(bnAmount, {
-                   decimals: activeToken.decimals,
-                 })}
-               </Text>
-               <Icon name={activeToken.icon!} />
-             </div>
-             <Divider />
-           </div>
+            <div className="mb-24">
+              <div className="flex align-center justify-center pb-24">
+                <Text type="h2" weight="bold" color="primary" className="mr-8">
+                  {formatToken(bnAmount, {
+                    decimals: activeToken.decimals,
+                  })}
+                </Text>
+                <Icon name={activeToken.icon!} />
+              </div>
+              <Divider />
+            </div>
           }
           submitText={`Confirm your unstake`}
           onCancel={handleUnstakeCancel}

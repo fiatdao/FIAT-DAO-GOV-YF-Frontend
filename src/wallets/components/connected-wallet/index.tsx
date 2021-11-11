@@ -94,15 +94,22 @@ const ConnectedWallet: React.FC = () => {
           </div>
         }
         trigger="click">
-        <button type="button" className="button-primary"><span>Connecting...</span></button>
+        <button type="button" className="button-primary">
+          <span>Connecting...</span>
+        </button>
       </Popover>
     );
   }
 
   if (!wallet.isActive) {
-    return (<button type="button" className={cn('button-ghost', { 'button-small': isMobile })} onClick={() => wallet.showWalletsModal()}>
-      <span>Connect {!isMobile && 'wallet'}</span>
-    </button>)
+    return (
+      <button
+        type="button"
+        className={cn('button-ghost', { 'button-small': isMobile })}
+        onClick={() => wallet.showWalletsModal()}>
+        <span>Connect {!isMobile && 'wallet'}</span>
+      </button>
+    );
   }
 
   const AccountSection = (

@@ -8,8 +8,8 @@ import s from './s.module.scss';
 
 export type TextProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label' | 'p' | 'div' | 'span' | 'small' | 'strong';
-  type: 'h1' | 'h2' | 'h3' | 'p1' | 'p2' | 'lb1' | 'lb2' | 'small';
-  weight?: '500' | 'semibold' | 'bold';
+  type: 'h1' | 'h2' | 'h3' | 'p1' | 'p2' | 'p3' | 'lb1' | 'lb2' | 'small';
+  weight?: '500' | '700' | 'semibold' | 'bold';
   color?: 'primary' | 'secondary' | 'red' | 'green' | 'blue' | 'purple' | 'white' | string;
   textGradient?: string;
   align?: 'left' | 'center' | 'right';
