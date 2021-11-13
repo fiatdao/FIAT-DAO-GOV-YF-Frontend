@@ -6,7 +6,7 @@
 
 .item {
   margin-bottom: 0;
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     display: block;
   }
   :global(.ant-form-item-label) label {

@@ -1,17 +1,17 @@
 .wrap {
   --percent: 0%;
   --height: 8px;
-  --bg-bar: var(--theme-green-color);
-  --bg-component: rgba(var(--theme-green-color-rgb), 0.16);
+  --bg-bar: linear-gradient(96.42deg, #FF9574 14.8%, #FF4C8C 92.84%);
+  --bg-component: rgba(var(--pink-rgba), 0.16);
 
   position: relative;
-  border-radius: 100px;
+  border-radius: 4px;
   width: 100%;
 }
 
 .progress {
   height: var(--height);
-  border-radius: 100px;
+  border-radius: 4px;
   overflow: hidden;
   position: relative;
 
@@ -31,10 +31,10 @@
   }
 
   &::after {
-    background: var(--bg-bar);
+    background: linear-gradient(96.42deg, #FF9574 14.8%, #FF4C8C 92.84%);
     left: 0;
     width: var(--percent, 0%);
-    border-radius: 100px;
+    border-radius: 2px;
   }
 }
 
@@ -55,17 +55,17 @@
     display: block;
     left: 0;
     background: var(--acceptance-bg);
-    width: 4px;
+    width: 2px;
     height: calc(var(--height, 8px) / 2);
   }
 
   &::before {
     top: calc(var(--height, 8px) / -2);
-    border-radius: 100px 100px 0 0;
+    border-radius: 4px;
   }
 
   &::after {
     bottom: calc(var(--height, 8px) / -2);
-    border-radius: 0 0 100px 100px;
+    border-radius: 2px;
   }
 }

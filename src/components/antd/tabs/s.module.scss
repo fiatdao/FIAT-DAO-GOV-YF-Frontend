@@ -19,7 +19,7 @@
           flex-shrink: 0;
 
           > :global(.ant-tabs-tab-btn) {
-            @include font-p1-semi-bold;
+            @include font-p1-regular;
             display: flex;
             flex-direction: row;
             column-gap: 8px;
@@ -55,7 +55,7 @@
 
         > :global(.ant-tabs-ink-bar) {
           height: 2px;
-          background: var(--theme-primary-color);
+          background: var(--gradient-secondary-pink);
           border-radius: 4px 4px 0 0;
         }
       }

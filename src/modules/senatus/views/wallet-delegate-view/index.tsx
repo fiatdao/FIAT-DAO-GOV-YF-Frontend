@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Antd from 'antd';
+import cn from 'classnames';
 import { ZERO_BIG_NUMBER } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
-import Button from 'components/antd/button';
 import Form from 'components/antd/form';
 import GasFeeList from 'components/custom/gas-fee-list';
 import Grid from 'components/custom/grid';
@@ -12,10 +12,13 @@ import TokenInput from 'components/custom/token-input';
 import { Text } from 'components/custom/typography';
 import useMergeState from 'hooks/useMergeState';
 
+import TokenAmount from '../../../../components/custom/token-amount';
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 import { useDAO } from '../../components/dao-provider';
 
 import { isValidAddress } from 'utils';
+
+import s from './s.module.scss';
 
 type DelegateFormData = {
   delegateAddress?: string;
@@ -79,17 +82,17 @@ const WalletDelegateView: React.FC = () => {
   }
 
   return (
-    <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="auto" align="start">
+    <div className={cn('card', s.card)}>
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Current Voting Type
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -99,7 +102,7 @@ const WalletDelegateView: React.FC = () => {
 
         {isDelegated && (
           <Grid flow="row" gap={4}>
-            <Text type="small" weight="semibold" color="secondary">
+            <Text type="small" weight="500" color="secondary">
               Delegated Address
             </Text>
             <Text type="p1" weight="semibold" color="primary">
@@ -108,7 +111,7 @@ const WalletDelegateView: React.FC = () => {
           </Grid>
         )}
 
-        <div />
+        <div className={s.empty} />
       </Grid>
       <Form
         className="p-24"
@@ -117,13 +120,16 @@ const WalletDelegateView: React.FC = () => {
         validateTrigger={['onSubmit']}
         onFinish={handleSubmit}>
         <Grid flow="row" gap={32}>
-          <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+          <Grid className={s.cardCont}>
             <Grid flow="row" gap={32}>
               <Form.Item
                 name="delegateAddress"
                 label="Delegate address"
                 rules={[{ required: true, message: 'Required' }]}>
-                <TokenInput disabled={formDisabled || state.saving} />
+                <TokenInput
+                  addonBefore={<Icon name={FDTToken.icon!} width={27} height={27} />}
+                  disabled={formDisabled || state.saving}
+                />
               </Form.Item>
               <Alert message="Delegating your voting power to this address means that they will be able to vote in your place. You can’t delegate the voting bonus, only the staked balance." />
               {isLocked && (
@@ -145,14 +151,13 @@ const WalletDelegateView: React.FC = () => {
               const { delegateAddress } = getFieldsValue();
 
               return (
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={state.saving}
-                  disabled={formDisabled || !delegateAddress}
+                <button
+                  type="submit"
+                  className="button-primary"
+                  disabled={state.saving || !delegateAddress}
                   style={{ justifySelf: 'start' }}>
                   {userDelegatedTo === delegateAddress ? 'Stop Delegate' : 'Delegate'}
-                </Button>
+                </button>
               );
             }}
           </Form.Item>

@@ -32,6 +32,8 @@ import WalletLockConfirmModal from './components/wallet-lock-confirm-modal';
 
 import { getFormattedDuration, isValidAddress } from 'utils';
 
+import s from './s.module.scss';
+
 type WalletLockViewState = {
   lockDurationOption?: string;
   showLockConfirmModal: boolean;
@@ -144,17 +146,17 @@ const WalletLockView: React.FC = () => {
   }, [userLockedUntil]);
 
   return (
-    <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
+    <div className={cn('card', s.card)}>
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -163,7 +165,7 @@ const WalletLockView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Lock Duration
           </Text>
           <UseLeftTime end={userLockedUntil ?? 0} delay={1_000}>
@@ -175,7 +177,7 @@ const WalletLockView: React.FC = () => {
           </UseLeftTime>
         </Grid>
 
-        <div />
+        <div className={s.empty} />
       </Grid>
 
       <Form
@@ -186,7 +188,7 @@ const WalletLockView: React.FC = () => {
         onValuesChange={handleValuesChange}
         onFinish={handleFinish}>
         <Grid flow="row" gap={32}>
-          <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+          <Grid className={s.cardCont}>
             <Grid flow="row" gap={32}>
               <Form.Item label="Add lock duration" dependencies={['lockEndDate']}>
                 {() => (
@@ -278,14 +280,13 @@ const WalletLockView: React.FC = () => {
           {/*  }} */}
           {/* </Form.Item> */}
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={state.saving}
-            disabled={formDisabled}
+          <button
+            type="submit"
+            className="button-primary"
+            disabled={formDisabled || state.saving}
             style={{ justifySelf: 'start' }}>
             Lock
-          </Button>
+          </button>
         </Grid>
       </Form>
 

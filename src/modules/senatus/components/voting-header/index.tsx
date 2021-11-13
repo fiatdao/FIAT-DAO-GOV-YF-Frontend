@@ -2,7 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, formatEntrValue, isSmallEntrValue } from 'web3/utils';
+import { formatBigValue, formatEntrValue, formatToken, isSmallEntrValue } from 'web3/utils';
 
 import Button from 'components/antd/button';
 import Divider from 'components/antd/divider';
@@ -16,6 +16,7 @@ import useMergeState from 'hooks/useMergeState';
 import imgSrc from 'resources/png/enterdao.png';
 
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../dao-provider';
 import VotingDetailedModal from '../voting-detailed-modal';
@@ -36,6 +37,7 @@ const InitialState: VotingHeaderState = {
 
 const VotingHeader: React.FC = () => {
   const daoCtx = useDAO();
+  const isMobile = useMediaQuery(767);
 
   const [state, setState] = useMergeState<VotingHeaderState>(InitialState);
 
@@ -65,7 +67,7 @@ const VotingHeader: React.FC = () => {
   return (
     <div className={cn(s.component, 'pv-24')}>
       <div className="container-limit">
-        <Text type="lb2" weight="semibold" color="primary" className="mb-16">
+        <Text type="lb2" weight="500" color="primary" className="mb-16">
           My Voting Power
         </Text>
         <Grid flow="col" gap={24} className={s.items}>
@@ -73,57 +75,61 @@ const VotingHeader: React.FC = () => {
             <Text type="p2" color="secondary">
               Current reward
             </Text>
-            <Grid flow="col" align="center">
+            <Grid flow="col" align="center" className={s.item1__grid}>
               <Tooltip title={<Text type="p2">{formatBigValue(claimValue, FDTToken.decimals)}</Text>}>
                 <Skeleton loading={claimValue === undefined}>
-                  <Text type="h3" weight="bold" color="primary">
+                  <Text type="h3" weight="semibold" color="primary">
                     {isSmallEntrValue(claimValue) && '> '}
                     {formatEntrValue(claimValue)}
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/fiat-dao" width={40} height={40} />
-              <Button
-                type="primary"
-                size="small"
+              <Icon name="png/fiat-dao" width={27} height={27} style={{ marginLeft: 10 }} />
+              <button
+                type="button"
+                className="button-primary button-small"
                 disabled={claimValue?.isZero()}
                 onClick={handleClaim}
-                style={{ marginLeft: 4 }}>
+                style={{ marginLeft: isMobile ? 0 : 15 }}>
                 {!state.claiming ? 'Claim' : <Spin spinning />}
-              </Button>
+              </button>
             </Grid>
           </Grid>
           <Divider type="vertical" />
-          <Grid flow="row" gap={4} className={s.item2}>
-            <Text type="p2" color="secondary">
+
+          <Grid flow="row" gap={2} className={s.item2}>
+            <Text type="p2" color="secondary" className="mb-4">
               {FDTToken.symbol} Balance
             </Text>
-            <Grid flow="col" align="center">
-              <Skeleton loading={fdtBalance === undefined}>
-                <Text type="h3" weight="bold" color="primary">
+            <Skeleton loading={fdtBalance === undefined}>
+              <Grid flow="col" gap={8} align="center">
+                <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(fdtBalance)}
                 </Text>
-              </Skeleton>
-              <Icon name="png/fiat-dao" src={imgSrc} width={40} height={40} />
-            </Grid>
+                <Icon name={FDTToken.icon!} width={27} height={27} />
+              </Grid>
+            </Skeleton>
           </Grid>
+
           <Divider type="vertical" />
-          <Grid flow="row" gap={4} className={s.item3}>
-            <Text type="p2" color="secondary">
+          <Grid flow="row" gap={4} className={s.item4}>
+            <Text type="p2" color="secondary" className="sm-mb-8">
               Total voting power
             </Text>
-            <div className="flex col-gap-16 align-center" style={{ height: `40px` }}>
+            <div className={cn('flex col-gap-8 align-center', s.item4__flex)}>
               <Skeleton loading={votingPower === undefined}>
-                <Text type="h3" weight="bold" color="primary">
+                <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(votingPower) || '-'}
                 </Text>
+                <Icon name={FDTToken.icon!} width={27} height={27} />
               </Skeleton>
-              <Button type="light" onClick={() => setState({ showDetailedView: true })}>
-                <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
-                  Detailed view
-                </Text>
-              </Button>
-
+              <div className={s.break} />
+              <button
+                type="button"
+                className="button-primary button-small"
+                onClick={() => setState({ showDetailedView: true })}>
+                Detailed view
+              </button>
               {state.showDetailedView && <VotingDetailedModal onCancel={() => setState({ showDetailedView: false })} />}
             </div>
           </Grid>
@@ -144,14 +150,14 @@ const VotingHeader: React.FC = () => {
                     </Text>
                     <Grid flow="col" gap={8} align="center">
                       <Tooltip title={`x${leftMultiplier}`}>
-                        <Text type="lb1" weight="bold" color="red" className={s.ratio}>
+                        <Text type="lb1" weight="semibold" color="red" className={s.ratio}>
                           {inRange(multiplier, 1, 1.01) ? '>' : ''} {formatBigValue(leftMultiplier, 2, '-', 2)}x
                         </Text>
                       </Tooltip>
                       <Text type="p2" color="secondary">
                         for
                       </Text>
-                      <Text type="h3" weight="bold" color="primary">
+                      <Text type="h3" weight="semibold" color="primary">
                         {getFormattedDuration(0, userLockedUntil)}
                       </Text>
                     </Grid>
