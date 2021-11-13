@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Antd from 'antd';
+import cn from 'classnames';
 import { ZERO_BIG_NUMBER } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
@@ -11,13 +12,13 @@ import TokenInput from 'components/custom/token-input';
 import { Text } from 'components/custom/typography';
 import useMergeState from 'hooks/useMergeState';
 
+import TokenAmount from '../../../../components/custom/token-amount';
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 import { useDAO } from '../../components/dao-provider';
 
 import { isValidAddress } from 'utils';
 
 import s from './s.module.scss';
-import cn from 'classnames';
 
 type DelegateFormData = {
   delegateAddress?: string;
@@ -125,7 +126,10 @@ const WalletDelegateView: React.FC = () => {
                 name="delegateAddress"
                 label="Delegate address"
                 rules={[{ required: true, message: 'Required' }]}>
-                <TokenInput disabled={formDisabled || state.saving} />
+                <TokenInput
+                  addonBefore={<Icon name={FDTToken.icon!} width={27} height={27} />}
+                  disabled={formDisabled || state.saving}
+                />
               </Form.Item>
               <Alert message="Delegating your voting power to this address means that they will be able to vote in your place. You can’t delegate the voting bonus, only the staked balance." />
               {isLocked && (

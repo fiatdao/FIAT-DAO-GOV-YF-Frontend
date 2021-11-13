@@ -1,8 +1,9 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import AntdForm from 'antd/lib/form';
 import AntdSwitch from 'antd/lib/switch';
-import { isMobile } from 'react-device-detect';
 import BigNumber from 'bignumber.js';
+import cn from 'classnames';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
@@ -22,7 +23,6 @@ import { useDAO } from '../../components/dao-provider';
 import WalletDepositConfirmModal from './components/wallet-deposit-confirm-modal';
 
 import s from './s.module.scss';
-import cn from 'classnames';
 
 type DepositFormData = {
   amount?: BigNumber;
@@ -169,7 +169,7 @@ const WalletDepositView: React.FC = () => {
 
       {state.expanded && (
         <Form
-          className="p-24"
+          className={cn('p-24', s.cardForm)}
           form={form}
           initialValues={InitialFormValues}
           validateTrigger={['onSubmit']}

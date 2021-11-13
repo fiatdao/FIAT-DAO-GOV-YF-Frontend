@@ -5,6 +5,7 @@
 .cardHeader {
   grid-template-columns: 1fr 1fr 1fr 1fr 42px;
   align-items: center;
+  border: 0;
 
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
@@ -15,6 +16,10 @@
       align-items: center;
     }
   }
+}
+
+.cardForm {
+  border-top: 1px solid var(--theme-border-color);
 }
 
 .cardCont {

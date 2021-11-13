@@ -16,6 +16,7 @@ import useMergeState from 'hooks/useMergeState';
 import imgSrc from 'resources/png/enterdao.png';
 
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../dao-provider';
 import VotingDetailedModal from '../voting-detailed-modal';
@@ -23,7 +24,6 @@ import VotingDetailedModal from '../voting-detailed-modal';
 import { getFormattedDuration, inRange } from 'utils';
 
 import s from './s.module.scss';
-import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 type VotingHeaderState = {
   claiming: boolean;
@@ -84,7 +84,7 @@ const VotingHeader: React.FC = () => {
                   </Text>
                 </Skeleton>
               </Tooltip>
-              <Icon name="png/fiat-dao" width={27} height={27}  style={{ marginLeft: 10 }} />
+              <Icon name="png/fiat-dao" width={27} height={27} style={{ marginLeft: 10 }} />
               <button
                 type="button"
                 className="button-primary button-small"
@@ -97,18 +97,17 @@ const VotingHeader: React.FC = () => {
           </Grid>
           <Divider type="vertical" />
 
-
           <Grid flow="row" gap={2} className={s.item2}>
             <Text type="p2" color="secondary" className="mb-4">
               {FDTToken.symbol} Balance
             </Text>
             <Skeleton loading={fdtBalance === undefined}>
-            <Grid flow="col" gap={8} align="center">
-              <Text type="h3" weight="semibold" color="primary">
-                {formatEntrValue(fdtBalance)}
-              </Text>
-              <Icon name={FDTToken.icon!} width={27} height={27} />
-            </Grid>
+              <Grid flow="col" gap={8} align="center">
+                <Text type="h3" weight="semibold" color="primary">
+                  {formatEntrValue(fdtBalance)}
+                </Text>
+                <Icon name={FDTToken.icon!} width={27} height={27} />
+              </Grid>
             </Skeleton>
           </Grid>
 
@@ -117,7 +116,7 @@ const VotingHeader: React.FC = () => {
             <Text type="p2" color="secondary" className="sm-mb-8">
               Total voting power
             </Text>
-            <div className={cn('flex col-gap-16 align-center', s.item4__flex)}>
+            <div className={cn('flex col-gap-8 align-center', s.item4__flex)}>
               <Skeleton loading={votingPower === undefined}>
                 <Text type="h3" weight="semibold" color="primary">
                   {formatEntrValue(votingPower) || '-'}
