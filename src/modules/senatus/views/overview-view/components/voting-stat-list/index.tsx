@@ -70,7 +70,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                   amount of ${FDTToken.symbol}
                   staked because of the multiplier mechanic
                 </Text>
-                <ExternalLink href="https://docs.universe.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                <ExternalLink href="https://discord.gg/GZE6kjR6g5" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
                 </ExternalLink>
               </Grid>
