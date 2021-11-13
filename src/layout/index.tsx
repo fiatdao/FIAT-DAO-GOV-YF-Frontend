@@ -1,11 +1,10 @@
 import React, { Suspense, lazy } from 'react';
-import { isMobile } from 'react-device-detect';
-import cn from 'classnames';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AntdSpin from 'antd/lib/spin';
+import cn from 'classnames';
 
-import { useGeneral } from 'components/providers/general-provider';
 import ErrorBoundary from 'components/custom/error-boundary';
+import { useGeneral } from 'components/providers/general-provider';
 import WarningProvider from 'components/providers/warning-provider';
 import LayoutFooter from 'layout/components/layout-footer';
 import LayoutHeader from 'layout/components/layout-header';
@@ -14,8 +13,9 @@ import ThemeSwitcher from './components/theme-switcher';
 
 import s from './s.module.scss';
 
-const PlugView = lazy(() => import('modules/plug'));
+// const PlugView = lazy(() => import('modules/plug'));
 const RewardsView = lazy(() => import('modules/rewards'));
+const AirdropView = lazy(() => import('modules/airdrop'));
 const SenatusView = lazy(() => import('modules/senatus'));
 
 const LayoutView: React.FC = () => {
@@ -31,6 +31,7 @@ const LayoutView: React.FC = () => {
                 <Switch>
                   {/*<Route path="/" component={PlugView} />*/}
                   <Route path="/rewards" component={RewardsView} />
+                  <Route path="/airdrop" component={AirdropView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />
                   <Redirect from="/" to="/rewards" />
