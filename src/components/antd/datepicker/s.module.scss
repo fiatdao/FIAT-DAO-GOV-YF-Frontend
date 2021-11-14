@@ -86,12 +86,12 @@
 
     :global(.ant-picker-time-panel-cell-selected) {
       :global(.ant-picker-time-panel-cell-inner) {
-        background: var(--gradient-green);
+        background: var(--gradient-secondary-pink);
       }
     }
 
     :global(.ant-picker-time-panel-cell-inner):hover {
-      background: var(--gradient-green);
+      background: var(--gradient-secondary-pink);
     }
 
     :global(.ant-picker-cell.ant-picker-cell-today.ant-picker-cell-selected) {
@@ -102,20 +102,20 @@
   }
 
   :global(.ant-picker-cell.ant-picker-cell-today) :global(.ant-picker-cell-inner)::before {
-    border: 1px solid var(--gradient-green-safe);
+    border: 1px solid var(--gradient-pink-safe);
   }
 
   :global(.ant-picker-cell.ant-picker-cell-selected) :global(.ant-picker-cell-inner) {
     color: var(--theme-primary-color);
-    background: var(--gradient-green);
+    background: var(--gradient-secondary-pink);
   }
 
   :global(.ant-picker-cell.ant-picker-cell-selected) :global(.ant-picker-cell-inner)::before {
-    border: 1px solid var(--gradient-green-safe);
+    border: 1px solid var(--gradient-pink-safe);
   }
 
   :global(.ant-btn.ant-btn-primary) {
-    background: var(--gradient-green);
+    background: var(--gradient-secondary-pink);
     border: 0;
     color: var(--theme-primary-color);
   }

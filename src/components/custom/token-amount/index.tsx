@@ -63,7 +63,7 @@ const TokenAmount: React.FC<TokenAmountProps> = props => {
         placeholder={max !== undefined ? `0 (Max ${formatBigValue(bnMaxValue, displayDecimals)})` : ''}
         addonBefore={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {typeof tokenIcon === 'string' && <Icon name={tokenIcon as TokenIconNames} width={32} height={32} />}
+            {typeof tokenIcon === 'string' && <Icon name={tokenIcon as TokenIconNames} width={30} height={30} />}
             {typeof tokenIcon === 'object' && tokenIcon}
             <div className="mr-8" />
             {!isMobile && (

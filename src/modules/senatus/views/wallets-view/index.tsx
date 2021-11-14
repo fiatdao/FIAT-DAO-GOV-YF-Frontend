@@ -9,12 +9,14 @@ import WalletDepositView from 'modules/senatus/views/wallet-deposit-view';
 import WalletLockView from 'modules/senatus/views/wallet-lock-view';
 import WalletWithdrawView from 'modules/senatus/views/wallet-withdraw-view';
 import { useWallet } from 'wallets/wallet';
+import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 type WalletViewRouteParams = {
   action: string;
 };
 
 const WalletView: React.FC = () => {
+  const isMobile = useMediaQuery(992);
   const history = useHistory();
   const wallet = useWallet();
   const {
@@ -42,15 +44,31 @@ const WalletView: React.FC = () => {
   }
 
   return (
-    <Grid flow="row" gap={32}>
-      <Text type="h2" weight="bold" color="primary" font="secondary">
+    <Grid flow="row" gap={isMobile ? 16 : 32}>
+      <Text type="h2" weight="semibold" color="primary" font="secondary">
         Wallet
       </Text>
       <Tabs activeKey={activeTab} simple onChange={handleTabChange}>
-        <Tabs.Tab key="deposit" tab="Deposit" />
-        <Tabs.Tab key="lock" tab="Lock" />
-        <Tabs.Tab key="delegate" tab="Delegate" />
-        <Tabs.Tab key="withdraw" tab="Withdraw" />
+        <Tabs.Tab key="deposit"
+                  tab={
+                    <Text type="p1" weight="500" >
+                      Deposit
+                    </Text>} />
+        <Tabs.Tab key="lock"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Lock
+                    </Text>} />
+        <Tabs.Tab key="delegate"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Delegate
+                    </Text>} />
+        <Tabs.Tab key="withdraw"
+                  tab={
+                    <Text type="p1" weight="500">
+                      Withdraw
+                    </Text>} />
       </Tabs>
       <Switch>
         <Route path="/senatus/wallet/deposit" exact component={WalletDepositView} />

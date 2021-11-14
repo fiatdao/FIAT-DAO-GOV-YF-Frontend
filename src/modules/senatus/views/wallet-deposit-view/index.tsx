@@ -1,7 +1,9 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import AntdForm from 'antd/lib/form';
 import AntdSwitch from 'antd/lib/switch';
 import BigNumber from 'bignumber.js';
+import cn from 'classnames';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
@@ -19,6 +21,8 @@ import config from '../../../../config';
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../../components/dao-provider';
 import WalletDepositConfirmModal from './components/wallet-deposit-confirm-modal';
+
+import s from './s.module.scss';
 
 type DepositFormData = {
   amount?: BigNumber;
@@ -109,17 +113,17 @@ const WalletDepositView: React.FC = () => {
   }, [comitiumAllowance]);
 
   return (
-    <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
+    <div className={cn('card', s.card)}>
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -128,7 +132,7 @@ const WalletDepositView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Wallet Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -137,7 +141,7 @@ const WalletDepositView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Enable Token
           </Text>
           <AntdSwitch
@@ -148,7 +152,7 @@ const WalletDepositView: React.FC = () => {
           />
         </Grid>
 
-        {state.enabled && (
+        {state.enabled && !isMobile && (
           <button
             type="button"
             className="button-ghost-monochrome p-8"
@@ -158,26 +162,24 @@ const WalletDepositView: React.FC = () => {
                 expanded: !prevState.expanded,
               }))
             }>
-            <span>
-              <Icon name="chevron-right" rotate={state.expanded ? 270 : 0} />
-            </span>
+            <Icon name="chevron-right" rotate={state.expanded ? 270 : 0} />
           </button>
         )}
       </Grid>
 
       {state.expanded && (
         <Form
-          className="p-24"
+          className={cn('p-24', s.cardForm)}
           form={form}
           initialValues={InitialFormValues}
           validateTrigger={['onSubmit']}
           onFinish={handleFinish}>
           <Grid flow="row" gap={32}>
-            <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+            <Grid className={s.cardCont}>
               <Grid flow="row" gap={32}>
                 <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                   <TokenAmount
-                    tokenIcon="png/enterdao"
+                    tokenIcon={FDTToken.icon}
                     max={fdtBalance}
                     maximumFractionDigits={FDTToken.decimals}
                     name={FDTToken.symbol}
@@ -198,9 +200,9 @@ const WalletDepositView: React.FC = () => {
                 </Form.Item>
               </Grid>
             </Grid>
-            <Button type="primary" htmlType="submit" loading={state.saving} style={{ justifySelf: 'start' }}>
+            <button type="submit" className="button-primary" disabled={state.saving} style={{ justifySelf: 'start' }}>
               Deposit
-            </Button>
+            </button>
           </Grid>
         </Form>
       )}

@@ -19,7 +19,7 @@
 }
 
 .row {
-  @include font-p1-semi-bold;
+  @include font-p1-500;
   padding: 16px 32px;
   display: flex;
   align-items: center;
@@ -37,6 +37,7 @@
 }
 
 .data {
+  @include font-p1-semi-bold;
   margin-left: auto;
   margin-bottom: 0;
   display: flex;
@@ -48,6 +49,6 @@
   margin-left: 8px;
 }
 
-.dataTotal {
-  @include font-h3-bold;
-}
+//.dataTotal {
+//  @include font-h3-bold;
+//}

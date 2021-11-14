@@ -16,6 +16,9 @@ import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../../components/dao-provider';
+import cn from 'classnames';
+
+import s from './s.module.scss';
 
 type WithdrawFormData = {
   amount?: BigNumber;
@@ -69,17 +72,17 @@ const WalletWithdrawView: React.FC = () => {
   }
 
   return (
-    <div className="card">
-      <Grid className="card-header" flow="col" gap={24} colsTemplate="1fr 1fr 1fr 1fr 42px" align="start">
+    <div className={cn('card', s.card)}>
+      <Grid gap={24} className={cn('card-header', s.cardHeader)}>
         <Grid flow="col" gap={12} align="center">
-          <Icon name="png/fiat-dao" width={40} height={40} />
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="semibold" color="primary">
             {FDTToken.symbol}
           </Text>
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Staked Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -88,7 +91,7 @@ const WalletWithdrawView: React.FC = () => {
         </Grid>
 
         <Grid flow="row" gap={4}>
-          <Text type="small" weight="semibold" color="secondary">
+          <Text type="small" weight="500" color="secondary">
             Wallet Balance
           </Text>
           <Text type="p1" weight="semibold" color="primary">
@@ -96,7 +99,7 @@ const WalletWithdrawView: React.FC = () => {
           </Text>
         </Grid>
 
-        <div />
+        <div className={s.empty} />
       </Grid>
       <Form
         className="p-24"
@@ -105,11 +108,11 @@ const WalletWithdrawView: React.FC = () => {
         validateTrigger={['onSubmit']}
         onFinish={handleSubmit}>
         <Grid flow="row" gap={32}>
-          <Grid flow="col" gap={64} colsTemplate="1fr 1fr">
+          <Grid className={s.cardCont}>
             <Grid flow="row" gap={32}>
               <Form.Item name="amount" label="Amount" rules={[{ required: true, message: 'Required' }]}>
                 <TokenAmount
-                  tokenIcon="png/enterdao"
+                  tokenIcon={FDTToken.icon}
                   name={FDTToken.symbol}
                   max={stakedBalance}
                   maximumFractionDigits={FDTToken.decimals}
@@ -130,14 +133,13 @@ const WalletWithdrawView: React.FC = () => {
               </Form.Item>
             </Grid>
           </Grid>
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={state.saving}
-            disabled={formDisabled}
+          <button
+            type="submit"
+            className="button-primary"
+            disabled={state.saving || formDisabled}
             style={{ justifySelf: 'start' }}>
             Withdraw
-          </Button>
+          </button>
         </Grid>
       </Form>
     </div>
