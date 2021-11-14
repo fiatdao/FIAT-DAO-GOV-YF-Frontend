@@ -58,8 +58,8 @@ const DaoCard: FC = () => {
           <Text type="lb2" weight="500" color="secondary">
             My Staked Balance
           </Text>
-          <div className="flex flow-col">
-            <Icon name="png/fiat-dao" className="mr-4" />
+          <div className="flex flow-col align-center">
+            <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
             <Text type="p1" weight="500" color="primary">
               {formatToken(daoComitium.balance) ?? '-'}
             </Text>
@@ -91,8 +91,8 @@ const DaoCard: FC = () => {
           <Text type="lb2" weight="500" color="secondary">
             My {FDTToken.symbol} Rewards
           </Text>
-          <div className="flex flow-col">
-            <Icon name="png/fiat-dao" className="mr-4" />
+          <div className="flex flow-col align-center">
+            <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
             <Text type="p1" weight="500" color="primary">
               {formatToken(daoReward.claimValue) ?? '-'}
             </Text>
