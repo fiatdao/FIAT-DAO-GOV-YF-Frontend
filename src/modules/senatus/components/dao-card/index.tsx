@@ -46,8 +46,8 @@ const DaoCard: FC = () => {
         <Text type="lb2" weight="500" color="secondary">
           {FDTToken.symbol} Staked
         </Text>
-        <div className="flex flow-col">
-          <Icon name="png/fiat-dao" className="mr-4" />
+        <div className="flex flow-col align-center">
+          <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
           <Text type="p1" weight="500" color="primary">
             {formatToken(daoComitium.fdtStaked) ?? '-'}
           </Text>
@@ -75,8 +75,8 @@ const DaoCard: FC = () => {
             out of {formatToken(daoReward.poolFeature?.totalAmount)}
           </Text>
         </div>
-        <div className="flex flow-col">
-          <Icon name="png/fiat-dao" className="mr-4" />
+        <div className="flex flow-col align-center">
+          <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
           <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="500" color="primary">
