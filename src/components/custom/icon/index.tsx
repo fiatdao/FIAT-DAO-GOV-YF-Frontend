@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import cn from 'classnames';
 
+import accountImgWithout from 'resources/png/account_img_without.png';
 import accountImg from 'resources/png/account_img.png';
 import addEnterSrc from 'resources/png/add-enter.png';
 import axsSrc from 'resources/png/axie.png';
@@ -200,6 +201,7 @@ export type IconNames =
   | 'png/telegram'
   | 'png/empty-table'
   | 'png/account'
+  | 'png/account_without'
   | 'png/tx-progress'
   | 'png/tx-success'
   | 'png/tx-failure'
@@ -299,6 +301,8 @@ const Icon: React.FC<IconProps> = props => {
           return telegramSrc;
         case 'png/account':
           return accountImg;
+        case 'png/account_without':
+          return accountImgWithout;
         default:
           return '';
       }

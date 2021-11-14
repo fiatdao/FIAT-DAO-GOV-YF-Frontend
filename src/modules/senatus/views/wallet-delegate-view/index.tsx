@@ -127,7 +127,7 @@ const WalletDelegateView: React.FC = () => {
                 label="Delegate address"
                 rules={[{ required: true, message: 'Required' }]}>
                 <TokenInput
-                  addonBefore={<Icon name={FDTToken.icon!} width={27} height={27} />}
+                  addonBefore={<Icon name="png/account_without" width="32" height="32" />}
                   disabled={formDisabled || state.saving}
                 />
               </Form.Item>
