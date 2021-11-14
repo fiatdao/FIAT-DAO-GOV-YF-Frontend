@@ -67,12 +67,11 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
               <Grid flow="row" gap={8} align="start">
                 <Text type="p2">
                   This number shows the amount of v{FDTToken.symbol} currently minted. This number may differ from the
-                  amount of ${FDTToken.symbol}
-                  staked because of the multiplier mechanic
+                  amount of ${FDTToken.symbol} staked because of the multiplier mechanic.
                 </Text>
-                <ExternalLink href="https://discord.gg/GZE6kjR6g5" className="link-blue" style={{ fontWeight: 600 }}>
+                {/*<ExternalLink href="https://discord.gg/GZE6kjR6g5" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
-                </ExternalLink>
+                </ExternalLink>*/}
               </Grid>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
@@ -93,12 +92,12 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             text={
               <Grid flow="row" gap={8} align="start">
                 <Text type="p2">
-                  This counter shows the average amount of time ${FDTToken.symbol} stakers locked their deposits in
+                  This counter shows the average amount of time ${FDTToken.symbol} stakers have locked their deposits for in
                   order to take advantage of the voting power bonus.
                 </Text>
-                <ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                {/*<ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
-                </ExternalLink>
+                </ExternalLink>*/}
               </Grid>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
@@ -121,8 +120,8 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
           <Hint
             text={
               <Text type="p2">
-                This number shows the ${FDTToken.symbol} token rewards distributed so far out of the total of{' '}
-                {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)} that are going to be available for the DAO
+                This number shows the amount of ${FDTToken.symbol} rewards distributed so far out of the total of{' '}
+                {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)} that are going to be available for DAO
                 Staking.
               </Text>
             }>
@@ -153,9 +152,9 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                 <Text type="p2">
                   This number shows the amount of v{FDTToken.symbol} that is delegated to other addresses.
                 </Text>
-                <ExternalLink href="" className="link-blue" style={{ fontWeight: 600 }}>
+                {/*<ExternalLink href="" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
-                </ExternalLink>
+                </ExternalLink>*/}
               </Grid>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
