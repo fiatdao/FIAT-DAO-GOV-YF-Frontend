@@ -67,8 +67,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
               <Grid flow="row" gap={8} align="start">
                 <Text type="p2">
                   This number shows the amount of v{FDTToken.symbol} currently minted. This number may differ from the
-                  amount of ${FDTToken.symbol}
-                  staked because of the multiplier mechanic.
+                  amount of ${FDTToken.symbol} staked because of the multiplier mechanic.
                 </Text>
                 {/*<ExternalLink href="https://discord.gg/GZE6kjR6g5" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
@@ -96,9 +95,9 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                   This counter shows the average amount of time ${FDTToken.symbol} stakers have locked their deposits for in
                   order to take advantage of the voting power bonus.
                 </Text>
-                <ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
+                {/*<ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
-                </ExternalLink>
+                </ExternalLink>*/}
               </Grid>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
@@ -153,9 +152,9 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
                 <Text type="p2">
                   This number shows the amount of v{FDTToken.symbol} that is delegated to other addresses.
                 </Text>
-                <ExternalLink href="" className="link-blue" style={{ fontWeight: 600 }}>
+                {/*<ExternalLink href="" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
-                </ExternalLink>
+                </ExternalLink>*/}
               </Grid>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
