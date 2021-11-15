@@ -107,7 +107,7 @@ export const EthFdtSLPYfPool: YFPoolMeta = {
 
 export const sOHMFdtSLPYfPool: YFPoolMeta = {
   name: YFPoolID.sOHM_FDT_SLP,
-  label: 'sOHM_FDT_SUSHI_LP',
+  label: 'wsOHM_FDT_SUSHI_LP',
   icons: ['png/sOHM_FDT_SUSHI_LP'],
   colors: ['var(--theme-red-color)'],
   tokens: [sOHMFdtSLPToken],
@@ -122,7 +122,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   RGTYfPool,
   wsOHMYfPool,
   // EthFdtSLPYfPool,
-  // sOHMFdtSLPYfPool,
+  sOHMFdtSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
