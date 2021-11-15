@@ -249,22 +249,15 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
     wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
-  // wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
-
-  console.log('wsOHMToken?.price', wsOHMToken?.price);
+  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
 
   const supply = totalSupply.unscaleBy(decimals);
-
-// .multipliedBy(new BigNumber(wsOHMToken.price as BigNumber))
 
   if (!wsOHMReserve || !supply || supply.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  console.log('wsOHMReserve', wsOHMReserve.toString());
-  console.log('wsOHMReserve', supply.toString());
-
-  return wsOHMReserve.dividedBy(supply).multipliedBy(2);
+  return wsOHMReserve.div(supply).times(2);
 }
 
 export function getTokenPrice(symbol: string): BigNumber | undefined {
