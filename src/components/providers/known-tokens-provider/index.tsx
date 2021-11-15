@@ -227,37 +227,7 @@ async function getFdtPrice(): Promise<BigNumber> {
     return BigNumber.ZERO;
   }
 
-  console.log(' wsOHMReserve.dividedBy(fdtReserve)',  wsOHMReserve.dividedBy(fdtReserve));
-
   return wsOHMReserve.dividedBy(fdtReserve);
-}
-
-// ToDo: Check the SLP price calculation
-async function getEthFdtSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, EthFdtSLPToken.address);
-
-  const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
-    { method: 'decimals', transform: Number },
-    { method: 'totalSupply', transform: value => new BigNumber(value) },
-    { method: 'token0' },
-    { method: 'getReserves' },
-  ]);
-
-  let usdcReserve;
-
-  if (String(token0).toLowerCase() === FDTToken.address) {
-    usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
-  } else {
-    usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
-  }
-
-  const supply = totalSupply.unscaleBy(decimals);
-
-  if (!usdcReserve || !supply || supply.eq(BigNumber.ZERO)) {
-    return BigNumber.ZERO;
-  }
-
-  return usdcReserve.dividedBy(supply).multipliedBy(2);
 }
 
 // ToDo: Check the SLP price calculation
@@ -281,9 +251,14 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
 
   const supply = totalSupply.unscaleBy(decimals);
 
+  console.log({ wsOHMReserve});
+  console.log({ supply});
+
   if (!wsOHMReserve || !supply || supply.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
+
+  console.log('wsOHMReserve.dividedBy(supply).multipliedBy(2)==', wsOHMReserve.dividedBy(supply).multipliedBy(2));
 
   return wsOHMReserve.dividedBy(supply).multipliedBy(2);
 }
@@ -350,7 +325,7 @@ const KnownTokensProvider: FC = props => {
 
     (async () => {
       FDTToken.price = await getFdtPrice().catch(() => undefined);
-      EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
+      // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
       wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
