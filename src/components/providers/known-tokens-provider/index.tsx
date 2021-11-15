@@ -330,10 +330,6 @@ const KnownTokensProvider: FC = props => {
     (FDTToken.contract as Erc20Contract).loadCommon().catch(Error);
 
     (async () => {
-      FDTToken.price = await getFdtPrice().catch(() => undefined);
-      // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
-      wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
-
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
         .join(',');
@@ -351,8 +347,14 @@ const KnownTokensProvider: FC = props => {
               token.price = new BigNumber(price);
             }
           }
+        });
 
-          console.log(`[Token Price] ${token.symbol} = ${token?.price?.toString()}`);
+        FDTToken.price = await getFdtPrice().catch(() => undefined);
+        // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
+        wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
+
+
+        KNOWN_TOKENS.forEach(token => {
           console.log(`[Token Price] ${token.symbol} = ${formatUSD(token.price)}`);
         });
       } catch {}
