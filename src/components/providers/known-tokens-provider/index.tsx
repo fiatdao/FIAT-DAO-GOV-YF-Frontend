@@ -21,7 +21,7 @@ export enum KnownTokens {
   RGT = 'RGT',
   wsOHM = 'wsOHM',
   ETH_FDT_SLP = 'ETH_FDT_SLP',
-  sOHM_FDT_SLP = 'sOHM_FDT_SLP',
+  wsOHM_FDT_SLP = 'wsOHM_FDT_SLP',
 }
 
 export type TokenMeta = {
@@ -133,13 +133,13 @@ export const EthFdtSLPToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.ethFDTSLP),
 };
 
-export const sOHMFdtSLPToken: TokenMeta = {
-  address: config.tokens.sOHMFDTSLP,
-  symbol: KnownTokens.sOHM_FDT_SLP,
+export const wsOHMFdtSLPToken: TokenMeta = {
+  address: config.tokens.wsOHMFDTSLP,
+  symbol: KnownTokens.wsOHM_FDT_SLP,
   name: 'sOHM FDT SUSHI LP',
   decimals: 18,
-  icon: 'png/sOHM_FDT_SUSHI_LP',
-  contract: new Erc20Contract([], config.tokens.sOHMFDTSLP),
+  icon: 'png/wsOHM_FDT_SUSHI_LP',
+  contract: new Erc20Contract([], config.tokens.wsOHMFDTSLP),
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
@@ -153,7 +153,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   RGTToken,
   wsOHMToken,
   EthFdtSLPToken,
-  sOHMFdtSLPToken,
+  wsOHMFdtSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -257,8 +257,8 @@ async function getEthFdtSLPPrice(): Promise<BigNumber> {
 }
 
 // ToDo: Check the SLP price calculation
-async function getSOHMFdtSLPPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, sOHMFdtSLPToken.address);
+async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, wsOHMFdtSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -347,7 +347,7 @@ const KnownTokensProvider: FC = props => {
     (async () => {
       FDTToken.price = await getFdtPrice().catch(() => undefined);
       EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
-      sOHMFdtSLPToken.price = await getSOHMFdtSLPPrice().catch(() => undefined);
+      wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
 
       const ids = KNOWN_TOKENS.map(tk => tk.coinGeckoId)
         .filter(Boolean)
