@@ -203,7 +203,9 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 
 // ToDo: Check the ENTR price calculation
 async function getFdtPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, FDTToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, wsOHMFdtSLPToken.address);
+
+  console.log('priceFeedContract', priceFeedContract);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
@@ -211,21 +213,23 @@ async function getFdtPrice(): Promise<BigNumber> {
   ]);
 
   let fdtReserve;
-  let usdcReserve;
+  let wsOHMReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
     fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
-    usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
+    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
   } else {
     fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
-    usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
+    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
-  if (!usdcReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
+  if (!wsOHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  return usdcReserve.dividedBy(fdtReserve);
+  console.log(' wsOHMReserve.dividedBy(fdtReserve)',  wsOHMReserve.dividedBy(fdtReserve));
+
+  return wsOHMReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
@@ -267,21 +271,21 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
     { method: 'getReserves' },
   ]);
 
-  let usdcReserve;
+  let wsOHMReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
-    usdcReserve = new BigNumber(reserve1).unscaleBy(UsdcToken.decimals);
+    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
   } else {
-    usdcReserve = new BigNumber(reserve0).unscaleBy(UsdcToken.decimals);
+    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
   const supply = totalSupply.unscaleBy(decimals);
 
-  if (!usdcReserve || !supply || supply.eq(BigNumber.ZERO)) {
+  if (!wsOHMReserve || !supply || supply.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  return usdcReserve.dividedBy(supply).multipliedBy(2);
+  return wsOHMReserve.dividedBy(supply).multipliedBy(2);
 }
 
 export function getTokenPrice(symbol: string): BigNumber | undefined {
