@@ -205,8 +205,6 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 async function getFdtPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, wsOHMFdtSLPToken.address);
 
-  console.log('priceFeedContract', priceFeedContract);
-
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
     { method: 'getReserves' },
@@ -226,6 +224,8 @@ async function getFdtPrice(): Promise<BigNumber> {
   if (!wsOHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
+
+  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
 
   return wsOHMReserve.dividedBy(fdtReserve);
 }
@@ -308,8 +308,6 @@ export function convertTokenIn(
 }
 
 export function convertTokenInUSD(amount: BigNumber | number | undefined, source: string): BigNumber | undefined {
-  // console.log('amount', amount);
-  console.log('source', source === 'wsOHM_FDT_SLP' && amount?.toString());
   return convertTokenIn(amount, source, KnownTokens.USDC);
 }
 
