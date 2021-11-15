@@ -249,6 +249,10 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
     wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
+  // wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
+
+  console.log('wsOHMToken?.price', wsOHMToken?.price);
+
   const supply = totalSupply.unscaleBy(decimals);
 
 // .multipliedBy(new BigNumber(wsOHMToken.price as BigNumber))
