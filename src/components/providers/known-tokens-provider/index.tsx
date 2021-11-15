@@ -243,10 +243,12 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
 
   let wsOHMReserve;
 
-  if (String(token0).toLowerCase() === wsOHMToken.address) {
-    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
+  if (String(token0).toLowerCase() === FDTToken.address) {
+    // @ts-ignore
+    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals).multipliedBy(new BigNumber(wsOHMToken.price));
   } else {
-    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
+    // @ts-ignore
+    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals).multipliedBy(new BigNumber(wsOHMToken.price));
   }
 
   const supply = totalSupply.unscaleBy(decimals);
