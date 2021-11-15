@@ -255,13 +255,13 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
   const supply = totalSupply.unscaleBy(decimals);
 
   console.log('wsOHMReserve', wsOHMReserve?.toString());
-  console.log('supply', supply?.toString);
+  console.log('supply', supply?.toString());
 
   if (!wsOHMReserve || !supply || supply.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  console.log('wsOHMReserve.dividedBy(supply).multipliedBy(2)==', wsOHMReserve.dividedBy(supply).multipliedBy(2).toString);
+  console.log('wsOHMReserve.dividedBy(supply).multipliedBy(2)==', wsOHMReserve.dividedBy(supply).multipliedBy(2).toString());
 
   return wsOHMReserve.dividedBy(supply).multipliedBy(2);
 }
