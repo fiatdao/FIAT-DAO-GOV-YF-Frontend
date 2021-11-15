@@ -33,6 +33,8 @@ const PoolStats: React.FC<Props> = ({ className }) => {
 
   const isEnded = poolMeta?.contract.isPoolEnded === true;
 
+  console.log('FDTToken.price', FDTToken.price);
+
   return (
     <div className={cn(s.component, className)}>
       <div className="card p-24">
@@ -90,23 +92,23 @@ const PoolStats: React.FC<Props> = ({ className }) => {
         </div>
       </div>
 
-      {/*<div className="card p-24">*/}
-      {/*  <div className="flex flow-row justify-space-between full-height">*/}
-      {/*    <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>*/}
-      {/*      {FDTToken.symbol} Price*/}
-      {/*    </Text>*/}
-      {/*    <div className="flex flow-row">*/}
-      {/*      <Text type="h2" weight="semibold" color="primary" className="mb-4">*/}
-      {/*        {formatUSD(FDTToken.price) ?? '-'}*/}
-      {/*      </Text>*/}
-      {/*      <ExternalLink href={FDT_MARKET_LINK} className="link-gradient">*/}
-      {/*        <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">*/}
-      {/*          SushiSwap market*/}
-      {/*        </Text>*/}
-      {/*      </ExternalLink>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+      <div className="card p-24">
+        <div className="flex flow-row justify-space-between full-height">
+          <Text type="lb2" weight="semibold" color="primary" className={cn(s.label, 'mb-48 sm-mb-24')}>
+            {FDTToken.symbol} Price
+          </Text>
+          <div className="flex flow-row">
+            <Text type="h2" weight="semibold" color="primary" className="mb-4">
+              {formatUSD(FDTToken.price) ?? '-'}
+            </Text>
+            <ExternalLink href={FDT_MARKET_LINK} className="link-gradient">
+              <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">
+                SushiSwap market
+              </Text>
+            </ExternalLink>
+          </div>
+        </div>
+      </div>
 
       {!isEnded && (
         <div className="card p-24">
