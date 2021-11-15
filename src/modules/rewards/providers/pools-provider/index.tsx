@@ -12,7 +12,7 @@ import {
   RGTToken,
   wsOHMToken,
   EthFdtSLPToken,
-  sOHMFdtSLPToken,
+  wsOHMFdtSLPToken,
   TokenMeta,
   useKnownTokens,
 } from 'components/providers/known-tokens-provider';
@@ -30,7 +30,7 @@ export enum YFPoolID {
   RGT = 'rgt',
   wsOHM = 'wsOHM',
   ETH_FDT_SLP = 'eth-fdt-slp',
-  sOHM_FDT_SLP = 'sOHM-fdt-slp',
+  wsOHM_FDT_SLP = 'wsOHM-fdt-slp',
 }
 
 export type YFPoolMeta = {
@@ -105,13 +105,13 @@ export const EthFdtSLPYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.ethFDTSLP),
 };
 
-export const sOHMFdtSLPYfPool: YFPoolMeta = {
-  name: YFPoolID.sOHM_FDT_SLP,
+export const wsOHMFdtSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.wsOHM_FDT_SLP,
   label: 'wsOHM_FDT_SUSHI_LP',
-  icons: ['png/sOHM_FDT_SUSHI_LP'],
+  icons: ['png/wsOHM_FDT_SUSHI_LP'],
   colors: ['var(--theme-red-color)'],
-  tokens: [sOHMFdtSLPToken],
-  contract: new YfPoolContract(config.contracts.yf.sOHMFDTSLP),
+  tokens: [wsOHMFdtSLPToken],
+  contract: new YfPoolContract(config.contracts.yf.wsOHMFDTSLP),
 };
 
 const KNOWN_POOLS: YFPoolMeta[] = [
@@ -122,7 +122,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   RGTYfPool,
   wsOHMYfPool,
   // EthFdtSLPYfPool,
-  sOHMFdtSLPYfPool,
+  wsOHMFdtSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
@@ -425,7 +425,7 @@ const YFPoolsProvider: FC = props => {
       <ContractListener contract={RGTYfPool.contract} />
       <ContractListener contract={wsOHMYfPool.contract} />
       <ContractListener contract={EthFdtSLPToken.contract} />
-      <ContractListener contract={sOHMFdtSLPToken.contract} />
+      <ContractListener contract={wsOHMFdtSLPToken.contract} />
     </YFPoolsContext.Provider>
   );
 };

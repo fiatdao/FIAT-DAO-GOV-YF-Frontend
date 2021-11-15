@@ -25,7 +25,7 @@ const config = {
     rgt: toLowerCase(process.env.REACT_APP_TOKEN_RGT_ADDR),
     wsOHM: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_ADDR),
     ethFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
-    sOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
+    wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
   },
   contracts: {
     yf: {
@@ -37,7 +37,7 @@ const config = {
       rgt: toLowerCase(process.env.REACT_APP_CONTRACT_YF_RGT_ADDR),
       wsOHM: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_ADDR),
       ethFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ETH_FDT_SUSHI_LP),
-      sOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP),
+      wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP),
     },
     dao: {
       governance: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),

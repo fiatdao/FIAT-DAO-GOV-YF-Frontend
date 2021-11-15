@@ -23,7 +23,7 @@ import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
 import plugBgImg from 'resources/png/plug-bg.png';
 import RGTSrc from 'resources/png/RGT.png';
 import sandSrc from 'resources/png/sandbox.png';
-import sOHM_FDT_SUSHI_LPImg from 'resources/png/sOHM_FDT_SUSHI_LP.png';
+import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import telegramSrc from 'resources/png/telegram.png';
 import aaveSrc from 'resources/png/token-aave.png';
 import eslpSrc from 'resources/png/token-eslp.png';
@@ -82,7 +82,7 @@ export type TokenIconNames =
   | 'png/wsOHM'
   | 'png/YFI'
   | 'png/ETH_FDT_SLP'
-  | 'png/sOHM_FDT_SUSHI_LP'
+  | 'png/wsOHM_FDT_SUSHI_LP'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -251,8 +251,8 @@ const Icon: React.FC<IconProps> = props => {
           return fdIconDImg;
         case 'png/ETH_FDT_SLP':
           return ETH_FDT_SLPImg;
-        case 'png/sOHM_FDT_SUSHI_LP':
-          return sOHM_FDT_SUSHI_LPImg;
+        case 'png/wsOHM_FDT_SUSHI_LP':
+          return wsOHM_FDT_SUSHI_LPImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':
