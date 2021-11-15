@@ -244,18 +244,21 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
   let wsOHMReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
-    wsOHMReserve = new BigNumber(reserve1).multipliedBy(new BigNumber(wsOHMToken.price as BigNumber));
+    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
   } else {
-    wsOHMReserve = new BigNumber(reserve0).multipliedBy(new BigNumber(wsOHMToken.price as BigNumber));
+    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
   const supply = totalSupply.unscaleBy(decimals);
+
+// .multipliedBy(new BigNumber(wsOHMToken.price as BigNumber))
 
   if (!wsOHMReserve || !supply || supply.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
   console.log('wsOHMReserve', wsOHMReserve.toString());
+  console.log('wsOHMReserve', supply.toString());
 
   return wsOHMReserve.dividedBy(supply).multipliedBy(2);
 }
