@@ -243,6 +243,9 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
 
   let wsOHMReserve;
 
+  console.log('reserve0', reserve0.toString());
+  console.log('reserve0', reserve1.toString());
+
   if (String(token0).toLowerCase() === FDTToken.address) {
     wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
   } else {
@@ -258,7 +261,7 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
     return BigNumber.ZERO;
   }
 
-  console.log('wsOHMReserve.dividedBy(supply).multipliedBy(2)==', wsOHMReserve.dividedBy(supply).multipliedBy(2).toString());
+  console.log('wsOHMReserve.dividedBy(supply).multipliedBy(2)==', wsOHMReserve.dividedBy(supply).multipliedBy(2).toString);
 
   return wsOHMReserve.dividedBy(supply).multipliedBy(2);
 }
