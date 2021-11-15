@@ -314,6 +314,8 @@ export function convertTokenIn(
 }
 
 export function convertTokenInUSD(amount: BigNumber | number | undefined, source: string): BigNumber | undefined {
+  // console.log('amount', amount);
+  console.log('source', source === 'wsOHM_FDT_SLP' && amount?.toString());
   return convertTokenIn(amount, source, KnownTokens.USDC);
 }
 
@@ -349,6 +351,7 @@ const KnownTokensProvider: FC = props => {
             }
           }
 
+          console.log(`[Token Price] ${token.symbol} = ${token?.price?.toString()}`);
           console.log(`[Token Price] ${token.symbol} = ${formatUSD(token.price)}`);
         });
       } catch {}
