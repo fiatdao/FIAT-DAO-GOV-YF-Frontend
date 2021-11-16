@@ -9,6 +9,7 @@ import useMediaQuery from '../../../hooks/useMediaQuery';
 import Socials from './components/Socials';
 
 import s from './s.module.scss';
+import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 
 const LayoutFooter: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -57,6 +58,9 @@ const LayoutFooter: React.FC = () => {
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
               </div>
+              <div className={s.socialTop}>
+                <Socials />
+              </div>
             </>
           ) : (
             <Socials />
@@ -95,17 +99,32 @@ const LayoutFooter: React.FC = () => {
                 </Link>
               </>
             )}
+            {!isMobile && (
+              <div className={s.copyrightLinks}>
+                <div className={s.poweredBy}>
+                  <a
+                    href={FDT_MARKET_LIQUIDITY_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Add liquidity to SushiSwap USDC/LEAG pool
+                  </a>
+                  <a
+                    href={FDT_MARKET_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    SushiSwap USDC/LEAG market
+                  </a>
+                </div>
+              </div>
+            )}
             <div className={s.copyrightLink}>
               <a href="https://fiatdao.com/" target="_blank" rel="noopener noreferrer">
                 <span>fiatdao.com </span>
               </a>
               © {getYear()}. Open-sourced.
             </div>
-            {!isMobile && (
-              <div className={s.copyrightLinks}>
-                <Socials />
-              </div>
-            )}
           </div>
         </div>
       </div>

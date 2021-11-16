@@ -28,13 +28,15 @@ const InstallMetaMaskModal: React.FC<ModalProps> = props => {
           </Text>
         </Grid>
         <Grid flow="col" justify="space-between">
-          <Button type="primary" href={METAMASK_CHROME_EXT_URL} rel="noopener noreferrer" target="_blank">
-            Install MetaMask
-          </Button>
+          <a href={METAMASK_CHROME_EXT_URL} rel="noopener noreferrer" target="_blank">
+            <button type="button" className="button-primary" >
+              Install MetaMask
+            </button>
+          </a>
 
-          <Button type="ghost" onClick={props.onCancel}>
+          <button type="button" onClick={props.onCancel} className="button-ghost" >
             <span>Go Back</span>
-          </Button>
+          </button>
         </Grid>
       </Grid>
     </Modal>
