@@ -107,14 +107,14 @@ const LayoutFooter: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Add liquidity to SushiSwap USDC/LEAG pool
+                    Add liquidity to SushiSwap wsOHM/FDT pool
                   </a>
                   <a
                     href={FDT_MARKET_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    SushiSwap USDC/LEAG market
+                    SushiSwap wsOHM/FDT market
                   </a>
                 </div>
               </div>
