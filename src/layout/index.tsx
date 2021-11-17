@@ -17,6 +17,7 @@ import s from './s.module.scss';
 const PlugView = lazy(() => import('modules/plug'));
 const RewardsView = lazy(() => import('modules/rewards'));
 const SenatusView = lazy(() => import('modules/senatus'));
+const AgeOfRomulusView = lazy(() => import('modules/age-of-romulus'));
 
 const LayoutView: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -33,6 +34,7 @@ const LayoutView: React.FC = () => {
                   <Route path="/rewards" component={RewardsView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />
+                  <Route path="/age-of-romulus" component={AgeOfRomulusView} />
                   <Redirect from="/" to="/rewards" />
                 </Switch>
               </Suspense>
