@@ -1,85 +1,80 @@
-import React from 'react';
+import {  useState, useEffect  } from 'react';
 import cn from 'classnames';
 
 import Grid from 'components/custom/grid';
+import Icon from 'components/custom/icon';
+import { Text } from 'components/custom/typography';
+import useMediaQuery from 'hooks/useMediaQuery';
 
-import Icon from '../../../../components/custom/icon';
-import { Hint, Text } from '../../../../components/custom/typography';
-import useMediaQuery from '../../../../hooks/useMediaQuery';
+import { fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
+
+import AgeOfRomulusTable from '../../components/age-of-romulus-table'
+import PrizesView from '../../components/prizes-view'
 
 import s from './s.module.scss';
+import { useWallet } from '../../../../wallets/wallet';
 
-const PrizesData = [
-  {
-    date: (
-      <div className={s.date}>
-        <span>20</span>
-        <span>Dec</span>
-      </div>
-    ),
-    icon: <Icon name="png/roman-corona" width="60" height="auto" />,
-    title: 'roman corona',
-    rate: 'Top 5%',
-    stakers: '25',
-    active: false,
-  },
-  {
-    date: (
-      <div className={s.date}>
-        <span>13</span>
-        <span>Dec</span>
-      </div>
-    ),
-    icon: <Icon name="png/roman-gladius" width="60" height="auto" />,
-    title: 'Roman gladius',
-    rate: 'Top 10%',
-    stakers: '50',
-    active: false,
-  },
-  {
-    date: (
-      <div className={s.date}>
-        <span>6</span>
-        <span>Dec</span>
-      </div>
-    ),
-    icon: <Icon name="png/roman-galea" width="60" height="auto" />,
-    title: 'roman galea',
-    rate: 'Top 25%',
-    stakers: '125',
-    active: false,
-  },
-  {
-    date: (
-      <div className={s.date}>
-        <span>29</span>
-        <span>Nov</span>
-      </div>
-    ),
-    icon: <Icon name="png/roman-kithara" width="60" height="auto" />,
-    title: 'roman kithara',
-    rate: 'Top 50%',
-    stakers: '250',
-    active: false,
-  },
-  {
-    date: (
-      <div className={s.date}>
-        <span>22</span>
-        <span>Nov</span>
-      </div>
-    ),
-    icon: <Icon name="png/roman-amphora" width="60" height="auto" />,
-    title: 'roman amphora',
-    rate: 'Everyone',
-    stakers: '500',
-    active: true,
-  },
-];
+// const enum ActiveDates {
+//   amphora = '15 Nov 2021 00:00:00 GMT',
+//   kithara = '17 Nov 2021 00:00:00 GMT',
+//   galea = '6 Dec 2021 00:00:00 GMT',
+//   gladius = '13 Dec 2021 00:00:00 GMT',
+//   corona = '20 Dec 2021 00:00:00 GMT',
+// }
+
+export enum ActiveKeys {
+  amphora = 'amphora',
+  kithara = 'kithara',
+  galea = 'galea',
+  gladius = 'gladius',
+  corona = 'corona',
+}
+
+const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora
+
 
 const AgeOfRomulusView = () => {
   const isTablet = useMediaQuery(992);
-  const isMobile = useMediaQuery(768);
+
+  const wallet = useWallet();
+
+  const [countAllUsers, setCountAllUsers] = useState<null | number>(null)
+  const [isClaimDisable, setIsClaimDisable] = useState<boolean | null>(null)
+  const [allUsers, setAllUsers] = useState<null | any[]>(null)
+
+  useEffect(() => {
+    fetchCountAllUsers().then(setCountAllUsers)
+  }, [])
+
+  useEffect(() => {
+    if(countAllUsers) {
+      const maxCountPerPage = 1000;
+
+      const promises = new Array(Math.ceil(countAllUsers / maxCountPerPage))
+        .fill(null)
+        .map((_, i) => fetchVoters(i + 1, 1000));
+
+      Promise.all(promises).then((responses) => {
+        const result = responses.reduce((acc,{ data}) => (acc.concat(data as any)), []);
+        setAllUsers(result)
+
+      });
+    }
+
+  }, [countAllUsers]);
+
+  useEffect(() => {
+    if(allUsers) {
+      wallet.account
+        // @ts-ignore
+        ? setIsClaimDisable(!!allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
+        : setIsClaimDisable(false)
+    }
+  }, [allUsers, wallet.account])
+
+  console.log({ countAllUsers});
+  console.log({ allUsers});
+
 
   return (
     <div className={s.ageOfRomulus}>
@@ -129,45 +124,7 @@ const AgeOfRomulusView = () => {
               </div>
             </div>
           </div>
-          <div className={s.card}>
-            <Text type="h3" color="primary" className="mb-16">
-              Prizes
-            </Text>
-
-            <div className={s.card__table}>
-              {PrizesData.map(item => (
-                <Grid
-                  flow="col"
-                  key={item.title}
-                  align="center"
-                  gap={8}
-                  colsTemplate={!isMobile ? 'auto 60px 1fr auto auto' : 'auto 60px 1fr auto '}
-                  className={cn(s.card__table__item, { [s.card__table__item__active]: item.active })}>
-                  {item.date}
-                  {item.icon}
-                  <div>
-                    <Text type="lb2" color="primary">
-                      {item.title}
-                    </Text>
-                    <Text type="p3" weight="bold" color="primary">
-                      {item.rate}
-                    </Text>
-                  </div>
-                  <div className={s.stakers}>
-                    <Text type="p2" color="secondary">
-                      <span>{item.stakers}</span>
-                      <span>stakers</span>
-                    </Text>
-                  </div>
-                  <div className={cn({ [s.button]: isMobile })}>
-                    <button type="button" disabled={!item.active} className="button-primary button-small">
-                      {item.active ? 'Claim' : <Hint text="Tooltip">Claim</Hint>}
-                    </button>
-                  </div>
-                </Grid>
-              ))}
-            </div>
-          </div>
+          <PrizesView countAllUsers={countAllUsers} activeKey={ACTIVE_KEY} isClaimDisable={isClaimDisable} />
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>
@@ -176,18 +133,15 @@ const AgeOfRomulusView = () => {
               DAO Stakers
             </Text>
             <Grid flow="col" gap={8} align="center" className={s.counter} colsTemplate="1fr 1fr 1fr">
-              <Text tag="div" type="h3" weight="bold" color="white">
-                4
-              </Text>
-              <Text tag="div" type="h3" weight="bold" color="white">
-                0
-              </Text>
-              <Text tag="div" type="h3" weight="bold" color="white">
-                0
-              </Text>
+              {/*// @ts-ignore*/}
+              {countAllUsers && [...countAllUsers.toString()].map((number, index) => (
+                <Text key={index} tag='div' type='h3' weight='bold' color='white'>
+                  {number}
+                </Text>
+              ))}
             </Grid>
           </div>
-          <div className={s.daoStakers__data}>DAO Stakers data</div>
+          <AgeOfRomulusTable />
         </div>
       </div>
     </div>
