@@ -1,0 +1,284 @@
+.ageOfRomulus {
+  padding: 48px 0;
+
+  h1 {
+    text-align: center;
+
+    span {
+      display: block;
+    }
+  }
+
+  .card {
+    background: var(--theme-leaderboard-card-bg);
+    padding: 18px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+
+    > div,
+    > p,
+    > span {
+      position: relative;
+      z-index: 4;
+    }
+
+    &__dots {
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: -20%;
+        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 80, 139, 0.37) 0%, rgba(255, 80, 139, 0) 100%);
+        opacity: 0.25;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 80px;
+        width: 100%;
+        top: 48px;
+        background: url('../../../../resources/png/leaderboard_card_dots.png') center no-repeat;
+        background-size: contain;
+        z-index: 2;
+        pointer-events: none;
+      }
+    }
+
+    .rank {
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    .rewards {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-gap: 16px;
+      align-items: center;
+      margin-bottom: 40px;
+
+      p {
+        background: var(--gradient-pink);
+        background-size: cover;
+        background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        text-transform: uppercase;
+        margin: 0;
+      }
+    }
+
+    .upcoming {
+      text-align: center;
+      padding-bottom: 72px;
+
+      p {
+        font-size: 10px;
+      }
+
+      &__card {
+        background: var(--theme-secondary-block);
+        padding: 12px;
+        border-radius: 4px;
+        display: inline-block;
+        text-align: left;
+      }
+    }
+
+    .line {
+      height: 0.5px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(255, 76, 140, 0) 0%, #ff4c8c 23.96%, #ff9574 78.12%, rgba(255, 149, 116, 0) 100%);
+    }
+
+    &__table {
+      display: grid;
+      grid-gap: 8px;
+
+      &__item {
+        background: var(--theme-secondary-block);
+        border-radius: 4px;
+        padding: 4px 16px 4px 8px;
+        position: relative;
+
+        @media (max-width: 768px) {
+          padding: 8px;
+        }
+
+        .button {
+          @media (max-width: 768px) {
+            grid-column: 1/5;
+            grid-row: 2;
+
+            button {
+              width: 100%;
+            }
+          }
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          width: calc(100% - 2px);
+          height: calc(100% - 2px);
+          left: 1px;
+          top: 1px;
+          background: var(--theme-secondary-block);
+          pointer-events: none;
+          border-radius: 3px;
+        }
+
+        .date {
+          //opacity: 0.25;
+          font-size: 10px;
+          color: var(--theme-secondary-color);
+          text-align: center;
+
+          span {
+            display: block;
+          }
+        }
+
+        .stakers {
+          padding-right: 22px;
+
+          > div {
+            line-height: normal;
+          }
+
+          span {
+            display: block;
+          }
+        }
+
+        &__active {
+          background: var(--gradient-pink);
+
+          .date {
+            color: var(--theme-primary-color);
+          }
+        }
+
+        > div,
+        > img,
+        > p,
+        > span {
+          position: relative;
+        }
+      }
+
+      button {
+        font-size: 14px;
+        padding: 9px 10px;
+        width: 80px;
+      }
+    }
+
+  }
+}
+
+
+.daoStakers {
+  background: var(--theme-leaderboard-card-bg);
+  border-radius: 4px;
+  overflow: hidden;
+
+  &__head {
+    position: relative;
+    padding: 32px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    > p {
+      position: relative;
+      z-index: 3;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      left: 50%;
+      top: 50%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(255, 80, 139, 0.37) 0%, rgba(255, 80, 139, 0) 100%);
+      opacity: 0.25;
+      z-index: 1;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      height: 131px;
+      width: 353px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: url('../../../../resources/png/daoStakers_dots.png') center no-repeat;
+      background-size: contain;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &__img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: url('../../../../resources/png/stakers_table_img.png') right bottom no-repeat;
+      background-size: contain;
+      height: 100%;
+      content: '';
+      width: 100%;
+      pointer-events: none;
+
+      @media (max-width: 540px) {
+        background-size: cover;
+      }
+    }
+
+    .counter {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+
+      @media (max-width: 768px) {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin-top: 14px;
+      }
+
+      > div {
+        background: var(--theme-leaderboard-counter-item);
+        padding: 17px 14px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  &__data {
+    border-top: 1px solid var(--theme-border-color);
+
+    // Костя, знаю, отступ здесь не нужен - но, пока таблицы нет - с ним красивее)
+    padding: 32px;
+  }
+}

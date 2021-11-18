@@ -22,8 +22,13 @@ import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
 import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
 import plugBgImg from 'resources/png/plug-bg.png';
 import RGTSrc from 'resources/png/RGT.png';
+import romanAmphora from 'resources/png/roman_amphora.png';
+// Leaderboard
+import romanCorona from 'resources/png/roman_corona.png';
+import romanGalea from 'resources/png/roman_galea.png';
+import romanGladius from 'resources/png/roman_gladius.png';
+import romanKithara from 'resources/png/roman_kithara.png';
 import sandSrc from 'resources/png/sandbox.png';
-import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import telegramSrc from 'resources/png/telegram.png';
 import aaveSrc from 'resources/png/token-aave.png';
 import eslpSrc from 'resources/png/token-eslp.png';
@@ -36,6 +41,7 @@ import txProgressImg from 'resources/png/tx-progress.png';
 import txSuccessImg from 'resources/png/tx-success.png';
 import UMASrc from 'resources/png/UMA.png';
 import universeSrc from 'resources/png/universe.png';
+import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import Sprite from 'resources/svg/icons-sprite.svg';
@@ -43,6 +49,13 @@ import Sprite from 'resources/svg/icons-sprite.svg';
 import s from './s.module.scss';
 
 export type LogoIconNames = 'png/fiat-dao';
+
+export type RomanIconNames =
+  | 'png/roman-corona'
+  | 'png/roman-gladius'
+  | 'png/roman-galea'
+  | 'png/roman-kithara'
+  | 'png/roman-amphora';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -106,6 +119,7 @@ export type IconNames =
   | TokenIconNames
   | NavIconNames
   | ThemeIconNames
+  | RomanIconNames
   | 'static/uStar'
   | 'right-arrow-circle-outlined'
   | 'arrow-back'
@@ -303,6 +317,16 @@ const Icon: React.FC<IconProps> = props => {
           return accountImg;
         case 'png/account_without':
           return accountImgWithout;
+        case 'png/roman-corona':
+          return romanCorona;
+        case 'png/roman-gladius':
+          return romanGladius;
+        case 'png/roman-galea':
+          return romanGalea;
+        case 'png/roman-kithara':
+          return romanKithara;
+        case 'png/roman-amphora':
+          return romanAmphora;
         default:
           return '';
       }

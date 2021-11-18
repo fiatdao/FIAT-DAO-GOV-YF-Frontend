@@ -5,11 +5,11 @@ import cn from 'classnames';
 import Icon from 'components/custom/icon';
 
 import { useGeneral } from '../../../components/providers/general-provider';
+import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Socials from './components/Socials';
 
 import s from './s.module.scss';
-import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 
 const LayoutFooter: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -102,18 +102,10 @@ const LayoutFooter: React.FC = () => {
             {!isMobile && (
               <div className={s.copyrightLinks}>
                 <div className={s.poweredBy}>
-                  <a
-                    href={FDT_MARKET_LIQUIDITY_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">
                     Add liquidity to SushiSwap wsOHM/FDT pool
                   </a>
-                  <a
-                    href={FDT_MARKET_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
                     SushiSwap wsOHM/FDT market
                   </a>
                 </div>
