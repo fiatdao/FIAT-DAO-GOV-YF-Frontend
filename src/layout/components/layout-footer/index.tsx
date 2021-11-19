@@ -54,6 +54,13 @@ const LayoutFooter: React.FC = () => {
                   })}>
                   <span>Senatus</span>
                 </Link>
+                <Link
+                  to="/age-of-romulus"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'age-of-romulus',
+                  })}>
+                  <span>Age of Romulus</span>
+                </Link>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
@@ -85,6 +92,9 @@ const LayoutFooter: React.FC = () => {
                   </Link>
                   <Link to="/senatus" className={s.dropdownLink}>
                     <span>Senatus</span>
+                  </Link>
+                  <Link to="/age-of-romulus" className={s.dropdownLink}>
+                    <span>Age of Romulus</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}

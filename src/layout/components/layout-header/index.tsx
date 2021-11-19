@@ -91,6 +91,9 @@ const LayoutHeader: React.FC = () => {
         <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>
           <span>Senatus</span>
         </Link>
+        <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
+          <span>Age of Romulus</span>
+        </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
         {/*</Link>*/}
@@ -183,6 +186,7 @@ const LayoutHeader: React.FC = () => {
                 bottom: 0,
                 right: 0,
                 '--top': `${state?.modifiersData?.popperOffsets?.y || 0}px`,
+                zIndex: 99,
               } as React.CSSProperties
             }
             {...attributes.popper}>
@@ -198,6 +202,9 @@ const LayoutHeader: React.FC = () => {
                   </Link>
                   <Link to="/senatus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Senatus</span>
+                  </Link>
+                  <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Age of Romulus</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
