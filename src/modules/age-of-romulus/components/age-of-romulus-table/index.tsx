@@ -60,11 +60,11 @@ const Columns: ColumnsType<APIVoterEntity> = [
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
-          {prizeList.amphora.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-amphora" />}
-          {prizeList.kithara.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-kithara" />}
-          {prizeList.galea.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-galea" />}
-          {prizeList.gladius.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-gladius" />}
-          {prizeList.corona.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-corona" />}
+          {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-amphora" />}
+          {prizeList.kithara.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-kithara" />}
+          {prizeList.galea.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-galea" />}
+          {prizeList.gladius.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-gladius" />}
+          {prizeList.corona.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-corona" />}
         </div>
       );
     },
