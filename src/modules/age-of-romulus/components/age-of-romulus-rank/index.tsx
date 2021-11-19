@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
-import BigNumber from 'bignumber.js';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 import { Progress } from 'antd';
+import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import format from 'date-fns/format';
+import { formatBigValue } from 'web3/utils';
 
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
@@ -11,18 +13,17 @@ import { Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
 import iconNotConnect from 'resources/svg/not-connected.svg';
 import { useWallet } from 'wallets/wallet';
-import { formatBigValue } from 'web3/utils';
 
-import { PrizesData } from '../prizes-view';
-import { ACTIVE_KEY } from '../../views/age-of-romulus';
 import { APIVoterEntity } from '../../api';
+import { ACTIVE_KEY } from '../../views/age-of-romulus';
+import { PrizesData } from '../prizes-view';
 
 import s from './s.module.scss';
 
 interface IAgeOfRomulusRank {
-  allUsers: null | any[]
-  currUser: null | undefined | APIVoterEntity
-  countAllUsers: null | number
+  allUsers: null | any[];
+  currUser: null | undefined | APIVoterEntity;
+  countAllUsers: null | number;
 }
 
 const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRank) => {
@@ -31,26 +32,25 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
 
   const [nextPrize] = useState(() => {
     const nextPrizeIndex = PrizesData.map((i: any) => i.key).indexOf(ACTIVE_KEY);
-    return  PrizesData[nextPrizeIndex ? nextPrizeIndex - 1 : nextPrizeIndex]
-  })
+    return PrizesData[nextPrizeIndex ? nextPrizeIndex - 1 : nextPrizeIndex];
+  });
 
-  const [isUntil, setIsUntil] = useState(false)
-  const [lastVoterWithPrize, setLastVoterWithPrize] = useState(() => new BigNumber(0))
-
-  useEffect(() => {
-    if(allUsers && countAllUsers && currUser) {
-      const arrForPrize = [...allUsers]
-      arrForPrize.splice(Math.ceil((countAllUsers) * ((nextPrize.rate as number) / 100)))
-      setLastVoterWithPrize(arrForPrize[arrForPrize.length - 1].votingPower)
-
-    }
-  }, [allUsers, countAllUsers, currUser])
+  const [isUntil, setIsUntil] = useState(false);
+  const [lastVoterWithPrize, setLastVoterWithPrize] = useState(() => new BigNumber(0));
 
   useEffect(() => {
-    if(lastVoterWithPrize.isGreaterThan(new BigNumber(0))) {
-      setIsUntil(lastVoterWithPrize.isGreaterThan((currUser as APIVoterEntity).votingPower))
+    if (allUsers && countAllUsers && currUser) {
+      const arrForPrize = [...allUsers];
+      arrForPrize.splice(Math.ceil(countAllUsers * ((nextPrize.rate as number) / 100)));
+      setLastVoterWithPrize(arrForPrize[arrForPrize.length - 1].votingPower);
     }
-  } , [lastVoterWithPrize])
+  }, [allUsers, countAllUsers, currUser]);
+
+  useEffect(() => {
+    if (lastVoterWithPrize.isGreaterThan(new BigNumber(0))) {
+      setIsUntil(lastVoterWithPrize.isGreaterThan((currUser as APIVoterEntity).votingPower));
+    }
+  }, [lastVoterWithPrize]);
 
   return (
     <div className={s.dots}>
@@ -70,7 +70,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
             </button>
           </div>
         </div>
-      ) : !!currUser && (
+      ) : !!currUser ? (
         <div>
           <div className={s.rank}>
             <Text type="p3" color="primary" className="mb-8">
@@ -82,7 +82,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
             <div className="flex inline flow-col align-center mb-32">
               <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
               <Text type="p2" color="primary">
-                vFDT  {formatBigValue(currUser.votingPower, 2, '-', 2)}
+                vFDT {formatBigValue(currUser.votingPower, 2, '-', 2)}
               </Text>
             </div>
           </div>
@@ -99,11 +99,11 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
                 Next prize
               </Text>
               <Text tag="p" type="p2" color="primary" className="mb-9">
-                {format(new Date(nextPrize.date), 'dd')} {format(new Date(nextPrize.date), 'LLL')}, {format(new Date(nextPrize.date), 'y')}
+                {format(new Date(nextPrize.date), 'dd')} {format(new Date(nextPrize.date), 'LLL')},{' '}
+                {format(new Date(nextPrize.date), 'y')}
               </Text>
             </Grid>
-            <div
-              className={cn(s.upcoming__card, { [s.upcoming__card__active]: !isUntil })}>
+            <div className={cn(s.upcoming__card, { [s.upcoming__card__active]: !isUntil })}>
               <Grid flow="col" gap={8} align="center" colsTemplate="60px 1fr">
                 {nextPrize.icon}
                 <div>
@@ -129,10 +129,25 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
                 '100%': '#FF4C8C',
               }}
               trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}
-              percent={isUntil ? currUser.votingPower.times(new BigNumber(100)).div(lastVoterWithPrize).toNumber() : 100}
+              percent={
+                isUntil ? currUser.votingPower.times(new BigNumber(100)).div(lastVoterWithPrize).toNumber() : 100
+              }
               strokeWidth={32}
               showInfo={false}
             />
+          </div>
+        </div>
+      ) : (
+        <div className="flex full-height justify-center align-center">
+          <div className="flex flow-row align-center">
+            <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
+            <Text tag="p" type="p2" color="primary" className="mb-32">
+              To participate in Age of Romulus, stake <br />
+              FDT tokens in the DAO
+            </Text>
+            <Link to="/senatus" className="button-primary">
+              Stake FDT
+            </Link>
           </div>
         </div>
       )}
