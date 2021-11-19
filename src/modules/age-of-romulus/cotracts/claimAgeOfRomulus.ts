@@ -1,4 +1,4 @@
-import { BigNumber, FixedNumber } from 'ethers';
+import { BigNumber } from 'ethers';
 import { AbiItem } from 'web3-utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
 
@@ -23,8 +23,8 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
       // @ts-ignore
       const airdropData = prizeList[weekKey];
       const airdropAccounts = airdropData.map((drop: { address: any; earnings: any }) => ({
-        account: drop.address,
-        amount: BigNumber.from(FixedNumber.from(drop.earnings)),
+        account: drop.address.toLowerCase(),
+        amount: BigNumber.from(1),
       }));
       this.tree = airdropAccounts.length && new BalanceTree(airdropAccounts)
       this.claimAmount = BigNumber.from(1);
@@ -35,8 +35,6 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
       }
 
       this.claimIndex = airdropAccounts.findIndex((o: { account: string | undefined }) => o.account === this.account?.toLowerCase());
-      // @ts-ignore
-      // this.claimAmount = this.claimIndex !== -1 ? this.getClaimAmount(this.account?.toLowerCase(), airdropData) : undefined;
     });
   }
 
@@ -58,23 +56,15 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
   }
 
   async claim(): Promise<void> {
-    try{
-      console.log('claimIndex===', this.claimIndex);
-      console.log('account===', this.account?.toLowerCase());
-      console.log('this.claimAmount===', this.claimAmount?.toString());
-      const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), this.claimAmount)
-      console.log('merkleProof', merkleProof);
-    } catch (e) {
-      console.log('e===', e);
-    }
-    // return this.send('claim',
-    //   [this.claimIndex, this.account?.toLowerCase(), this.claimAmount, merkleProof], {
-    //   from: this.account,
-    // }).then(() => {
-    //   this.isClaimed = true;
-    //   this.claimIndex = -1;
-    //   this.claimAmount = undefined;
-    //   this.emit(Web3Contract.UPDATE_DATA);
-    // });
+    const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), this.claimAmount)
+    return this.send('claim',
+      [this.claimIndex, this.account?.toLowerCase(), this.claimAmount, merkleProof], {
+      from: this.account,
+    }).then(() => {
+      this.isClaimed = true;
+      this.claimIndex = -1;
+      this.claimAmount = undefined;
+      this.emit(Web3Contract.UPDATE_DATA);
+    });
   }
 }
