@@ -7,7 +7,7 @@ import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
-import { fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
+import { APIVoterEntity, fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
 
 import { useGeneral } from '../../../../components/providers/general-provider';
 import nftCard from '../../../../resources/png/nft_card.png';
@@ -38,7 +38,7 @@ export enum ActiveKeys {
   corona = 'corona',
 }
 
-const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora;
+export const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora;
 
 export type AirdropModalProps = ModalProps & {
   merkleDistributor?: MerkleDistributor;
@@ -50,7 +50,7 @@ const AgeOfRomulusView: FC<AirdropModalProps> = props => {
   const wallet = useWallet();
 
   const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
-  const [isClaimDisable, setIsClaimDisable] = useState<boolean | null>(null);
+  const [currUser, setCurrUser] =  useState<null | undefined | APIVoterEntity>(null)
   const [allUsers, setAllUsers] = useState<null | any[]>(null);
 
   const isNftModalVisible = false;
@@ -76,10 +76,11 @@ const AgeOfRomulusView: FC<AirdropModalProps> = props => {
 
   useEffect(() => {
     if (allUsers) {
+      console.log('wallet.account', wallet.account);
       wallet.account
-        ? // @ts-ignore
-          setIsClaimDisable(!!allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
-        : setIsClaimDisable(false);
+         ? // @ts-ignore
+          setCurrUser(allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
+          : setCurrUser(undefined)
     }
   }, [allUsers, wallet.account]);
 
@@ -94,9 +95,9 @@ const AgeOfRomulusView: FC<AirdropModalProps> = props => {
         </Text>
         <Grid gap={!isTablet ? 32 : 16} colsTemplate={!isTablet ? '1fr 1fr' : '1fr'} className="mb-32 sm-mb-16">
           <div className={s.card}>
-            <AgeOfRomulusRank />
+            <AgeOfRomulusRank allUsers={allUsers} currUser={currUser} countAllUsers={countAllUsers} />
           </div>
-          <PrizesView countAllUsers={countAllUsers} activeKey={ACTIVE_KEY} isClaimDisable={isClaimDisable} />
+          <PrizesView countAllUsers={countAllUsers} activeKey={ACTIVE_KEY} isClaimDisable={!!currUser} />
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>

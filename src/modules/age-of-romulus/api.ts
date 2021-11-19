@@ -13,13 +13,8 @@ type PaginatedResult<T extends Record<string, any>> = {
 
 export type APIVoterEntity = {
   address: string;
-  tokensStaked: BigNumber;
-  lockedUntil: number;
-  delegatedPower: BigNumber;
-  votes: number;
-  proposals: number;
+  rank: number;
   votingPower: BigNumber;
-  hasActiveDelegation: boolean;
 };
 
 export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVoterEntity>> {

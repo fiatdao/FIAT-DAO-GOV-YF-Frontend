@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import format from 'date-fns/format';
 
 import AntdSpin from 'antd/lib/spin';
 import Icon from 'components/custom/icon';
@@ -10,66 +11,47 @@ import s from '../../views/age-of-romulus/s.module.scss';
 import { ActiveKeys } from '../../views/age-of-romulus';
 import React from 'react';
 
+//   amphora = '22 Nov 2021 00:00:00 GMT',
+//   kithara = '29 Nov 2021 00:00:00 GMT',
+//   galea = '6 Dec 2021 00:00:00 GMT',
+//   gladius = '13 Dec 2021 00:00:00 GMT',
+//   corona = '20 Dec 2021 00:00:00 GMT',
 
-const PrizesData = [
+export const PrizesData = [
   {
     key: 'corona',
-    date: (
-      <div className={s.date}>
-        <span>20</span>
-        <span>Dec</span>
-      </div>
-    ),
+    date:'20 Dec 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-corona" width="60" height="auto" />,
     title: 'roman corona',
-    rate: 'Top 5%',
+    rate: 5,
   },
   {
     key: 'gladius',
-    date: (
-      <div className={s.date}>
-        <span>13</span>
-        <span>Dec</span>
-      </div>
-    ),
+    date: '13 Dec 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-gladius" width="60" height="auto" />,
     title: 'Roman gladius',
-    rate: 'Top 10%',
+    rate: 10,
   },
   {
     key: 'galea',
-    date: (
-      <div className={s.date}>
-        <span>6</span>
-        <span>Dec</span>
-      </div>
-    ),
+    date: '6 Dec 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-galea" width="60" height="auto" />,
     title: 'roman galea',
-    rate: 'Top 25%',
+    rate: 25,
   },
   {
     key: 'kithara',
-    date: (
-      <div className={s.date}>
-        <span>29</span>
-        <span>Nov</span>
-      </div>
-    ),
+    date: '29 Nov 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-kithara" width="60" height="auto" />,
     title: 'roman kithara',
+    rate: 50,
   },
   {
     key: 'amphora',
-    date: (
-      <div className={s.date}>
-        <span>22</span>
-        <span>Nov</span>
-      </div>
-    ),
+    date: '22 Nov 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-amphora" width="60" height="auto" />,
     title: 'roman amphora',
-    rate: 'Everyone',
+    rate: null,
   },
 ];
 
@@ -113,14 +95,17 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                 gap={8}
                 colsTemplate={!isMobile ? 'auto 60px 1fr auto auto' : 'auto 60px 1fr auto '}
                 className={cn(s.card__table__item, { [s.card__table__item__active]: key === activeKey })}>
-                {date}
+                <div className={s.date}>
+                  <span>{format(new Date(date), 'dd')}</span>
+                  <span>{format(new Date(date), 'LLL')}</span>
+                </div>
                 {icon}
                 <div>
                   <Text type="lb2" color="primary">
                     {title}
                   </Text>
                   <Text type="p3" weight="bold" color="primary">
-                    {rate}
+                    {rate ? `Top ${rate}%` : 'Everyone'}
                   </Text>
                 </div>
                 <div className={s.stakers}>
