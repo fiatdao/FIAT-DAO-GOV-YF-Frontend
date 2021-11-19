@@ -259,6 +259,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
+      display: flex;
 
       @media (max-width: 768px) {
         position: relative;
@@ -272,6 +273,7 @@
         background: var(--theme-leaderboard-counter-item);
         padding: 17px 14px;
         border-radius: 4px;
+        margin: 0 4px;
       }
     }
   }

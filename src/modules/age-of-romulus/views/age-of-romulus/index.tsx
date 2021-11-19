@@ -1,18 +1,17 @@
-import {  useState, useEffect  } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
-
 import { fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
 
-import AgeOfRomulusTable from '../../components/age-of-romulus-table'
-import PrizesView from '../../components/prizes-view'
+import { useWallet } from '../../../../wallets/wallet';
+import AgeOfRomulusTable from '../../components/age-of-romulus-table';
+import PrizesView from '../../components/prizes-view';
 
 import s from './s.module.scss';
-import { useWallet } from '../../../../wallets/wallet';
 
 // const enum ActiveDates {
 //   amphora = '15 Nov 2021 00:00:00 GMT',
@@ -30,51 +29,47 @@ export enum ActiveKeys {
   corona = 'corona',
 }
 
-const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora
-
+const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora;
 
 const AgeOfRomulusView = () => {
   const isTablet = useMediaQuery(992);
 
   const wallet = useWallet();
 
-  const [countAllUsers, setCountAllUsers] = useState<null | number>(null)
-  const [isClaimDisable, setIsClaimDisable] = useState<boolean | null>(null)
-  const [allUsers, setAllUsers] = useState<null | any[]>(null)
+  const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
+  const [isClaimDisable, setIsClaimDisable] = useState<boolean | null>(null);
+  const [allUsers, setAllUsers] = useState<null | any[]>(null);
 
   useEffect(() => {
-    fetchCountAllUsers().then(setCountAllUsers)
-  }, [])
+    fetchCountAllUsers().then(setCountAllUsers);
+  }, []);
 
   useEffect(() => {
-    if(countAllUsers) {
+    if (countAllUsers) {
       const maxCountPerPage = 1000;
 
       const promises = new Array(Math.ceil(countAllUsers / maxCountPerPage))
         .fill(null)
         .map((_, i) => fetchVoters(i + 1, 1000));
 
-      Promise.all(promises).then((responses) => {
-        const result = responses.reduce((acc,{ data}) => (acc.concat(data as any)), []);
-        setAllUsers(result)
-
+      Promise.all(promises).then(responses => {
+        const result = responses.reduce((acc, { data }) => acc.concat(data as any), []);
+        setAllUsers(result);
       });
     }
-
   }, [countAllUsers]);
 
   useEffect(() => {
-    if(allUsers) {
+    if (allUsers) {
       wallet.account
-        // @ts-ignore
-        ? setIsClaimDisable(!!allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
-        : setIsClaimDisable(false)
+        ? // @ts-ignore
+          setIsClaimDisable(!!allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
+        : setIsClaimDisable(false);
     }
-  }, [allUsers, wallet.account])
+  }, [allUsers, wallet.account]);
 
-  console.log({ countAllUsers});
-  console.log({ allUsers});
-
+  console.log({ countAllUsers });
+  console.log({ allUsers });
 
   return (
     <div className={s.ageOfRomulus}>
@@ -132,14 +127,14 @@ const AgeOfRomulusView = () => {
             <Text tag="p" type="h1" weight="bold" color="primary">
               DAO Stakers
             </Text>
-            <Grid flow="col" gap={8} align="center" className={s.counter} colsTemplate="1fr 1fr 1fr">
-              {/*// @ts-ignore*/}
-              {countAllUsers && [...countAllUsers.toString()].map((number, index) => (
-                <Text key={index} tag='div' type='h3' weight='bold' color='white'>
-                  {number}
-                </Text>
-              ))}
-            </Grid>
+            <div className={s.counter}>
+              {countAllUsers &&
+                [...countAllUsers.toString()].map((number, index) => (
+                  <Text key={index} tag="div" type="h3" weight="bold" color="white">
+                    {number}
+                  </Text>
+                ))}
+            </div>
           </div>
           <AgeOfRomulusTable />
         </div>
