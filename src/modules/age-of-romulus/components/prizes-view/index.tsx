@@ -6,16 +6,10 @@ import Icon from 'components/custom/icon';
 import { Hint, Text } from 'components/custom/typography';
 import Grid from 'components/custom/grid';
 import useMediaQuery from 'hooks/useMediaQuery';
+import { ActiveKeys, useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 
 import s from '../../views/age-of-romulus/s.module.scss';
-import { ActiveKeys } from '../../providers/age-of-romulus-providers';
-import React from 'react';
 
-//   amphora = '22 Nov 2021 00:00:00 GMT',
-//   kithara = '29 Nov 2021 00:00:00 GMT',
-//   galea = '6 Dec 2021 00:00:00 GMT',
-//   gladius = '13 Dec 2021 00:00:00 GMT',
-//   corona = '20 Dec 2021 00:00:00 GMT',
 
 export const PrizesData = [
   {
@@ -58,6 +52,9 @@ export const PrizesData = [
 const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                       { countAllUsers: number | null, activeKey: string, isClaimDisable: boolean | null }) => {
   const isMobile = useMediaQuery(768);
+
+  const ageOfRomulusCtx = useAgeOfRomulus();
+
   return (
     <div>
       <div className={s.card}>
@@ -67,7 +64,14 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
 
         <div className={s.card__table}>
           {PrizesData.map(({ key, title,date, icon, rate  }) => {
-            const isDisabled = key === activeKey ? !isClaimDisable : true
+            // @ts-ignore
+            console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
+            // @ts-ignore
+            const isDisabled = !!ageOfRomulusCtx[key].tree
+              // @ts-ignore
+              ? ageOfRomulusCtx[key].isClaimed
+              : key === activeKey
+                ? !isClaimDisable : true
 
             let stakers;
             switch (key) {
@@ -115,7 +119,8 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                   </Text>
                 </div>
                 <div className={cn({ [s.button]: isMobile })}>
-                  <button type="button" disabled={isDisabled} className="button-primary button-small">
+                  {/*// @ts-ignore*/}
+                  <button type="button" disabled={isDisabled} onClick={() => ageOfRomulusCtx[key].claim()} className="button-primary button-small">
                     {key === activeKey ? 'Claim' : <Hint text="Tooltip">Claim</Hint>}
                   </button>
                 </div>

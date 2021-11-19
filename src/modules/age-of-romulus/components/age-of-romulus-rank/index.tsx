@@ -139,7 +139,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
             />
           </div>
         </div>
-      ) : (
+      ) : currUser === undefined && (
         <div className="flex full-height justify-center align-center">
           <div className="flex flow-row align-center">
             <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />

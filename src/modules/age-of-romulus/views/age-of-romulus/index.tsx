@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import Modal from 'components/antd/modal';
@@ -17,24 +17,11 @@ import PrizesView from '../../components/prizes-view';
 
 import s from './s.module.scss';
 
-
-// import { formatToken } from '../../../../web3/utils';
-
-// const enum ActiveDates {
-//   amphora = '15 Nov 2021 00:00:00 GMT',
-//   kithara = '17 Nov 2021 00:00:00 GMT',
-//   galea = '6 Dec 2021 00:00:00 GMT',
-//   gladius = '13 Dec 2021 00:00:00 GMT',
-//   corona = '20 Dec 2021 00:00:00 GMT',
-// }
-
 const AgeOfRomulusView = () => {
   const isTablet = useMediaQuery(992);
   const wallet = useWallet();
 
   const ageOfRomulusCtx = useAgeOfRomulus();
-
-  console.log('ageOfRomulusCtx', ageOfRomulusCtx);
 
   const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
   const [currUser, setCurrUser] =  useState<null | undefined | APIVoterEntity>(null)
@@ -63,16 +50,12 @@ const AgeOfRomulusView = () => {
 
   useEffect(() => {
     if (allUsers) {
-      console.log('wallet.account', wallet.account);
       wallet.account
          ? // @ts-ignore
           setCurrUser(allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
           : setCurrUser(undefined)
     }
   }, [allUsers, wallet.account]);
-
-  console.log({ countAllUsers });
-  console.log({ allUsers });
 
   return (
     <div className={s.ageOfRomulus}>
