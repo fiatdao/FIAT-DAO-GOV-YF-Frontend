@@ -53,6 +53,8 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                       { countAllUsers: number | null, activeKey: string, isClaimDisable: boolean | null }) => {
   const isMobile = useMediaQuery(768);
 
+  console.log('isClaimDisable', !isClaimDisable);
+
   const ageOfRomulusCtx = useAgeOfRomulus();
 
   return (
@@ -67,7 +69,7 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
             // @ts-ignore
             // console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
             // @ts-ignore
-            const isDisabled = !!ageOfRomulusCtx[key].tree
+            const isDisabled = isClaimDisable && !!ageOfRomulusCtx[key].tree
               // @ts-ignore
               ? ageOfRomulusCtx[key].isClaimed
               : key === activeKey
