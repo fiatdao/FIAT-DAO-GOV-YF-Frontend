@@ -1,24 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Progress } from 'antd';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import Modal, { ModalProps } from 'components/antd/modal';
+import Modal from 'components/antd/modal';
 import Grid from 'components/custom/grid';
-import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { APIVoterEntity, fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
+import { useAgeOfRomulus } from 'modules/age-of-romulus/providers/age-of-romulus-providers';
 
-import { useGeneral } from '../../../../components/providers/general-provider';
-import nftCard from '../../../../resources/png/nft_card.png';
-import { useWallet } from '../../../../wallets/wallet';
-import MerkleDistributor from '../../../../web3/merkleDistributor';
-import NotConnectedModal from '../../components/age-of-romulus-rank';
+import nftCard from 'resources/png/nft_card.png';
+import { useWallet } from 'wallets/wallet';
+
 import AgeOfRomulusRank from '../../components/age-of-romulus-rank';
 import AgeOfRomulusTable from '../../components/age-of-romulus-table';
 import PrizesView from '../../components/prizes-view';
 
 import s from './s.module.scss';
+
 
 // import { formatToken } from '../../../../web3/utils';
 
@@ -30,24 +28,13 @@ import s from './s.module.scss';
 //   corona = '20 Dec 2021 00:00:00 GMT',
 // }
 
-export enum ActiveKeys {
-  amphora = 'amphora',
-  kithara = 'kithara',
-  galea = 'galea',
-  gladius = 'gladius',
-  corona = 'corona',
-}
-
-export const ACTIVE_KEY: ActiveKeys = ActiveKeys.amphora;
-
-export type AirdropModalProps = ModalProps & {
-  merkleDistributor?: MerkleDistributor;
-};
-
-const AgeOfRomulusView: FC<AirdropModalProps> = props => {
-  const { merkleDistributor, ...modalProps } = props;
+const AgeOfRomulusView = () => {
   const isTablet = useMediaQuery(992);
   const wallet = useWallet();
+
+  const ageOfRomulusCtx = useAgeOfRomulus();
+
+  console.log('ageOfRomulusCtx', ageOfRomulusCtx);
 
   const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
   const [currUser, setCurrUser] =  useState<null | undefined | APIVoterEntity>(null)
@@ -97,7 +84,7 @@ const AgeOfRomulusView: FC<AirdropModalProps> = props => {
           <div className={s.card}>
             <AgeOfRomulusRank allUsers={allUsers} currUser={currUser} countAllUsers={countAllUsers} />
           </div>
-          <PrizesView countAllUsers={countAllUsers} activeKey={ACTIVE_KEY} isClaimDisable={!!currUser} />
+          <PrizesView countAllUsers={countAllUsers} activeKey={ageOfRomulusCtx.ACTIVE_KEY} isClaimDisable={!!currUser} />
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>
@@ -118,7 +105,8 @@ const AgeOfRomulusView: FC<AirdropModalProps> = props => {
         </div>
       </div>
       {isNftModalVisible && (
-        <Modal width={428} className={s.modal} {...modalProps}>
+        // @ts-ignore
+        <Modal width={428} className={s.modal} visible={isNftModalVisible}>
           <div className="flex flow-row justify-center align-center">
             <Text tag="h4" weight="bold" type="h3" color="primary" className="mb-24">
               Congratulations!

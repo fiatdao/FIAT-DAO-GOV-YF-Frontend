@@ -5,7 +5,7 @@ import AntdSpin from 'antd/lib/spin';
 
 import { useWarning } from 'components/providers/warning-provider';
 
-// import YFPoolsProvider from './providers/pools-provider';
+import AgeOfRomulusProvider from './providers/age-of-romulus-providers';
 
 const AgeOfRomulusView = lazy(() => import('./views/age-of-romulus'));
 
@@ -35,12 +35,14 @@ const AgeOfRomulusViewPage: React.FC = () => {
   }, [isMobile]);
 
   return (
-    <Suspense fallback={<AntdSpin />}>
-      <Switch>
-        <Route path="/age-of-romulus" exact component={AgeOfRomulusView} />
-        <Redirect to="/age-of-romulus" />
-      </Switch>
-    </Suspense>
+    <AgeOfRomulusProvider>
+      <Suspense fallback={<AntdSpin />}>
+        <Switch>
+          <Route path="/age-of-romulus" exact component={AgeOfRomulusView} />
+          <Redirect to="/age-of-romulus" />
+        </Switch>
+      </Suspense>
+    </AgeOfRomulusProvider>
   );
 };
 

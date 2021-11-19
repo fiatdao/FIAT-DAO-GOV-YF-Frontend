@@ -14,11 +14,12 @@ import { useGeneral } from 'components/providers/general-provider';
 import iconNotConnect from 'resources/svg/not-connected.svg';
 import { useWallet } from 'wallets/wallet';
 
+import { useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 import { APIVoterEntity } from '../../api';
-import { ACTIVE_KEY } from '../../views/age-of-romulus';
 import { PrizesData } from '../prizes-view';
 
 import s from './s.module.scss';
+
 
 interface IAgeOfRomulusRank {
   allUsers: null | any[];
@@ -29,9 +30,10 @@ interface IAgeOfRomulusRank {
 const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRank) => {
   const wallet = useWallet();
   const { isDarkTheme } = useGeneral();
+  const ageOfRomulusCtx = useAgeOfRomulus();
 
   const [nextPrize] = useState(() => {
-    const nextPrizeIndex = PrizesData.map((i: any) => i.key).indexOf(ACTIVE_KEY);
+    const nextPrizeIndex = PrizesData.map((i: any) => i.key).indexOf(ageOfRomulusCtx.ACTIVE_KEY);
     return PrizesData[nextPrizeIndex ? nextPrizeIndex - 1 : nextPrizeIndex];
   });
 

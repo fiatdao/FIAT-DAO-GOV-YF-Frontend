@@ -10,11 +10,8 @@ import Icon from 'components/custom/icon';
 import Identicon from 'components/custom/identicon';
 import { Text } from 'components/custom/typography';
 import { APIVoterEntity, fetchVoters } from 'modules/age-of-romulus/api';
-import AmphoraList from 'modules/age-of-romulus/prize/amphora.json';
-import CoronaList from 'modules/age-of-romulus/prize/corona.json';
-import GaleaList from 'modules/age-of-romulus/prize/galea.json';
-import GladiusList from 'modules/age-of-romulus/prize/gladius.json';
-import KitharaList from 'modules/age-of-romulus/prize/kithara.json';
+
+import prizeList from 'modules/age-of-romulus/prize';
 
 interface IJsonItem {
   [key: string]: unknown;
@@ -57,17 +54,17 @@ const Columns: ColumnsType<APIVoterEntity> = [
 
   {
     title: 'Prize',
-    dataIndex: 'prize',
+    dataIndex: 'prize-test',
     width: 266,
     align: 'right',
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
-          {AmphoraList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-amphora" />}
-          {KitharaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-kithara" />}
-          {GaleaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-galea" />}
-          {GladiusList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-gladius" />}
-          {CoronaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-corona" />}
+          {prizeList.amphora.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-amphora" />}
+          {prizeList.kithara.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-kithara" />}
+          {prizeList.galea.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-galea" />}
+          {prizeList.gladius.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-gladius" />}
+          {prizeList.corona.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-corona" />}
         </div>
       );
     },

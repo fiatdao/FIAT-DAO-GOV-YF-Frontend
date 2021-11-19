@@ -8,7 +8,7 @@ import Grid from 'components/custom/grid';
 import useMediaQuery from 'hooks/useMediaQuery';
 
 import s from '../../views/age-of-romulus/s.module.scss';
-import { ActiveKeys } from '../../views/age-of-romulus';
+import { ActiveKeys } from '../../providers/age-of-romulus-providers';
 import React from 'react';
 
 //   amphora = '22 Nov 2021 00:00:00 GMT',
