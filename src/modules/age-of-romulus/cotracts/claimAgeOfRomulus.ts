@@ -50,7 +50,7 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
     }
 
     if (this.claimAmount !== null && this.claimIndex !== -1) {
-      this.isClaimed =  await this.call('isClaimed',[this.account]);
+      this.isClaimed =  await this.call('isClaimed',[this.claimIndex]);
       this.emit(Web3Contract.UPDATE_DATA);
     }
   }
