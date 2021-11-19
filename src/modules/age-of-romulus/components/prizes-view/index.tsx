@@ -65,7 +65,7 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
         <div className={s.card__table}>
           {PrizesData.map(({ key, title,date, icon, rate  }) => {
             // @ts-ignore
-            console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
+            // console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
             // @ts-ignore
             const isDisabled = !!ageOfRomulusCtx[key].tree
               // @ts-ignore
