@@ -77,7 +77,10 @@
 
     .upcoming {
       text-align: center;
-      padding-bottom: 72px;
+      padding-bottom: 23px;
+      max-width: 223px;
+      display: block;
+      margin: 0 auto;
 
       p {
         font-size: 10px;
@@ -87,9 +90,18 @@
         background: var(--theme-secondary-block);
         padding: 12px;
         border-radius: 4px;
-        display: inline-block;
+        display: block;
         text-align: left;
+        opacity: 0.4;
+
+        &__active {
+          opacity: 1;
+        }
       }
+    }
+
+    .progress {
+      position: relative;
     }
 
     .line {
@@ -283,5 +295,67 @@
 
     // Костя, знаю, отступ здесь не нужен - но, пока таблицы нет - с ним красивее)
     padding: 32px;
+  }
+}
+
+:global(.ant-modal-mask) {
+  background-color: rgba(11, 11, 11, 0.75);
+}
+
+:global(.ant-modal) {
+  :global(.ant-modal-content) {
+    border-radius: 4px;
+
+    > :global(.ant-modal-body) {
+      padding: 32px;
+      color: var(--theme-primary-color);
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}
+
+.modal:global(.ant-modal) {
+  > :global(.ant-modal-content) {
+    > :global(.ant-modal-body) {
+      > div,
+      > p,
+      > img,
+      > span {
+        position: relative;
+        z-index: 2;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 429px;
+        height: 264.87px;
+        background: url('../../../../resources/png/leaderboard_modal.png') center no-repeat;
+        background-size: cover;
+        pointer-events: none;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 460px;
+        height: 460px;
+        background: radial-gradient(50% 50% at 50% 50%, rgba(255, 80, 139, 0.37) 0%, rgba(255, 80, 139, 0) 100%);
+        opacity: 0.25;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .button {
+    width: 100%;
+    padding: 18px 32px;
   }
 }

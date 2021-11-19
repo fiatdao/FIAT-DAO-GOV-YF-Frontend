@@ -172,3 +172,16 @@
     display: none !important;
   }
 }
+
+
+.ant {
+  &-progress {
+    &-inner {
+      border-radius: 4px;
+    }
+
+    &-bg {
+      border-radius: 4px;
+    }
+  }
+}

@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ColumnsType } from 'antd/lib/table/interface';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import { formatBigValue, getEtherscanAddressUrl, shortenAddr } from 'web3/utils';
 
 import Table from 'components/antd/table';
-import Icon from 'components/custom/icon';
 import ExternalLink from 'components/custom/externalLink';
+import Icon from 'components/custom/icon';
 import Identicon from 'components/custom/identicon';
 import { Text } from 'components/custom/typography';
 import { APIVoterEntity, fetchVoters } from 'modules/age-of-romulus/api';
-
 import AmphoraList from 'modules/age-of-romulus/prize/amphora.json';
 import CoronaList from 'modules/age-of-romulus/prize/corona.json';
 import GaleaList from 'modules/age-of-romulus/prize/galea.json';
@@ -26,11 +25,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
   {
     title: 'Rank',
     dataIndex: 'rank',
-    render: (value: string) => (
-      <div className="flex  align-center">
-        {value}
-      </div>
-    ),
+    render: (value: string) => <div className="flex  align-center">{value}</div>,
   },
   {
     title: 'Address',
@@ -68,13 +63,13 @@ const Columns: ColumnsType<APIVoterEntity> = [
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
-          {AmphoraList.find((i: IJsonItem) => i?.address === address) && <Icon name='png/roman-amphora' />}
-          {KitharaList.find((i: IJsonItem) => i?.address === address) && <Icon name='png/roman-kithara' />}
-          {GaleaList.find((i: IJsonItem) => i?.address === address) && <Icon name='png/roman-galea' />}
-          {GladiusList.find((i: IJsonItem) => i?.address === address) && <Icon name='png/roman-gladius' />}
-          {CoronaList.find((i: IJsonItem) => i?.address === address) && <Icon name='png/roman-corona' />}
+          {AmphoraList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-amphora" />}
+          {KitharaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-kithara" />}
+          {GaleaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-galea" />}
+          {GladiusList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-gladius" />}
+          {CoronaList.find((i: IJsonItem) => i?.address === address) && <Icon name="png/roman-corona" />}
         </div>
-      )
+      );
     },
   },
 ];
@@ -86,10 +81,10 @@ export type VotersTableProps = {
 const AgeOfRomulusTable: React.FC<VotersTableProps> = props => {
   const { className } = props;
 
-  const [loading, setLoading] = React.useState<boolean>(false);
-  const [voters, setVoters] = React.useState<APIVoterEntity[]>([]);
-  const [totalVoters, setTotal] = React.useState<number>(0);
-  const [page, setPage] = React.useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [voters, setVoters] = useState<APIVoterEntity[]>([]);
+  const [totalVoters, setTotal] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
   const pageSize = 10;
 
   React.useEffect(() => {
