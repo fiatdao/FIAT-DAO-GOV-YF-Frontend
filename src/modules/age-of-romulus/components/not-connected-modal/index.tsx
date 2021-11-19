@@ -14,6 +14,11 @@ const NotConnectedModal: React.FC<ModalProps> = props => {
   const wallet = useWallet();
   const { ...modalProps } = props;
 
+  const onClick = () => {
+    wallet.showWalletsModal();
+    props.onCancel?.();
+  };
+
   return (
     <Modal width={524} className={s.modal} {...modalProps}>
       <div className="flex flow-row align-center">
@@ -22,10 +27,7 @@ const NotConnectedModal: React.FC<ModalProps> = props => {
           Wallet not connected: To check your rank, <br />
           connect your wallet below
         </Text>
-        <button
-          type="button"
-          className={cn('button-primary', { 'button-small': isMobile })}
-          onClick={() => wallet.showWalletsModal()}>
+        <button type="button" className={cn('button-primary', { 'button-small': isMobile })} onClick={onClick}>
           <span>Connect {!isMobile && 'wallet'}</span>
         </button>
       </div>
