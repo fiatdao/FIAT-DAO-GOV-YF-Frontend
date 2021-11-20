@@ -20,7 +20,7 @@ interface IJsonItem {
 }
 
 const Columns: ColumnsType<APIVoterEntity> = [
-  {
+/*  {
     title: 'Rank',
     dataIndex: 'rank',
     render: (value: string) => (
@@ -30,7 +30,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
         </Text>
       </div>
     ),
-  },
+  },*/
   {
     title: 'Address',
     dataIndex: 'address',
