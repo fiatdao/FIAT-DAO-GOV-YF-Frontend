@@ -133,7 +133,8 @@ const PrizesView = ({
                   {/*// @ts-ignore*/}
                   <button
                     type="button"
-                    disabled={isDisabled}
+                    // disabled={isDisabled}
+                    disabled={true}
                     // @ts-ignore
                     onClick={() => ageOfRomulusCtx[key].claim()}
                     className="button-primary button-small">
