@@ -123,7 +123,15 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                 <div className={cn({ [s.button]: isMobile })}>
                   {/*// @ts-ignore*/}
                   <button type="button" disabled={isDisabled} onClick={() => ageOfRomulusCtx[key].claim()} className="button-primary button-small">
-                    {key === activeKey ? 'Claim' : <Hint text="Tooltip">Claim</Hint>}
+                    {key === activeKey
+                      ? 'Claim'
+                      : (<Hint
+                      text={`This NFT grants you access to the
+                       ${key === ActiveKeys.amphora ? 'first' : key === ActiveKeys.kithara ? 'second' : key === ActiveKeys.galea ? 'third' : key === ActiveKeys.gladius ? 'fourth' : 'fifth'}
+                        tier of liquidity mining rewards for the FDT / gOHM pair on Sushiswap.`}>
+                      Claim
+                    </Hint>)
+                    }
                   </button>
                 </div>
               </Grid>
