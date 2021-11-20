@@ -9,7 +9,7 @@ const Socials = () => {
       <ExternalLink href="https://twitter.com/fiatdao" className={s.sLink}>
         <Icon name="twitter" width="15" />
       </ExternalLink>
-      <ExternalLink href="https://discord.com/invite/K2PcFZUdBR" className={s.sLink}>
+      <ExternalLink href="https://discord.gg/fiatdao" className={s.sLink}>
         <Icon name="discord" width="15" />
       </ExternalLink>
       <ExternalLink href="https://medium.com/fiat-dao" className={s.sLink}>
