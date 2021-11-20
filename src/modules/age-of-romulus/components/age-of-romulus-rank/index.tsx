@@ -14,12 +14,11 @@ import { useGeneral } from 'components/providers/general-provider';
 import iconNotConnect from 'resources/svg/not-connected.svg';
 import { useWallet } from 'wallets/wallet';
 
-import { useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 import { APIVoterEntity } from '../../api';
+import { useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 import { PrizesData } from '../prizes-view';
 
 import s from './s.module.scss';
-
 
 interface IAgeOfRomulusRank {
   allUsers: null | any[];
@@ -139,19 +138,21 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
             />
           </div>
         </div>
-      ) : currUser === undefined && (
-        <div className="flex full-height justify-center align-center">
-          <div className="flex flow-row align-center">
-            <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
-            <Text tag="p" type="p2" color="primary" className="mb-32">
-              To participate in Age of Romulus, stake <br />
-              FDT tokens in the DAO
-            </Text>
-            <Link to="/senatus" className="button-primary">
-              Stake FDT
-            </Link>
+      ) : (
+        currUser === undefined && (
+          <div className="flex full-height justify-center align-center">
+            <div className="flex flow-row align-center">
+              <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
+              <Text tag="p" type="p2" color="primary" className="mb-32">
+                To participate in Age of Romulus, stake <br />
+                FDT tokens in the DAO
+              </Text>
+              <Link to="/senatus" className="button-primary">
+                Stake FDT
+              </Link>
+            </div>
           </div>
-        </div>
+        )
       )}
     </div>
   );

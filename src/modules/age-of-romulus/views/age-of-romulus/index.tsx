@@ -7,7 +7,6 @@ import { Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { APIVoterEntity, fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
 import { useAgeOfRomulus } from 'modules/age-of-romulus/providers/age-of-romulus-providers';
-
 import nftCard from 'resources/png/nft_card.png';
 import { useWallet } from 'wallets/wallet';
 
@@ -24,7 +23,7 @@ const AgeOfRomulusView = () => {
   const ageOfRomulusCtx = useAgeOfRomulus();
 
   const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
-  const [currUser, setCurrUser] =  useState<null | undefined | APIVoterEntity>(null)
+  const [currUser, setCurrUser] = useState<null | undefined | APIVoterEntity>(null);
   const [allUsers, setAllUsers] = useState<null | any[]>(null);
 
   const isNftModalVisible = false;
@@ -51,9 +50,9 @@ const AgeOfRomulusView = () => {
   useEffect(() => {
     if (allUsers) {
       wallet.account
-         ? // @ts-ignore
+        ? // @ts-ignore
           setCurrUser(allUsers.find(i => i.address.toLowerCase() === wallet?.account.toLowerCase()))
-          : setCurrUser(undefined)
+        : setCurrUser(undefined);
     }
   }, [allUsers, wallet.account]);
 
@@ -67,7 +66,11 @@ const AgeOfRomulusView = () => {
           <div className={s.card}>
             <AgeOfRomulusRank allUsers={allUsers} currUser={currUser} countAllUsers={countAllUsers} />
           </div>
-          <PrizesView countAllUsers={countAllUsers} activeKey={ageOfRomulusCtx.ACTIVE_KEY} isClaimDisable={!!currUser} />
+          <PrizesView
+            countAllUsers={countAllUsers}
+            activeKey={ageOfRomulusCtx.ACTIVE_KEY}
+            isClaimDisable={!!currUser}
+          />
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>

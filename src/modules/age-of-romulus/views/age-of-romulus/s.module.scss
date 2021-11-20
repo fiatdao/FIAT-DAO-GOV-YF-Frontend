@@ -14,7 +14,10 @@
     padding: 18px;
     position: relative;
     border-radius: 4px;
-    overflow: hidden;
+
+    &::first-child {
+      overflow: hidden;
+    }
 
     > div,
     > p,
