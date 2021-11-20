@@ -45,6 +45,11 @@ const config = {
       reward: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_REWARD_ADDR),
     },
     merkleDistributor: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_ADDR),
+    merkleDistributorAmphora: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_AMPHORA_ADDR),
+    merkleDistributorKithara: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_KITHARA_ADDR),
+    merkleDistributorGalea: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_GALEA_ADDR),
+    merkleDistributorGladius: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_GLADIUS_ADDR),
+    merkleDistributorCorona: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_CORONA_ADDR),
   },
   web3: {
     chainId: Number(process.env.REACT_APP_WEB3_CHAIN_ID),
