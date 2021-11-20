@@ -147,6 +147,11 @@ body.mobile-menu-open {
 
   --theme-header-shadow: 0 0 0.5px rgba(6, 10, 13, 0.4), 0 8px 16px rgba(113, 121, 128, 0.08);
   --theme-selection-color: #ef9c92;
+
+  // Leaderboard
+  --theme-leaderboard-card-bg: rgba(255, 255, 255, 0.8);
+  --theme-leaderboard-table-item: #f9f9f9;
+  --theme-leaderboard-counter-item: var(--gradient-pink);
 }
 
 @media (max-width: 1024px) {
@@ -214,6 +219,11 @@ body.mobile-menu-open {
 
   --theme-social-bg-color: #202020;
   --theme-social-link-color: #fff;
+
+  // Leaderboard
+  --theme-leaderboard-card-bg: linear-gradient(135deg, rgba(37, 32, 33, 0.8) 0%, rgba(34, 32, 32, 0.8) 100%);
+  --theme-leaderboard-table-item: rgba(23, 23, 23, 0.6);
+  --theme-leaderboard-counter-item: rgba(23, 23, 23, 0.7);
 
   @media (max-width: 992px) {
     --theme-social-bg-color: #171717;

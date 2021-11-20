@@ -8,7 +8,7 @@ import s from './s.module.scss';
 
 export type TextProps = {
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label' | 'p' | 'div' | 'span' | 'small' | 'strong';
-  type: 'h1' | 'h2' | 'h3' | 'p1' | 'p2' | 'lb1' | 'lb2' | 'small';
+  type: 'h1' | 'h2' | 'h3' | 'p1' | 'p2' | 'p3' | 'lb1' | 'lb2' | 'small';
   weight?: '500' | 'semibold' | 'bold';
   color?: 'primary' | 'secondary' | 'red' | 'green' | 'blue' | 'purple' | 'white' | string;
   textGradient?: string;
@@ -18,7 +18,7 @@ export type TextProps = {
   className?: string;
   style?: Partial<CSSStyleDeclaration>;
   title?: string;
-  font?: 'secondary';
+  font?: 'secondary' | 'tertiary';
 };
 
 export const Text: React.FC<TextProps> = React.memo(props => {

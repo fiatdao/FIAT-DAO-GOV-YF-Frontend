@@ -11,13 +11,14 @@
 }
 
 .main {
-
   grid-area: content;
   flex-grow: 1;
-  &__light{
-    background: url(../resources/png/bg-light.png);
+
+  &__light {
+    background: url('../resources/png/bg-light.png');
   }
+
   &__black {
-    background: url(../resources/png/bg-black.png);
+    background: url('../resources/png/bg-black.png');
   }
 }
