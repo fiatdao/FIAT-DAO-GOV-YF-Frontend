@@ -1,5 +1,25 @@
 .table {
-  td {
-    vertical-align: middle;
+  :global(.ant-table-tbody) {
+    :global(.ant-table-row):hover {
+      :global(.ant-table-cell) {
+        //background: var(--theme-card-color);
+
+        &:not(:last-of-type):first-of-type {
+          border-left: 0;
+        }
+      }
+    }
+
+    :global(.ant-table-cell) {
+      vertical-align: middle;
+
+      &:first-of-type {
+        border-left: 0;
+      }
+
+      &:first-of-type:last-of-type {
+        border: 0;
+      }
+    }
   }
 }
