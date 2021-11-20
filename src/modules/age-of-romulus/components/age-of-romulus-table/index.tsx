@@ -10,8 +10,9 @@ import Icon from 'components/custom/icon';
 import Identicon from 'components/custom/identicon';
 import { Text } from 'components/custom/typography';
 import { APIVoterEntity, fetchVoters } from 'modules/age-of-romulus/api';
-
 import prizeList from 'modules/age-of-romulus/prize';
+
+import s from './s.module.scss';
 
 interface IJsonItem {
   [key: string]: unknown;
@@ -22,7 +23,13 @@ const Columns: ColumnsType<APIVoterEntity> = [
   {
     title: 'Rank',
     dataIndex: 'rank',
-    render: (value: string) => <div className="flex  align-center">{value}</div>,
+    render: (value: string) => (
+      <div className="flex align-center">
+        <Text type="p1" color="primary">
+          {value}
+        </Text>
+      </div>
+    ),
   },
   {
     title: 'Address',
@@ -31,10 +38,10 @@ const Columns: ColumnsType<APIVoterEntity> = [
       <div className="flex col-gap-16 align-center">
         <Identicon address={value} width={32} height={32} />
         <ExternalLink href={getEtherscanAddressUrl(value)} className="link-blue">
-          <Text type="p1" weight="semibold" ellipsis className="hidden-mobile hidden-tablet" color="primary">
-            {value}
+          <Text type="p1" ellipsis className="hidden-mobile hidden-tablet" color="primary">
+            {shortenAddr(value)}
           </Text>
-          <Text type="p1" weight="semibold" wrap={false} color="primary" className="hidden-desktop">
+          <Text type="p1" wrap={false} color="primary" className="hidden-desktop">
             {shortenAddr(value)}
           </Text>
         </ExternalLink>
@@ -46,7 +53,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
     dataIndex: 'votingPower',
     align: 'right',
     render: (value: BigNumber) => (
-      <Text type="p1" weight="semibold" className="ml-auto">
+      <Text type="p1" color="primary" className="ml-auto">
         {formatBigValue(value, 2, '-', 2)}
       </Text>
     ),
@@ -60,11 +67,21 @@ const Columns: ColumnsType<APIVoterEntity> = [
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
-          {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-amphora" />}
-          {prizeList.kithara.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-kithara" />}
-          {prizeList.galea.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-galea" />}
-          {prizeList.gladius.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-gladius" />}
-          {prizeList.corona.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && <Icon name="png/roman-corona" />}
+          {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <Icon name="png/roman-amphora" width={50} height={50} />
+          )}
+          {prizeList.kithara.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <Icon name="png/roman-kithara" width={50} height={50} />
+          )}
+          {prizeList.galea.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <Icon name="png/roman-galea" width={50} height={50} />
+          )}
+          {prizeList.gladius.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <Icon name="png/roman-gladius" />
+          )}
+          {prizeList.corona.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <Icon name="png/roman-corona" width={50} height={50} />
+          )}
         </div>
       );
     },
@@ -109,6 +126,7 @@ const AgeOfRomulusTable: React.FC<VotersTableProps> = props => {
         inCard
         columns={Columns}
         dataSource={voters}
+        className={s.table}
         rowKey="address"
         loading={loading}
         pagination={{

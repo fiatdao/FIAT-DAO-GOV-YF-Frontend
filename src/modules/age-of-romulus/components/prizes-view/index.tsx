@@ -1,20 +1,20 @@
+import AntdSpin from 'antd/lib/spin';
 import cn from 'classnames';
 import format from 'date-fns/format';
 
-import AntdSpin from 'antd/lib/spin';
+import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
 import { Hint, Text } from 'components/custom/typography';
-import Grid from 'components/custom/grid';
 import useMediaQuery from 'hooks/useMediaQuery';
+
 import { ActiveKeys, useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 
 import s from '../../views/age-of-romulus/s.module.scss';
 
-
 export const PrizesData = [
   {
     key: 'corona',
-    date:'20 Dec 2021 00:00:00 GMT',
+    date: '20 Dec 2021 00:00:00 GMT',
     icon: <Icon name="png/roman-corona" width="60" height="auto" />,
     title: 'roman corona',
     rate: 5,
@@ -49,8 +49,15 @@ export const PrizesData = [
   },
 ];
 
-const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
-                      { countAllUsers: number | null, activeKey: string, isClaimDisable: boolean | null }) => {
+const PrizesView = ({
+  countAllUsers,
+  activeKey,
+  isClaimDisable,
+}: {
+  countAllUsers: number | null;
+  activeKey: string;
+  isClaimDisable: boolean | null;
+}) => {
   const isMobile = useMediaQuery(768);
 
   console.log('isClaimDisable', !isClaimDisable);
@@ -65,23 +72,25 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
         </Text>
 
         <div className={s.card__table}>
-          {PrizesData.map(({ key, title,date, icon, rate  }) => {
+          {PrizesData.map(({ key, title, date, icon, rate }) => {
             // @ts-ignore
             // console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
-            // @ts-ignore
-            const isDisabled = isClaimDisable && !!ageOfRomulusCtx[key].tree
+            const isDisabled =
               // @ts-ignore
-              ? ageOfRomulusCtx[key].isClaimed
-              : key === activeKey
-                ? !isClaimDisable : true
+              isClaimDisable && !!ageOfRomulusCtx[key].tree
+                ? // @ts-ignore
+                  ageOfRomulusCtx[key].isClaimed
+                : key === activeKey
+                ? !isClaimDisable
+                : true;
 
             let stakers;
             switch (key) {
               case ActiveKeys.amphora:
-                stakers = (countAllUsers ?? 0);
+                stakers = countAllUsers ?? 0;
                 break;
               case ActiveKeys.kithara:
-                stakers = Math.ceil((countAllUsers ?? 0) * 0.5)
+                stakers = Math.ceil((countAllUsers ?? 0) * 0.5);
                 break;
               case ActiveKeys.galea:
                 stakers = Math.ceil((countAllUsers ?? 0) * 0.25);
@@ -122,20 +131,36 @@ const PrizesView = ({ countAllUsers, activeKey, isClaimDisable }:
                 </div>
                 <div className={cn({ [s.button]: isMobile })}>
                   {/*// @ts-ignore*/}
-                  <button type="button" disabled={isDisabled} onClick={() => ageOfRomulusCtx[key].claim()} className="button-primary button-small">
-                    {key === activeKey
-                      ? 'Claim'
-                      : (<Hint
-                      text={`This NFT grants you access to the
-                       ${key === ActiveKeys.amphora ? 'first' : key === ActiveKeys.kithara ? 'second' : key === ActiveKeys.galea ? 'third' : key === ActiveKeys.gladius ? 'fourth' : 'fifth'}
+                  <button
+                    type="button"
+                    disabled={isDisabled}
+                    // @ts-ignore
+                    onClick={() => ageOfRomulusCtx[key].claim()}
+                    className="button-primary button-small">
+                    {key === activeKey ? (
+                      'Claim'
+                    ) : (
+                      <Hint
+                        text={`This NFT grants you access to the
+                       ${
+                         key === ActiveKeys.amphora
+                           ? 'first'
+                           : key === ActiveKeys.kithara
+                           ? 'second'
+                           : key === ActiveKeys.galea
+                           ? 'third'
+                           : key === ActiveKeys.gladius
+                           ? 'fourth'
+                           : 'fifth'
+                       }
                         tier of liquidity mining rewards for the FDT / gOHM pair on Sushiswap.`}>
-                      Claim
-                    </Hint>)
-                    }
+                        Claim
+                      </Hint>
+                    )}
                   </button>
                 </div>
               </Grid>
-            )
+            );
           })}
         </div>
       </div>
