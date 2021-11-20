@@ -39,19 +39,19 @@ const Columns: ColumnsType<APIVoterEntity> = [
         <Identicon address={value} width={32} height={32} />
         <ExternalLink href={getEtherscanAddressUrl(value)} className="link-blue">
           <Text type="p1" ellipsis className="hidden-mobile hidden-tablet" color="primary">
-            {shortenAddr(value)}
+            {value}
           </Text>
           <Text type="p1" wrap={false} color="primary" className="hidden-desktop">
-            {shortenAddr(value)}
+            {value}
           </Text>
         </ExternalLink>
       </div>
     ),
   },
   {
-    title: 'vFDT',
+    title: 'Voting power (vFDT)',
     dataIndex: 'votingPower',
-    align: 'right',
+    // align: 'right',
     render: (value: BigNumber) => (
       <Text type="p1" color="primary" className="ml-auto">
         {formatBigValue(value, 2, '-', 2)}
@@ -60,10 +60,10 @@ const Columns: ColumnsType<APIVoterEntity> = [
   },
 
   {
-    title: 'Prize',
+    title: 'NFT Prize',
     dataIndex: 'prize-test',
     width: 266,
-    align: 'right',
+    // align: 'right',
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">

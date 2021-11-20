@@ -60,8 +60,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
           <div className="flex flow-row align-center">
             <img src={iconNotConnect} width={48} height={64} className="mb-32" alt="" />
             <Text tag="p" type="p2" color="primary" className="mb-32">
-              To check your rank, <br />
-              connect your wallet below
+              To check your rank, connect your wallet below
             </Text>
             <button
               type="button"
