@@ -3,8 +3,13 @@
 .text {
   font-weight: normal;
   word-wrap: anywhere;
+
   &.font-secondary {
     font-family: 'Inter', sans-serif;
+  }
+
+  &.font-tertiary {
+    font-family: Times New Roman, sans-serif;
   }
 
   &.weight-500 {
@@ -45,11 +50,6 @@
 
   &.p2 {
     font-size: var(--font-size-p2);
-    line-height: calc(var(--font-size-p2) + 10px);
-  }
-
-  &.p3 {
-    font-size: var(--font-size-lb2);
     line-height: calc(var(--font-size-p2) + 10px);
   }
 

@@ -88,6 +88,12 @@ const LayoutHeader: React.FC = () => {
         <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
           <span>Rewards</span>
         </Link>
+        <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>
+          <span>Senatus</span>
+        </Link>
+        <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
+          <span>Age of Romulus</span>
+        </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
         {/*</Link>*/}
@@ -157,10 +163,10 @@ const LayoutHeader: React.FC = () => {
         {/*  </Button>*/}
         {/*</Popover>*/}
       </nav>
-      {!isMobile && wallet.isActive && wallet.connector?.id === 'metamask' && (
+      {wallet.isActive && wallet.connector?.id === 'metamask' && (
         <div className={s.addTokenWrapper}>
           <button type="button" onClick={handleAddProjectToken} className={s.addTokenButton}>
-            <Icon name="png/add-enter" width={32} height={32} />
+            <Icon name="png/fdt_add" width={32} height={32} />
           </button>
         </div>
       )}
@@ -180,6 +186,7 @@ const LayoutHeader: React.FC = () => {
                 bottom: 0,
                 right: 0,
                 '--top': `${state?.modifiersData?.popperOffsets?.y || 0}px`,
+                zIndex: 99,
               } as React.CSSProperties
             }
             {...attributes.popper}>
@@ -193,11 +200,17 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Rewards</span>
                   </Link>
+                  <Link to="/senatus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Senatus</span>
+                  </Link>
+                  <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Age of Romulus</span>
+                  </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
                 </div>
-                {!wallet.isActive && !isMobile ? (
+                {!wallet.isActive ? (
                   <div style={{ textAlign: 'center', padding: '0 20px', width: '100%' }}>
                     <Divider />
                     <button

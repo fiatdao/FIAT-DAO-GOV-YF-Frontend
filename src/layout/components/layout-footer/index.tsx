@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
 import Icon from 'components/custom/icon';
 
 import { useGeneral } from '../../../components/providers/general-provider';
+import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Socials from './components/Socials';
 
@@ -14,9 +15,7 @@ const LayoutFooter: React.FC = () => {
   const { isDarkTheme } = useGeneral();
   const isMobile = useMediaQuery(992);
 
-  const {
-    location: { pathname },
-  } = useHistory();
+  const location = useLocation();
 
   const getYear = () => {
     return new Date().getFullYear();
@@ -43,12 +42,31 @@ const LayoutFooter: React.FC = () => {
                 </a>
                 <Link
                   to="/rewards"
-                  className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })}>
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'rewards',
+                  })}>
                   <span>Rewards</span>
+                </Link>
+                <Link
+                  to="/senatus"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'senatus',
+                  })}>
+                  <span>Senatus</span>
+                </Link>
+                <Link
+                  to="/age-of-romulus"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'age-of-romulus',
+                  })}>
+                  <span>Age of Romulus</span>
                 </Link>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
+              </div>
+              <div className={s.socialTop}>
+                <Socials />
               </div>
             </>
           ) : (
@@ -72,6 +90,12 @@ const LayoutFooter: React.FC = () => {
                   <Link to="/rewards" className={s.dropdownLink}>
                     <span>Rewards</span>
                   </Link>
+                  <Link to="/senatus" className={s.dropdownLink}>
+                    <span>Senatus</span>
+                  </Link>
+                  <Link to="/age-of-romulus" className={s.dropdownLink}>
+                    <span>Age of Romulus</span>
+                  </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
@@ -85,17 +109,24 @@ const LayoutFooter: React.FC = () => {
                 </Link>
               </>
             )}
+            {!isMobile && (
+              <div className={s.copyrightLinks}>
+                <div className={s.poweredBy}>
+                  <a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">
+                    Add liquidity to SushiSwap wsOHM/FDT pool
+                  </a>
+                  <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
+                    SushiSwap wsOHM/FDT market
+                  </a>
+                </div>
+              </div>
+            )}
             <div className={s.copyrightLink}>
               <a href="https://fiatdao.com/" target="_blank" rel="noopener noreferrer">
                 <span>fiatdao.com </span>
               </a>
               © {getYear()}. Open-sourced.
             </div>
-            {!isMobile && (
-              <div className={s.copyrightLinks}>
-                <Socials />
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import Modal, { ModalProps } from 'components/antd/modal';
 import Grid from 'components/custom/grid';
 import { Text } from 'components/custom/typography';
 
-const METAMASK_CHROME_EXT_URL = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn';
+const METAMASK_CHROME_EXT_URL = 'https://metamask.io/';
 
 const InstallMetaMaskModal: React.FC<ModalProps> = props => {
   const { ...modalProps } = props;
@@ -24,17 +24,18 @@ const InstallMetaMaskModal: React.FC<ModalProps> = props => {
             </Text>{' '}
             installed to continue.
             <br />
-            Once you have installed it, please refresh the page
+            Once you have installed it, please <button className="button-text" onClick={() => document.location.reload()}>refresh the page</button>
           </Text>
         </Grid>
         <Grid flow="col" justify="space-between">
-          <Button type="primary" href={METAMASK_CHROME_EXT_URL} rel="noopener noreferrer" target="_blank">
-            Install MetaMask
-          </Button>
-
-          <Button type="ghost" onClick={props.onCancel}>
+          <button type="button" onClick={props.onCancel} className="button-ghost" >
             <span>Go Back</span>
-          </Button>
+          </button>
+          <a href={METAMASK_CHROME_EXT_URL} rel="noopener noreferrer" target="_blank">
+            <button type="button" className="button-primary" >
+              Install MetaMask
+            </button>
+          </a>
         </Grid>
       </Grid>
     </Modal>

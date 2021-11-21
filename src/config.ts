@@ -25,7 +25,7 @@ const config = {
     rgt: toLowerCase(process.env.REACT_APP_TOKEN_RGT_ADDR),
     wsOHM: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_ADDR),
     ethFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
-    sOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_sOHM_FDT_SUSHI_LP),
+    wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
   },
   contracts: {
     yf: {
@@ -37,7 +37,7 @@ const config = {
       rgt: toLowerCase(process.env.REACT_APP_CONTRACT_YF_RGT_ADDR),
       wsOHM: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_ADDR),
       ethFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_ETH_FDT_SUSHI_LP),
-      sOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_sOHM_FDT_SUSHI_LP),
+      wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP),
     },
     dao: {
       governance: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),
@@ -45,6 +45,11 @@ const config = {
       reward: toLowerCase(process.env.REACT_APP_CONTRACT_DAO_REWARD_ADDR),
     },
     merkleDistributor: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_ADDR),
+    merkleDistributorAmphora: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_AMPHORA_ADDR),
+    merkleDistributorKithara: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_KITHARA_ADDR),
+    merkleDistributorGalea: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_GALEA_ADDR),
+    merkleDistributorGladius: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_GLADIUS_ADDR),
+    merkleDistributorCorona: toLowerCase(process.env.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_CORONA_ADDR),
   },
   web3: {
     chainId: Number(process.env.REACT_APP_WEB3_CHAIN_ID),
@@ -82,8 +87,8 @@ const config = {
   },
 };
 
-export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.usdc}&outputCurrency=${config.tokens.fdt}`;
+export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.wsOHM}&outputCurrency=${config.tokens.fdt}`;
 
-export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.usdc}/${config.tokens.fdt}`;
+export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.wsOHM}/${config.tokens.fdt}`;
 
 export default config;

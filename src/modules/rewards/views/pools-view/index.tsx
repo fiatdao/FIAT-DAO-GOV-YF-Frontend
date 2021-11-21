@@ -19,7 +19,7 @@ const PoolsView: React.FC = () => {
 
   return (
     <>
-      {!isMobile && walletCtx.isActive && <PoolRewards />}
+      {walletCtx.isActive && <PoolRewards />}
       <div className="content-container-fix content-container">
         <PoolStats className="mb-64 sm-mb-24" />
         <Text type="h1" weight="bold" color="primary" className="mb-16 sm-mb-4" font="secondary">
@@ -29,8 +29,11 @@ const PoolsView: React.FC = () => {
           Overview
         </Text>
         <div className={s.poolCards}>
+          <DAOProvider>
+            <DaoCard />
+          </DAOProvider>
           {/*<PoolCard poolId={YFPoolID.ETH_FDT_SLP} />*/}
-          {/*<PoolCard poolId={YFPoolID.sOHM_FDT_SLP} />*/}
+          <PoolCard poolId={YFPoolID.wsOHM_FDT_SLP} />
           <PoolCard poolId={YFPoolID.BOND} />
           <PoolCard poolId={YFPoolID.UMA} />
           <PoolCard poolId={YFPoolID.MKR} />

@@ -17,6 +17,7 @@ import s from './s.module.scss';
 const RewardsView = lazy(() => import('modules/rewards'));
 const AirdropView = lazy(() => import('modules/airdrop'));
 const SenatusView = lazy(() => import('modules/senatus'));
+const AgeOfRomulusView = lazy(() => import('modules/age-of-romulus'));
 
 const LayoutView: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -34,6 +35,7 @@ const LayoutView: React.FC = () => {
                   <Route path="/airdrop" component={AirdropView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />
+                  <Route path="/age-of-romulus" component={AgeOfRomulusView} />
                   <Redirect from="/" to="/rewards" />
                 </Switch>
               </Suspense>

@@ -197,12 +197,12 @@
 
 .button-text {
   @include font-p1-semi-bold;
-  color: var(--theme-secondary-color);
+  color: var(--gradient-pink-safe);
   border: 0;
   background-color: transparent;
   padding: 0;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
 
   &:hover {
@@ -236,7 +236,7 @@
   }
 
   &.selected {
-    border-color: var(--gradient-green-safe);
+    border-color: var(--gradient-pink-safe);
   }
 }
 

@@ -12,6 +12,8 @@ import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { useDAO } from '../../../../components/dao-provider';
 
+import s from './s.module.scss';
+
 export type ActivationThresholdProps = {
   className?: string;
 };
@@ -37,9 +39,8 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Hint
           text={
             <Text type="p2">
-              For the {FDTToken.symbol} to be activated, a threshold of {formatEntrValue(dao.activationThreshold)}{' '}
-              {FDTToken.symbol}
-              tokens staked has to be met.
+              For FIAT DAO to be activated, a threshold of {formatEntrValue(dao.activationThreshold)} $
+              {FDTToken.symbol} tokens staked has to be met.
             </Text>
           }>
           <Text type="p2" weight="bold" color="primary" font="secondary">
@@ -57,12 +58,12 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
           />
           <Icon name="ribbon-outlined" />
         </Grid>
-        <Grid flow="col" gap={8} align="center">
-          <Icon name="png/fiat-dao" width={32} height={32} />
+        <Grid className={s.col}>
+          <Icon name="png/fiat-dao" width={27} height={27} />
           <Text type="p1" weight="bold" color="primary">
             {formatEntrValue(dao.fdtStaked)}
           </Text>
-          <Text type="p1" weight="semibold" color="secondary">
+          <Text type="p1" weight="500" color="secondary">
             / {formatEntrValue(dao.activationThreshold)} already staked.
           </Text>
         </Grid>

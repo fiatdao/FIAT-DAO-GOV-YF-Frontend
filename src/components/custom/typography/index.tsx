@@ -18,7 +18,7 @@ export type TextProps = {
   className?: string;
   style?: Partial<CSSStyleDeclaration>;
   title?: string;
-  font?: 'secondary';
+  font?: 'secondary' | 'tertiary';
 };
 
 export const Text: React.FC<TextProps> = React.memo(props => {

@@ -1,45 +1,62 @@
 import React, { CSSProperties } from 'react';
 import cn from 'classnames';
 
+import accountImgWithout from 'resources/png/account_img_without.png';
+import accountImg from 'resources/png/account_img.png';
+import addEnterSrc from 'resources/png/add-enter.png';
+import axsSrc from 'resources/png/axie.png';
+import circlePlusOutlinedImg from 'resources/png/circle-plus-outlined.png';
+import emptyTable from 'resources/png/empty-table.png';
+import enterStarSrc from 'resources/png/enter-star.png';
+import ETH_FDT_SLPImg from 'resources/png/ETH_FDT_SLP.png';
+import fdIconDImg from 'resources/png/fd_icon.png';
+import fdtAddImg from 'resources/png/fdt_add.png';
+import logoTextDImg from 'resources/png/logo_dark_text.png';
+import logoDarkSrc from 'resources/png/logo_dark.png';
+import logoTextLImg from 'resources/png/logo_light_text.png';
+import logoLightSrc from 'resources/png/logo_light.png';
+// import enterdaoSrc from 'resources/png/enterdao.png';
+import manaSrc from 'resources/png/mana.png';
+import MKRSrc from 'resources/png/MKR.png';
+import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
+import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
+import plugBgImg from 'resources/png/plug-bg.png';
+import RGTSrc from 'resources/png/RGT.png';
+import romanAmphora from 'resources/png/roman_amphora.png';
+// Leaderboard
+import romanCorona from 'resources/png/roman_corona.png';
+import romanGalea from 'resources/png/roman_galea.png';
+import romanGladius from 'resources/png/roman_gladius.png';
+import romanKithara from 'resources/png/roman_kithara.png';
+import sandSrc from 'resources/png/sandbox.png';
+import telegramSrc from 'resources/png/telegram.png';
 import aaveSrc from 'resources/png/token-aave.png';
+import eslpSrc from 'resources/png/token-eslp.png';
 import ilvSrc from 'resources/png/token-ilv.png';
 import linkSrc from 'resources/png/token-link.png';
 import sushiSrc from 'resources/png/token-sushi.png';
 import uslpSrc from 'resources/png/token-uslp.png';
-import eslpSrc from 'resources/png/token-eslp.png';
-import universeSrc from 'resources/png/universe.png';
-// import enterdaoSrc from 'resources/png/enterdao.png';
-import manaSrc from 'resources/png/mana.png';
-import sandSrc from 'resources/png/sandbox.png';
-import axsSrc from 'resources/png/axie.png';
-import emptyTable from 'resources/png/empty-table.png';
-import addEnterSrc from 'resources/png/add-enter.png';
-import enterStarSrc from 'resources/png/enter-star.png';
-import logoDarkSrc from 'resources/png/logo_dark.png';
-import logoLightSrc from 'resources/png/logo_light.png';
-import telegramSrc from 'resources/png/telegram.png';
-import Sprite from 'resources/svg/icons-sprite.svg';
-import MKRSrc from 'resources/png/MKR.png';
-import RGTSrc from 'resources/png/RGT.png';
+import txFailureImg from 'resources/png/tx-failure.png';
+import txProgressImg from 'resources/png/tx-progress.png';
+import txSuccessImg from 'resources/png/tx-success.png';
 import UMASrc from 'resources/png/UMA.png';
+import universeSrc from 'resources/png/universe.png';
+import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
-import accountImg from 'resources/png/account_img.png';
-import ETH_FDT_SLPImg from 'resources/png/ETH_FDT_SLP.png';
-import sOHM_FDT_SUSHI_LPImg from 'resources/png/sOHM_FDT_SUSHI_LP.png';
-import logoTextLImg from 'resources/png/logo_light_text.png';
-import logoTextDImg from 'resources/png/logo_dark_text.png';
-import fdIconDImg from 'resources/png/fd_icon.png';
-import txProgressImg from 'resources/png/tx-progress.png';
-import txFailureImg from 'resources/png/tx-failure.png';
-import txSuccessImg from 'resources/png/tx-success.png';
-import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
-import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
-import plugBgImg from 'resources/png/plug-bg.png';
+import notConnected from 'resources/svg/not-connected.svg';
+import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
 
 export type LogoIconNames = 'png/fiat-dao';
+
+export type RomanIconNames =
+  | 'png/roman-corona'
+  | 'png/roman-gladius'
+  | 'png/roman-galea'
+  | 'png/roman-kithara'
+  | 'png/roman-amphora';
 
 export type TokenIconNames =
   | 'bond-circle-token'
@@ -79,7 +96,7 @@ export type TokenIconNames =
   | 'png/wsOHM'
   | 'png/YFI'
   | 'png/ETH_FDT_SLP'
-  | 'png/sOHM_FDT_SUSHI_LP'
+  | 'png/wsOHM_FDT_SUSHI_LP'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -103,6 +120,7 @@ export type IconNames =
   | TokenIconNames
   | NavIconNames
   | ThemeIconNames
+  | RomanIconNames
   | 'static/uStar'
   | 'right-arrow-circle-outlined'
   | 'arrow-back'
@@ -135,6 +153,7 @@ export type IconNames =
   | 'handshake-outlined'
   | 'stamp-outlined'
   | 'circle-plus-outlined'
+  | 'png/circle-plus-outlined'
   | 'circle-minus-outlined'
   | 'senior_tranche'
   | 'junior_tranche'
@@ -197,12 +216,15 @@ export type IconNames =
   | 'png/telegram'
   | 'png/empty-table'
   | 'png/account'
+  | 'png/account_without'
   | 'png/tx-progress'
   | 'png/tx-success'
   | 'png/tx-failure'
   | 'png/plug-bg-mobile'
   | 'png/plug-bg-tablet'
   | 'png/plug-bg'
+  | 'png/fdt_add'
+  | 'svg/not-connected'
   | 'static/add-token';
 
 export type IconProps = {
@@ -216,7 +238,6 @@ export type IconProps = {
   src?: string;
 };
 
-
 const Icon: React.FC<IconProps> = props => {
   const { name, width = 24, height = 24, rotate, color, className, style, src, ...rest } = props;
 
@@ -228,6 +249,10 @@ const Icon: React.FC<IconProps> = props => {
       switch (name) {
         case 'png/plug-bg-mobile':
           return plugBgMobileImg;
+        case 'png/fdt_add':
+          return fdtAddImg;
+        case 'png/circle-plus-outlined':
+          return circlePlusOutlinedImg;
         case 'png/plug-bg-tablet':
           return plugBgTabletImg;
         case 'png/plug-bg':
@@ -242,8 +267,8 @@ const Icon: React.FC<IconProps> = props => {
           return fdIconDImg;
         case 'png/ETH_FDT_SLP':
           return ETH_FDT_SLPImg;
-        case 'png/sOHM_FDT_SUSHI_LP':
-          return sOHM_FDT_SUSHI_LPImg;
+        case 'png/wsOHM_FDT_SUSHI_LP':
+          return wsOHM_FDT_SUSHI_LPImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':
@@ -292,6 +317,20 @@ const Icon: React.FC<IconProps> = props => {
           return telegramSrc;
         case 'png/account':
           return accountImg;
+        case 'png/account_without':
+          return accountImgWithout;
+        case 'png/roman-corona':
+          return romanCorona;
+        case 'png/roman-gladius':
+          return romanGladius;
+        case 'png/roman-galea':
+          return romanGalea;
+        case 'png/roman-kithara':
+          return romanKithara;
+        case 'png/roman-amphora':
+          return romanAmphora;
+        case 'svg/not-connected':
+          return notConnected;
         default:
           return '';
       }

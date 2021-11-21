@@ -21,8 +21,8 @@ const DaoCard: FC = () => {
     <div className="card">
       <div className={cn('card-header', s.cardTitleContainer)}>
         <div className={s.cardTitleTexts}>
-          <Icon name="png/enter-star" width={40} height={40} className="mr-4" />
-          <Text type="p1" weight="semibold" color="primary" ellipsis>
+          <Icon name="png/fiat-dao" width={40} height={40} className="mr-16" />
+          <Text type="p1" weight="500" color="primary">
             DAO Rewards
           </Text>
         </div>
@@ -33,34 +33,34 @@ const DaoCard: FC = () => {
         )}
       </div>
       <div className="card-row card-row-border p-24">
-        <Text type="lb2" weight="semibold" color="secondary">
+        <Text type="lb2" weight="500" color="secondary">
           APR
         </Text>
         <div className="flex flow-col">
-          <Text type="p1" weight="semibold" color="primary">
+          <Text type="p1" weight="500" color="primary">
             {formatPercent(daoCtx.apr) ?? '-'}
           </Text>
         </div>
       </div>
       <div className="card-row card-row-border p-24">
-        <Text type="lb2" weight="semibold" color="secondary">
+        <Text type="lb2" weight="500" color="secondary">
           {FDTToken.symbol} Staked
         </Text>
-        <div className="flex flow-col">
-          <Icon name="png/fiat-dao" className="mr-4" />
-          <Text type="p1" weight="semibold" color="primary">
+        <div className="flex flow-col align-center">
+          <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
+          <Text type="p1" weight="500" color="primary">
             {formatToken(daoComitium.fdtStaked) ?? '-'}
           </Text>
         </div>
       </div>
       {walletCtx.isActive && (
         <div className="card-row card-row-border p-24">
-          <Text type="lb2" weight="semibold" color="secondary">
+          <Text type="lb2" weight="500" color="secondary">
             My Staked Balance
           </Text>
-          <div className="flex flow-col">
-            <Icon name="png/fiat-dao" className="mr-4" />
-            <Text type="p1" weight="semibold" color="primary">
+          <div className="flex flow-col align-center">
+            <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
+            <Text type="p1" weight="500" color="primary">
               {formatToken(daoComitium.balance) ?? '-'}
             </Text>
           </div>
@@ -68,18 +68,18 @@ const DaoCard: FC = () => {
       )}
       <div className="card-row card-row-border p-24">
         <div className="flex flow-row">
-          <Text type="lb2" weight="semibold" color="secondary" className="mb-4">
+          <Text type="lb2" weight="500" color="secondary" className="mb-4">
             {FDTToken.symbol} Rewards
           </Text>
           <Text type="p2" color="secondary">
             out of {formatToken(daoReward.poolFeature?.totalAmount)}
           </Text>
         </div>
-        <div className="flex flow-col">
-          <Icon name="png/fiat-dao" className="mr-4" />
+        <div className="flex flow-col align-center">
+          <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
           <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
-              <Text type="p1" weight="bold" color="primary">
+              <Text type="p1" weight="500" color="primary">
                 {formatToken(daoReward.actions.getEntrRewards())}
               </Text>
             )}
@@ -88,12 +88,12 @@ const DaoCard: FC = () => {
       </div>
       {walletCtx.isActive && (
         <div className="card-row card-row-border p-24">
-          <Text type="lb2" weight="semibold" color="secondary">
+          <Text type="lb2" weight="500" color="secondary">
             My {FDTToken.symbol} Rewards
           </Text>
-          <div className="flex flow-col">
-            <Icon name="png/fiat-dao" className="mr-4" />
-            <Text type="p1" weight="semibold" color="primary">
+          <div className="flex flow-col align-center">
+            <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
+            <Text type="p1" weight="500" color="primary">
               {formatToken(daoReward.claimValue) ?? '-'}
             </Text>
           </div>
