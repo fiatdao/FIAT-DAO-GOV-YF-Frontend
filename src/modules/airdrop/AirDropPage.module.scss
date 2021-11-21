@@ -117,3 +117,32 @@
 .bigBlock {
   padding: 35px 42px;
 }
+
+
+.cardGradient {
+  background: var(--gradient-pink);
+  border-radius: 8px;
+  position: relative;
+
+  > div {
+    position: relative;
+    padding: 16px 23px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    left: 1px;
+    top: 1px;
+    background: var(--theme-secondary-block);
+    pointer-events: none;
+    border-radius: 7px;
+    z-index: 0;
+  }
+}

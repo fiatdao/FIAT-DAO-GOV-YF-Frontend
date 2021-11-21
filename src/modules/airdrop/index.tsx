@@ -179,7 +179,7 @@ const AirDropPage = () => {
                 </div>
               </div>
             </Grid>
-            <div className={s.card}>
+            <div className={cn(s.card, 'mb-32')}>
               <div className={s.week}>
                 <Text type="small">WEEK 15/100</Text>
               </div>
@@ -217,6 +217,11 @@ const AirDropPage = () => {
                     500,000
                   </Text>
                 </div>
+              </div>
+            </div>
+            <div>
+              <div className={s.cardGradient}>
+                <div>Test block</div>
               </div>
             </div>
           </div>
