@@ -20,7 +20,7 @@ interface IJsonItem {
 }
 
 const Columns: ColumnsType<APIVoterEntity> = [
-  {
+/*  {
     title: 'Rank',
     dataIndex: 'rank',
     width: '1%',
@@ -30,7 +30,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
         {value}
       </Text>
     ),
-  },
+  },*/
   {
     title: 'Address',
     dataIndex: 'address',
@@ -42,7 +42,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
             {value}
           </Text>
           <Text type="p1" wrap={false} color="primary" className="hidden-desktop">
-            {shortenAddr(value)}
+            {value}
           </Text>
         </ExternalLink>
       </div>
@@ -51,7 +51,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
   {
     title: 'vFDT (Voting power)',
     dataIndex: 'votingPower',
-    align: 'right',
+    // align: 'right',
     render: (value: BigNumber) => (
       <Text type="p1" color="primary" className="ml-auto">
         {formatBigValue(value, 2, '-', 2)}
@@ -60,7 +60,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
   },
 
   {
-    title: 'Prize',
+    title: 'NFT Prize',
     dataIndex: 'prize-test',
     width: 266,
     align: 'left',
