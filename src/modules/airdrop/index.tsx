@@ -1,26 +1,202 @@
 import React from 'react';
+import cn from 'classnames';
 
+import Table from 'components/antd/table';
 import Grid from 'components/custom/grid';
 
-import { Text } from '../../components/custom/typography';
+import ExternalLink from '../../components/custom/externalLink';
+import Icon from '../../components/custom/icon';
+import { Hint, Text } from '../../components/custom/typography';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
-import styles from './AirDropPage.module.scss';
+import { getEtherscanTxUrl, shortenAddr } from '../../web3/utils';
+
+import s from './AirDropPage.module.scss';
+
+const columns = [
+  {
+    // title: 'Name',
+    dataIndex: 'address',
+    key: 'address',
+    render: (text: any) => text,
+  },
+  {
+    // title: 'Address',
+    dataIndex: 'amount',
+    key: 'amount',
+  },
+];
+
+const data = [
+  {
+    key: '1',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+  {
+    key: '2',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+  {
+    key: '3',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+  {
+    key: '4',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+  {
+    key: '5',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+];
 
 const AirDropPage = () => {
+  const isMobile = useMediaQuery(992);
   return (
-    <section className={styles.page}>
-      <div className={styles.container}>
+    <section className={s.page}>
+      <div className={s.container}>
         <Text type="h2" weight="bold" color="primary" className="mb-8">
           Airdrop reward
         </Text>
-        <Text type="p3" color="secondary">
+        <Text type="small" color="secondary" className="mb-32">
           You may have received claimable token rewards from the $FDT BarnBridge Community Airdrop. Claiming your
-          airdrop before a year has passed will forfeit a portion of your balance. Your total claimable amount will rise
-          whenever someone forfeits a portion of their reward.
+          airdrop before a year has
+          <br /> passed will forfeit a portion of your balance. Your total claimable amount will rise whenever someone
+          forfeits a portion of their reward.
         </Text>
         <Grid flow="col" colsTemplate="1fr 350px" gap={30} className="mb-12">
-          <div>Left</div>
-          <div>Right</div>
+          <div>
+            <Grid
+              colsTemplate={!isMobile ? '1fr 1fr 1fr' : '1fr'}
+              gap={24}
+              justify="space-between"
+              className={cn(s.card, s.card__head, 'mb-32')}>
+              <div>
+                <Hint text="Total airdropped - tooltip" className="mb-4">
+                  <Text type="small" color="secondary">
+                    Total airdropped
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center">
+                  <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                  <Text type="p2" weight="700" color="primary">
+                    10,000,000
+                  </Text>
+                </div>
+              </div>
+              <div>
+                <Hint text="Total claimed - tooltip" className="mb-4">
+                  <Text type="small" color="secondary">
+                    Total claimed
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center">
+                  <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                  <Text type="p2" weight="700" color="primary">
+                    100,000
+                  </Text>
+                </div>
+              </div>
+              <div>
+                <Hint text="Total redistributed - tooltip" className="mb-4">
+                  <Text type="small" color="secondary">
+                    Total redistributed
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center">
+                  <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                  <Text type="p2" weight="700" color="green">
+                    135,000
+                  </Text>
+                </div>
+              </div>
+            </Grid>
+            <div className={s.card}>
+              <div className={s.week}>
+                <Text type="small">WEEK 15/100</Text>
+              </div>
+            </div>
+          </div>
+          <div className={s.card}>
+            <Hint text="Total redistributed - tooltip" className="mt-16 mb-32">
+              <Text type="small" color="secondary">
+                Last claimed
+              </Text>
+            </Hint>
+            <div className={s.table}>
+              <Table showHeader={false} columns={columns} dataSource={data} />
+            </div>
+          </div>
         </Grid>
       </div>
     </section>
