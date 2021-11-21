@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { Progress } from 'antd';
+import { Progress, Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import format from 'date-fns/format';
@@ -59,8 +59,9 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
         <div className="flex full-height justify-center align-center">
           <div className="flex flow-row align-center">
             <img src={iconNotConnect} width={48} height={64} className="mb-32" alt="" />
-            <Text tag="p" type="p2" color="primary" className="mb-32">
-              To check your rank, connect your wallet below
+            <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
+              To check your rank, <br />
+              connect your wallet below
             </Text>
             <button
               type="button"
@@ -137,21 +138,23 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
           {/*  />*/}
           {/*</div>*/}
         </div>
-      ) : (
-        currUser === undefined && (
-          <div className="flex full-height justify-center align-center">
-            <div className="flex flow-row align-center">
-              <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
-              <Text tag="p" type="p2" color="primary" className="mb-32">
-                To participate in Age of Romulus, stake <br />
-                FDT tokens in the DAO
-              </Text>
-              <Link to="/senatus" className="button-primary">
-                Stake FDT
-              </Link>
-            </div>
+      ) : currUser === undefined ? (
+        <div className="flex full-height justify-center align-center">
+          <div className="flex flow-row align-center">
+            <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
+            <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
+              To participate in Age of Romulus, stake <br />
+              FDT tokens in the DAO
+            </Text>
+            <Link to="/senatus" className="button-primary">
+              Stake FDT
+            </Link>
           </div>
-        )
+        </div>
+      ) : (
+        <div className="flex align-center full-height justify-center">
+          <Spin size={'large'} spinning />
+        </div>
       )}
     </div>
   );

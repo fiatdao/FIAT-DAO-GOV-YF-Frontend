@@ -13,8 +13,8 @@
   }
 
   &:global(.ant-picker-large) {
-    height: 64px;
-    padding: 20px 24px;
+    height: auto;
+    padding: 0;
   }
 
   &:global(.ant-picker-disabled) {
@@ -33,8 +33,11 @@
 
   :global(.ant-picker-input) {
     input {
-      @include font-p1-semi-bold;
+      @include font-p1-regular;
       color: var(--theme-primary-color);
+      order: 2;
+      height: 64px;
+      padding: 20px 24px;
 
       &::placeholder {
         color: var(--theme-default-color);
@@ -43,6 +46,20 @@
 
     :global(.ant-picker-suffix) {
       color: var(--theme-icon-color);
+      order: 1;
+      margin: 0;
+      border-right: 1px solid var(--theme-border-color);
+      height: 64px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    :global(.ant-picker-clear) {
+      right: 24px;
+      background: transparent;
+      color: var(--theme-primary-color);
+      opacity: 0.5;
     }
   }
 }
