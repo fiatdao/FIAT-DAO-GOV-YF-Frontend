@@ -15,13 +15,11 @@ import s from './AirDropPage.module.scss';
 
 const columns = [
   {
-    // title: 'Name',
     dataIndex: 'address',
     key: 'address',
     render: (text: any) => text,
   },
   {
-    // title: 'Address',
     dataIndex: 'amount',
     key: 'amount',
   },
@@ -38,7 +36,7 @@ const data = [
       </ExternalLink>
     ),
     amount: (
-      <div className="flex flow-col align-center">
+      <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
         <Text type="p2" weight="700" color="primary">
           100,000
@@ -56,7 +54,7 @@ const data = [
       </ExternalLink>
     ),
     amount: (
-      <div className="flex flow-col align-center">
+      <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
         <Text type="p2" weight="700" color="primary">
           100,000
@@ -74,7 +72,7 @@ const data = [
       </ExternalLink>
     ),
     amount: (
-      <div className="flex flow-col align-center">
+      <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
         <Text type="p2" weight="700" color="primary">
           100,000
@@ -92,7 +90,7 @@ const data = [
       </ExternalLink>
     ),
     amount: (
-      <div className="flex flow-col align-center">
+      <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
         <Text type="p2" weight="700" color="primary">
           100,000
@@ -110,7 +108,7 @@ const data = [
       </ExternalLink>
     ),
     amount: (
-      <div className="flex flow-col align-center">
+      <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
         <Text type="p2" weight="700" color="primary">
           100,000
@@ -184,6 +182,41 @@ const AirDropPage = () => {
             <div className={s.card}>
               <div className={s.week}>
                 <Text type="small">WEEK 15/100</Text>
+              </div>
+              <div className={s.bigBlock}>
+                <Hint text="Your total airdrop amount - tooltip" className="mb-12">
+                  <Text type="small" color="secondary">
+                    Your total airdrop amount
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center mb-60">
+                  <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
+                  <Text type="h1" weight="700" color="primary">
+                    135,000
+                  </Text>
+                </div>
+                <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                  <Text type="small" color="secondary">
+                    Your airdrop amount
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center mb-32">
+                  <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                  <Text type="p2" weight="700" color="primary">
+                    500,000
+                  </Text>
+                </div>
+                <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                  <Text type="small" color="secondary">
+                    Your bonus amount
+                  </Text>
+                </Hint>
+                <div className="flex flow-col align-center">
+                  <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                  <Text type="p2" weight="700" color="green">
+                    500,000
+                  </Text>
+                </div>
               </div>
             </div>
           </div>

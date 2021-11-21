@@ -29,7 +29,7 @@
   min-height: 60vh;
   display: flex;
   position: relative;
-  padding-top: 60px;
+  padding: 60px 0;
 
   @media (max-width: 992px) {
     padding-top: 30px;
@@ -43,6 +43,7 @@
   background: var(--theme-card-color);
   border-radius: 8px;
   padding: 17px 24px;
+  position: relative;
 
   &__head {
     > div {
@@ -108,4 +109,11 @@
   border-radius: 30px;
   display: inline-block;
   color: #ffa800;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.bigBlock {
+  padding: 35px 42px;
 }
