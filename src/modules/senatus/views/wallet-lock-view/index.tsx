@@ -257,7 +257,7 @@ const WalletLockView: React.FC = () => {
                   }}
                   format="DD/MM/YYYY HH:mm"
                   size="large"
-                  disabled={formDisabled || state.saving}
+                  // disabled={formDisabled || state.saving}
                 />
               </Form.Item>
               <Alert message="All locked balances will be unavailable for withdrawal until the lock timer ends. All future deposits will be locked for the same time." />

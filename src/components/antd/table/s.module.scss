@@ -12,7 +12,7 @@
   }
 
   :global(.ant-table-thead .ant-table-cell) {
-    @include font-sm-semi-bold;
+    @include font-sm-regular;
     padding: 16px 24px;
     background: var(--theme-card-color);
     color: var(--theme-default-color);
