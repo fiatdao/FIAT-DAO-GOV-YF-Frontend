@@ -59,7 +59,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
         <div className="flex full-height justify-center align-center">
           <div className="flex flow-row align-center">
             <img src={iconNotConnect} width={48} height={64} className="mb-32" alt="" />
-            <Text tag="p" type="p2" color="primary" className="mb-32">
+            <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
               To check your rank, <br />
               connect your wallet below
             </Text>
@@ -143,7 +143,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
           <div className="flex full-height justify-center align-center">
             <div className="flex flow-row align-center">
               <Icon name="png/fiat-dao" width="60" height="auto" className="mb-32" />
-              <Text tag="p" type="p2" color="primary" className="mb-32">
+              <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
                 To participate in Age of Romulus, stake <br />
                 FDT tokens in the DAO
               </Text>
