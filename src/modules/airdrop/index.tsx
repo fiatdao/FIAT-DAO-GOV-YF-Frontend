@@ -9,6 +9,8 @@ import ExternalLink from '../../components/custom/externalLink';
 import Icon from '../../components/custom/icon';
 import { Hint, Text } from '../../components/custom/typography';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import { useWallet } from '../../wallets/wallet';
+import airdropRewardWalletRequest from './animation/AirdropRewardWalletRequest.json';
 import waveAnimations from './animation/waves.json';
 
 import { getEtherscanTxUrl, shortenAddr } from '../../web3/utils';
@@ -212,6 +214,7 @@ const data = [
 ];
 
 const AirDropPage = () => {
+  const wallet = useWallet();
   const isTablet = useMediaQuery(992);
   const isMobile = useMediaQuery(720);
   return (
@@ -274,63 +277,83 @@ const AirDropPage = () => {
               </div>
             </Grid>
             <div className={cn(s.card, 'mb-32')}>
-              <div className={s.week}>
-                <Text type="small">WEEK 15/100</Text>
-              </div>
-              <div className={s.bigBlock}>
+              {!wallet.isActive ? (
+                <div className="flex full-height justify-center align-center">
+                  <div className="flex flow-row align-center">
+                    <Lottie animationData={airdropRewardWalletRequest} className={s.walletRequest} />
+                    <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
+                      To check if you are eligible for the airdrop, <br />
+                      connect your wallet.
+                    </Text>
+                    <button
+                      type="button"
+                      className={cn('button-primary', { 'button-small': isMobile })}
+                      onClick={() => wallet.showWalletsModal()}>
+                      <span>Connect {!isMobile && 'wallet'}</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
                 <div>
-                  <Hint text="Your total airdrop amount - tooltip" className="mb-12">
-                    <Text type="small" color="secondary">
-                      Your total airdrop amount
-                    </Text>
-                  </Hint>
-                  <div className="flex flow-col align-center mb-48">
-                    <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
-                    <Text type="h1" weight="700" color="primary">
-                      135,000
-                    </Text>
+                  <div className={s.week}>
+                    <Text type="small">WEEK 15/100</Text>
                   </div>
-                  <Hint text="Your airdrop amount - tooltip" className="mb-12">
-                    <Text type="small" color="secondary">
-                      Your airdrop amount
-                    </Text>
-                  </Hint>
-                  <div className="flex flow-col align-center mb-32">
-                    <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                    <Text type="p2" weight="700" color="primary">
-                      500,000
-                    </Text>
-                  </div>
-                  <Hint text="Your airdrop amount - tooltip" className="mb-12">
-                    <Text type="small" color="secondary">
-                      Your bonus amount
-                    </Text>
-                  </Hint>
-                  <div className="flex flow-col align-center">
-                    <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                    <Text type="p2" weight="700" color="green">
-                      500,000
-                    </Text>
+                  <div className={s.bigBlock}>
+                    <div>
+                      <Hint text="Your total airdrop amount - tooltip" className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your total airdrop amount
+                        </Text>
+                      </Hint>
+                      <div className="flex flow-col align-center mb-48">
+                        <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
+                        <Text type="h1" weight="700" color="primary">
+                          135,000
+                        </Text>
+                      </div>
+                      <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your airdrop amount
+                        </Text>
+                      </Hint>
+                      <div className="flex flow-col align-center mb-32">
+                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                        <Text type="p2" weight="700" color="primary">
+                          500,000
+                        </Text>
+                      </div>
+                      <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your bonus amount
+                        </Text>
+                      </Hint>
+                      <div className="flex flow-col align-center">
+                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                        <Text type="p2" weight="700" color="green">
+                          500,000
+                        </Text>
+                      </div>
+                    </div>
+                    <div className={s.progress}>
+                      <div>
+                        <span>
+                          <Text type="h1" weight="700" color="primary">
+                            100,000
+                          </Text>
+                          <Text type="p3" color="primary">
+                            available
+                          </Text>
+                        </span>
+                        <Lottie
+                          animationData={waveAnimations}
+                          style={{ transform: `translateY(calc(-${progressPercent}% - -10px))` }}
+                          className={s.waveAnimation}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className={s.progress}>
-                  <div>
-                    <span>
-                      <Text type="h1" weight="700" color="primary">
-                        100,000
-                      </Text>
-                      <Text type="p3" color="primary">
-                        available
-                      </Text>
-                    </span>
-                    <Lottie
-                      animationData={waveAnimations}
-                      style={{ transform: `translateY(calc(-${progressPercent}% - -10px))` }}
-                      className={s.waveAnimation}
-                    />
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
             <div>
               <div className={s.cardGradient}>
