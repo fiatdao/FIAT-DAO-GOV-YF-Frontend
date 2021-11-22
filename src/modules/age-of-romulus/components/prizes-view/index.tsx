@@ -114,7 +114,13 @@ const PrizesView = ({
                   <span>{format(new Date(date), 'dd')}</span>
                   <span>{format(new Date(date), 'LLL')}</span>
                 </div>
-                {icon}
+                {
+                  key === activeKey ? (
+                  <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
+                    {icon}
+                  </a>
+                ) : icon
+                }
                 <div>
                   <Text type="lb2" color="primary">
                     {title}

@@ -87,11 +87,11 @@ const LayoutFooter: React.FC = () => {
                     className={cn(s.dropdownLink)}>
                     <span>Home</span>
                   </a>
-                  <Link to="/rewards" className={s.dropdownLink}>
-                    <span>Rewards</span>
-                  </Link>
                   <Link to="/senatus" className={s.dropdownLink}>
                     <span>Senatus</span>
+                  </Link>
+                  <Link to="/rewards" className={s.dropdownLink}>
+                    <span>Rewards</span>
                   </Link>
                   <Link to="/age-of-romulus" className={s.dropdownLink}>
                     <span>Age of Romulus</span>
