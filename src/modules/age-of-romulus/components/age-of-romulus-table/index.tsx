@@ -15,7 +15,7 @@ import prizeList from 'modules/age-of-romulus/prize';
 import s from './s.module.scss';
 
 interface IJsonItem {
-  [key: string]: unknown;
+  [key: string]: any;
   address: string;
 }
 
@@ -67,6 +67,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
+          {/*// @ts-ignore*/}
           {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <Icon name="png/roman-amphora" width={50} height={50} />
           )}

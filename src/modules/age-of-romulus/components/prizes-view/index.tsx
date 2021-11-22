@@ -60,7 +60,7 @@ const PrizesView = ({
 }) => {
   const isMobile = useMediaQuery(768);
 
-  console.log('isClaimDisable', !isClaimDisable);
+  // console.log('isClaimDisable', !isClaimDisable);
 
   const ageOfRomulusCtx = useAgeOfRomulus();
 
@@ -133,8 +133,8 @@ const PrizesView = ({
                   {/*// @ts-ignore*/}
                   <button
                     type="button"
-                    // disabled={isDisabled}
-                    disabled={true}
+                    disabled={isDisabled}
+                    // disabled={true}
                     // @ts-ignore
                     onClick={() => ageOfRomulusCtx[key].claim()}
                     className="button-primary button-small">
