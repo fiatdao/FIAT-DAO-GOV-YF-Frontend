@@ -87,7 +87,7 @@ const PrizesView = ({
             let stakers;
             switch (key) {
               case ActiveKeys.amphora:
-                stakers = countAllUsers ?? 0;
+                stakers = 751;
                 break;
               case ActiveKeys.kithara:
                 stakers = Math.ceil((countAllUsers ?? 0) * 0.5);
