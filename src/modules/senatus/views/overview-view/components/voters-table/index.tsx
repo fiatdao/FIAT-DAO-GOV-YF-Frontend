@@ -18,7 +18,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
       <div className="flex col-gap-16 align-center">
         <Identicon address={value} width={32} height={32} />
         <ExternalLink href={getEtherscanAddressUrl(value)} className="link-blue">
-          <Text type="p1" ellipsis className="hidden-mobile hidden-tablet" color="primary">
+          <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
             {value}
           </Text>
           <Text type="p1" wrap={false} color="primary" className="hidden-desktop">
