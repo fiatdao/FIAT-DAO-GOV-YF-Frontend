@@ -122,6 +122,7 @@
     "graphql": "^15.5.1",
     "identicon.js": "2.3.3",
     "lodash": "4.17.21",
+    "lottie-react": "^2.1.0",
     "nanoid": "3.1.22",
     "outy": "0.1.2",
     "query-string": "7.0.0",
