@@ -15,7 +15,6 @@ import setDate from 'date-fns/set';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
-import Button from 'components/antd/button';
 import DatePicker from 'components/antd/datepicker';
 import Form from 'components/antd/form';
 import GasFeeList from 'components/custom/gas-fee-list';
@@ -257,7 +256,7 @@ const WalletLockView: React.FC = () => {
                   }}
                   format="DD/MM/YYYY HH:mm"
                   size="large"
-                  disabled={formDisabled || state.saving}
+                  // disabled={formDisabled || state.saving}
                 />
               </Form.Item>
               <Alert message="All locked balances will be unavailable for withdrawal until the lock timer ends. All future deposits will be locked for the same time." />

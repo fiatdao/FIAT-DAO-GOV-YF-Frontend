@@ -1,5 +1,7 @@
 .table {
   :global(.ant-table-tbody) {
+    border-radius: 0;
+
     :global(.ant-table-row):hover {
       :global(.ant-table-cell) {
         //background: var(--theme-card-color);

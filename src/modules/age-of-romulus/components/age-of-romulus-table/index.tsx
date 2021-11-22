@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ColumnsType } from 'antd/lib/table/interface';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, getEtherscanAddressUrl, shortenAddr } from 'web3/utils';
+import { formatBigValue, getEtherscanAddressUrl } from 'web3/utils';
 
 import Table from 'components/antd/table';
 import ExternalLink from 'components/custom/externalLink';
@@ -20,15 +20,15 @@ interface IJsonItem {
 }
 
 const Columns: ColumnsType<APIVoterEntity> = [
-/*  {
+  /*  {
     title: 'Rank',
     dataIndex: 'rank',
+    width: '1%',
+    align: 'center',
     render: (value: string) => (
-      <div className="flex align-center">
-        <Text type="p1" color="primary">
-          {value}
-        </Text>
-      </div>
+      <Text type="p1" color="primary">
+        {value}
+      </Text>
     ),
   },*/
   {
@@ -49,7 +49,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
     ),
   },
   {
-    title: 'Voting power (vFDT)',
+    title: 'vFDT (Voting power)',
     dataIndex: 'votingPower',
     // align: 'right',
     render: (value: BigNumber) => (
@@ -63,7 +63,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
     title: 'NFT Prize',
     dataIndex: 'prize-test',
     width: 266,
-    // align: 'right',
+    align: 'left',
     render: (value: number, { address }) => {
       return (
         <div className="flex col-gap-16 align-center">
