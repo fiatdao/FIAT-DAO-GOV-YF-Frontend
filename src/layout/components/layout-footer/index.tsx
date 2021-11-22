@@ -41,18 +41,18 @@ const LayoutFooter: React.FC = () => {
                   <span>Home</span>
                 </a>
                 <Link
-                  to="/rewards"
-                  className={cn(s.dropdownLink, {
-                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'rewards',
-                  })}>
-                  <span>Rewards</span>
-                </Link>
-                <Link
                   to="/senatus"
                   className={cn(s.dropdownLink, {
                     [s.dropdownLink_active]: location.pathname.split('/')[1] === 'senatus',
                   })}>
                   <span>Senatus</span>
+                </Link>
+                <Link
+                  to="/rewards"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'rewards',
+                  })}>
+                  <span>Rewards</span>
                 </Link>
                 <Link
                   to="/age-of-romulus"
