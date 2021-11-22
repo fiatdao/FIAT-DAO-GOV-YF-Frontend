@@ -59,9 +59,9 @@ const AgeOfRomulusView = () => {
   return (
     <div className={s.ageOfRomulus}>
       <div className="container-limit">
-        <Text tag="h1" type="h1" weight="bold" color="primary" font="tertiary" className="mb-48">
-          Age of Romulus <span>Leaderboard</span>
-        </Text>
+        {/*<Text tag="h1" type="h1" weight="bold" color="primary" font="tertiary" className="mb-48">*/}
+        {/*  Age of Romulus <span>Leaderboard</span>*/}
+        {/*</Text>*/}
         <Grid gap={!isTablet ? 32 : 16} colsTemplate={!isTablet ? '1fr 1fr' : '1fr'} className="mb-32 sm-mb-16">
           <div className={s.card}>
             <AgeOfRomulusRank allUsers={allUsers} currUser={currUser} countAllUsers={countAllUsers} />

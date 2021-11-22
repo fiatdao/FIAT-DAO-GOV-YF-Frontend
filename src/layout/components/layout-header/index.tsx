@@ -53,6 +53,7 @@ const LayoutHeader: React.FC = () => {
   }, [window.innerWidth]);
 
   const isSenatusPage = useRouteMatch('/senatus');
+  const isRewardsPage = useRouteMatch('/rewards');
 
   async function handleAddProjectToken() {
     if (wallet.connector?.id === 'metamask') {
@@ -79,7 +80,7 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : 'Rewards'}</h1>
+      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : isRewardsPage ? 'Rewards' : 'Age of Romulus'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>

@@ -87,56 +87,56 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
               </Text>
             </div>
           </div>
-          {/*<div className={s.rewards}>*/}
-          {/*  <div className={s.line} />*/}
-          {/*  <Text tag="p" weight="500" type="p2">*/}
-          {/*    Rewards*/}
-          {/*  </Text>*/}
-          {/*  <div className={s.line} />*/}
-          {/*</div>*/}
-          {/*<div className={s.upcoming}>*/}
-          {/*  <Grid flow="col" justify="space-between" className="1fr 1fr">*/}
-          {/*    <Text tag="p" type="p2" color="primary" className="mb-9">*/}
-          {/*      Next prize*/}
-          {/*    </Text>*/}
-          {/*    <Text tag="p" type="p2" color="primary" className="mb-9">*/}
-          {/*      {format(new Date(nextPrize.date), 'dd')} {format(new Date(nextPrize.date), 'LLL')},{' '}*/}
-          {/*      {format(new Date(nextPrize.date), 'y')}*/}
-          {/*    </Text>*/}
-          {/*  </Grid>*/}
-          {/*  <div className={cn(s.upcoming__card, { [s.upcoming__card__active]: !isUntil })}>*/}
-          {/*    <Grid flow="col" gap={8} align="center" colsTemplate="60px 1fr">*/}
-          {/*      {nextPrize.icon}*/}
-          {/*      <div>*/}
-          {/*        <Text type="lb2" color="primary">*/}
-          {/*          {nextPrize.title}*/}
-          {/*        </Text>*/}
-          {/*        <Text type="p3" weight="bold" color="primary">*/}
-          {/*          {nextPrize.rate ? `Top ${nextPrize.rate}%` : 'Everyone'}*/}
-          {/*        </Text>*/}
-          {/*      </div>*/}
-          {/*    </Grid>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          {/*<div className="progress">*/}
-          {/*  <Text type="p3" color="primary" className="mb-12">*/}
-          {/*    {isUntil*/}
-          {/*      ? `Until next prize: ${formatBigValue(lastVoterWithPrize.minus(currUser.votingPower), 2, '-', 2)} vFDT`*/}
-          {/*      : `You are ahead by: ${formatBigValue(currUser.votingPower.minus(lastVoterWithPrize), 2, '-', 2)} vFDT`}*/}
-          {/*  </Text>*/}
-          {/*  <Progress*/}
-          {/*    strokeColor={{*/}
-          {/*      '0%': '#FF9574',*/}
-          {/*      '100%': '#FF4C8C',*/}
-          {/*    }}*/}
-          {/*    trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}*/}
-          {/*    percent={*/}
-          {/*      isUntil ? currUser.votingPower.times(new BigNumber(100)).div(lastVoterWithPrize).toNumber() : 100*/}
-          {/*    }*/}
-          {/*    strokeWidth={32}*/}
-          {/*    showInfo={false}*/}
-          {/*  />*/}
-          {/*</div>*/}
+          <div className={s.rewards}>
+            <div className={s.line} />
+            <Text tag="p" weight="500" type="p2">
+              Rewards
+            </Text>
+            <div className={s.line} />
+          </div>
+          <div className={s.upcoming}>
+            <Grid flow="col" justify="space-between" className="1fr 1fr">
+              <Text tag="p" type="p2" color="primary" className="mb-9">
+                Next prize
+              </Text>
+              <Text tag="p" type="p2" color="primary" className="mb-9">
+                {format(new Date(nextPrize.date), 'dd')} {format(new Date(nextPrize.date), 'LLL')},{' '}
+                {format(new Date(nextPrize.date), 'y')}
+              </Text>
+            </Grid>
+            <div className={cn(s.upcoming__card, { [s.upcoming__card__active]: !isUntil })}>
+              <Grid flow="col" gap={8} align="center" colsTemplate="60px 1fr">
+                {nextPrize.icon}
+                <div>
+                  <Text type="lb2" color="primary">
+                    {nextPrize.title}
+                  </Text>
+                  <Text type="p3" weight="bold" color="primary">
+                    {nextPrize.rate ? `Top ${nextPrize.rate}%` : 'Everyone'}
+                  </Text>
+                </div>
+              </Grid>
+            </div>
+          </div>
+          <div className="progress">
+            <Text type="p3" color="primary" className="mb-12">
+              {isUntil
+                ? `Until next prize: ${formatBigValue(lastVoterWithPrize.minus(currUser.votingPower), 2, '-', 2)} vFDT`
+                : `You are ahead by: ${formatBigValue(currUser.votingPower.minus(lastVoterWithPrize), 2, '-', 2)} vFDT`}
+            </Text>
+            <Progress
+              strokeColor={{
+                '0%': '#FF9574',
+                '100%': '#FF4C8C',
+              }}
+              trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}
+              percent={
+                isUntil ? currUser.votingPower.times(new BigNumber(100)).div(lastVoterWithPrize).toNumber() : 100
+              }
+              strokeWidth={32}
+              showInfo={false}
+            />
+          </div>
         </div>
       ) : currUser === undefined ? (
         <div className="flex full-height justify-center align-center">
