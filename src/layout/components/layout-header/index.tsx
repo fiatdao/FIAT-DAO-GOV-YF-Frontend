@@ -86,11 +86,11 @@ const LayoutHeader: React.FC = () => {
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
-        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
-          <span>Rewards</span>
-        </Link>
         <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>
           <span>Senatus</span>
+        </Link>
+        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
+          <span>Rewards</span>
         </Link>
         <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
           <span>Age of Romulus</span>
@@ -198,11 +198,11 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Home</span>
                   </Link>
-                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>Rewards</span>
-                  </Link>
                   <Link to="/senatus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Senatus</span>
+                  </Link>
+                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Rewards</span>
                   </Link>
                   <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Age of Romulus</span>

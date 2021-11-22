@@ -69,7 +69,9 @@ const Columns: ColumnsType<APIVoterEntity> = [
         <div className="flex col-gap-16 align-center">
           {/*// @ts-ignore*/}
           {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
+            <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
             <Icon name="png/roman-amphora" width={50} height={50} />
+            </a>
           )}
           {prizeList.kithara.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <Icon name="png/roman-kithara" width={50} height={50} />
