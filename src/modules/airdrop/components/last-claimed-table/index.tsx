@@ -109,24 +109,6 @@ const data = [
     ),
   },
   {
-    key: '5',
-    address: (
-      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
-        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
-          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
-        </Text>
-      </ExternalLink>
-    ),
-    amount: (
-      <div className="flex flow-col align-center justify-end">
-        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
-          100,000
-        </Text>
-      </div>
-    ),
-  },
-  {
     key: '6',
     address: (
       <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
@@ -182,6 +164,24 @@ const data = [
   },
   {
     key: '9',
+    address: (
+      <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
+        <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+          {shortenAddr('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')}
+        </Text>
+      </ExternalLink>
+    ),
+    amount: (
+      <div className="flex flow-col align-center justify-end">
+        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+        <Text type="p2" weight="700" color="primary">
+          100,000
+        </Text>
+      </div>
+    ),
+  },
+  {
+    key: '10',
     address: (
       <ExternalLink href={getEtherscanTxUrl('0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF')} className="link-blue mb-4">
         <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
