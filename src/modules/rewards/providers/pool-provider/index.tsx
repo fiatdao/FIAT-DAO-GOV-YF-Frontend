@@ -7,7 +7,7 @@ import config from 'config';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
-import { YFPoolMeta, useYFPools } from '../pools-provider';
+import { YFPoolMeta, useYFPools, YFPoolNFTID } from '../pools-provider';
 
 export type YFPoolType = {
   poolMeta?: YFPoolMeta;
