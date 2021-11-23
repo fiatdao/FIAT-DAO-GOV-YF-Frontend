@@ -12,15 +12,13 @@ import Alert from 'components/antd/alert';
 import Spin from 'components/antd/spin';
 import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
-// import { TokenAmount, TokenSelect } from 'components/custom/token-amount-new';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { KnownTokens, convertTokenInUSD, useKnownTokens, FDTToken } from 'components/providers/known-tokens-provider';
-import config from 'config';
+import { KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
 import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
 
 import { useYFPool } from '../../providers/pool-provider';
-import { useYFPools, YFPoolNFTID } from '../../providers/pools-provider';
+import { useYFPools } from '../../providers/pools-provider';
 
 import s from './s.module.scss';
 import Divider from '../../../../components/antd/divider';
