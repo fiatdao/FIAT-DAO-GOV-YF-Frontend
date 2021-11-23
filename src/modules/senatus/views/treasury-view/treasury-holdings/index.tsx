@@ -6,18 +6,17 @@ import Erc20Contract from 'web3/erc20Contract';
 import { formatToken, formatUSD, getEtherscanAddressUrl, getEtherscanTxUrl, shortenAddr } from 'web3/utils';
 import Web3Contract from 'web3/web3Contract';
 
-import Select from 'components/antd/select';
+// import Select from 'components/antd/select';
 import Table from 'components/antd/table';
 import Tooltip from 'components/antd/tooltip';
 import ExternalLink from 'components/custom/externalLink';
 import Icon, { IconNames, TokenIconNames } from 'components/custom/icon';
-import TableFilter, { TableFilterType } from 'components/custom/table-filter';
+// import TableFilter, { TableFilterType } from 'components/custom/table-filter';
 import { Text } from 'components/custom/typography';
 import { DEFAULT_WEB3 } from 'components/providers/eth-web3-provider';
 import {
   EthToken,
   KnownTokens,
-  convertTokenIn,
   convertTokenInUSD,
   getTokenBySymbol,
   getTokenPrice,
@@ -71,15 +70,15 @@ const InitialState: State = {
 
 const getPrice = (entity: APITreasuryHistory): string | undefined => {
   const price = getTokenPrice(entity.tokenSymbol);
-  if (price == undefined) {
+  if (price === undefined) {
     return undefined;
   }
   return formatUSD(Number.parseFloat(entity.amount) * price.toNumber());
 };
 
-function handleFooter(currentPageData: any) {
-  return '';
-}
+// function handleFooter(currentPageData: any) {
+//   return '';
+// }
 
 const Columns: ColumnsType<APITreasuryHistory> = [
   {
@@ -140,8 +139,8 @@ const Columns: ColumnsType<APITreasuryHistory> = [
   {
     title: 'From',
     render: (_, entity) => {
-      let address = '';
-      let label = '';
+      let address;
+      let label;
 
       if (entity.transactionDirection === 'IN') {
         address = entity.counterpartyAddress;
@@ -163,8 +162,8 @@ const Columns: ColumnsType<APITreasuryHistory> = [
   {
     title: 'To',
     render: (_, entity) => {
-      let address = '';
-      let label = '';
+      let address;
+      let label;
 
       if (entity.transactionDirection === 'OUT') {
         address = entity.counterpartyAddress;
@@ -190,15 +189,15 @@ const TreasuryHoldings: React.FC = () => {
   const knownTokens = useKnownTokens();
   const [state, setState] = React.useState<State>(InitialState);
 
-  function handlePaginationChange(page: number) {
-    setState(prevState => ({
-      ...prevState,
-      history: {
-        ...prevState.history,
-        page,
-      },
-    }));
-  }
+  // function handlePaginationChange(page: number) {
+  //   setState(prevState => ({
+  //     ...prevState,
+  //     history: {
+  //       ...prevState.history,
+  //       page,
+  //     },
+  //   }));
+  // }
 
   React.useEffect(() => {
     setState(prevState => ({

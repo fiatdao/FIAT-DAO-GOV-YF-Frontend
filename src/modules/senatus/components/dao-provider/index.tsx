@@ -8,8 +8,8 @@ import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
 import { DAOComitiumContract, useDAOComitiumContract } from 'modules/senatus/contracts/daoComitium';
-import { DAOSenatusContract, useDAOSenatusContract } from 'modules/senatus/contracts/daoSenatus';
 import { DAORewardContract, useDAORewardContract } from 'modules/senatus/contracts/daoReward';
+import { DAOSenatusContract, useDAOSenatusContract } from 'modules/senatus/contracts/daoSenatus';
 import { useWallet } from 'wallets/wallet';
 
 import { APIProposalStateId } from '../../api';

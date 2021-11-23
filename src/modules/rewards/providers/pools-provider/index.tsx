@@ -6,15 +6,15 @@ import Web3Contract from 'web3/web3Contract';
 
 import {
   BondToken,
-  UMAToken,
-  MKRToken,
-  YFIToken,
-  RGTToken,
-  wsOHMToken,
   EthFdtSLPToken,
-  wsOHMFdtSLPToken,
+  MKRToken,
+  RGTToken,
   TokenMeta,
+  UMAToken,
+  YFIToken,
   useKnownTokens,
+  wsOHMFdtSLPToken,
+  wsOHMToken,
 } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import { useReload } from 'hooks/useReload';

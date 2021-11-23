@@ -76,7 +76,7 @@ function executeProposalSend(proposalId: number, from: string): Promise<void> {
 }
 
 export enum ProposalState {
-  WarmUp = 0,
+  // WarmUp = 0,
   Active,
   Canceled,
   Failed,
@@ -85,7 +85,7 @@ export enum ProposalState {
   Grace,
   Expired,
   Executed,
-  Abrogated
+  Abrogated,
 }
 
 export function getProposalStateCall(proposalId: number): Promise<ProposalState> {

@@ -1,10 +1,11 @@
 import React from 'react';
 import * as Antd from 'antd';
 import BigNumber from 'bignumber.js';
+import cn from 'classnames';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
-import Button from 'components/antd/button';
+// import Button from 'components/antd/button';
 import Form from 'components/antd/form';
 import GasFeeList from 'components/custom/gas-fee-list';
 import Grid from 'components/custom/grid';
@@ -16,7 +17,6 @@ import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../../components/dao-provider';
-import cn from 'classnames';
 
 import s from './s.module.scss';
 

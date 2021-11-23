@@ -1,6 +1,6 @@
 import React from 'react';
-import BigNumber from 'bignumber.js';
 import { isMobile } from 'react-device-detect';
+import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import { MAX_UINT_256, formatBigValue } from 'web3/utils';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from 'components/antd/button';
+// import Button from 'components/antd/button';
 import Modal, { ModalProps } from 'components/antd/modal';
 import Grid from 'components/custom/grid';
 import { Text } from 'components/custom/typography';
@@ -24,15 +24,18 @@ const InstallMetaMaskModal: React.FC<ModalProps> = props => {
             </Text>{' '}
             installed to continue.
             <br />
-            Once you have installed it, please <button className="button-text" onClick={() => document.location.reload()}>refresh the page</button>
+            Once you have installed it, please{' '}
+            <button className="button-text" onClick={() => document.location.reload()}>
+              refresh the page
+            </button>
           </Text>
         </Grid>
         <Grid flow="col" justify="space-between">
-          <button type="button" onClick={props.onCancel} className="button-ghost" >
+          <button type="button" onClick={props.onCancel} className="button-ghost">
             <span>Go Back</span>
           </button>
           <a href={METAMASK_CHROME_EXT_URL} rel="noopener noreferrer" target="_blank">
-            <button type="button" className="button-primary" >
+            <button type="button" className="button-primary">
               Install MetaMask
             </button>
           </a>

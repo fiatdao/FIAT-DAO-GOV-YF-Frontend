@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 import ReactDOM from 'react-dom';
 import { usePopper } from 'react-popper';
-import { Link, useRouteMatch, useHistory } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import cn from 'classnames';
 
 import Button from 'components/antd/button';
 import Divider from 'components/antd/divider';
-import Popover from 'components/antd/popover';
-import Tooltip from 'components/antd/tooltip';
-import ExternalLink from 'components/custom/externalLink';
-import Grid from 'components/custom/grid';
+// import Popover from 'components/antd/popover';
+// import Tooltip from 'components/antd/tooltip';
+// import ExternalLink from 'components/custom/externalLink';
+// import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
-import { Text } from 'components/custom/typography';
+// import { Text } from 'components/custom/typography';
 import { useGeneral } from 'components/providers/general-provider';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import { useWarning } from 'components/providers/warning-provider';
@@ -28,14 +28,15 @@ const LayoutHeader: React.FC = () => {
   const { navOpen, setNavOpen, toggleDarkTheme, isDarkTheme } = useGeneral();
   const [referenceElement, setReferenceElement] = useState<any>();
   const [popperElement, setPopperElement] = useState<any>();
-  const [popper1visible, setPopper1visible] = useState<boolean>(false);
-  const [popper2visible, setPopper2visible] = useState<boolean>(false);
-  const [popper3visible, setPopper3visible] = useState<boolean>(false);
-  const [popper4visible, setPopper4visible] = useState<boolean>(false);
+  // const [popper1visible, setPopper1visible] = useState<boolean>(false);
+  // const [popper2visible, setPopper2visible] = useState<boolean>(false);
+  // const [popper3visible, setPopper3visible] = useState<boolean>(false);
+  // const [popper4visible, setPopper4visible] = useState<boolean>(false);
   const wallet = useWallet();
   const { warns } = useWarning();
-  const { location: { pathname } } = useHistory();
-
+  const {
+    location: { pathname },
+  } = useHistory();
 
   const { styles, attributes, forceUpdate, state } = usePopper(referenceElement, popperElement, {
     placement: 'bottom',
@@ -82,16 +83,25 @@ const LayoutHeader: React.FC = () => {
       <h1 className={s.title}>{isSenatusPage ? 'Senatus' : 'Rewards'}</h1>
 
       <nav className={s.nav}>
-        <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
+        <a href="https://fiatdao.com/" target="_blank" rel="noopener noreferrer" className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
-        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
+        <Link
+          to="/rewards"
+          className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })}
+          onClick={() => setNavOpen(false)}>
           <span>Rewards</span>
         </Link>
-        <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>
+        <Link
+          to="/senatus"
+          className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })}
+          onClick={() => setNavOpen(false)}>
           <span>Senatus</span>
         </Link>
-        <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
+        <Link
+          to="/age-of-romulus"
+          className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })}
+          onClick={() => setNavOpen(false)}>
           <span>Age of Romulus</span>
         </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}

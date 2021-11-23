@@ -2,9 +2,9 @@ import React from 'react';
 import { Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, formatEntrValue, formatToken, isSmallEntrValue } from 'web3/utils';
+import { formatBigValue, formatEntrValue, isSmallEntrValue } from 'web3/utils';
 
-import Button from 'components/antd/button';
+// import Button from 'components/antd/button';
 import Divider from 'components/antd/divider';
 import Skeleton from 'components/antd/skeleton';
 import Tooltip from 'components/antd/tooltip';
@@ -13,7 +13,6 @@ import Icon from 'components/custom/icon';
 import { Text } from 'components/custom/typography';
 import { UseLeftTime } from 'hooks/useLeftTime';
 import useMergeState from 'hooks/useMergeState';
-import imgSrc from 'resources/png/enterdao.png';
 
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 import useMediaQuery from '../../../../hooks/useMediaQuery';
@@ -24,6 +23,8 @@ import VotingDetailedModal from '../voting-detailed-modal';
 import { getFormattedDuration, inRange } from 'utils';
 
 import s from './s.module.scss';
+
+// import imgSrc from 'resources/png/enterdao.png';
 
 type VotingHeaderState = {
   claiming: boolean;

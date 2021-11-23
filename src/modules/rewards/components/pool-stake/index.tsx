@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AntdForm from 'antd/lib/form';
 import BigNumber from 'bignumber.js';
@@ -15,7 +15,7 @@ import Icon from 'components/custom/icon';
 // import { TokenAmount, TokenSelect } from 'components/custom/token-amount-new';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { FDTToken, KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
+import { KnownTokens, convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
 
@@ -30,13 +30,14 @@ type StakeFormData = {
 };
 
 const PoolStake: FC = () => {
-  const knownTokensCtx = useKnownTokens();
+  // const knownTokensCtx = useKnownTokens();
   const yfPoolsCtx = useYFPools();
   const yfPoolCtx = useYFPool();
 
   const [form] = AntdForm.useForm<StakeFormData>();
 
-  const [activeToken, setActiveToken] = useState(yfPoolCtx.poolMeta?.tokens[0]);
+  // const [activeToken, setActiveToken] = useState(yfPoolCtx.poolMeta?.tokens[0]);
+  const activeToken = yfPoolCtx.poolMeta?.tokens[0];
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [enabling, setEnabling] = useState(false);
   const [staking, setStaking] = useState(false);
@@ -55,10 +56,10 @@ const PoolStake: FC = () => {
   const walletBalance = activeContract.balance?.unscaleBy(activeToken.decimals);
   const maxAmount = BigNumber.min(walletBalance ?? BigNumber.ZERO, allowance ?? BigNumber.ZERO);
 
-  function handleTokenSelect(tokenSymbol: string) {
-    const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
-    setActiveToken(tokenMeta);
-  }
+  // function handleTokenSelect(tokenSymbol: string) {
+  //   const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
+  //   setActiveToken(tokenMeta);
+  // }
 
   async function handleEnable() {
     setEnabling(true);

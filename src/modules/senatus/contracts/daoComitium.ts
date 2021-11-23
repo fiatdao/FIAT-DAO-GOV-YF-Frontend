@@ -13,7 +13,11 @@ import DAO_COMITIUM_ABI from './daoComitium.json';
 
 import { getNowTs } from 'utils';
 
-const Contract = new Web3Contract(DAO_COMITIUM_ABI as Web3ContractAbiItem[], config.contracts.dao.comitium, 'Community');
+const Contract = new Web3Contract(
+  DAO_COMITIUM_ABI as Web3ContractAbiItem[],
+  config.contracts.dao.comitium,
+  'Community',
+);
 
 function loadCommonData(): Promise<any> {
   return Contract.batch([

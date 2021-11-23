@@ -12,7 +12,7 @@ import TokenInput from 'components/custom/token-input';
 import { Text } from 'components/custom/typography';
 import useMergeState from 'hooks/useMergeState';
 
-import TokenAmount from '../../../../components/custom/token-amount';
+// import TokenAmount from '../../../../components/custom/token-amount';
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 import { useDAO } from '../../components/dao-provider';
 

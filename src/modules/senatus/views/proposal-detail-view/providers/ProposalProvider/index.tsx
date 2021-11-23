@@ -191,9 +191,7 @@ const ProposalProvider: React.FC<ProposalProviderProps> = props => {
   }
 
   function executeProposal(): Promise<void> {
-    return proposalId
-      ? daoCtx.daoSenatus.actions.executeProposal(proposalId).then(() => reload())
-      : Promise.reject();
+    return proposalId ? daoCtx.daoSenatus.actions.executeProposal(proposalId).then(() => reload()) : Promise.reject();
   }
 
   function proposalCastVote(support: boolean, gasPrice: number): Promise<void> {

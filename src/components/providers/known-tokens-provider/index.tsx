@@ -93,7 +93,6 @@ export const MKRToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.mkr),
 };
 
-
 export const YFIToken: TokenMeta = {
   address: config.tokens.yfi,
   symbol: KnownTokens.YFI,
@@ -225,7 +224,7 @@ async function getFdtPrice(): Promise<BigNumber> {
     return BigNumber.ZERO;
   }
 
-  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
+  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber);
 
   return wsOHMReserve.dividedBy(fdtReserve);
 }
@@ -249,7 +248,7 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
     wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
   }
 
-  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
+  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber);
 
   const supply = totalSupply.unscaleBy(decimals);
 
@@ -343,7 +342,6 @@ const KnownTokensProvider: FC = props => {
         FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
-
 
         KNOWN_TOKENS.forEach(token => {
           console.log(`[Token Price] ${token.symbol} = ${formatUSD(token.price)}`);

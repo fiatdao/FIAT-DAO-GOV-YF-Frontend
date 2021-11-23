@@ -1,10 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import useDebounce from '@rooks/use-debounce';
+// import useDebounce from '@rooks/use-debounce';
 import AntdSpin from 'antd/lib/spin';
 
 import Button from 'components/antd/button';
-import Input from 'components/antd/input';
+// import Input from 'components/antd/input';
 import Popover from 'components/antd/popover';
 import Tabs from 'components/antd/tabs';
 import ExternalLink from 'components/custom/externalLink';
@@ -44,9 +44,9 @@ const ProposalsViewInner: React.FC = () => {
     proposalsCtx.changeStateFilter(stateFilter);
   }
 
-  const handleSearchChange = useDebounce((ev: React.ChangeEvent<HTMLInputElement>) => {
-    proposalsCtx.changeSearchFilter(ev.target.value);
-  }, 400);
+  // const handleSearchChange = useDebounce((ev: React.ChangeEvent<HTMLInputElement>) => {
+  //   proposalsCtx.changeSearchFilter(ev.target.value);
+  // }, 400);
 
   React.useEffect(() => {
     daoCtx.actions.hasActiveProposal().then(hasActiveProposal => {

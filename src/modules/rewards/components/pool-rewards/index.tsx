@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import add from 'date-fns/add';
-import differenceInCalendarWeeks from 'date-fns/differenceInCalendarWeeks';
+// import add from 'date-fns/add';
+// import differenceInCalendarWeeks from 'date-fns/differenceInCalendarWeeks';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatToken } from 'web3/utils';
 
@@ -46,16 +46,17 @@ const PoolRewards: React.FC = () => {
   }, undefined);
 
   const merkleDistributorData = yfPoolsCtx.merkleDistributor;
-  const isAirdropClaimed = merkleDistributorData?.isAirdropClaimed;
-  const adjustedAmount = merkleDistributorData?.adjustedAmount;
+  // const isAirdropClaimed = merkleDistributorData?.isAirdropClaimed;
+  // const adjustedAmount = merkleDistributorData?.adjustedAmount;
 
-  const airdropAmount = !isAirdropClaimed ? BigNumber.from(adjustedAmount) : BigNumber.from(0);
-  const airdropDurationInWeeks = 100;
-  const airdropStartDate = new Date(1626674400000); // 2021-07-19 00:00:00
-  const airdropEndDate = add(airdropStartDate, { weeks: airdropDurationInWeeks });
-  const airdropCurrentWeek =
-    airdropDurationInWeeks -
-    differenceInCalendarWeeks(new Date(airdropEndDate), new Date() > airdropEndDate ? airdropEndDate : new Date());
+  // const airdropAmount = !isAirdropClaimed ? BigNumber.from(adjustedAmount) : BigNumber.from(0);
+  // const airdropDurationInWeeks = 100;
+  // const airdropStartDate = new Date(1626674400000); // 2021-07-19 00:00:00
+  // const airdropEndDate = add(airdropStartDate, { weeks: airdropDurationInWeeks });
+
+  // const airdropCurrentWeek =
+  //   airdropDurationInWeeks -
+  //   differenceInCalendarWeeks(new Date(airdropEndDate), new Date() > airdropEndDate ? airdropEndDate : new Date());
 
   return (
     <div className={cn(s.component, 'pv-24')}>

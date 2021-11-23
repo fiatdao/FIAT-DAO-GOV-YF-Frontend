@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
-import { formatToken, formatUSD, formatEntrValue } from 'web3/utils';
+import { formatEntrValue, formatToken, formatUSD } from 'web3/utils';
 
-import ExternalLink from 'components/custom/externalLink';
+// import ExternalLink from 'components/custom/externalLink';
 import Grid from 'components/custom/grid';
 import { Hint, Text } from 'components/custom/typography';
 import { UseLeftTime } from 'hooks/useLeftTime';
@@ -36,9 +36,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
         <Grid flow="row" gap={48}>
           <Hint
             text={
-              <Text type="p2">
-                This number shows the amount of ${FDTToken.symbol} currently staked in the DAO.
-              </Text>
+              <Text type="p2">This number shows the amount of ${FDTToken.symbol} currently staked in the DAO.</Text>
             }>
             <Text type="lb2" weight="semibold" color="secondary">
               {FDTToken.symbol} staked
@@ -92,8 +90,8 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             text={
               <Grid flow="row" gap={8} align="start">
                 <Text type="p2">
-                  This counter shows the average amount of time ${FDTToken.symbol} stakers have locked their deposits for in
-                  order to take advantage of the voting power bonus.
+                  This counter shows the average amount of time ${FDTToken.symbol} stakers have locked their deposits
+                  for in order to take advantage of the voting power bonus.
                 </Text>
                 {/*<ExternalLink href="https://docs.enterdao.xyz/" className="link-blue" style={{ fontWeight: 600 }}>
                   Learn more
@@ -121,8 +119,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             text={
               <Text type="p2">
                 This number shows the amount of ${FDTToken.symbol} rewards distributed so far out of the total of{' '}
-                {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)} that are going to be available for DAO
-                Staking.
+                {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)} that are going to be available for DAO Staking.
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="secondary">

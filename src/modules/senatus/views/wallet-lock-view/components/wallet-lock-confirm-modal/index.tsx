@@ -29,7 +29,8 @@ const WalletLockConfirmModal: React.FC<WalletLockConfirmModalProps> = props => {
               Are you sure you want to lock your balance?
             </Text>
             <Text type="p2" weight="semibold" color="secondary">
-              You are about to lock {formatEntrValue(balance)} ${FDTToken.symbol} for {getFormattedDuration(0, duration)}
+              You are about to lock {formatEntrValue(balance)} ${FDTToken.symbol} for{' '}
+              {getFormattedDuration(0, duration)}
               .
               <br />
               <br />

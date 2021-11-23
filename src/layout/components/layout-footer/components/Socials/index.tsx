@@ -1,7 +1,9 @@
-import s from '../../s.module.scss';
+import React from 'react';
+
 import ExternalLink from '../../../../../components/custom/externalLink';
 import Icon from '../../../../../components/custom/icon';
-import React from 'react';
+
+import s from '../../s.module.scss';
 
 const Socials = () => {
   return (
@@ -25,7 +27,7 @@ const Socials = () => {
       {/*  <Icon name="coingecko" width="15" />*/}
       {/*</ExternalLink>*/}
     </div>
-  )
-}
+  );
+};
 
 export default Socials;

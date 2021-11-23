@@ -2,8 +2,8 @@ import { BigNumber } from 'ethers';
 import { AbiItem } from 'web3-utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
 
-import prizeList from 'modules/age-of-romulus/prize';
 import BalanceTree from 'merkle-distributor/balance-tree';
+import prizeList from 'modules/age-of-romulus/prize';
 
 const ABI: AbiItem[] = [
   createAbiItem('isClaimed', ['uint256'], ['bool']),
@@ -26,7 +26,7 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
         account: drop.address.toLowerCase(),
         amount: BigNumber.from(1),
       }));
-      this.tree = airdropAccounts.length && new BalanceTree(airdropAccounts)
+      this.tree = airdropAccounts.length && new BalanceTree(airdropAccounts);
       this.claimAmount = BigNumber.from(1);
       if (!this.account) {
         this.isClaimed = false;
@@ -34,7 +34,9 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
         this.emit(Web3Contract.UPDATE_DATA);
       }
 
-      this.claimIndex = airdropAccounts.findIndex((o: { account: string | undefined }) => o.account === this.account?.toLowerCase());
+      this.claimIndex = airdropAccounts.findIndex(
+        (o: { account: string | undefined }) => o.account === this.account?.toLowerCase(),
+      );
     });
   }
 
@@ -50,15 +52,14 @@ export default class ClaimAgeOfRomulus extends Web3Contract {
     }
 
     if (this.claimAmount !== null && this.claimIndex !== -1) {
-      this.isClaimed =  await this.call('isClaimed',[this.claimIndex]);
+      this.isClaimed = await this.call('isClaimed', [this.claimIndex]);
       this.emit(Web3Contract.UPDATE_DATA);
     }
   }
 
   async claim(): Promise<void> {
-    const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), this.claimAmount)
-    return this.send('claim',
-      [this.claimIndex, this.account?.toLowerCase(), this.claimAmount, merkleProof], {
+    const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), this.claimAmount);
+    return this.send('claim', [this.claimIndex, this.account?.toLowerCase(), this.claimAmount, merkleProof], {
       from: this.account,
     }).then(() => {
       this.isClaimed = true;

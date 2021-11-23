@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import TxConfirmModal from 'web3/components/tx-confirm-modal';
 import Erc20Contract from 'web3/erc20Contract';
-import { formatNumber, formatToken, formatUSD } from 'web3/utils';
+import { formatToken, formatUSD } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
 import Divider from 'components/antd/divider';
@@ -15,7 +15,7 @@ import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
-import { KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
+import { KnownTokens, convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import { YfPoolContract } from 'modules/rewards/contracts/yfPool';
 
 import { useYFPool } from '../../providers/pool-provider';
@@ -28,11 +28,12 @@ type UnStakeFormData = {
 };
 
 const PoolUnstake: FC = () => {
-  const knownTokensCtx = useKnownTokens();
+  // const knownTokensCtx = useKnownTokens();
   const yfPoolsCtx = useYFPools();
   const yfPoolCtx = useYFPool();
 
-  const [activeToken, setActiveToken] = useState(yfPoolCtx.poolMeta?.tokens[0]);
+  // const [activeToken, setActiveToken] = useState(yfPoolCtx.poolMeta?.tokens[0]);
+  const activeToken = yfPoolCtx.poolMeta?.tokens[0];
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [unstaking, setUnstaking] = useState(false);
   const [bnAmount, setBnAmount] = useState(new BigNumber(0));
@@ -52,10 +53,10 @@ const PoolUnstake: FC = () => {
   const maxAmount = stakedBalance ?? BigNumber.ZERO;
   // const bnAmount = BigNumber.from(amount);
 
-  function handleTokenSelect(tokenSymbol: string) {
-    const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
-    setActiveToken(tokenMeta);
-  }
+  // function handleTokenSelect(tokenSymbol: string) {
+  //   const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
+  //   setActiveToken(tokenMeta);
+  // }
 
   function handleUnstake({ amount }: any) {
     setBnAmount(amount);

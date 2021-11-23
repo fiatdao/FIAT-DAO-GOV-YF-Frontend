@@ -9,6 +9,7 @@ import WalletDepositView from 'modules/senatus/views/wallet-deposit-view';
 import WalletLockView from 'modules/senatus/views/wallet-lock-view';
 import WalletWithdrawView from 'modules/senatus/views/wallet-withdraw-view';
 import { useWallet } from 'wallets/wallet';
+
 import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 type WalletViewRouteParams = {
@@ -49,26 +50,38 @@ const WalletView: React.FC = () => {
         Wallet
       </Text>
       <Tabs activeKey={activeTab} simple onChange={handleTabChange}>
-        <Tabs.Tab key="deposit"
-                  tab={
-                    <Text type="p1" weight="500" >
-                      Deposit
-                    </Text>} />
-        <Tabs.Tab key="lock"
-                  tab={
-                    <Text type="p1" weight="500">
-                      Lock
-                    </Text>} />
-        <Tabs.Tab key="delegate"
-                  tab={
-                    <Text type="p1" weight="500">
-                      Delegate
-                    </Text>} />
-        <Tabs.Tab key="withdraw"
-                  tab={
-                    <Text type="p1" weight="500">
-                      Withdraw
-                    </Text>} />
+        <Tabs.Tab
+          key="deposit"
+          tab={
+            <Text type="p1" weight="500">
+              Deposit
+            </Text>
+          }
+        />
+        <Tabs.Tab
+          key="lock"
+          tab={
+            <Text type="p1" weight="500">
+              Lock
+            </Text>
+          }
+        />
+        <Tabs.Tab
+          key="delegate"
+          tab={
+            <Text type="p1" weight="500">
+              Delegate
+            </Text>
+          }
+        />
+        <Tabs.Tab
+          key="withdraw"
+          tab={
+            <Text type="p1" weight="500">
+              Withdraw
+            </Text>
+          }
+        />
       </Tabs>
       <Switch>
         <Route path="/senatus/wallet/deposit" exact component={WalletDepositView} />

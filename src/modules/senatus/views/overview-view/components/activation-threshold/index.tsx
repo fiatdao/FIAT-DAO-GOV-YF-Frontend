@@ -39,8 +39,8 @@ const ActivationThreshold: React.FC<ActivationThresholdProps> = props => {
         <Hint
           text={
             <Text type="p2">
-              For FIAT DAO to be activated, a threshold of {formatEntrValue(dao.activationThreshold)} $
-              {FDTToken.symbol} tokens staked has to be met.
+              For FIAT DAO to be activated, a threshold of {formatEntrValue(dao.activationThreshold)} ${FDTToken.symbol}{' '}
+              tokens staked has to be met.
             </Text>
           }>
           <Text type="p2" weight="bold" color="primary" font="secondary">

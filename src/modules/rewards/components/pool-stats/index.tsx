@@ -41,8 +41,8 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             className="mb-48 sm-mb-24"
             text={
               <Text type="p2">
-                This number shows the Total Value Locked across the staking pool(s). It is the USD conversion of
-                the amounts in the pool balance(s).
+                This number shows the Total Value Locked across the staking pool(s). It is the USD conversion of the
+                amounts in the pool balance(s).
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="primary" className={s.label}>

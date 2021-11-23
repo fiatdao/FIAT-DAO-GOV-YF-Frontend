@@ -92,7 +92,7 @@ const PoolStatistics: FC = () => {
                 Potential reward this epoch
               </Text>
               <div className="flex align-center">
-                <Icon width={16} height={16}  name={FDTToken.icon!}  className="mr-8" />
+                <Icon width={16} height={16} name={FDTToken.icon!} className="mr-8" />
                 <Text type="p1" weight="semibold" color="primary">
                   {formatToken(poolMeta.contract.potentialReward) ?? '-'}
                 </Text>
@@ -118,7 +118,7 @@ const PoolStatistics: FC = () => {
                     style={{ maxWidth: '120px' }}>
                     {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
                       decimals: FDTToken.decimals,
-                      compact: true
+                      compact: true,
                     }) ?? '-'}
                   </Text>
                 </Tooltip>

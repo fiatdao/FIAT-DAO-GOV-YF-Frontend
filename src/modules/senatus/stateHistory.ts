@@ -11,15 +11,15 @@ export namespace ProposalHistory {
 
     // Sort and Populate Timestamps
     history.sort((e1, e2) => {
-      if (e1.name == APIProposalState.CREATED && e2.name == APIProposalState.WARMUP) {
+      if (e1.name === APIProposalState.CREATED && e2.name === APIProposalState.WARMUP) {
         return 1;
-      } else if (e2.name == APIProposalState.CREATED && e1.name == APIProposalState.WARMUP) {
+      } else if (e2.name === APIProposalState.CREATED && e1.name === APIProposalState.WARMUP) {
         return -1;
       }
 
-      if (e1.name == APIProposalState.ACCEPTED && e2.name == APIProposalState.QUEUED) {
+      if (e1.name === APIProposalState.ACCEPTED && e2.name === APIProposalState.QUEUED) {
         return 1;
-      } else if (e2.name == APIProposalState.ACCEPTED && e1.name == APIProposalState.QUEUED) {
+      } else if (e2.name === APIProposalState.ACCEPTED && e1.name === APIProposalState.QUEUED) {
         return -1;
       }
 
@@ -116,11 +116,11 @@ async function calculateEvents(proposal: any) {
 
   // after the proposal reached accepted state, nothing else can happen unless somebody calls the queue function
   // which emits a QUEUED event
-  if (eventsCopy.length == 0) {
+  if (eventsCopy.length === 0) {
     return history;
   }
 
-  if (eventsCopy[0].eventType == APIProposalState.QUEUED) {
+  if (eventsCopy[0].eventType === APIProposalState.QUEUED) {
     history.push({
       name: APIProposalState.QUEUED,
       startTimestamp: proposal.createTime + proposal.warmUpDuration + proposal.activeDuration + 1,
@@ -135,7 +135,7 @@ async function calculateEvents(proposal: any) {
     return history;
   }
 
-  if (proposalState == ProposalState.Abrogated) {
+  if (proposalState === ProposalState.Abrogated) {
     history.push({
       name: APIProposalState.ABROGATED,
       startTimestamp: nextDeadline,
@@ -157,7 +157,7 @@ async function calculateEvents(proposal: any) {
   if (
     eventsCopy.length > 0 &&
     eventsCopy[0].createTime <= nextDeadline &&
-    eventsCopy[0].eventType == APIProposalState.EXECUTED
+    eventsCopy[0].eventType === APIProposalState.EXECUTED
   ) {
     history.push({
       name: APIProposalState.EXECUTED,
@@ -202,7 +202,7 @@ function shouldStopBuilding(nextDeadline: number) {
 }
 
 function checkForCancelledEvent(eventsCopy: Array<any>, nextDeadline: number, history: APIProposalHistoryEntity[]) {
-  if (eventsCopy.length > 0 && eventsCopy[0].createTime < nextDeadline && eventsCopy[0].eventType == 'CANCELED') {
+  if (eventsCopy.length > 0 && eventsCopy[0].createTime < nextDeadline && eventsCopy[0].eventType === 'CANCELED') {
     history.push({
       name: APIProposalState.CANCELED,
       startTimestamp: eventsCopy[0].createTime,

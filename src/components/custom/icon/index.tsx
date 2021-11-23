@@ -44,8 +44,8 @@ import universeSrc from 'resources/png/universe.png';
 import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
-import notConnected from 'resources/svg/not-connected.svg';
 import Sprite from 'resources/svg/icons-sprite.svg';
+import notConnected from 'resources/svg/not-connected.svg';
 
 import s from './s.module.scss';
 

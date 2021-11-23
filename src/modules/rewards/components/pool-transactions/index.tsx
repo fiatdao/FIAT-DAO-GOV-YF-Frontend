@@ -1,6 +1,7 @@
 ﻿import React, { FC, useEffect, useMemo, useState } from 'react';
 import { SelectValue } from 'antd/lib/select';
 import { ColumnsType } from 'antd/lib/table/interface';
+import cn from 'classnames';
 import format from 'date-fns/format';
 import { formatToken, formatUSD, getEtherscanAddressUrl, getEtherscanTxUrl, shortenAddr } from 'web3/utils';
 
@@ -19,7 +20,6 @@ import { useYFPool } from '../../providers/pool-provider';
 import { useYFPools } from '../../providers/pools-provider';
 
 import s from './s.module.scss';
-import cn from 'classnames';
 
 type TableEntity = APIYFPoolTransaction;
 
@@ -112,17 +112,17 @@ function getColumns(isAll: boolean): ColumnsType<TableEntity> {
     },
     isAll
       ? {
-        title: 'Address',
-        dataIndex: 'from',
-        width: '25%',
-        render: (_, entity) => (
-          <ExternalLink href={getEtherscanAddressUrl(entity.userAddress)} className="link-blue">
-            <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
-              {shortenAddr(entity.userAddress)}
-            </Text>
-          </ExternalLink>
-        ),
-      }
+          title: 'Address',
+          dataIndex: 'from',
+          width: '25%',
+          render: (_, entity) => (
+            <ExternalLink href={getEtherscanAddressUrl(entity.userAddress)} className="link-blue">
+              <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
+                {shortenAddr(entity.userAddress)}
+              </Text>
+            </ExternalLink>
+          ),
+        }
       : {},
     {
       title: 'Transaction hash/timestamp',
@@ -298,11 +298,11 @@ const PoolTransactions: FC = () => {
           tabs={[
             ...(hasOwnTab
               ? [
-                {
-                  id: 'own',
-                  children: 'My transactions',
-                },
-              ]
+                  {
+                    id: 'own',
+                    children: 'My transactions',
+                  },
+                ]
               : []),
             {
               id: 'all',
