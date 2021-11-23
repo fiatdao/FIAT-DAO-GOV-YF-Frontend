@@ -4,6 +4,8 @@ import Web3Contract, { createAbiItem } from 'web3/web3Contract';
 
 import config from 'config';
 
+import { YFPoolNFTID } from '../providers/pools-provider';
+
 const ABI: AbiItem[] = [
   createAbiItem('balanceOf', ['address', 'uint256'], ['uint256']),
   createAbiItem('isApprovedForAll', ['address', 'address'], ['bool']),
@@ -14,29 +16,18 @@ export class YfNFTContract extends Web3Contract {
   constructor(nftAddress: string) {
     super(ABI, nftAddress, 'YF NFT');
 
-    this.balanceOfAmphora = null
-    this.balanceOfKithara = null
-    this.balanceOfGalea = null
-    this.balanceOfGladius = null
-    this.balanceOfCorona = null
+    this.balanceOf = null
     this.isApproved = null
 
     this.on(Web3Contract.UPDATE_ACCOUNT, () => {
-      this.balanceOfAmphora = null
-      this.balanceOfKithara = null
-      this.balanceOfGalea = null
-      this.balanceOfGladius = null
-      this.balanceOfCorona = null
+      this.balanceOf = null
       this.isApproved = null;
       this.emit(Web3Contract.UPDATE_DATA);
     });
   }
 
-  balanceOfAmphora: BigNumber | null;
-  balanceOfKithara: BigNumber | null;
-  balanceOfGalea: BigNumber | null;
-  balanceOfGladius: BigNumber | null;
-  balanceOfCorona: BigNumber | null;
+  balanceOf: { [key: string]: BigNumber; } | null
+
   isApproved: boolean | null;
 
   async loadUserDataFor(): Promise<void> {
@@ -53,17 +44,20 @@ export class YfNFTContract extends Web3Contract {
       { method: 'isApprovedForAll', methodArgs: [account, config.contracts.yf.stakingNFT] }
     ]);
 
-    this.balanceOfAmphora = new BigNumber(balanceOfAmphora);
-    this.balanceOfKithara = new BigNumber(balanceOfKithara);
-    this.balanceOfGalea = new BigNumber(balanceOfGalea);
-    this.balanceOfGladius = new BigNumber(balanceOfGladius);
-    this.balanceOfCorona = new BigNumber(balanceOfCorona);
+    this.balanceOf = {
+      [YFPoolNFTID.gOHM_FDT_SLP_Amphora]: new BigNumber(balanceOfAmphora),
+      [YFPoolNFTID.gOHM_FDT_SLP_Kithara]: new BigNumber(balanceOfKithara),
+      [YFPoolNFTID.gOHM_FDT_SLP_Galea]: new BigNumber(balanceOfGalea),
+      [YFPoolNFTID.gOHM_FDT_SLP_Gladius]: new BigNumber(balanceOfGladius),
+      [YFPoolNFTID.gOHM_FDT_SLP_Corona]: new BigNumber(balanceOfCorona),
+    };
+
     this.isApproved = isApproved;
 
     this.emit(Web3Contract.UPDATE_DATA);
   }
 
-  async approve(gasPrice: number): Promise<BigNumber> {
+  async approve(gasPrice?: number): Promise<BigNumber> {
     return this.send('setApprovalForAll', [config.contracts.yf.stakingNFT, true], {}, gasPrice);
   }
 }

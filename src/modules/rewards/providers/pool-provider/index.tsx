@@ -51,7 +51,7 @@ const YFPoolProvider: React.FC<Props> = props => {
         if (erc20Contract) {
           erc20Contract.setAccount(walletCtx.account);
           erc20Contract.loadBalance().then(reload).catch(Error);
-          erc20Contract.loadAllowance(config.contracts.yf.staking).then(reload).catch(Error);
+          erc20Contract.loadAllowance(pool.isNFTPool ? config.contracts.yf.stakingNFT :  config.contracts.yf.staking).then(reload).catch(Error);
         }
       });
     }

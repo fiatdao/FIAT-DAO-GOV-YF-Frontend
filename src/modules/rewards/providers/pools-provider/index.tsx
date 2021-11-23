@@ -38,6 +38,10 @@ export enum YFPoolID {
 
 export enum YFPoolNFTID {
   gOHM_FDT_SLP_Amphora = 'gOHM-fdt-slp-amphora',
+  gOHM_FDT_SLP_Kithara = 'gOHM-fdt-slp-kithara',
+  gOHM_FDT_SLP_Galea = 'gOHM-fdt-slp-galea',
+  gOHM_FDT_SLP_Gladius = 'gOHM-fdt-slp-gladius',
+  gOHM_FDT_SLP_Corona = 'gOHM-fdt-slp-corona',
 }
 
 export type YFPoolMeta = {
