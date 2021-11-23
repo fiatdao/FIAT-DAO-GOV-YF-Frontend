@@ -69,7 +69,7 @@ const AgeOfRomulusView = () => {
           <PrizesView
             countAllUsers={countAllUsers}
             activeKey={ageOfRomulusCtx.ACTIVE_KEY}
-            isClaimDisable={!!currUser}
+            currUser={currUser}
           />
         </Grid>
         <div className={s.daoStakers}>
