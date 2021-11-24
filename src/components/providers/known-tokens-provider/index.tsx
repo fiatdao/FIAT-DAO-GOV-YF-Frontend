@@ -9,6 +9,7 @@ import { TokenIconNames } from 'components/custom/icon';
 import config from 'config';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
+import { gOHMFdtAmphoraSLPYfPool } from '../../../modules/rewards/providers/pools-provider';
 
 export enum KnownTokens {
   FDT = 'FDT',
@@ -22,6 +23,7 @@ export enum KnownTokens {
   wsOHM = 'wsOHM',
   ETH_FDT_SLP = 'ETH_FDT_SLP',
   wsOHM_FDT_SLP = 'wsOHM_FDT_SLP',
+  gOHM_FDT_Amphora_SLP = 'gOHM_FDT_SLP_Amphora',
 }
 
 export type TokenMeta = {
@@ -142,6 +144,15 @@ export const wsOHMFdtSLPToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.wsOHMFDTSLP),
 };
 
+export const gOHMFdtAmphoraSLPToken: TokenMeta = {
+  address: config.tokens.gOHMFDTAmphoraSLP,
+  symbol: KnownTokens.gOHM_FDT_Amphora_SLP,
+  name: 'gOHM FDT SUSHI LP Amphora',
+  decimals: 18,
+  icon: 'png/wsOHM_FDT_SUSHI_LP',
+  contract: new Erc20Contract([], config.tokens.gOHMFDTAmphoraSLP),
+};
+
 const KNOWN_TOKENS: TokenMeta[] = [
   FDTToken,
   EthToken,
@@ -154,6 +165,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   wsOHMToken,
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
+  gOHMFdtAmphoraSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -260,6 +272,35 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
   return wsOHMReserve.div(supply).times(2);
 }
 
+async function getGOHMFdtAmphoraSLPTokenPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, gOHMFdtAmphoraSLPToken.address);
+
+  const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
+    { method: 'decimals', transform: Number },
+    { method: 'totalSupply', transform: value => new BigNumber(value) },
+    { method: 'token0' },
+    { method: 'getReserves' },
+  ]);
+
+  let gOHMAmphoraReserve;
+
+  if (String(token0).toLowerCase() === FDTToken.address) {
+    gOHMAmphoraReserve = new BigNumber(reserve1).unscaleBy(gOHMFdtAmphoraSLPToken.decimals);
+  } else {
+    gOHMAmphoraReserve = new BigNumber(reserve0).unscaleBy(gOHMFdtAmphoraSLPToken.decimals);
+  }
+
+  gOHMAmphoraReserve = (gOHMAmphoraReserve as BigNumber).times(gOHMFdtAmphoraSLPToken?.price as BigNumber)
+
+  const supply = totalSupply.unscaleBy(decimals);
+
+  if (!gOHMAmphoraReserve || !supply || supply.eq(BigNumber.ZERO)) {
+    return BigNumber.ZERO;
+  }
+
+  return gOHMAmphoraReserve.div(supply).times(2);
+}
+
 export function getTokenPrice(symbol: string): BigNumber | undefined {
   return getTokenBySymbol(symbol)?.price;
 }
@@ -343,6 +384,7 @@ const KnownTokensProvider: FC = props => {
         FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
+        gOHMFdtAmphoraSLPToken.price = await getGOHMFdtAmphoraSLPTokenPrice().catch(() => undefined);
 
 
         KNOWN_TOKENS.forEach(token => {
