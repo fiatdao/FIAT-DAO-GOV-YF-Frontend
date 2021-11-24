@@ -118,6 +118,9 @@ const LayoutFooter: React.FC = () => {
                   <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
                     SushiSwap wsOHM/FDT market
                   </a>
+                  <Link to="/airdrop">
+                    AirDrop
+                  </Link>
                 </div>
               </div>
             )}

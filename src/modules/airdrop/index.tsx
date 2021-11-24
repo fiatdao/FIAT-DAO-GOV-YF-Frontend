@@ -26,7 +26,7 @@ const AirDropPage = () => {
         <Text type="h2" weight="bold" color="primary" className="mb-8">
           Airdrop reward
         </Text>
-        <Text type="small" color="secondary" className="mb-32">
+        <Text type="p3" color="secondary" className="mb-32">
           You may have received claimable token rewards from the $FDT BarnBridge Community Airdrop. Claiming your
           airdrop before a year has
           <br /> passed will forfeit a portion of your balance. Your total claimable amount will rise whenever someone
@@ -176,7 +176,7 @@ const AirDropPage = () => {
             <div>
               <div className={s.cardGradient}>
                 <div>
-                  <Grid colsTemplate={!isTablet ? '1fr 1fr auto' : '1fr'} align="center" gap={24}>
+                  <Grid className={s.cardGradient__grid} align="center" gap={!isTablet ? 40 : 24}>
                     <div>
                       <Text type="small" color="secondary" className="mb-4">
                         Available to claim now:
@@ -190,7 +190,7 @@ const AirDropPage = () => {
                     </div>
                     <div>
                       <Text type="small" color="secondary" className="mb-4">
-                        Available to claim now:
+                        You forfeit:
                       </Text>
                       <div className="flex flow-col align-center">
                         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
@@ -199,7 +199,9 @@ const AirDropPage = () => {
                         </Text>
                       </div>
                     </div>
-                    <button className="button-primary">Claim</button>
+                    <div className={cn('flex align-center', s.button)}>
+                      <button className="button-primary">Claim</button>
+                    </div>
                   </Grid>
                 </div>
               </div>
