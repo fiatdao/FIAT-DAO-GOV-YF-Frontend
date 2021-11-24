@@ -15,17 +15,18 @@ import { Hint, Text } from 'components/custom/typography';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import { KnownTokens } from 'components/providers/known-tokens-provider';
 import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
-import { YFPoolID, useYFPools } from 'modules/rewards/providers/pools-provider';
+import { YFPoolID, useYFPools, YFPoolNFTID } from 'modules/rewards/providers/pools-provider';
 import { useWallet } from 'wallets/wallet';
 
 import s from './s.module.scss';
 
 export type PoolCardProps = {
-  poolId: YFPoolID;
+  poolId: YFPoolID | YFPoolNFTID;
 };
 
 const PoolCard: React.FC<PoolCardProps> = props => {
   const { poolId } = props;
+  // console.log('poolId', poolId);
 
   const walletCtx = useWallet();
   const history = useHistory();

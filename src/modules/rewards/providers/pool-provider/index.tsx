@@ -7,7 +7,7 @@ import config from 'config';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
-import { YFPoolMeta, useYFPools } from '../pools-provider';
+import { YFPoolMeta, useYFPools, YFPoolNFTID } from '../pools-provider';
 
 export type YFPoolType = {
   poolMeta?: YFPoolMeta;
@@ -51,7 +51,7 @@ const YFPoolProvider: React.FC<Props> = props => {
         if (erc20Contract) {
           erc20Contract.setAccount(walletCtx.account);
           erc20Contract.loadBalance().then(reload).catch(Error);
-          erc20Contract.loadAllowance(config.contracts.yf.staking).then(reload).catch(Error);
+          erc20Contract.loadAllowance(pool.isNFTPool ? config.contracts.yf.stakingNFT :  config.contracts.yf.staking).then(reload).catch(Error);
         }
       });
     }

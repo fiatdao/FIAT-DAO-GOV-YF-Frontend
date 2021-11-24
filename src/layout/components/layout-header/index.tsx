@@ -53,6 +53,7 @@ const LayoutHeader: React.FC = () => {
   }, [window.innerWidth]);
 
   const isSenatusPage = useRouteMatch('/senatus');
+  const isRewardsPage = useRouteMatch('/rewards');
 
   async function handleAddProjectToken() {
     if (wallet.connector?.id === 'metamask') {
@@ -79,17 +80,17 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : 'Rewards'}</h1>
+      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : isRewardsPage ? 'Rewards' : 'Age of Romulus'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
-        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
-          <span>Rewards</span>
-        </Link>
         <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>
           <span>Senatus</span>
+        </Link>
+        <Link to="/rewards" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'rewards' })} onClick={() => setNavOpen(false)}>
+          <span>Rewards</span>
         </Link>
         <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
           <span>Age of Romulus</span>
@@ -197,11 +198,11 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Home</span>
                   </Link>
-                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
-                    <span>Rewards</span>
-                  </Link>
                   <Link to="/senatus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Senatus</span>
+                  </Link>
+                  <Link to="/rewards" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Rewards</span>
                   </Link>
                   <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Age of Romulus</span>

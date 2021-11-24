@@ -42,13 +42,11 @@ const PoolUnstake: FC = () => {
   const { poolMeta } = yfPoolCtx;
   const activeContract = activeToken?.contract as Erc20Contract;
 
-  if (!poolMeta || !activeToken) {
-    return null;
-  }
+  const currStakingContract = !!poolMeta?.isNFTPool ? yfPoolsCtx.stakingNFTContract : yfPoolsCtx.stakingContract;
 
-  const selectedStakedToken = yfPoolsCtx.stakingContract?.stakedTokens.get(activeToken.address);
-  const stakedBalance = selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken.decimals);
-  const walletBalance = activeContract.balance?.unscaleBy(activeToken.decimals);
+  const selectedStakedToken = currStakingContract?.stakedTokens.get(activeToken?.address as string);
+  const stakedBalance = selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken?.decimals);
+  const walletBalance = activeContract.balance?.unscaleBy(activeToken?.decimals);
   const maxAmount = stakedBalance ?? BigNumber.ZERO;
   // const bnAmount = BigNumber.from(amount);
 
@@ -78,17 +76,26 @@ const PoolUnstake: FC = () => {
     setUnstaking(true);
 
     value = value.scaleBy(activeToken.decimals)!;
-
-    try {
-      await yfPoolsCtx.stakingContract?.unstake(activeToken.address, value, gasPrice);
+    if(!!poolMeta?.isNFTPool) {
+      await yfPoolsCtx.stakingNFTContract?.unstake(activeToken.address, (poolMeta.nftId as number), value, gasPrice);
 
       setBnAmount(new BigNumber(0));
-      yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);
-      yfPoolsCtx.stakingContract?.loadUserDataFor(activeToken.address).catch(Error);
-      (poolMeta?.contract as YfPoolContract).loadCommon().catch(Error);
-      (poolMeta?.contract as YfPoolContract).loadUserData().catch(Error);
-      activeContract.loadBalance().catch(Error);
-    } catch (e) {}
+      yfPoolsCtx.stakingNFTContract?.loadCommonFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);
+      yfPoolsCtx.stakingNFTContract?.loadUserDataFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);
+    } else {
+      try {
+        await yfPoolsCtx.stakingContract?.unstake(activeToken.address, value, gasPrice);
+
+        setBnAmount(new BigNumber(0));
+        yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);
+        yfPoolsCtx.stakingContract?.loadUserDataFor(activeToken.address).catch(Error);
+      } catch (e) {}
+    }
+
+    (poolMeta?.contract as YfPoolContract).loadCommon().catch(Error);
+    (poolMeta?.contract as YfPoolContract).loadUserData().catch(Error);
+    activeContract.loadBalance().catch(Error);
+
 
     setUnstaking(false);
   }
@@ -100,10 +107,10 @@ const PoolUnstake: FC = () => {
           <Text type="small" weight="500" color="secondary" className="mb-8">
             Staked balance
           </Text>
-          <Tooltip title={formatUSD(convertTokenInUSD(stakedBalance, activeToken.symbol)) ?? '-'}>
+          <Tooltip title={formatUSD(convertTokenInUSD(stakedBalance, (activeToken?.symbol as string))) ?? '-'}>
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(stakedBalance, {
-                decimals: activeToken.decimals,
+                decimals: activeToken?.decimals,
               }) ?? '-'}
             </Text>
           </Tooltip>
@@ -112,10 +119,10 @@ const PoolUnstake: FC = () => {
           <Text type="small" weight="500" color="secondary" className="mb-8">
             Wallet balance
           </Text>
-          <Tooltip title={formatUSD(convertTokenInUSD(walletBalance, activeToken.symbol)) ?? '-'}>
+          <Tooltip title={formatUSD(convertTokenInUSD(walletBalance, (activeToken?.symbol as string))) ?? '-'}>
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(walletBalance, {
-                decimals: activeToken.decimals,
+                decimals: activeToken?.decimals,
               }) ?? '-'}
             </Text>
           </Tooltip>
@@ -124,17 +131,17 @@ const PoolUnstake: FC = () => {
       <Form validateTrigger={['onSubmit']} initialValues={{ amount: undefined }} onFinish={handleUnstake} form={form}>
         <Form.Item name="amount" rules={[{ required: true, message: 'Required' }]}>
           <TokenAmount
-            tokenIcon={activeToken.icon}
+            tokenIcon={activeToken?.icon}
             max={maxAmount}
-            maximumFractionDigits={activeToken.decimals}
-            name={activeToken.symbol}
+            maximumFractionDigits={activeToken?.decimals}
+            name={activeToken?.symbol}
             displayDecimals={4}
             disabled={unstaking}
             slider
           />
         </Form.Item>
-        <Form.Item>
-          {poolMeta.contract.isPoolEnded === true && (
+        <Form.Item >
+          {poolMeta?.contract.isPoolEnded === true && (
             <>
               <Alert
                 message={
@@ -146,7 +153,7 @@ const PoolUnstake: FC = () => {
                 }
                 className="mb-32"
               />
-              {activeToken.symbol === KnownTokens.FDT && (
+              {activeToken?.symbol === KnownTokens.FDT && (
                 <Alert
                   className="mb-32"
                   message={
@@ -166,7 +173,7 @@ const PoolUnstake: FC = () => {
             </>
           )}
 
-          {poolMeta.contract.isPoolEnded === false && (
+          {poolMeta?.contract.isPoolEnded === false && (
             <Alert
               className="mb-32"
               message="Any funds withdrawn before the end of this epoch will not accrue any rewards for this epoch."
@@ -183,17 +190,17 @@ const PoolUnstake: FC = () => {
         <TxConfirmModal
           title="Unstake"
           header={
-            <div className="mb-24">
-              <div className="flex align-center justify-center pb-24">
-                <Text type="h2" weight="bold" color="primary" className="mr-8">
-                  {formatToken(bnAmount, {
-                    decimals: activeToken.decimals,
-                  })}
-                </Text>
-                <Icon name={activeToken.icon!} />
-              </div>
-              <Divider />
-            </div>
+           <div className="mb-24">
+             <div className="flex align-center justify-center pb-24">
+               <Text type="h2" weight="bold" color="primary" className="mr-8">
+                 {formatToken(bnAmount, {
+                   decimals: activeToken?.decimals,
+                 })}
+               </Text>
+               <Icon name={activeToken?.icon!} />
+             </div>
+             <Divider />
+           </div>
           }
           submitText={`Confirm your unstake`}
           onCancel={handleUnstakeCancel}

@@ -52,15 +52,15 @@ export const PrizesData = [
 const PrizesView = ({
   countAllUsers,
   activeKey,
-  isClaimDisable,
+  currUser,
 }: {
   countAllUsers: number | null;
   activeKey: string;
-  isClaimDisable: boolean | null;
+  currUser: any | null;
 }) => {
   const isMobile = useMediaQuery(768);
 
-  console.log('isClaimDisable', !isClaimDisable);
+  console.log('currUser', currUser);
 
   const ageOfRomulusCtx = useAgeOfRomulus();
 
@@ -74,20 +74,18 @@ const PrizesView = ({
         <div className={s.card__table}>
           {PrizesData.map(({ key, title, date, icon, rate }) => {
             // @ts-ignore
-            // console.log('ageOfRomulusCtx', ageOfRomulusCtx[key]);
+            console.log('!!tree', !!ageOfRomulusCtx[key].tree);
             const isDisabled =
               // @ts-ignore
-              isClaimDisable && !!ageOfRomulusCtx[key].tree
+              currUser && !!ageOfRomulusCtx[key].tree
                 ? // @ts-ignore
                   ageOfRomulusCtx[key].isClaimed
-                : key === activeKey
-                ? !isClaimDisable
-                : true;
+                : true
 
             let stakers;
             switch (key) {
               case ActiveKeys.amphora:
-                stakers = countAllUsers ?? 0;
+                stakers = 751;
                 break;
               case ActiveKeys.kithara:
                 stakers = Math.ceil((countAllUsers ?? 0) * 0.5);
@@ -114,7 +112,13 @@ const PrizesView = ({
                   <span>{format(new Date(date), 'dd')}</span>
                   <span>{format(new Date(date), 'LLL')}</span>
                 </div>
-                {icon}
+                {
+                  key === activeKey ? (
+                  <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
+                    {icon}
+                  </a>
+                ) : icon
+                }
                 <div>
                   <Text type="lb2" color="primary">
                     {title}
@@ -134,6 +138,7 @@ const PrizesView = ({
                   <button
                     type="button"
                     disabled={isDisabled}
+                    // disabled={true}
                     // @ts-ignore
                     onClick={() => ageOfRomulusCtx[key].claim()}
                     className="button-primary button-small">

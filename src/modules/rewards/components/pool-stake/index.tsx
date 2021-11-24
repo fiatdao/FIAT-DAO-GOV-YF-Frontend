@@ -12,7 +12,6 @@ import Form from 'components/antd/form';
 import Spin from 'components/antd/spin';
 import Tooltip from 'components/antd/tooltip';
 import Icon from 'components/custom/icon';
-// import { TokenAmount, TokenSelect } from 'components/custom/token-amount-new';
 import TokenAmount from 'components/custom/token-amount';
 import { Text } from 'components/custom/typography';
 import { FDTToken, KnownTokens, convertTokenInUSD, useKnownTokens } from 'components/providers/known-tokens-provider';
@@ -42,18 +41,19 @@ const PoolStake: FC = () => {
   const [staking, setStaking] = useState(false);
   const [bnAmount, setBnAmount] = useState(new BigNumber(0));
 
-  const { poolMeta } = yfPoolCtx;
+  const { poolMeta, poolBalance } = yfPoolCtx;
   const activeContract = activeToken?.contract as Erc20Contract;
 
-  if (!poolMeta || !activeToken) {
-    return null;
-  }
+  const currStakingContract = !!poolMeta?.isNFTPool ? yfPoolsCtx.stakingNFTContract : yfPoolsCtx.stakingContract;
 
-  const selectedStakedToken = yfPoolsCtx.stakingContract?.stakedTokens.get(activeToken.address);
-  const allowance = activeContract.getAllowanceOf(config.contracts.yf.staking)?.unscaleBy(activeToken.decimals);
-  const stakedBalance = selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken.decimals);
-  const walletBalance = activeContract.balance?.unscaleBy(activeToken.decimals);
+
+  const selectedStakedToken = currStakingContract?.stakedTokens.get((activeToken?.address as string));
+  const allowance = activeContract.getAllowanceOf(currStakingContract?.address as string)?.unscaleBy(activeToken?.decimals);
+  const stakedBalance = selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken?.decimals);
+  const walletBalance = activeContract.balance?.unscaleBy(activeToken?.decimals);
   const maxAmount = BigNumber.min(walletBalance ?? BigNumber.ZERO, allowance ?? BigNumber.ZERO);
+
+  const nftBalance = yfPoolsCtx.yfNFTContract?.balanceOf?.[(poolMeta?.name as string)] ?? null
 
   function handleTokenSelect(tokenSymbol: string) {
     const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
@@ -64,7 +64,7 @@ const PoolStake: FC = () => {
     setEnabling(true);
 
     try {
-      await activeContract.approve(true, yfPoolsCtx.stakingContract?.address!);
+      await activeContract.approve(true, currStakingContract?.address!);
     } catch {}
 
     setEnabling(false);
@@ -79,6 +79,16 @@ const PoolStake: FC = () => {
     setConfirmModalVisible(false);
   }
 
+  async function handleApproveNFT() {
+    setStaking(true)
+    try {
+      await yfPoolsCtx.yfNFTContract?.approve()
+      await yfPoolsCtx.yfNFTContract?.loadUserDataFor()
+    } catch (e) {} finally {
+      setStaking(false)
+    }
+  }
+
   async function handleStakeConfirm({ gasPrice }: any) {
     setConfirmModalVisible(false);
 
@@ -91,17 +101,27 @@ const PoolStake: FC = () => {
     setStaking(true);
 
     value = value.scaleBy(activeToken.decimals)!;
+    if(!!poolMeta?.isNFTPool) {
+      try {
+        await yfPoolsCtx.stakingNFTContract?.stake(activeToken.address, (poolMeta.nftId as number), value, gasPrice);
 
-    try {
-      await yfPoolsCtx.stakingContract?.stake(activeToken.address, value, gasPrice);
+        setBnAmount(new BigNumber(0));
+        yfPoolsCtx.stakingNFTContract?.loadCommonFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);
+        yfPoolsCtx.stakingNFTContract?.loadUserDataFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);
+      } catch (e) {}
+    } else {
+      try {
+        await yfPoolsCtx.stakingContract?.stake(activeToken.address, value, gasPrice);
 
-      setBnAmount(new BigNumber(0));
-      yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);
-      yfPoolsCtx.stakingContract?.loadUserDataFor(activeToken.address).catch(Error);
-      (poolMeta?.contract as YfPoolContract).loadCommon().catch(Error);
-      (poolMeta?.contract as YfPoolContract).loadUserData().catch(Error);
-      activeContract.loadBalance().catch(Error);
-    } catch (e) {}
+        setBnAmount(new BigNumber(0));
+        yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);
+        yfPoolsCtx.stakingContract?.loadUserDataFor(activeToken.address).catch(Error);
+      } catch (e) {}
+    }
+
+    (poolMeta?.contract as YfPoolContract).loadCommon().catch(Error);
+    (poolMeta?.contract as YfPoolContract).loadUserData().catch(Error);
+    activeContract.loadBalance().catch(Error);
 
     setStaking(false);
   }
@@ -113,10 +133,10 @@ const PoolStake: FC = () => {
           <Text type="small" weight="500" color="secondary" className="mb-8 sm-mb-0">
             Staked balance
           </Text>
-          <Tooltip title={formatUSD(convertTokenInUSD(stakedBalance, activeToken.symbol)) ?? '-'}>
+          <Tooltip title={formatUSD(convertTokenInUSD(stakedBalance, (activeToken?.symbol as string))) ?? '-'}>
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(stakedBalance, {
-                decimals: activeToken.decimals,
+                decimals: activeToken?.decimals,
               }) ?? '-'}
             </Text>
           </Tooltip>
@@ -125,10 +145,10 @@ const PoolStake: FC = () => {
           <Text type="small" weight="500" color="secondary" className="mb-8 sm-mb-0">
             Wallet balance
           </Text>
-          <Tooltip title={formatUSD(convertTokenInUSD(walletBalance, activeToken.symbol)) ?? '-'}>
+          <Tooltip title={formatUSD(convertTokenInUSD(walletBalance, (activeToken?.symbol as string))) ?? '-'}>
             <Text type="p1" weight="semibold" color="primary">
               {formatToken(walletBalance, {
-                decimals: activeToken.decimals,
+                decimals: activeToken?.decimals,
               }) ?? '-'}
             </Text>
           </Tooltip>
@@ -137,76 +157,116 @@ const PoolStake: FC = () => {
       <Form validateTrigger={['onSubmit']} initialValues={{ amount: undefined }} onFinish={handleStake} form={form}>
         <Form.Item name="amount" rules={[{ required: true, message: 'Required' }]}>
           <TokenAmount
-            tokenIcon={activeToken.icon}
+            tokenIcon={activeToken?.icon}
             max={maxAmount}
-            maximumFractionDigits={activeToken.decimals}
-            name={activeToken.symbol}
+            maximumFractionDigits={activeToken?.decimals}
+            name={activeToken?.symbol}
             displayDecimals={4}
             disabled={staking}
             slider
           />
         </Form.Item>
-        <Form.Item>
-          {poolMeta.contract.isPoolEnded === true && (
-            <>
+        {!!poolMeta?.isNFTPool && poolBalance?.isZero() && nftBalance?.isZero()
+          ?(
+            <Form.Item >
               <Alert
-                message={
-                  <div className="flex flow-row row-gap-16 align-start">
-                    <Text type="p2" weight="semibold" color="blue">
-                      Deposits made after an epoch started will be considered as pro-rata figures in relation to the
-                      length of the epoch.
-                    </Text>
-                  </div>
-                }
                 className="mb-32"
+                message={
+                  <>
+                    You are not eligible for liquidity mining in this pool. To participate, you need to stake in the DAO and claim NFTs from Age of Romulus.
+                    {' '}
+                    <a href='https://medium.com/fiat-dao/the-ludi-liquidi-are-soon-upon-us-f80955864ada' target="_blank" rel="noopener">
+                      Learn more.
+                    </a>
+                  </>
+                }
               />
-              {activeToken.symbol === KnownTokens.FDT && (
-                <Alert
-                  className="mb-32"
-                  message={
-                    <div className="flex flow-row row-gap-16 align-start">
-                      <Text type="p2" weight="semibold" color="blue">
-                        You can still deposit {activeToken.symbol} in the DAO governance to earn interest for your
-                        funds.
-                      </Text>
-                      <Link to="/senatus" className="link-blue">
-                        <Text type="p2" weight="bold" style={{ textDecoration: 'underline' }}>
-                          Go to governance staking
-                        </Text>
-                      </Link>
-                    </div>
-                  }
-                />
-              )}
+            </Form.Item>
+          ) : (
+            <>
+              <Form.Item >
+                {poolMeta?.contract.isPoolEnded === true && (
+                  <>
+                    <Alert
+                      message={
+                        <div className="flex flow-row row-gap-16 align-start">
+                          <Text type="p2" weight="semibold" color="blue">
+                            Deposits made after an epoch started will be considered as pro-rata figures in relation to the length
+                            of the epoch.
+                          </Text>
+                        </div>
+                      }
+                      className="mb-32"
+                    />
+                    {activeToken?.symbol === KnownTokens.FDT && (
+                      <Alert
+                        className="mb-32"
+                        message={
+                          <div className="flex flow-row row-gap-16 align-start">
+                            <Text type="p2" weight="semibold" color="blue">
+                              You can still deposit {activeToken.symbol} in the DAO governance to earn interest for your funds.
+                            </Text>
+                            <Link to="/senatus" className="link-blue">
+                              <Text type="p2" weight="bold" style={{ textDecoration: 'underline' }}>
+                                Go to governance staking
+                              </Text>
+                            </Link>
+                          </div>
+                        }
+                      />
+                    )}
+                  </>
+                )}
+
+                {poolMeta?.contract.isPoolEnded === false && (
+                  <Alert
+                    className="mb-32"
+                    message="Deposits made after an epoch started will be considered as pro-rata figures in relation to the length of the epoch."
+                  />
+                )}
+              </Form.Item>
+
+              <div style={{ display: 'flex' }}>
+                {!!poolMeta?.isNFTPool && !yfPoolsCtx.yfNFTContract?.isApproved
+                ? (<button
+                    onClick={handleApproveNFT}
+                    disabled={staking}
+                    type="button"
+                    className="button-primary">
+                    Approve NFT
+                  </button>)
+                  // @ts-ignore
+                : (
+                  <>
+                    <button
+                      type="submit"
+                      className="button-primary"
+                      disabled={
+                        !allowance?.gt(BigNumber.ZERO) ||
+                        staking
+                      }
+                    >
+                      {staking && <Spin spinning />}
+                      Stake
+                    </button>
+
+                    {allowance?.eq(BigNumber.ZERO) && (
+                      <button
+                        type="button"
+                        className="button-primary"
+                        disabled={enabling}
+                        onClick={handleEnable}
+                        style={{ marginLeft: 10 }}>
+                        {enabling && <Spin spinning />}
+                        Enable {activeToken?.symbol}
+                      </button>
+                    )}
+                  </>
+                  )}
+              </div>
             </>
           )}
 
-          {poolMeta.contract.isPoolEnded === false && (
-            <Alert
-              className="mb-32"
-              message="Deposits made after an epoch started will be considered as pro-rata figures in relation to the length of the epoch."
-            />
-          )}
-        </Form.Item>
-
-        <div style={{ display: 'flex' }}>
-          <button type="submit" className="button-primary" disabled={!allowance?.gt(BigNumber.ZERO) || staking}>
-            {staking && <Spin spinning />}
-            Stake
-          </button>
-
-          {allowance?.eq(BigNumber.ZERO) && (
-            <button
-              type="button"
-              className="button-primary"
-              disabled={enabling}
-              onClick={handleEnable}
-              style={{ marginLeft: 10 }}>
-              {enabling && <Spin spinning />}
-              Enable {activeToken.symbol}
-            </button>
-          )}
-        </div>
       </Form>
 
       {confirmModalVisible && (
@@ -217,10 +277,10 @@ const PoolStake: FC = () => {
               <div className="flex align-center justify-center pb-24">
                 <Text type="h2" weight="bold" color="primary" className="mr-8">
                   {formatToken(bnAmount, {
-                    decimals: activeToken.decimals,
+                    decimals: activeToken?.decimals,
                   })}
                 </Text>
-                <Icon name={activeToken.icon!} />
+                <Icon name={activeToken?.icon!} />
               </div>
               <Divider />
             </div>
