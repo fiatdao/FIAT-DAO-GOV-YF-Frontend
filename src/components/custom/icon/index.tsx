@@ -42,6 +42,7 @@ import txSuccessImg from 'resources/png/tx-success.png';
 import UMASrc from 'resources/png/UMA.png';
 import universeSrc from 'resources/png/universe.png';
 import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
+import gohm_fdt_slp_amphoraImg from 'resources/png/gohm_fdt_slp_amphora.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import notConnected from 'resources/svg/not-connected.svg';
@@ -97,6 +98,7 @@ export type TokenIconNames =
   | 'png/YFI'
   | 'png/ETH_FDT_SLP'
   | 'png/wsOHM_FDT_SUSHI_LP'
+  | 'png/gohm_fdt_slp_amphora'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -269,6 +271,8 @@ const Icon: React.FC<IconProps> = props => {
           return ETH_FDT_SLPImg;
         case 'png/wsOHM_FDT_SUSHI_LP':
           return wsOHM_FDT_SUSHI_LPImg;
+        case 'png/gohm_fdt_slp_amphora':
+          return gohm_fdt_slp_amphoraImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':

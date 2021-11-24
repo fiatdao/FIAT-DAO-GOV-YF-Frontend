@@ -138,7 +138,7 @@ export const wsOHMFdtSLPYfPool: YFPoolMeta = {
 export const gOHMFdtAmphoraSLPYfPool: YFPoolMeta = {
   name: YFPoolNFTID.gOHM_FDT_SLP_Amphora,
   label: 'gOHM_FDT_SUSHI_LP_Amphora',
-  icons: ['png/wsOHM_FDT_SUSHI_LP'],
+  icons: ['png/gohm_fdt_slp_amphora'],
   colors: ['var(--theme-red-color)'],
   tokens: [gOHMFdtAmphoraSLPToken],
   isNFTPool: true,
