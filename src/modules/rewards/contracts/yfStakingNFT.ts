@@ -10,7 +10,7 @@ const ABI: AbiItem[] = [
   createAbiItem('epochDuration', [], ['uint256']),
   createAbiItem('getCurrentEpoch', [], ['uint128']),
   createAbiItem('getEpochPoolSize', ['address', 'uint256', 'uint128'], ['uint256']),
-  createAbiItem('getEpochUserBalance', ['address', 'address', 'uint128', 'uint256'], ['uint256']),
+  createAbiItem('getEpochUserBalance', ['address', 'address', 'uint256', 'uint128'], ['uint256']),
   createAbiItem('balanceOf', ['address', 'address', 'uint256'], ['uint256']),
   createAbiItem('erc1155BalanceOf', ['address', 'uint256'], ['uint256']),
   createAbiItem('deposit', ['address', 'uint256', 'uint256'], []),
@@ -25,8 +25,8 @@ export type YfStakedToken = {
 };
 
 export class YfStakingNFTContract extends Web3Contract {
-  constructor(stakingAddress: string) {
-    super(ABI, stakingAddress, 'YF STAKING');
+  constructor(stakingNFTAddress: string) {
+    super(ABI, stakingNFTAddress, 'YF STAKING NFT');
 
     this.stakedTokens = new Map();
 
