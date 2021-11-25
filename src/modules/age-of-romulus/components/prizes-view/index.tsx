@@ -7,6 +7,7 @@ import Icon from 'components/custom/icon';
 import { Hint, Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
 
+import prizeList from '../../prize';
 import { ActiveKeys, useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 
 import s from '../../views/age-of-romulus/s.module.scss';
@@ -60,8 +61,6 @@ const PrizesView = ({
 }) => {
   const isMobile = useMediaQuery(768);
 
-  console.log('currUser', currUser);
-
   const ageOfRomulusCtx = useAgeOfRomulus();
 
   return (
@@ -73,11 +72,9 @@ const PrizesView = ({
 
         <div className={s.card__table}>
           {PrizesData.map(({ key, title, date, icon, rate }) => {
-            // @ts-ignore
-            console.log('!!tree', !!ageOfRomulusCtx[key].tree);
             const isDisabled =
               // @ts-ignore
-              currUser && !!ageOfRomulusCtx[key].tree
+              currUser && prizeList[key].length && prizeList[key].some(i => i.address.toLowerCase() === currUser.address.toLowerCase())
                 ? // @ts-ignore
                   ageOfRomulusCtx[key].isClaimed
                 : true
