@@ -7,6 +7,7 @@ import Icon from 'components/custom/icon';
 import { Hint, Text } from 'components/custom/typography';
 import useMediaQuery from 'hooks/useMediaQuery';
 
+import prizeList from '../../prize';
 import { ActiveKeys, useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 
 import s from '../../views/age-of-romulus/s.module.scss';
@@ -50,17 +51,15 @@ export const PrizesData = [
 ];
 
 const PrizesView = ({
-  countAllUsers,
-  activeKey,
-  currUser,
-}: {
+                      countAllUsers,
+                      activeKey,
+                      currUser,
+                    }: {
   countAllUsers: number | null;
   activeKey: string;
   currUser: any | null;
 }) => {
   const isMobile = useMediaQuery(768);
-
-  console.log('currUser', currUser);
 
   const ageOfRomulusCtx = useAgeOfRomulus();
 
@@ -73,13 +72,11 @@ const PrizesView = ({
 
         <div className={s.card__table}>
           {PrizesData.map(({ key, title, date, icon, rate }) => {
-            // @ts-ignore
-            console.log('!!tree', !!ageOfRomulusCtx[key].tree);
             const isDisabled =
               // @ts-ignore
-              currUser && !!ageOfRomulusCtx[key].tree
+              currUser && prizeList[key].length && prizeList[key].some(i => i.address.toLowerCase() === currUser.address.toLowerCase())
                 ? // @ts-ignore
-                  ageOfRomulusCtx[key].isClaimed
+                ageOfRomulusCtx[key].isClaimed
                 : true
 
             let stakers;
@@ -114,10 +111,10 @@ const PrizesView = ({
                 </div>
                 {
                   key === activeKey ? (
-                  <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
-                    {icon}
-                  </a>
-                ) : icon
+                    <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
+                      {icon}
+                    </a>
+                  ) : icon
                 }
                 <div>
                   <Text type="lb2" color="primary">
@@ -148,16 +145,16 @@ const PrizesView = ({
                       <Hint
                         text={`This NFT grants you access to the
                        ${
-                         key === ActiveKeys.amphora
-                           ? 'first'
-                           : key === ActiveKeys.kithara
-                           ? 'second'
-                           : key === ActiveKeys.galea
-                           ? 'third'
-                           : key === ActiveKeys.gladius
-                           ? 'fourth'
-                           : 'fifth'
-                       }
+                          key === ActiveKeys.amphora
+                            ? 'first'
+                            : key === ActiveKeys.kithara
+                              ? 'second'
+                              : key === ActiveKeys.galea
+                                ? 'third'
+                                : key === ActiveKeys.gladius
+                                  ? 'fourth'
+                                  : 'fifth'
+                        }
                         tier of liquidity mining rewards for the FDT / gOHM pair on Sushiswap.`}>
                         Claim
                       </Hint>
