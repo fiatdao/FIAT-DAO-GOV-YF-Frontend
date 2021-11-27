@@ -25,11 +25,13 @@ const PoolStatistics: FC = () => {
   const yfPoolsCtx = useYFPools();
   const yfPoolCtx = useYFPool();
 
-  const { poolMeta, poolMetaNew } = yfPoolCtx;
+  const { poolMeta, poolMetaOld } = yfPoolCtx;
 
   const [activeToken, setActiveToken] = useState(poolMeta?.tokens[0]);
   const [claiming, setClaiming] = useState(false);
+  const [oldClaiming, setOldClaiming] = useState(false);
   const [confirmClaimVisible, setConfirmClaimVisible] = useState(false);
+  const [confirmOldClaimVisible, setConfirmOldClaimVisible] = useState(false);
 
   const fdtContract = FDTToken.contract as Erc20Contract;
   const activeContract = activeToken?.contract as Erc20Contract;
@@ -51,6 +53,10 @@ const PoolStatistics: FC = () => {
     setConfirmClaimVisible(true);
   }
 
+  function handleOldClaim() {
+    setConfirmOldClaimVisible(true);
+  }
+
   const confirmClaim = async <A extends ConfirmTxModalArgs>(args: A) => {
     setConfirmClaimVisible(false);
     setClaiming(true);
@@ -62,6 +68,19 @@ const PoolStatistics: FC = () => {
     } catch {}
 
     setClaiming(false);
+  };
+
+  const confirmOldClaim = async <A extends ConfirmTxModalArgs>(args: A) => {
+    setConfirmOldClaimVisible(false);
+    setOldClaiming(true);
+
+    try {
+      await poolMetaOld?.contract.claim(args.gasPrice);
+      fdtContract.loadBalance().catch(Error);
+      (poolMetaOld?.contract as YfPoolContract).loadUserData().catch(Error);
+    } catch {}
+
+    setOldClaiming(false);
   };
 
   const isEnded = poolMeta?.contract.isPoolEnded === true;
@@ -100,14 +119,14 @@ const PoolStatistics: FC = () => {
             </div>
           )}
         </div>
-        {!!poolMetaNew && (
+        {!!poolMetaOld && (
           <div className="p-4">
             <div className={cn('flex align-center justify-space-between', s.claimBlock)}>
               <div className="flex flow-row">
                 <div className="flex align-center mb-4">
                   <Tooltip
                     title={
-                      formatToken(poolMetaNew.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      formatToken(poolMetaOld.contract.toClaim?.unscaleBy(FDTToken.decimals), {
                         decimals: FDTToken.decimals,
                       }) ?? '-'
                     }>
@@ -117,7 +136,7 @@ const PoolStatistics: FC = () => {
                       color="primary"
                       className="mr-8 text-ellipsis"
                       style={{ maxWidth: '120px' }}>
-                      {formatToken(poolMetaNew.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      {formatToken(poolMetaOld.contract.toClaim?.unscaleBy(FDTToken.decimals), {
                         decimals: FDTToken.decimals,
                         compact: true
                       }) ?? '-'}
@@ -132,10 +151,10 @@ const PoolStatistics: FC = () => {
               <button
                 type="button"
                 className="button-primary"
-                disabled={!poolMetaNew.contract.toClaim?.gt(BigNumber.ZERO) || claiming}
-                onClick={handleClaim}>
-                {claiming && <Spin spinning />}
-                Claim reward
+                disabled={!poolMetaOld.contract.toClaim?.gt(BigNumber.ZERO) || oldClaiming}
+                onClick={handleOldClaim}>
+                {oldClaiming && <Spin spinning />}
+                Claim old reward
               </button>
             </div>
           </div>
@@ -174,7 +193,7 @@ const PoolStatistics: FC = () => {
               disabled={!poolMeta.contract.toClaim?.gt(BigNumber.ZERO) || claiming}
               onClick={handleClaim}>
               {claiming && <Spin spinning />}
-              Claim {!!poolMetaNew && 'old'} reward
+              Claim reward
             </button>
           </div>
         </div>
@@ -283,6 +302,22 @@ const PoolStatistics: FC = () => {
           submitText="Claim"
           onCancel={() => setConfirmClaimVisible(false)}
           onConfirm={confirmClaim}
+        />
+      )}
+      {confirmOldClaimVisible && (
+        <TxConfirmModal
+          title="Confirm your claim"
+          header={
+            <div className="flex col-gap-8 align-center justify-center">
+              <Text type="h2" weight="500" color="primary">
+                {formatToken(poolMetaOld?.contract.toClaim?.unscaleBy(FDTToken.decimals)) ?? '-'}
+              </Text>
+              <Icon name={FDTToken.icon!} width={32} height={32} />
+            </div>
+          }
+          submitText="Claim"
+          onCancel={() => setConfirmOldClaimVisible(false)}
+          onConfirm={confirmOldClaim}
         />
       )}
     </div>

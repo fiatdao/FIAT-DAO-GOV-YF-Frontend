@@ -11,7 +11,7 @@ import { YFPoolMeta, useYFPools, YFPoolID } from '../pools-provider';
 
 export type YFPoolType = {
   poolMeta?: YFPoolMeta;
-  poolMetaNew?: YFPoolMeta | null;
+  poolMetaOld?: YFPoolMeta | null;
   poolBalance?: BigNumber;
   effectivePoolBalance?: BigNumber;
 };
@@ -34,14 +34,14 @@ const YFPoolProvider: React.FC<Props> = props => {
   const yfPoolsCtx = useYFPools();
 
   const pool = React.useMemo(() => yfPoolsCtx.getYFKnownPoolByName(poolId), [poolId]);
-  const poolNew = React.useMemo(() => poolId === YFPoolID.wsOHM_FDT_SLP ? yfPoolsCtx.getYFKnownPoolByName(YFPoolID.wsOHM_FDT_SLP_NEW) : null, [poolId]);
+  const poolOld = React.useMemo(() => poolId === YFPoolID.wsOHM_FDT_SLP ? yfPoolsCtx.getYFKnownPoolByName(YFPoolID.wsOHM_FDT_SLP_OLD) : null, [poolId]);
 
   const poolBalance = yfPoolsCtx.getPoolBalanceInUSD(poolId);
   const effectivePoolBalance = yfPoolsCtx.getPoolEffectiveBalanceInUSD(poolId);
 
   const value: YFPoolType = {
     poolMeta: pool,
-    poolMetaNew: poolNew,
+    poolMetaOld: poolOld,
     poolBalance,
     effectivePoolBalance,
   };

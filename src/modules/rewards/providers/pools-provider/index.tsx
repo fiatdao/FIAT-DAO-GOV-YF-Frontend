@@ -34,7 +34,7 @@ export enum YFPoolID {
   wsOHM = 'wsOHM',
   ETH_FDT_SLP = 'eth-fdt-slp',
   wsOHM_FDT_SLP = 'wsOHM-fdt-slp',
-  wsOHM_FDT_SLP_NEW = 'wsOHM-fdt-slp-new',
+  wsOHM_FDT_SLP_OLD = 'wsOHM-fdt-slp-old',
 }
 
 export enum YFPoolNFTID {
@@ -136,14 +136,14 @@ export const wsOHMFdtSLPYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.wsOHMFDTSLP),
 };
 
-export const wsOHMFdtNEWSLPYfPool: YFPoolMeta = {
-  name: YFPoolID.wsOHM_FDT_SLP_NEW,
-  label: 'NEW_POOL_SUSHI_LP',
+export const wsOHMFdtOLDSLPYfPool: YFPoolMeta = {
+  name: YFPoolID.wsOHM_FDT_SLP_OLD,
+  label: 'wsOHM_FDT_SUSHI_LP_OLD',
   icons: ['png/wsOHM_FDT_SUSHI_LP'],
   colors: ['var(--theme-red-color)'],
   tokens: [wsOHMFdtSLPToken],
   isNFTPool: false,
-  contract: new YfPoolContract(config.contracts.yf.wsOHMFDTSLPNew),
+  contract: new YfPoolContract(config.contracts.yf.wsOHMFDTSLPOld),
 };
 
 export const gOHMFdtAmphoraSLPYfPool: YFPoolMeta = {
@@ -166,7 +166,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
   wsOHMYfPool,
   // EthFdtSLPYfPool,
   wsOHMFdtSLPYfPool,
-  wsOHMFdtNEWSLPYfPool,
+  wsOHMFdtOLDSLPYfPool,
 ];
 
 const KNOWN_POOLS_NFT: YFPoolMeta[] = [
