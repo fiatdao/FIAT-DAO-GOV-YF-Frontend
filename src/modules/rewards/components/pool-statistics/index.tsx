@@ -119,6 +119,44 @@ const PoolStatistics: FC = () => {
             </div>
           )}
         </div>
+        <div className="p-4">
+          <div className={cn('flex align-center justify-space-between', s.claimBlock)}>
+            <div className="flex flow-row">
+              <div className="flex align-center mb-4">
+                <Tooltip
+                  title={
+                    formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      decimals: FDTToken.decimals,
+                    }) ?? '-'
+                  }>
+                  <Text
+                    type="h2"
+                    weight="semibold"
+                    color="primary"
+                    className="mr-8 text-ellipsis"
+                    style={{ maxWidth: '120px' }}>
+                    {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
+                      decimals: FDTToken.decimals,
+                      compact: true
+                    }) ?? '-'}
+                  </Text>
+                </Tooltip>
+                <Icon name={FDTToken.icon!} width={24} height={24} />
+              </div>
+              <Text type="small" weight="500" color="secondary">
+                Current reward
+              </Text>
+            </div>
+            <button
+              type="button"
+              className="button-primary"
+              disabled={!poolMeta.contract.toClaim?.gt(BigNumber.ZERO) || claiming}
+              onClick={handleClaim}>
+              {claiming && <Spin spinning />}
+              Claim reward
+            </button>
+          </div>
+        </div>
         {!!poolMetaOld && (
           <div className="p-4">
             <div className={cn('flex align-center justify-space-between', s.claimBlock)}>
@@ -159,44 +197,6 @@ const PoolStatistics: FC = () => {
             </div>
           </div>
         )}
-        <div className="p-4">
-          <div className={cn('flex align-center justify-space-between', s.claimBlock)}>
-            <div className="flex flow-row">
-              <div className="flex align-center mb-4">
-                <Tooltip
-                  title={
-                    formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
-                      decimals: FDTToken.decimals,
-                    }) ?? '-'
-                  }>
-                  <Text
-                    type="h2"
-                    weight="semibold"
-                    color="primary"
-                    className="mr-8 text-ellipsis"
-                    style={{ maxWidth: '120px' }}>
-                    {formatToken(poolMeta.contract.toClaim?.unscaleBy(FDTToken.decimals), {
-                      decimals: FDTToken.decimals,
-                      compact: true
-                    }) ?? '-'}
-                  </Text>
-                </Tooltip>
-                <Icon name={FDTToken.icon!} width={24} height={24} />
-              </div>
-              <Text type="small" weight="500" color="secondary">
-                Current reward
-              </Text>
-            </div>
-            <button
-              type="button"
-              className="button-primary"
-              disabled={!poolMeta.contract.toClaim?.gt(BigNumber.ZERO) || claiming}
-              onClick={handleClaim}>
-              {claiming && <Spin spinning />}
-              Claim reward
-            </button>
-          </div>
-        </div>
       </div>
 
       <div className="card flex-grow">
