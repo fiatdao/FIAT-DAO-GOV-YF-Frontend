@@ -69,7 +69,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
             {poolMeta?.label ?? '-'}
           </Text>
           <Text type="lb2" weight="500" color="primary" ellipsis>
-            EPOCH {lastActiveEpoch && poolId === YFPoolID.wsOHM_FDT_SLP ? (lastActiveEpoch as number) + 2 : lastActiveEpoch ?? '-'}/{totalEpochs && poolId === YFPoolID.wsOHM_FDT_SLP ? 4 : totalEpochs ?? '-'}
+            EPOCH {poolId === YFPoolID.wsOHM_FDT_SLP ? ((lastActiveEpoch as number) + 2) ?? '-' : lastActiveEpoch ?? '-'}/{totalEpochs && poolId === YFPoolID.wsOHM_FDT_SLP ? 4 : totalEpochs ?? '-'}
           </Text>
         </div>
         {walletCtx.isActive && isPoolAvailable && (
