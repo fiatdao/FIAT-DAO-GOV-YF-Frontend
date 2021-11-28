@@ -110,16 +110,16 @@ const PoolHarvestModal: FC<ModalProps> = props => {
               onClick={() => handleHarvest(yfPool.name)}
             />
           ))}
-          {yfPoolsCtx.yfPoolsNFT.map(yfPool => (
-            <PoolHarvestButton
-              key={yfPool.name}
-              icons={yfPool.icons}
-              label={yfPool.label}
-              reward={yfPool.contract.toClaim?.unscaleBy(FDTToken.decimals)}
-              loading={harvesting.get(yfPool.name) === true}
-              onClick={() => handleHarvest(yfPool.name)}
-            />
-          ))}
+          {/*{yfPoolsCtx.yfPoolsNFT.map(yfPool => (*/}
+          {/*  <PoolHarvestButton*/}
+          {/*    key={yfPool.name}*/}
+          {/*    icons={yfPool.icons}*/}
+          {/*    label={yfPool.label}*/}
+          {/*    reward={yfPool.contract.toClaim?.unscaleBy(FDTToken.decimals)}*/}
+          {/*    loading={harvesting.get(yfPool.name) === true}*/}
+          {/*    onClick={() => handleHarvest(yfPool.name)}*/}
+          {/*  />*/}
+          {/*))}*/}
         </Grid>
       </div>
     </Modal>
