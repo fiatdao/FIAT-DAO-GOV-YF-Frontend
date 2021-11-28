@@ -53,8 +53,8 @@ const PoolHeader: FC = () => {
             {poolMeta.label}
           </Text>
           <Text type="small" weight="semibold" color="primary">
-            Epoch {poolMeta?.contract?.lastActiveEpoch && poolMeta.name === YFPoolID.wsOHM_FDT_SLP
-            ? (poolMeta.contract.lastActiveEpoch as number) + 2 : poolMeta.contract.lastActiveEpoch ?? '-'}
+            Epoch {poolMeta.name === YFPoolID.wsOHM_FDT_SLP
+            ? ((poolMeta.contract.lastActiveEpoch as number) + 2) ?? '-' : poolMeta.contract.lastActiveEpoch ?? '-'}
             /{poolMeta?.contract?.totalEpochs && poolMeta.name === YFPoolID.wsOHM_FDT_SLP ? 4 : poolMeta.contract.totalEpochs ?? '-'}
           </Text>
         </div>
