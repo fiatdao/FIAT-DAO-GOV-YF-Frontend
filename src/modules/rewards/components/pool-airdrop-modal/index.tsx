@@ -99,7 +99,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
           </Text>
           <Icon width={19} height={19} name="png/fiat-dao" className={cn(s.fdReward, 'mr-4')} />
           <Hint text="2.5% of FDT supply was reserved for the BarnBridge community in recognition of their incubation of FIAT.">
-            <Text type="p1" weight="700" color="primary">
+            <Text type="p1" weight="bold" color="primary">
               10,000,000
             </Text>
           </Hint>
@@ -131,7 +131,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
                 )}
               />
               <Icon width={19} height={19} name="png/fiat-dao" className={cn(s.fdReward, 'mr-4')} />
-              <Text type="p2" weight="700" color="primary">
+              <Text type="p2" weight="bold" color="primary">
                 500,000
               </Text>
             </div>
@@ -144,7 +144,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
             </Hint>
             <div className="flex flow-col align-center mt-32 sm-mb-16 sm-mt-16">
               <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-              <Text type="p2" weight="700" color="green">
+              <Text type="p2" weight="bold" color="green">
                 500,000
               </Text>
             </div>
@@ -167,7 +167,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               </Hint>
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                <Text type="p2" weight="700" color="primary">
+                <Text type="p2" weight="bold" color="primary">
                   100,000
                 </Text>
               </div>
@@ -183,7 +183,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               </Hint>
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                <Text type="p2" weight="700" color="green">
+                <Text type="p2" weight="bold" color="green">
                   +35,000
                 </Text>
               </div>
@@ -199,7 +199,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               </Hint>
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                <Text type="p2" weight="700" color="primary">
+                <Text type="p2" weight="bold" color="primary">
                   135,000
                 </Text>
               </div>
@@ -223,7 +223,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
             <div>
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                <Text type="p2" weight="700" color="primary">
+                <Text type="p2" weight="bold" color="primary">
                   135,000
                 </Text>
               </div>

@@ -13,13 +13,13 @@ import LastClaimed from './components/last-claimed-table';
 
 import s from './AirDropPage.module.scss';
 
-const progressPercent = 50;
+const progressPercent = 30;
 
 const AirDropPage = () => {
   const wallet = useWallet();
   const isTablet = useMediaQuery(992);
   const isMobile = useMediaQuery(720);
-  const lockedAirDrop = true;
+  const lockedAirDrop = false;
   return (
     <section className={s.page}>
       <div className={s.container}>
@@ -47,7 +47,7 @@ const AirDropPage = () => {
                 </Hint>
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                  <Text type="p2" weight="700" color="primary">
+                  <Text type="p2" weight="bold" color="primary">
                     10,000,000
                   </Text>
                 </div>
@@ -60,7 +60,7 @@ const AirDropPage = () => {
                 </Hint>
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                  <Text type="p2" weight="700" color="primary">
+                  <Text type="p2" weight="bold" color="primary">
                     100,000
                   </Text>
                 </div>
@@ -73,7 +73,7 @@ const AirDropPage = () => {
                 </Hint>
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                  <Text type="p2" weight="700" color="green">
+                  <Text type="p2" weight="bold" color="green">
                     135,000
                   </Text>
                 </div>
@@ -123,7 +123,7 @@ const AirDropPage = () => {
                           </Hint>
                           <div className="flex flow-col align-center mb-48">
                             <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
-                            <Text type="h1" weight="700" color="primary">
+                            <Text type="h1" weight="bold" color="primary">
                               135,000
                             </Text>
                           </div>
@@ -134,7 +134,7 @@ const AirDropPage = () => {
                           </Hint>
                           <div className="flex flow-col align-center mb-32">
                             <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                            <Text type="p2" weight="700" color="primary">
+                            <Text type="p2" weight="bold" color="primary">
                               500,000
                             </Text>
                           </div>
@@ -145,7 +145,7 @@ const AirDropPage = () => {
                           </Hint>
                           <div className="flex flow-col align-center">
                             <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                            <Text type="p2" weight="700" color="green">
+                            <Text type="p2" weight="bold" color="green">
                               500,000
                             </Text>
                           </div>
@@ -153,7 +153,7 @@ const AirDropPage = () => {
                         <div className={s.progress}>
                           <div>
                             <span>
-                              <Text type="h1" weight="700" color="primary">
+                              <Text type="h1" weight="bold" color="primary">
                                 100,000
                               </Text>
                               <Text type="p3" color="primary">
@@ -183,7 +183,7 @@ const AirDropPage = () => {
                       </Text>
                       <div className="flex flow-col align-center">
                         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                        <Text type="h2" weight="700" color="primary">
+                        <Text type="h2" weight="bold" color="primary">
                           100,000
                         </Text>
                       </div>
@@ -194,7 +194,7 @@ const AirDropPage = () => {
                       </Text>
                       <div className="flex flow-col align-center">
                         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                        <Text type="h2" weight="700" color="primary" textGradient="var(--gradient-pink)">
+                        <Text type="h2" weight="bold" color="primary" textGradient="var(--gradient-pink)">
                           100,000
                         </Text>
                       </div>

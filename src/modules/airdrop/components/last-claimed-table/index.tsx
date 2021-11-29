@@ -30,7 +30,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -48,7 +48,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -66,7 +66,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -84,7 +84,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -102,7 +102,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -120,7 +120,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -138,7 +138,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -156,7 +156,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -174,7 +174,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>
@@ -192,7 +192,7 @@ const data = [
     amount: (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-        <Text type="p2" weight="700" color="primary">
+        <Text type="p2" weight="bold" color="primary">
           100,000
         </Text>
       </div>

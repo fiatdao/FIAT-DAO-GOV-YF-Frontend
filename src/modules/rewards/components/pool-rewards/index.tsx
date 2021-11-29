@@ -24,7 +24,7 @@ const PoolRewards: React.FC = () => {
   const yfPoolsCtx = useYFPools();
 
   const [harvestModalVisible, showHarvestModal] = useState(false);
-  const [airdropModalVisible, showAirdropModal] = useState(false);
+  const [airdropModalVisible, showAirdropModal] = useState(true);
 
   const fdtContract = FDTToken.contract as Erc20Contract;
   const { currentEpoch } = yfPoolsCtx.stakingContract ?? {};
