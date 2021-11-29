@@ -106,7 +106,7 @@ export class YfPoolContract extends Web3Contract {
       return 0;
     }
 
-    return epochReward * (lastActiveEpoch === this.totalEpochs ? lastActiveEpoch : lastActiveEpoch - 1);
+    return epochReward * (this.isPoolEnded ? lastActiveEpoch : lastActiveEpoch - 1);
   }
 
   async loadCommon(): Promise<void> {
