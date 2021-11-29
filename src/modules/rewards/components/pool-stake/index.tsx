@@ -175,7 +175,7 @@ const PoolStake: FC = () => {
                   <>
                     You are not eligible for liquidity mining in this pool. To participate, you need to stake in the DAO and claim NFTs from Age of Romulus.
                     {' '}
-                    <a href='https://medium.com/fiat-dao/the-ludi-liquidi-are-soon-upon-us-f80955864ada' target="_blank" rel="noopener">
+                    <a href='https://medium.com/fiat-dao/the-ludi-liquidi-are-soon-upon-us-f80955864ada' style={{ textDecoration: 'underline' }} target="_blank" rel="noopener">
                       Learn more.
                     </a>
                   </>

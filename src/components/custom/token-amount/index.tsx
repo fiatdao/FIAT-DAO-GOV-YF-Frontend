@@ -68,7 +68,7 @@ const TokenAmount: React.FC<TokenAmountProps> = props => {
             <div className="mr-8" />
             {!isMobile && (
               <Text type="lb1" weight="semibold" color="primary">
-                {name}
+                {name === 'gOHM_FDT_SLP_Amphora' ? 'gOHM_FDT_SLP' : name}
               </Text>
             )}
           </div>

@@ -13,6 +13,7 @@ import { convertTokenInUSD } from 'components/providers/known-tokens-provider';
 import { useYFPool } from '../../providers/pool-provider';
 
 import s from './s.module.scss';
+import { YFPoolID } from '../../providers/pools-provider';
 
 const PoolHeader: FC = () => {
   const yfPoolCtx = useYFPool();
@@ -52,7 +53,9 @@ const PoolHeader: FC = () => {
             {poolMeta.label}
           </Text>
           <Text type="small" weight="semibold" color="primary">
-            Epoch {poolMeta.contract.lastActiveEpoch ?? '-'}/{poolMeta.contract.totalEpochs ?? '-'}
+            Epoch {poolMeta.name === YFPoolID.wsOHM_FDT_SLP
+            ? ((poolMeta.contract.lastActiveEpoch as number) + 2) ?? '-' : poolMeta.contract.lastActiveEpoch ?? '-'}
+            /{poolMeta?.contract?.totalEpochs && poolMeta.name === YFPoolID.wsOHM_FDT_SLP ? 4 : poolMeta.contract.totalEpochs ?? '-'}
           </Text>
         </div>
       </div>

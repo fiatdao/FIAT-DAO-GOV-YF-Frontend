@@ -7,10 +7,11 @@ import config from 'config';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
-import { YFPoolMeta, useYFPools, YFPoolNFTID } from '../pools-provider';
+import { YFPoolMeta, useYFPools, YFPoolID } from '../pools-provider';
 
 export type YFPoolType = {
   poolMeta?: YFPoolMeta;
+  poolMetaOld?: YFPoolMeta | null;
   poolBalance?: BigNumber;
   effectivePoolBalance?: BigNumber;
 };
@@ -33,12 +34,14 @@ const YFPoolProvider: React.FC<Props> = props => {
   const yfPoolsCtx = useYFPools();
 
   const pool = React.useMemo(() => yfPoolsCtx.getYFKnownPoolByName(poolId), [poolId]);
+  const poolOld = React.useMemo(() => poolId === YFPoolID.wsOHM_FDT_SLP ? yfPoolsCtx.getYFKnownPoolByName(YFPoolID.wsOHM_FDT_SLP_OLD) : null, [poolId]);
 
   const poolBalance = yfPoolsCtx.getPoolBalanceInUSD(poolId);
   const effectivePoolBalance = yfPoolsCtx.getPoolEffectiveBalanceInUSD(poolId);
 
   const value: YFPoolType = {
     poolMeta: pool,
+    poolMetaOld: poolOld,
     poolBalance,
     effectivePoolBalance,
   };
