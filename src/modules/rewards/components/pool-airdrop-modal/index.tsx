@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import { Progress } from 'antd';
-// import { BigNumber as _BigNumber } from 'bignumber.js';
+import { BigNumber as _BigNumber } from 'bignumber.js';
 import cn from 'classnames';
 import { BigNumber, FixedNumber } from 'ethers';
 import MerkleDistributor from 'web3/merkleDistributor';
@@ -20,8 +20,10 @@ import { useGeneral } from '../../../../components/providers/general-provider';
 import useMediaQuery from '../../../../hooks/useMediaQuery';
 
 import s from './s.module.scss';
+// import { formatToken } from '../../../../web3/utils';
 
-// import { formatToken } from 'web3/utils';
+import { formatToken } from 'web3/utils';
+import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 
 export type AirdropModalProps = ModalProps & {
   merkleDistributor?: MerkleDistributor;
@@ -38,9 +40,11 @@ const AirdropModal: FC<AirdropModalProps> = props => {
 
   const merkleDistributorContract = merkleDistributor;
 
+  console.log('merkleDistributorContract', merkleDistributorContract);
+
   const tree = useMemo(() => {
     let airdropData;
-    config.isDev
+    config.web3.chainId === 4
       ? (airdropData = require(`../../../../merkle-distributor/airdrop-test.json`))
       : (airdropData = require(`../../../../merkle-distributor/airdrop.json`));
     const airdropAccounts = airdropData.map((drop: { address: any; earnings: any }) => ({
@@ -100,7 +104,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
           <Icon width={19} height={19} name="png/fiat-dao" className={cn(s.fdReward, 'mr-4')} />
           <Hint text="2.5% of FDT supply was reserved for the BarnBridge community in recognition of their incubation of FIAT.">
             <Text type="p1" weight="bold" color="primary">
-              10,000,000
+              {formatToken(merkleDistributorContract?.totalAirdropped) ?? 0}
             </Text>
           </Hint>
         </div>
@@ -122,7 +126,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
                 trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}
                 strokeWidth={16}
                 width={54}
-                percent={12}
+                percent={10}
                 className="mr-12"
                 format={() => (
                   <span className={s.progress}>

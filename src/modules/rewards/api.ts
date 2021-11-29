@@ -62,3 +62,39 @@ export function fetchYFPoolTransactions(
       };
     });
 }
+
+
+export type APIAirdropInfo = {
+  totalFDTAirdropClaimed: string;
+  totalFDTAirdropRedistributed: string;
+};
+
+export function fetchAirdropInfo(
+  first = 1000,
+): Promise<APIAirdropInfo> {
+  return GraphClient.get({
+    query: gql`
+      query($first: Int,){
+        overviews(first: $first) {
+          totalFDTAirdropClaimed
+          totalFDTAirdropRedistributed
+        }
+      }
+    `,
+    variables: {
+      first: first,
+    },
+  })
+  .catch(e => {
+    console.log(e)
+    return { data: [] }
+  })
+  .then(result => {
+    console.log(result)
+    return {
+      totalFDTAirdropClaimed: '1',
+      totalFDTAirdropRedistributed: '1',
+    }
+    // return { data: result.data.transactions.slice(limit * (page - 1), limit * page), meta: { count: result.data.transactions.length, block: page } }
+  })
+}

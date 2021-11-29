@@ -24,7 +24,7 @@ const PoolRewards: React.FC = () => {
   const yfPoolsCtx = useYFPools();
 
   const [harvestModalVisible, showHarvestModal] = useState(false);
-  const [airdropModalVisible, showAirdropModal] = useState(true);
+  const [airdropModalVisible, showAirdropModal] = useState(false);
 
   const fdtContract = FDTToken.contract as Erc20Contract;
   const { currentEpoch } = yfPoolsCtx.stakingContract ?? {};
@@ -49,9 +49,10 @@ const PoolRewards: React.FC = () => {
   const isAirdropClaimed = merkleDistributorData?.isAirdropClaimed;
   const adjustedAmount = merkleDistributorData?.adjustedAmount;
 
-  const airdropAmount = !isAirdropClaimed ? BigNumber.from(adjustedAmount) : BigNumber.from(0);
+  const airdropAmount = !isAirdropClaimed ? BigNumber.from(adjustedAmount?.airdropAmount) : BigNumber.from(0);
   const airdropDurationInWeeks = 100;
-  const airdropStartDate = new Date(1626674400000); // 2021-07-19 00:00:00
+  // @ts-ignore
+  const airdropStartDate = new Date(merkleDistributorData?.bonusStart * 1000);
   const airdropEndDate = add(airdropStartDate, { weeks: airdropDurationInWeeks });
   const airdropCurrentWeek =
     airdropDurationInWeeks -
@@ -119,10 +120,10 @@ const PoolRewards: React.FC = () => {
             </>
           )}
           {/* ToDo: Airdrop grid, uncomment when needed */}
-          {/* <Divider type="vertical" />
+          <Divider type="vertical" />
           <Grid flow="row" gap={2} className={s.item3}>
             <Grid flow="col" gap={8} align="center">
-              <Hint text="You have claimable tokens from the $ENTR Airdrop. This balance will rise over time and as more people exit the pool and forfeit their additional rewards. Warning: You can only claim once.">
+              <Hint text={`You have claimable tokens from the $${FDTToken.symbol} Airdrop. This balance will rise over time and as more people exit the pool and forfeit their additional rewards. Warning: You can only claim once.`}>
                 <Text type="p2" color="secondary">
                   <span style={{ marginRight: 5 }}>Airdrop reward</span>
                   <span className={s.week}>
@@ -133,9 +134,9 @@ const PoolRewards: React.FC = () => {
             </Grid>
             <Grid flow="col" gap={4} align="center">
               <Text type="h3" weight="bold" color="primary">
-                {formatToken(airdropAmount?.unscaleBy(EnterToken.decimals)) ?? 0}
+                {formatToken(airdropAmount?.unscaleBy(FDTToken.decimals)) ?? 0}
               </Text>
-              <Icon name={EnterToken.icon!} width={40} height={40} />
+              <Icon name={FDTToken.icon!} width={27} height={27} />
               {walletCtx.isActive && (
                 <button
                   type="button"
@@ -146,7 +147,7 @@ const PoolRewards: React.FC = () => {
                 </button>
               )}
             </Grid>
-          </Grid> */}
+          </Grid>
         </Grid>
       </div>
       {harvestModalVisible && <PoolHarvestModal onCancel={() => showHarvestModal(false)} />}
