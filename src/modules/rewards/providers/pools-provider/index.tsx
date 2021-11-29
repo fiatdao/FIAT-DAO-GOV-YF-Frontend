@@ -488,6 +488,9 @@ const YFPoolsProvider: FC = props => {
         return undefined;
       }
 
+      console.log('yfPool', yfPool.name);
+      console.log('new BigNumber(distributedReward)', new BigNumber(distributedReward).toString());
+
       return new BigNumber(distributedReward);
     });
   }, []);
