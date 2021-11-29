@@ -461,20 +461,23 @@ const YFPoolsProvider: FC = props => {
     [stakingContract, stakingNFTContract, knownTokensCtx.version],
   );
 
+  //todo add KNOWN_POOLS_NFT when get price
   const getYFTotalStakedInUSD = useCallback(() => {
-    return BigNumber.sumEach([...KNOWN_POOLS, ...KNOWN_POOLS_NFT], yfPool => {
+    return BigNumber.sumEach(KNOWN_POOLS, yfPool => {
       return getPoolBalanceInUSD(yfPool.name);
     });
   }, [getPoolBalanceInUSD]);
 
+  //todo add KNOWN_POOLS_NFT when get price
   const getYFTotalEffectiveStakedInUSD = useCallback(() => {
-    return BigNumber.sumEach([...KNOWN_POOLS, ...KNOWN_POOLS_NFT], yfPool => {
+    return BigNumber.sumEach(KNOWN_POOLS, yfPool => {
       return getPoolEffectiveBalanceInUSD(yfPool.name);
     });
   }, [getPoolEffectiveBalanceInUSD]);
 
+  //todo add KNOWN_POOLS_NFT when get price
   const getYFDistributedRewards = useCallback(() => {
-    return BigNumber.sumEach([...KNOWN_POOLS, ...KNOWN_POOLS_NFT], yfPool => {
+    return BigNumber.sumEach(KNOWN_POOLS, yfPool => {
       if (!yfPool.contract.isPoolAvailable) {
         return BigNumber.ZERO;
       }
@@ -489,8 +492,9 @@ const YFPoolsProvider: FC = props => {
     });
   }, []);
 
+  //todo add KNOWN_POOLS_NFT when get price
   const getYFTotalSupply = useCallback(() => {
-    return BigNumber.sumEach([...KNOWN_POOLS, ...KNOWN_POOLS_NFT], yfPool => {
+    return BigNumber.sumEach(KNOWN_POOLS, yfPool => {
       if (!yfPool.contract.isPoolAvailable) {
         return BigNumber.ZERO;
       }
