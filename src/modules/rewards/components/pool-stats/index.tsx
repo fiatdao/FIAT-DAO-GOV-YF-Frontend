@@ -10,10 +10,12 @@ import { UseLeftTime } from 'hooks/useLeftTime';
 
 import { useYFPool } from '../../providers/pool-provider';
 import { useYFPools } from '../../providers/pools-provider';
+import { useDAO } from '../../../senatus/components/dao-provider';
 
 import { getFormattedDuration } from 'utils';
 
 import s from './s.module.scss';
+
 
 type Props = {
   className?: string;
@@ -22,12 +24,16 @@ type Props = {
 const PoolStats: React.FC<Props> = ({ className }) => {
   const yfPoolsCtx = useYFPools();
   const yfPoolCtx = useYFPool();
+  const daoCtx = useDAO();
   const { poolMeta } = yfPoolCtx;
 
   const yfTotalStakedInUSD = yfPoolsCtx.getYFTotalStakedInUSD();
   const yfTotalEffectiveStakedInUSD = yfPoolsCtx.getYFTotalEffectiveStakedInUSD();
   const yfTotalSupply = yfPoolsCtx.getYFTotalSupply();
-  const yfDistributedRewards = yfPoolsCtx.getYFDistributedRewards();
+
+  // console.log('daoReward.actions.getEntrRewards()', daoCtx.daoReward.actions.getEntrRewards()?.toString());
+
+  const yfDistributedRewards = yfPoolsCtx.getYFDistributedRewards()?.plus(daoCtx.daoReward.actions.getEntrRewards() ?? 0);
   const { epochStart, currentEpoch } = yfPoolsCtx.stakingContract ?? {};
   const [, epochEndDate] = yfPoolsCtx.stakingContract?.epochDates ?? [];
 
