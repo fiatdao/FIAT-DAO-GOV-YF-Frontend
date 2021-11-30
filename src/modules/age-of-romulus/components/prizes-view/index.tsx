@@ -11,6 +11,7 @@ import prizeList from '../../prize';
 import { ActiveKeys, useAgeOfRomulus } from '../../providers/age-of-romulus-providers';
 
 import s from '../../views/age-of-romulus/s.module.scss';
+import { useWallet } from '../../../../wallets/wallet';
 
 export const PrizesData = [
   {
@@ -53,12 +54,12 @@ export const PrizesData = [
 const PrizesView = ({
                       countAllUsers,
                       activeKey,
-                      currUser,
                     }: {
   countAllUsers: number | null;
   activeKey: string;
-  currUser: any | null;
 }) => {
+  const walletCtx = useWallet();
+
   const isMobile = useMediaQuery(768);
 
   const ageOfRomulusCtx = useAgeOfRomulus();
@@ -74,7 +75,7 @@ const PrizesView = ({
           {PrizesData.map(({ key, title, date, icon, rate }) => {
             const isDisabled =
               // @ts-ignore
-              currUser && prizeList[key].length && prizeList[key].some(i => i.address.toLowerCase() === currUser.address.toLowerCase())
+              walletCtx.account && prizeList[key].length && prizeList[key].some(i => i.address.toLowerCase() === walletCtx.account.toLowerCase())
                 ? // @ts-ignore
                 ageOfRomulusCtx[key].isClaimed
                 : true
