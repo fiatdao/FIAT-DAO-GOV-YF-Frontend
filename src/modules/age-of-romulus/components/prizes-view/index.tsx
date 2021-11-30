@@ -138,7 +138,7 @@ const PrizesView = ({
                     // @ts-ignore
                     onClick={() => ageOfRomulusCtx[key].claim()}
                     className="button-primary button-small">
-                    {key === activeKey ? (
+                    {!isDisabled ? (
                       'Claim'
                     ) : (
                       <Hint
