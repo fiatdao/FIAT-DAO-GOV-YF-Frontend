@@ -1,25 +1,56 @@
-import React from 'react';
+import {  useState  } from 'react';
 import cn from 'classnames';
+import { BigNumber as _BigNumber } from 'bignumber.js';
 import Lottie from 'lottie-react';
 
 import { Grid, Hint, Icon, Text } from 'components/custom';
 
-import { useMediaQuery } from '../../hooks';
-import { useWallet } from '../../wallets/wallet';
-import airdropRewardLocked from './animation/AirdropRewardLocked.json';
-import airdropRewardWalletRequest from './animation/AirdropRewardWalletRequest.json';
-import waveAnimations from './animation/waves.json';
-import LastClaimed from './components/last-claimed-table';
+import { useMediaQuery } from '../../../../hooks';
+import { useWallet } from '../../../../wallets/wallet';
+import airdropRewardLocked from '../../animation/AirdropRewardLocked.json';
+import airdropRewardWalletRequest from '../../animation/AirdropRewardWalletRequest.json';
+import waveAnimations from '../../animation/waves.json';
+import LastClaimed from '../../components/last-claimed-table';
 
 import s from './AirDropPage.module.scss';
 
-const progressPercent = 30;
+import { useYFPools } from '../../providers/pools-provider';
+import { formatToken } from '../../../../web3/utils';
+
+import { FDTToken } from 'components/providers/known-tokens-provider';
 
 const AirDropPage = () => {
+  const yfPoolsCtx = useYFPools();
+
+  const merkleDistributorContract = yfPoolsCtx.merkleDistributor;
+
   const wallet = useWallet();
   const isTablet = useMediaQuery(992);
   const isMobile = useMediaQuery(720);
-  const lockedAirDrop = false;
+  const lockedAirDrop = merkleDistributorContract?.claimIndex === -1;
+
+  const totalClaimed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropClaimed ?? 0).unscaleBy(FDTToken.decimals)
+  const totalRedistributed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropRedistributed ?? 0).unscaleBy(FDTToken.decimals)
+
+  const userAmount = new _BigNumber(merkleDistributorContract?.claimAmount ?? 0)
+  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0).unscaleBy(FDTToken.decimals)
+  const userBonus = new _BigNumber(merkleDistributorContract?.adjustedAmount?.bonus ?? 0).unscaleBy(FDTToken.decimals)
+
+  const progressPercent = userAvailable?.times(100).div(userAmount ?? 0).toNumber()
+
+  const [isClaim, setIsClaim] = useState(false)
+
+  const handleClaim = async () => {
+    setIsClaim(true)
+    try {
+      await merkleDistributorContract?.claim()
+    } catch (e) {
+      console.log(e)
+    } finally {
+      setIsClaim(false)
+    }
+  }
+
   return (
     <section className={s.page}>
       <div className={s.container}>
@@ -40,7 +71,7 @@ const AirDropPage = () => {
               justify="space-between"
               className={cn(s.card, s.card__head, 'mb-32')}>
               <div>
-                <Hint text="Total airdropped - tooltip" className="mb-4">
+                <Hint text="2.5% of FDT supply was reserved for the BarnBridge community in recognition of their incubation of FIAT." className="mb-4">
                   <Text type="small" color="secondary">
                     Total airdropped
                   </Text>
@@ -48,12 +79,12 @@ const AirDropPage = () => {
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                   <Text type="p2" weight="bold" color="primary">
-                    10,000,000
+                    {formatToken(merkleDistributorContract?.totalAirdropped) ?? 0}
                   </Text>
                 </div>
               </div>
               <div>
-                <Hint text="Total claimed - tooltip" className="mb-4">
+                <Hint text="The amount of $FDT claimed to date." className="mb-4">
                   <Text type="small" color="secondary">
                     Total claimed
                   </Text>
@@ -61,12 +92,12 @@ const AirDropPage = () => {
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                   <Text type="p2" weight="bold" color="primary">
-                    100,000
+                    {formatToken(totalClaimed)}
                   </Text>
                 </div>
               </div>
               <div>
-                <Hint text="Total redistributed - tooltip" className="mb-4">
+                <Hint text="The amount of forfeited $FDT redistributed across remaining recipients." className="mb-4">
                   <Text type="small" color="secondary">
                     Total redistributed
                   </Text>
@@ -74,7 +105,7 @@ const AirDropPage = () => {
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                   <Text type="p2" weight="bold" color="green">
-                    135,000
+                    {formatToken(totalRedistributed)}
                   </Text>
                 </div>
               </div>
@@ -112,11 +143,12 @@ const AirDropPage = () => {
                   ) : (
                     <div>
                       <div className={s.week}>
-                        <Text type="small">WEEK 15/100</Text>
+                        <Text type="small">WEEK {merkleDistributorContract?.airdropCurrentWeek}/{merkleDistributorContract?.airdropDurationInWeeks}</Text>
                       </div>
                       <div className={s.bigBlock}>
                         <div>
-                          <Hint text="Your total airdrop amount - tooltip" className="mb-12">
+                          <Hint text="This is the total amount of $FDT you are getting based on your initial airdrop amount + bonus
+                amount from redistributed $FDT." className="mb-12">
                             <Text type="small" color="secondary">
                               Your total airdrop amount
                             </Text>
@@ -124,10 +156,11 @@ const AirDropPage = () => {
                           <div className="flex flow-col align-center mb-48">
                             <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
                             <Text type="h1" weight="bold" color="primary">
-                              135,000
+                              {formatToken(userBonus?.plus(userAmount ?? 0))}
                             </Text>
                           </div>
-                          <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                          <Hint text="You received $FDT because you were either staking your $BOND as of 0:00 UTC November 4th,
+                2021, had voted in BarnBridge governance up until that date, or a combination of both." className="mb-12">
                             <Text type="small" color="secondary">
                               Your airdrop amount
                             </Text>
@@ -135,10 +168,11 @@ const AirDropPage = () => {
                           <div className="flex flow-col align-center mb-32">
                             <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                             <Text type="p2" weight="bold" color="primary">
-                              500,000
+                              {formatToken(userAmount)}
                             </Text>
                           </div>
-                          <Hint text="Your airdrop amount - tooltip" className="mb-12">
+                          <Hint text="This is the amount of additional $FDT you have received as a result of early claimants
+                forfeiting a portion of their airdrop." className="mb-12">
                             <Text type="small" color="secondary">
                               Your bonus amount
                             </Text>
@@ -146,7 +180,7 @@ const AirDropPage = () => {
                           <div className="flex flow-col align-center">
                             <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                             <Text type="p2" weight="bold" color="green">
-                              500,000
+                              +{formatToken(userBonus)}
                             </Text>
                           </div>
                         </div>
@@ -154,7 +188,7 @@ const AirDropPage = () => {
                           <div>
                             <span>
                               <Text type="h1" weight="bold" color="primary">
-                                100,000
+                                 {formatToken(userAvailable, { compact: true })}
                               </Text>
                               <Text type="p3" color="primary">
                                 available
@@ -162,7 +196,7 @@ const AirDropPage = () => {
                             </span>
                             <Lottie
                               animationData={waveAnimations}
-                              style={{ transform: `translateY(calc(-${progressPercent}% - -10px))` }}
+                              style={{ transform: `translateY(calc(-${isNaN(progressPercent as number) ? 0 : (progressPercent as number) < 20 ? 20 : progressPercent}% - -10px))` }}
                               className={s.waveAnimation}
                             />
                           </div>
@@ -184,7 +218,7 @@ const AirDropPage = () => {
                       <div className="flex flow-col align-center">
                         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                         <Text type="h2" weight="bold" color="primary">
-                          100,000
+                          {formatToken(userAvailable)}
                         </Text>
                       </div>
                     </div>
@@ -195,12 +229,12 @@ const AirDropPage = () => {
                       <div className="flex flow-col align-center">
                         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                         <Text type="h2" weight="bold" color="primary" textGradient="var(--gradient-pink)">
-                          100,000
+                          {formatToken(userBonus?.plus(userAmount ?? 0)?.minus(userAvailable ?? 0))}
                         </Text>
                       </div>
                     </div>
                     <div className={cn('flex align-center', s.button)}>
-                      <button className="button-primary">Claim</button>
+                      <button disabled={merkleDistributorContract?.isAirdropClaimed || isClaim} onClick={handleClaim} className="button-primary">Claim</button>
                     </div>
                   </Grid>
                 </div>

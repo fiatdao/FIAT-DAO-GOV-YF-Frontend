@@ -15,7 +15,7 @@ import s from './s.module.scss';
 
 // const PlugView = lazy(() => import('modules/plug'));
 const RewardsView = lazy(() => import('modules/rewards'));
-const AirdropView = lazy(() => import('modules/airdrop'));
+const AirdropView = lazy(() => import('modules/rewards/views/airdrop'));
 const SenatusView = lazy(() => import('modules/senatus'));
 const AgeOfRomulusView = lazy(() => import('modules/age-of-romulus'));
 
@@ -31,8 +31,8 @@ const LayoutView: React.FC = () => {
               <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
                 <Switch>
                   {/*<Route path="/" component={PlugView} />*/}
+                  {/*<Route path="/airdrop" component={AirdropView} />*/}
                   <Route path="/rewards" component={RewardsView} />
-                  <Route path="/airdrop" component={AirdropView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />
                   <Route path="/age-of-romulus" component={AgeOfRomulusView} />

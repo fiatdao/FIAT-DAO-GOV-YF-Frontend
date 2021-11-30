@@ -22,7 +22,7 @@ import useMediaQuery from '../../../../hooks/useMediaQuery';
 import s from './s.module.scss';
 // import { formatToken } from '../../../../web3/utils';
 
-import { formatToken } from 'web3/utils';
+import { formatBigValue, formatToken } from 'web3/utils';
 import { FDTToken } from '../../../../components/providers/known-tokens-provider';
 
 export type AirdropModalProps = ModalProps & {
@@ -63,17 +63,18 @@ const AirdropModal: FC<AirdropModalProps> = props => {
     claimIndex !== -1
       ? tree.getProof(claimIndex || BigNumber.from(0), walletCtx.account || '', claimAmountFromJSON)
       : [];
-  // const adjustedAmount = _BigNumber.from(merkleDistributorContract?.adjustedAmount);
+
+  const totalClaimed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropClaimed ?? 0).unscaleBy(FDTToken.decimals)
+  const totalRedistributed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropRedistributed ?? 0).unscaleBy(FDTToken.decimals)
+
+  const userAmount = new _BigNumber(merkleDistributorContract?.claimAmount ?? 0).unscaleBy(FDTToken.decimals)
+  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0).unscaleBy(FDTToken.decimals)
+  const userBonus = new _BigNumber(merkleDistributorContract?.adjustedAmount?.bonus ?? 0).unscaleBy(FDTToken.decimals)
 
   async function claimAirdrop() {
     setClaiming(true);
     try {
-      await merkleDistributorContract?.claim(
-        claimIndex || BigNumber.from(0),
-        merkleDistributorContract.account || '',
-        claimAmountFromJSON.toString(),
-        merkleProof,
-      );
+      await merkleDistributorContract?.claim();
     } catch (e) {}
 
     setClaiming(false);
@@ -126,17 +127,17 @@ const AirdropModal: FC<AirdropModalProps> = props => {
                 trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}
                 strokeWidth={16}
                 width={54}
-                percent={10}
+                percent={totalClaimed?.times(100).div(merkleDistributorContract?.totalAirdropped ?? 0).toNumber()}
                 className="mr-12"
                 format={() => (
                   <span className={s.progress}>
-                    10<span>%</span>
+                    {totalClaimed?.times(100).div(merkleDistributorContract?.totalAirdropped ?? 0).toFixed(1)}<span>%</span>
                   </span>
                 )}
               />
               <Icon width={19} height={19} name="png/fiat-dao" className={cn(s.fdReward, 'mr-4')} />
               <Text type="p2" weight="bold" color="primary">
-                500,000
+                {formatToken(totalClaimed)}
               </Text>
             </div>
           </div>
@@ -149,7 +150,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
             <div className="flex flow-col align-center mt-32 sm-mb-16 sm-mt-16">
               <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
               <Text type="p2" weight="bold" color="green">
-                500,000
+                {formatToken(totalRedistributed)}
               </Text>
             </div>
           </div>
@@ -172,7 +173,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                 <Text type="p2" weight="bold" color="primary">
-                  100,000
+                  {formatToken(userAmount)}
                 </Text>
               </div>
             </div>
@@ -188,7 +189,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                 <Text type="p2" weight="bold" color="green">
-                  +35,000
+                  +{formatToken(userBonus)}
                 </Text>
               </div>
             </div>
@@ -204,7 +205,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               <div className="flex flow-col align-center">
                 <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                 <Text type="p2" weight="bold" color="primary">
-                  135,000
+                  {formatToken(userBonus?.plus(userAmount ?? 0))}
                 </Text>
               </div>
             </div>
@@ -220,7 +221,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
             <div>
               <div className={s.week}>
                 <Text type="p3" weight="bold">
-                  WEEK 15/100
+                  WEEK {merkleDistributorContract?.airdropCurrentWeek}/{merkleDistributorContract?.airdropDurationInWeeks}
                 </Text>
               </div>
             </div>
@@ -239,7 +240,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               '100%': '#FF4C8C',
             }}
             trailColor={isDarkTheme ? '#171717' : '#F9F9F9'}
-            percent={40}
+            percent={((merkleDistributorContract?.airdropCurrentWeek ?? 0) * 100) / (merkleDistributorContract?.airdropDurationInWeeks ?? 0)}
             strokeWidth={19}
             showInfo={false}
           />
@@ -254,7 +255,7 @@ const AirdropModal: FC<AirdropModalProps> = props => {
               Available to claim now:
             </Text>
             <Text type="h2" weight="bold" color="primary" className="mb-8">
-              30,000
+              {formatToken(userAvailable)}
             </Text>
           </div>
           <Grid flow="col" colsTemplate="1fr 1fr" gap={12} align={'center'} className={s.buttons}>

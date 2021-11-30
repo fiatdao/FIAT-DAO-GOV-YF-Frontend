@@ -64,17 +64,17 @@ export function fetchYFPoolTransactions(
 }
 
 
-export type APIAirdropInfo = {
+export type APIAirdropTotal = {
   totalFDTAirdropClaimed: string;
   totalFDTAirdropRedistributed: string;
 };
 
-export function fetchAirdropInfo(
-  first = 1000,
-): Promise<APIAirdropInfo> {
+export function fetchAirdropTotal(
+  first = 1,
+): Promise<APIAirdropTotal> {
   return GraphClient.get({
     query: gql`
-      query($first: Int,){
+      query($first: Int){
         overviews(first: $first) {
           totalFDTAirdropClaimed
           totalFDTAirdropRedistributed
@@ -85,16 +85,53 @@ export function fetchAirdropInfo(
       first: first,
     },
   })
+  .then(({ data }) => {
+    return {
+      totalFDTAirdropClaimed: data.overviews.length ? data.overviews[0].totalFDTAirdropClaimed : '0',
+      totalFDTAirdropRedistributed: data.overviews.length ? data.overviews[0].totalFDTAirdropRedistributed: '0',
+    }
+  })
   .catch(e => {
     console.log(e)
-    return { data: [] }
-  })
-  .then(result => {
-    console.log(result)
     return {
-      totalFDTAirdropClaimed: '1',
-      totalFDTAirdropRedistributed: '1',
+      totalFDTAirdropClaimed: '0',
+      totalFDTAirdropRedistributed: '0',
     }
-    // return { data: result.data.transactions.slice(limit * (page - 1), limit * page), meta: { count: result.data.transactions.length, block: page } }
+  })
+}
+
+export type APIAirdropClaims = {
+  adjustedAmount: string;
+  redistributedAmount: string;
+};
+
+export function fetchAirdropClaims(
+  first = 100,
+): Promise<APIAirdropClaims> {
+  return GraphClient.get({
+    query: gql`
+      query($first: Int){
+        claims(first: $first) {
+          adjustedAmount
+          redistributedAmount
+        }
+      }
+    `,
+    variables: {
+      first: first,
+    },
+  })
+  .then(({ data }) => {
+    return {
+      adjustedAmount: data.claims.length ? data.claims[0].adjustedAmount : '0',
+      redistributedAmount: data.claims.length ? data.claims[0].redistributedAmount: '0',
+    }
+  })
+  .catch(e => {
+    console.log(e)
+    return {
+      adjustedAmount: '0',
+      redistributedAmount: '0',
+    }
   })
 }
