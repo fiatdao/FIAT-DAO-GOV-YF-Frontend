@@ -234,7 +234,13 @@ const AirDropPage = () => {
                       </div>
                     </div>
                     <div className={cn('flex align-center', s.button)}>
-                      <button disabled={merkleDistributorContract?.isAirdropClaimed || isClaim} onClick={handleClaim} className="button-primary">Claim</button>
+                      <button
+                        disabled={
+                          merkleDistributorContract?.adjustedAmount?.airdropAmount === undefined
+                          || merkleDistributorContract?.isAirdropClaimed
+                          || isClaim
+                        }
+                        onClick={handleClaim} className="button-primary">Claim</button>
                     </div>
                   </Grid>
                 </div>

@@ -13,7 +13,7 @@ import { Hint, Text } from 'components/custom/typography';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import { useWallet } from 'wallets/wallet';
 
-// import AirdropModal from '../../components/pool-airdrop-modal';
+import AirdropModal from '../../components/pool-airdrop-modal';
 import PoolHarvestModal from '../../components/pool-harvest-modal';
 import { useYFPools } from '../../providers/pools-provider';
 

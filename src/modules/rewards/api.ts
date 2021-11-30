@@ -112,8 +112,8 @@ export function fetchAirdropClaims(
     query: gql`
       query($first: Int){
         claims(first: $first) {
-          adjustedAmount
-          redistributedAmount
+          claimer
+          claimAmount
         }
       }
     `,

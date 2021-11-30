@@ -77,6 +77,11 @@ const AirdropModal: FC<AirdropModalProps> = props => {
       await merkleDistributorContract?.claim();
     } catch (e) {}
 
+    // claimIndex || BigNumber.from(0),
+    // merkleDistributorContract.account || '',
+    //   claimAmountFromJSON.toString(),
+    //   merkleProof,
+
     setClaiming(false);
     props.onCancel?.();
   }
