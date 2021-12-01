@@ -66,7 +66,7 @@ export default class MerkleDistributor extends Web3Contract {
 
       const airdropAccounts = this.airdropData.map((drop: { address: any; earnings: any }) => ({
         account: drop.address.toLowerCase(),
-        amount: BigNumber.from(drop.earnings),
+        amount: BigNumber.from(FixedNumber.from(drop.earnings)),
       }));
       this.tree = new BalanceTree(airdropAccounts)
       this.totalAirdropped =  this.airdropData.reduce((acc: _BigNumber, curr: { earnings: string }) => acc.plus(new _BigNumber(curr.earnings)), new _BigNumber(0))
@@ -127,9 +127,10 @@ export default class MerkleDistributor extends Web3Contract {
   async claim(): Promise<void> {
     console.log('this.claimIndex', this.claimIndex)
     console.log('this.account?.toLowerCase()', this.account?.toLowerCase())
-    console.log('claimAmount', BigNumber.from(this.claimAmount).toString())
-    const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), BigNumber.from(this.claimAmount))
-    return this.send('claim', [this.claimIndex, this.account?.toLowerCase(), BigNumber.from(this.claimAmount), merkleProof], {
+    console.log('FixedNumber', FixedNumber.from(this.claimAmount).toString())
+    console.log('claimAmount', BigNumber.from(FixedNumber.from(this.claimAmount)).toString())
+    const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), BigNumber.from(FixedNumber.from(this.claimAmount)))
+    return this.send('claim', [this.claimIndex, this.account?.toLowerCase(), BigNumber.from(FixedNumber.from(this.claimAmount)), merkleProof], {
       from: this.account,
     }).then(() => {
       this.isAirdropClaimed = true;
