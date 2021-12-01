@@ -9,6 +9,8 @@ import WarningProvider from 'components/providers/warning-provider';
 import LayoutFooter from 'layout/components/layout-footer';
 import LayoutHeader from 'layout/components/layout-header';
 
+import YFPoolsProvider from 'modules/rewards/providers/pools-provider';
+
 import ThemeSwitcher from './components/theme-switcher';
 
 import s from './s.module.scss';
@@ -18,6 +20,12 @@ const RewardsView = lazy(() => import('modules/rewards'));
 const AirdropView = lazy(() => import('modules/rewards/views/airdrop'));
 const SenatusView = lazy(() => import('modules/senatus'));
 const AgeOfRomulusView = lazy(() => import('modules/age-of-romulus'));
+
+const AirdropPage = () => (
+  <YFPoolsProvider>
+    <AirdropView />
+  </YFPoolsProvider>
+)
 
 const LayoutView: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -30,8 +38,9 @@ const LayoutView: React.FC = () => {
             <ErrorBoundary>
               <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
                 <Switch>
+
                   {/*<Route path="/" component={PlugView} />*/}
-                  {/*<Route path="/airdrop" component={AirdropView} />*/}
+                  <Route path="/airdrop" component={AirdropPage} />
                   <Route path="/rewards" component={RewardsView} />
                   <Route path="/senatus/:vt(\w+)" component={SenatusView} />
                   <Route path="/senatus" component={SenatusView} />

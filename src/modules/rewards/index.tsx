@@ -9,7 +9,6 @@ import YFPoolsProvider from './providers/pools-provider';
 
 const PoolsView = lazy(() => import('./views/pools-view'));
 const PoolView = lazy(() => import('./views/pool-view'));
-const AirdropView = lazy(() => import('./views/airdrop'));
 
 const RewardsView: React.FC = () => {
   const warning = useWarning();
@@ -40,7 +39,6 @@ const RewardsView: React.FC = () => {
     <YFPoolsProvider>
       <Suspense fallback={<AntdSpin />}>
         <Switch>
-          <Route path="/rewards/airdrop" component={AirdropView} />
           <Route path="/rewards" exact component={PoolsView} />
           <Route path="/rewards/:poolId" exact component={PoolView} />
           <Redirect to="/rewards" />
