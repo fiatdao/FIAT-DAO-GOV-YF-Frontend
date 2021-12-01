@@ -125,10 +125,6 @@ export default class MerkleDistributor extends Web3Contract {
   }
 
   async claim(): Promise<void> {
-    console.log('this.claimIndex', this.claimIndex)
-    console.log('this.account?.toLowerCase()', this.account?.toLowerCase())
-    console.log('FixedNumber', FixedNumber.from(this.claimAmount).toString())
-    console.log('claimAmount', BigNumber.from(FixedNumber.from(this.claimAmount)).toString())
     const merkleProof = this.tree.getProof(this.claimIndex, this.account?.toLowerCase(), BigNumber.from(FixedNumber.from(this.claimAmount)))
     return this.send('claim', [this.claimIndex, this.account?.toLowerCase(), BigNumber.from(FixedNumber.from(this.claimAmount)), merkleProof], {
       from: this.account,
