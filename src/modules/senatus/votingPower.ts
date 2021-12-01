@@ -1,11 +1,11 @@
-import BigNumber from "bignumber.js";
-import {APIVoterEntity} from "./api";
+import BigNumber from 'bignumber.js';
+
+import { APIVoterEntity } from './api';
 
 const BASE_MULTIPLIER = new BigNumber(10).pow(18);
 const ONE_YEAR = new BigNumber(31556926); // 365 days, 5 hours, 48 minutes and 46 seconds
 
 export namespace VotingPower {
-
   /**
    * Calculates the voting power of the Voter based on the staked tokens, delegations and locking timestamp
    * @param voter
@@ -17,11 +17,10 @@ export namespace VotingPower {
       ownVotingPower = BigNumber.ZERO;
     } else {
       const multiplier = computeMultiplier(voter.lockedUntil, now);
-      ownVotingPower = (new BigNumber(voter.tokensStaked)).multipliedBy(multiplier).dividedBy(BASE_MULTIPLIER);
+      ownVotingPower = new BigNumber(voter.tokensStaked).multipliedBy(multiplier).dividedBy(BASE_MULTIPLIER);
     }
     return ownVotingPower.plus(voter.delegatedPower);
   }
-
 }
 
 function computeMultiplier(lockedUntil: number, now: number) {

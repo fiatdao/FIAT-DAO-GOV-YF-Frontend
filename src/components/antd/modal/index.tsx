@@ -35,7 +35,7 @@ const Modal: React.FC<ModalProps> = props => {
       visible
       centered
       footer={null}
-      closeIcon={<Icon name="close-circle-outlined" />}
+      closeIcon={<Icon name="close-tiny" />}
       onCancel={handleCancel}
       {...modalProps}>
       {children}

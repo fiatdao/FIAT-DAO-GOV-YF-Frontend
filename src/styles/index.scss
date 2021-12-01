@@ -76,6 +76,7 @@ body.mobile-menu-open {
 
   --theme-body-color: #f8f8f9;
   --theme-card-color: rgba(255, 255, 255, 0.7);
+  --theme-modal-bg: #ffffff;
   --theme-amount-color: #fff;
   --theme-overlay-color: #f8f8f9;
   --theme-mask-color: rgba(0, 0, 0, 0.08);
@@ -104,7 +105,7 @@ body.mobile-menu-open {
   --theme-red-color: #ff4949; // red500
   --theme-red-color-rgb: 255, 73, 73; // red500
 
-  --theme-green-color: #2ad0ca; // green500
+  --theme-green-color: #52cd74; // green500
   --theme-green-color-rgb: 42, 208, 202; // green500
 
   --theme-green700-color: #007f59;
@@ -177,6 +178,7 @@ body.mobile-menu-open {
 [data-theme='dark'] {
   --theme-body-color: #171717;
   --theme-card-color: rgba(23, 23, 23, 0.7);
+  --theme-modal-bg: #202020;
   --theme-amount-color: #171717;
   --theme-overlay-color: #171717;
   --theme-mask-color: rgba(32, 37, 41, 0.8);

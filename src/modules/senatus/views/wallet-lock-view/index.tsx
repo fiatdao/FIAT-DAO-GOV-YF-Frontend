@@ -15,7 +15,6 @@ import setDate from 'date-fns/set';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
 
 import Alert from 'components/antd/alert';
-import Button from 'components/antd/button';
 import DatePicker from 'components/antd/datepicker';
 import Form from 'components/antd/form';
 import GasFeeList from 'components/custom/gas-fee-list';

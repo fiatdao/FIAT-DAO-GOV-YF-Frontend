@@ -13,11 +13,10 @@ import WindowStateProvider from 'components/providers/window-state';
 import LayoutView from 'layout';
 import { ReactComponent as StaticSprite } from 'resources/svg/static-sprite.svg';
 import Web3WalletProvider from 'wallets/wallet';
-import ScrollToTop from "./top-scroll";
 
 import { checkFlexGapSupport } from './checkFlexGap';
 import * as sw from './serviceWorker';
-
+import ScrollToTop from './top-scroll';
 
 const App: React.FC = () => {
   return (

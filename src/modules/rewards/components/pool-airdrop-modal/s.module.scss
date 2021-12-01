@@ -1,0 +1,51 @@
+.modal {
+  color: var(--theme-primary-color);
+
+  &__description {
+    color: var(--theme-social-link-color);
+  }
+}
+
+.card {
+  border: 1px solid var(--theme-border-color);
+  border-radius: 4px;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+
+  @media (max-width: 992px) {
+    margin-bottom: 0;
+  }
+}
+
+.progress {
+  font-size: 14px;
+  font-weight: bold;
+
+  > span {
+    font-size: 9px;
+  }
+}
+
+.ghost {
+  &::after {
+    background: var(--theme-modal-bg);
+  }
+}
+
+.week {
+  text-transform: uppercase;
+  background: rgba(255, 192, 98, 0.2);
+  border: 1px solid #ffcb66;
+  padding: 1px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  color: #ffa800;
+}
+
+.buttons {
+  @media (max-width: 992px) {
+    button {
+      width: 100%;
+    }
+  }
+}

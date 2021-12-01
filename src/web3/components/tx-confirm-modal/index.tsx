@@ -1,14 +1,10 @@
 import React from 'react';
 import * as Antd from 'antd';
 
-import Button from 'components/antd/button';
-import Divider from 'components/antd/divider';
 import Form from 'components/antd/form';
 import Modal, { ModalProps } from 'components/antd/modal';
 import GasFeeList from 'components/custom/gas-fee-list';
 import Grid from 'components/custom/grid';
-
-import s from './s.module.scss';
 
 export type ConfirmTxModalArgs = {
   gasPrice: number;
@@ -70,13 +66,15 @@ const TxConfirmModal: React.FC<Props> = props => {
         <Grid flow="row" gap={32}>
           {children?.({ form, submitting })}
 
-          <Form.Item name="gasPrice" label="Gas Fee (Gwei)" colon={false} rules={[{ required: true, message: 'Required' }]}>
+          <Form.Item
+            name="gasPrice"
+            label="Gas Fee (Gwei)"
+            colon={false}
+            rules={[{ required: true, message: 'Required' }]}>
             <GasFeeList disabled={submitting} />
           </Form.Item>
 
-          <button
-            type="submit"
-            className="button-primary" disabled={submitting}>
+          <button type="submit" className="button-primary" disabled={submitting}>
             {submitText}
           </button>
         </Grid>

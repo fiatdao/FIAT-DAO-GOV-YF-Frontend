@@ -1,11 +1,11 @@
-import {ApolloClient, ApolloQueryResult, InMemoryCache} from "@apollo/client";
+import { ApolloClient, ApolloQueryResult, InMemoryCache } from '@apollo/client';
+
 import config from '../../config';
 
 /**
  * Graph Node client utilising and switching between Primary/Fallback Graph nodes
  */
 export class GraphClient {
-
   /**
    * Executes a GraphQL call. Uses the primary Graph Node.
    * If the call fails, the same call is executed against the fallback Graph Node

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ColumnsType } from 'antd/lib/table/interface';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
-import { formatBigValue, getEtherscanAddressUrl, shortenAddr } from 'web3/utils';
+import { formatBigValue, getEtherscanAddressUrl } from 'web3/utils';
 
 import Table from 'components/antd/table';
 import ExternalLink from 'components/custom/externalLink';
@@ -20,7 +20,7 @@ interface IJsonItem {
 }
 
 const Columns: ColumnsType<APIVoterEntity> = [
-/*  {
+  /*  {
     title: 'Rank',
     dataIndex: 'rank',
     width: '1%',

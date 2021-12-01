@@ -8,6 +8,15 @@
     border-radius: 12px;
   }
 
+  :global(.ant-modal-body) {
+    //box-shadow: var(--theme-modal-shadow);
+    padding: 32px;
+
+    @media (max-width: 992px) {
+      padding: 24px;
+    }
+  }
+
   :global(.ant-modal-close) {
     top: 32px;
     right: 32px;
@@ -25,7 +34,7 @@
 
   :global(.ant-modal-header) {
     padding: 32px;
-    background: var(--theme-card-color);
+    background: var(--theme-modal-bg);
     border-bottom: 1px solid var(--theme-border-color);
     border-radius: 12px 12px 0 0;
 
@@ -38,7 +47,7 @@
   }
 
   :global(.ant-modal-body) {
-    background: var(--theme-card-color);
+    background: var(--theme-modal-bg);
     overflow-y: auto;
     border-radius: 12px;
   }
