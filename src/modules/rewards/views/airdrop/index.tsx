@@ -220,7 +220,7 @@ const AirDropPage = () => {
                 </>
               )}
             </div>
-            {!merkleDistributorContract?.isAirdropClaimed && (<div>
+            {!merkleDistributorContract?.isAirdropClaimed && !lockedAirDrop && (<div>
               <div className={s.cardGradient}>
                 <div>
                   <Grid className={s.cardGradient__grid} align='center' gap={!isTablet ? 40 : 24}>
