@@ -26,10 +26,6 @@ export default class MerkleDistributor extends Web3Contract {
     totalFDTAirdropClaimed: string;
     totalFDTAirdropRedistributed: string;
   };
-  totalClaims?: {
-    adjustedAmount: string
-    redistributedAmount: string
-  }
   adjustedAmount?: {
     airdropAmount: string;
     bonus: string;
@@ -56,7 +52,6 @@ export default class MerkleDistributor extends Web3Contract {
         this.claimAmount = undefined;
         this.totalAirdropped = undefined;
         this.totalInfo = undefined;
-        this.totalClaims = undefined;
         this.adjustedAmount = undefined;
         this.bonusStart = undefined;
         this.airdropCurrentWeek = undefined;
@@ -97,7 +92,6 @@ export default class MerkleDistributor extends Web3Contract {
     ]);
 
     this.totalInfo = await fetchAirdropTotal()
-    this.totalClaims = await fetchAirdropClaims()
 
     this.bonusStart = bonusStart;
 

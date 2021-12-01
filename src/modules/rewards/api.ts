@@ -106,8 +106,9 @@ export type APIAirdropClaims = {
 };
 
 export function fetchAirdropClaims(
-  first = 100,
-): Promise<APIAirdropClaims> {
+  page = 1,
+  limit = 10,
+): Promise<PaginatedResult<APIAirdropClaims>> {
   return GraphClient.get({
     query: gql`
       query($first: Int){
@@ -118,20 +119,21 @@ export function fetchAirdropClaims(
       }
     `,
     variables: {
-      first: first,
+      first: 1000,
     },
   })
-  .then(({ data }) => {
-    return {
-      adjustedAmount: data.claims.length ? data.claims[0].adjustedAmount : '0',
-      redistributedAmount: data.claims.length ? data.claims[0].redistributedAmount: '0',
-    }
+  .then(result => {
+    console.log(result)
+    return { data: result.data.claims.slice(limit * (page - 1), limit * page), meta: { count: result.data.claims.length, block: page } }
   })
+  // .then(({ data }) => {
+  //   return {
+  //     adjustedAmount: data.claims.length ? data.claims[0].adjustedAmount : '0',
+  //     redistributedAmount: data.claims.length ? data.claims[0].redistributedAmount: '0',
+  //   }
+  // })
   .catch(e => {
     console.log(e)
-    return {
-      adjustedAmount: '0',
-      redistributedAmount: '0',
-    }
+    return { data: [], meta: { count: 0, block: 0 } }
   })
 }

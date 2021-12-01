@@ -156,7 +156,7 @@ const AirDropPage = () => {
                           <div className="flex flow-col align-center mb-48">
                             <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
                             <Text type="h1" weight="bold" color="primary">
-                              {formatToken(userBonus?.plus(userAmount ?? 0))}
+                              {formatToken(userBonus?.plus(userAmount ?? 0), { decimals: 1 })}
                             </Text>
                           </div>
                           <Hint text="You received $FDT because you were either staking your $BOND as of 0:00 UTC November 4th,
