@@ -10,6 +10,7 @@ import { useWallet } from '../../../../wallets/wallet';
 import airdropRewardLocked from '../../animation/AirdropRewardLocked.json';
 import airdropRewardWalletRequest from '../../animation/AirdropRewardWalletRequest.json';
 import waveAnimations from '../../animation/waves.json';
+import airdropRewardClaimed from '../../animation/airdropRewardClaimed.json';
 import LastClaimed from '../../components/last-claimed-table';
 
 import s from './AirDropPage.module.scss';
@@ -110,7 +111,8 @@ const AirDropPage = () => {
                 </div>
               </div>
             </Grid>
-            <div className={cn(s.card, 'mb-32')}>
+            <div className={cn(s.card, { 'mb-32': !merkleDistributorContract?.isAirdropClaimed })}>
+
               {lockedAirDrop && (
                 <div className="flex full-height justify-center align-center">
                   <div className="flex flow-row align-center">
@@ -122,7 +124,18 @@ const AirDropPage = () => {
                   </div>
                 </div>
               )}
-              {!lockedAirDrop && (
+              {merkleDistributorContract?.isAirdropClaimed && (
+                <div className="flex full-height justify-center align-center">
+                  <div className="flex flow-row align-center">
+                    <Lottie animationData={airdropRewardClaimed} className={s.claimedAirDrop} />
+                    <Text tag="p" type="p2" color="primary" className="text-center">
+                      You have already claimed <br />
+                      your airdrop reward
+                    </Text>
+                  </div>
+                </div>
+              )}
+              {!lockedAirDrop && !merkleDistributorContract?.isAirdropClaimed && (
                 <>
                   {!wallet.isActive ? (
                     <div className="flex full-height justify-center align-center">
@@ -207,28 +220,28 @@ const AirDropPage = () => {
                 </>
               )}
             </div>
-            <div>
+            {!merkleDistributorContract?.isAirdropClaimed && (<div>
               <div className={s.cardGradient}>
                 <div>
-                  <Grid className={s.cardGradient__grid} align="center" gap={!isTablet ? 40 : 24}>
+                  <Grid className={s.cardGradient__grid} align='center' gap={!isTablet ? 40 : 24}>
                     <div>
-                      <Text type="small" color="secondary" className="mb-4">
+                      <Text type='small' color='secondary' className='mb-4'>
                         Available to claim now:
                       </Text>
-                      <div className="flex flow-col align-center">
-                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                        <Text type="h2" weight="bold" color="primary">
+                      <div className='flex flow-col align-center'>
+                        <Icon width={19} height={19} name='png/fiat-dao' className='mr-4' />
+                        <Text type='h2' weight='bold' color='primary'>
                           {formatToken(userAvailable)}
                         </Text>
                       </div>
                     </div>
                     <div>
-                      <Text type="small" color="secondary" className="mb-4">
+                      <Text type='small' color='secondary' className='mb-4'>
                         You forfeit:
                       </Text>
-                      <div className="flex flow-col align-center">
-                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                        <Text type="h2" weight="bold" color="primary" textGradient="var(--gradient-pink)">
+                      <div className='flex flow-col align-center'>
+                        <Icon width={19} height={19} name='png/fiat-dao' className='mr-4' />
+                        <Text type='h2' weight='bold' color='primary' textGradient='var(--gradient-pink)'>
                           {formatToken(userBonus?.plus(userAmount ?? 0)?.minus(userAvailable ?? 0))}
                         </Text>
                       </div>
@@ -240,12 +253,13 @@ const AirDropPage = () => {
                           || merkleDistributorContract?.isAirdropClaimed
                           || isClaim
                         }
-                        onClick={handleClaim} className="button-primary">Claim</button>
+                        onClick={handleClaim} className='button-primary'>Claim
+                      </button>
                     </div>
                   </Grid>
                 </div>
               </div>
-            </div>
+            </div>)}
           </Grid>
           <div className={cn(s.card, s.card__table)}>
             <Hint text="Total redistributed - tooltip" className="mt-16 mb-32">
