@@ -92,8 +92,8 @@ const config = {
   },
 };
 
-export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.wsOHM}&outputCurrency=${config.tokens.fdt}`;
+export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=0x0ab87046fbb341d058f17cbc4c1133f25a20a52f&outputCurrency=${config.tokens.fdt}`;
 
-export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.wsOHM}/${config.tokens.fdt}`;
+export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/0x0ab87046fbb341d058f17cbc4c1133f25a20a52f/${config.tokens.fdt}`;
 
 export default config;

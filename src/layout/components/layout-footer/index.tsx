@@ -123,10 +123,10 @@ const LayoutFooter: React.FC = () => {
               <div className={s.copyrightLinks}>
                 <div className={s.poweredBy}>
                   <a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">
-                    Add liquidity to SushiSwap wsOHM/FDT pool
+                    Add liquidity to SushiSwap gOHM/FDT pool
                   </a>
                   <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
-                    SushiSwap wsOHM/FDT market
+                    SushiSwap gOHM/FDT market
                   </a>
                   {/*<Link to="/airdrop">*/}
                   {/*  AirDrop*/}
