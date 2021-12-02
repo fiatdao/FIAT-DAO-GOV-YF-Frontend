@@ -34,8 +34,8 @@ const AirDropPage = () => {
   const totalRedistributed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropRedistributed ?? 0).unscaleBy(FDTToken.decimals)
 
   const userAmount = new _BigNumber(merkleDistributorContract?.claimAmount ?? 0)
-  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0).unscaleBy(FDTToken.decimals)
-  const userBonus = new _BigNumber(merkleDistributorContract?.adjustedAmount?.bonus ?? 0).unscaleBy(FDTToken.decimals)
+  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0)
+  const userBonus = new _BigNumber(merkleDistributorContract?.adjustedAmount?.bonusPart ?? 0).unscaleBy(FDTToken.decimals)
 
   const progressPercent = userAvailable?.times(100).div(userAmount ?? 0).toNumber()
 
@@ -80,7 +80,7 @@ const AirDropPage = () => {
                 <div className="flex flow-col align-center">
                   <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
                   <Text type="p2" weight="bold" color="primary">
-                    {formatToken(merkleDistributorContract?.totalAirdropped) ?? 0}
+                    {formatToken(merkleDistributorContract?.totalAirdropped?.unscaleBy(FDTToken.decimals)) ?? 0}
                   </Text>
                 </div>
               </div>

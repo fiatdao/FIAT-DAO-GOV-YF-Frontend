@@ -107,6 +107,8 @@ export default class MerkleDistributor extends Web3Contract {
         { method: 'calculateAdjustedAmount', methodArgs: [amount], callArgs: { from: account } },
       ]);
 
+      console.log('adjustedAmount', adjustedAmount)
+
       this.isAirdropClaimed = isClaimed;
       this.adjustedAmount = {
         airdropAmount: adjustedAmount[0],
