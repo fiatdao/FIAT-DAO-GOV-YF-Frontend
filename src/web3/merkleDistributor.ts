@@ -85,7 +85,7 @@ export default class MerkleDistributor extends Web3Contract {
       return;
     }
 
-    const amount = BigNumber.from(FixedNumber.from(this.claimAmount));
+    const amount = BigNumber.from(this.claimAmount);
 
     const [ bonusStart] = await this.batch([
       { method: 'bonusStart', methodArgs: [], callArgs: { from: account } },
@@ -106,6 +106,8 @@ export default class MerkleDistributor extends Web3Contract {
         { method: 'isClaimed', methodArgs: [this.claimIndex], callArgs: { from: account } },
         { method: 'calculateAdjustedAmount', methodArgs: [amount], callArgs: { from: account } },
       ]);
+
+      console.log('adjustedAmount', adjustedAmount)
 
       this.isAirdropClaimed = isClaimed;
       this.adjustedAmount = {
