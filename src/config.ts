@@ -24,6 +24,7 @@ const config = {
     yfi: toLowerCase(process.env.REACT_APP_TOKEN_YFI_ADDR),
     rgt: toLowerCase(process.env.REACT_APP_TOKEN_RGT_ADDR),
     wsOHM: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_ADDR),
+    gOHM: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_ADDR),
     ethFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
     wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
     gOHMFDTAmphoraSLP: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_FDT_Amphora_SUSHI_LP),
@@ -92,8 +93,8 @@ const config = {
   },
 };
 
-export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.wsOHM}&outputCurrency=${config.tokens.fdt}`;
+export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.gOHM}&outputCurrency=${config.tokens.fdt}`;
 
-export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.wsOHM}/${config.tokens.fdt}`;
+export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.gOHM}/${config.tokens.fdt}`;
 
 export default config;

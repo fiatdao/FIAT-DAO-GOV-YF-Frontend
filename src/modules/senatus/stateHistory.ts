@@ -1,8 +1,7 @@
-import {APIProposalHistoryEntity, APIProposalState} from "./api";
-import {getProposalStateCall, ProposalState} from "./contracts/daoSenatus";
+import { APIProposalHistoryEntity, APIProposalState } from './api';
+import { ProposalState, getProposalStateCall } from './contracts/daoSenatus';
 
 export namespace ProposalHistory {
-
   /**
    * Builds the Proposal History events based on the proposal
    * @param proposal
@@ -24,11 +23,11 @@ export namespace ProposalHistory {
         return -1;
       }
 
-      return  e2.startTimestamp - e1.startTimestamp;
+      return e2.startTimestamp - e1.startTimestamp;
     });
 
-    for (let i = 1; i <= history.length-1; i++) {
-      history[i].endTimestamp = history[i-1].startTimestamp -1;
+    for (let i = 1; i <= history.length - 1; i++) {
+      history[i].endTimestamp = history[i - 1].startTimestamp - 1;
     }
     history[0].endTimestamp = lastEventEndAt(proposal, history[0]);
 
@@ -50,7 +49,9 @@ export namespace ProposalHistory {
       case APIProposalState.QUEUED:
         return proposal.createTime + proposal.warmUpDuration + proposal.activeDuration + proposal.queueDuration - now;
       case APIProposalState.GRACE:
-        return proposal.createTime + proposal.warmUpDuration + proposal.queueDuration + proposal.gracePeriodDuration - now;
+        return (
+          proposal.createTime + proposal.warmUpDuration + proposal.queueDuration + proposal.gracePeriodDuration - now
+        );
       default:
         return 0;
     }
@@ -68,7 +69,7 @@ async function calculateEvents(proposal: any) {
     name: APIProposalState.CREATED,
     startTimestamp: proposal.createTime,
     endTimestamp: 0,
-    txHash: eventsCopy[0].txHash
+    txHash: eventsCopy[0].txHash,
   });
   // Remove Created event
   eventsCopy = eventsCopy.slice(1);
@@ -76,7 +77,7 @@ async function calculateEvents(proposal: any) {
     name: APIProposalState.WARMUP,
     startTimestamp: proposal.createTime,
     endTimestamp: 0, //proposal.createTime+ proposal.warmUpDuration,
-    txHash: ""
+    txHash: '',
   });
 
   let nextDeadline = proposal.createTime + proposal.warmUpDuration;
@@ -94,7 +95,7 @@ async function calculateEvents(proposal: any) {
     name: APIProposalState.ACTIVE,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
-    txHash: ""
+    txHash: '',
   });
 
   // just like in WARMUP period, the only final event that could occur in this case is CANCELED
@@ -105,17 +106,17 @@ async function calculateEvents(proposal: any) {
     return history;
   }
 
-  const proposalState = await getProposalStateCall(proposal.id)
+  const proposalState = await getProposalStateCall(proposal.id);
   history.push({
     name: proposalState === ProposalState.Failed ? APIProposalState.FAILED : APIProposalState.ACCEPTED,
     startTimestamp: nextDeadline + 1,
     endTimestamp: 0,
-    txHash: ""
+    txHash: '',
   });
 
   // after the proposal reached accepted state, nothing else can happen unless somebody calls the queue function
   // which emits a QUEUED event
-  if(eventsCopy.length == 0) {
+  if (eventsCopy.length == 0) {
     return history;
   }
 
@@ -125,7 +126,7 @@ async function calculateEvents(proposal: any) {
       startTimestamp: proposal.createTime + proposal.warmUpDuration + proposal.activeDuration + 1,
       endTimestamp: 0,
       txHash: eventsCopy[0].txHash,
-    })
+    });
   }
   eventsCopy = eventsCopy.slice(1);
 
@@ -139,7 +140,7 @@ async function calculateEvents(proposal: any) {
       name: APIProposalState.ABROGATED,
       startTimestamp: nextDeadline,
       endTimestamp: 0,
-      txHash: ""
+      txHash: '',
     });
     return history;
   }
@@ -149,17 +150,20 @@ async function calculateEvents(proposal: any) {
     name: APIProposalState.GRACE,
     startTimestamp: nextDeadline,
     endTimestamp: 0,
-    txHash: ""
+    txHash: '',
   });
 
   nextDeadline += proposal.gracePeriodDuration;
-  if (eventsCopy.length > 0 && eventsCopy[0].createTime <= nextDeadline
-    && eventsCopy[0].eventType == APIProposalState.EXECUTED) {
+  if (
+    eventsCopy.length > 0 &&
+    eventsCopy[0].createTime <= nextDeadline &&
+    eventsCopy[0].eventType == APIProposalState.EXECUTED
+  ) {
     history.push({
       name: APIProposalState.EXECUTED,
       startTimestamp: eventsCopy[0].createTime,
       endTimestamp: 0,
-      txHash: eventsCopy[0].txHash
+      txHash: eventsCopy[0].txHash,
     });
     return history;
   }
@@ -172,7 +176,7 @@ async function calculateEvents(proposal: any) {
     name: APIProposalState.EXPIRED,
     startTimestamp: nextDeadline,
     endTimestamp: 0,
-    txHash: ""
+    txHash: '',
   });
 
   return history;
@@ -189,7 +193,7 @@ function lastEventEndAt(proposal: any, event: APIProposalHistoryEntity): number 
     case APIProposalState.GRACE:
       return event.startTimestamp + proposal.gracePeriodDuration;
     default:
-      return 0
+      return 0;
   }
 }
 
@@ -198,13 +202,12 @@ function shouldStopBuilding(nextDeadline: number) {
 }
 
 function checkForCancelledEvent(eventsCopy: Array<any>, nextDeadline: number, history: APIProposalHistoryEntity[]) {
-  if (eventsCopy.length > 0 && eventsCopy[0].createTime < nextDeadline && eventsCopy[0].eventType == "CANCELED") {
+  if (eventsCopy.length > 0 && eventsCopy[0].createTime < nextDeadline && eventsCopy[0].eventType == 'CANCELED') {
     history.push({
       name: APIProposalState.CANCELED,
       startTimestamp: eventsCopy[0].createTime,
       endTimestamp: 0,
-      txHash: eventsCopy[0].txHash
-    })
+      txHash: eventsCopy[0].txHash,
+    });
   }
 }
-

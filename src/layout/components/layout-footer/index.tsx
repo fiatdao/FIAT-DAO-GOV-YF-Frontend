@@ -61,6 +61,13 @@ const LayoutFooter: React.FC = () => {
                   })}>
                   <span>Age of Romulus</span>
                 </Link>
+                <Link
+                  to="/airdrop"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'airdrop',
+                  })}>
+                  <span>Airdrop</span>
+                </Link>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
@@ -96,6 +103,9 @@ const LayoutFooter: React.FC = () => {
                   <Link to="/age-of-romulus" className={s.dropdownLink}>
                     <span>Age of Romulus</span>
                   </Link>
+                  <Link to="/airdrop" className={s.dropdownLink}>
+                    <span>Airdrop</span>
+                  </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
@@ -113,11 +123,14 @@ const LayoutFooter: React.FC = () => {
               <div className={s.copyrightLinks}>
                 <div className={s.poweredBy}>
                   <a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">
-                    Add liquidity to SushiSwap wsOHM/FDT pool
+                    Add liquidity to SushiSwap gOHM/FDT pool
                   </a>
                   <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
-                    SushiSwap wsOHM/FDT market
+                    SushiSwap gOHM/FDT market
                   </a>
+                  {/*<Link to="/airdrop">*/}
+                  {/*  AirDrop*/}
+                  {/*</Link>*/}
                 </div>
               </div>
             )}

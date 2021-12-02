@@ -265,24 +265,26 @@
     .copyrightLinks {
       margin-right: auto;
       display: flex;
+
       a {
         font-size: 12px;
         cursor: pointer;
         text-decoration: none;
         color: var(--theme-secondary-color);
-        margin-right: 10px;
+        margin-right: 30px;
 
         &:hover {
           color: var(--gradient-pink-safe);
           transition: 0.3s;
         }
 
-        &:first-child{
-          margin-right: 30px;
+        &:last-child {
+          margin-right: 0;
         }
 
         @media (max-width: 468px) {
           color: rgba(255, 255, 255, 0.8);
+
           &:first-child {
             margin-right: 0;
             margin-bottom: 20px;
@@ -295,6 +297,7 @@
       color: var(--theme-icon-color);
       font-size: 12px;
       line-height: 17px;
+
       a {
         color: var(--theme-icon-color);
       }
@@ -354,7 +357,7 @@
         color: var(--theme-primary-color);
       }
 
-        @media (max-width: 768px) {
+      @media (max-width: 768px) {
         padding: 12px 0;
       }
 

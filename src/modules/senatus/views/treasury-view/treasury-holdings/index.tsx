@@ -17,20 +17,15 @@ import { DEFAULT_WEB3 } from 'components/providers/eth-web3-provider';
 import {
   EthToken,
   KnownTokens,
+  convertTokenIn,
   convertTokenInUSD,
   getTokenBySymbol,
-  useKnownTokens,
-  convertTokenIn,
   getTokenPrice,
+  useKnownTokens,
 } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import { useReload } from 'hooks/useReload';
-import {
-  APITreasuryHistory,
-  APITreasuryToken,
-  fetchTreasuryHistory,
-  fetchTreasuryTokens,
-} from 'modules/senatus/api';
+import { APITreasuryHistory, APITreasuryToken, fetchTreasuryHistory, fetchTreasuryTokens } from 'modules/senatus/api';
 
 type APITreasuryTokenEntity = APITreasuryToken & {
   token: Erc20Contract;
@@ -75,16 +70,15 @@ const InitialState: State = {
 };
 
 const getPrice = (entity: APITreasuryHistory): string | undefined => {
-
-  const price = (getTokenPrice(entity.tokenSymbol));
+  const price = getTokenPrice(entity.tokenSymbol);
   if (price == undefined) {
-    return undefined
+    return undefined;
   }
-  return formatUSD(Number.parseFloat(entity.amount) * price.toNumber())
-}
+  return formatUSD(Number.parseFloat(entity.amount) * price.toNumber());
+};
 
 function handleFooter(currentPageData: any) {
-  return ""
+  return '';
 }
 
 const Columns: ColumnsType<APITreasuryHistory> = [
@@ -129,16 +123,16 @@ const Columns: ColumnsType<APITreasuryHistory> = [
   {
     title: 'Amount',
     render: (_, entity) => (
-      <Tooltip
-        placement="bottomRight"
-        title={`${entity.amount} ${entity.tokenSymbol}`}>
+      <Tooltip placement="bottomRight" title={`${entity.amount} ${entity.tokenSymbol}`}>
         <Text type="p1" weight="semibold" color={entity.transactionDirection === 'IN' ? 'green' : 'red'}>
-          {entity.transactionDirection === 'IN' ? '+' : '-'} {Number.parseFloat(entity.amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {entity.transactionDirection === 'IN' ? '+' : '-'}{' '}
+          {Number.parseFloat(entity.amount).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
         </Text>
         <Text type="small" weight="semibold">
-          {
-            getPrice(entity)
-          }
+          {getPrice(entity)}
         </Text>
       </Tooltip>
     ),

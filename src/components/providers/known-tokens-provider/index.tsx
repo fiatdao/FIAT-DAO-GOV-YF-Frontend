@@ -21,6 +21,7 @@ export enum KnownTokens {
   YFI = 'YFI',
   RGT = 'RGT',
   wsOHM = 'wsOHM',
+  gOHM = 'gOHM',
   ETH_FDT_SLP = 'ETH_FDT_SLP',
   wsOHM_FDT_SLP = 'wsOHM_FDT_SLP',
   gOHM_FDT_Amphora_SLP = 'gOHM_FDT_SLP_Amphora',
@@ -126,6 +127,16 @@ export const wsOHMToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.wsOHM),
 };
 
+export const gOHMToken: TokenMeta = {
+  address: config.tokens.gOHM,
+  symbol: KnownTokens.gOHM,
+  name: 'gOHM',
+  decimals: 18,
+  icon: 'png/wsOHM',
+  coinGeckoId: 'governance-ohm',
+  contract: new Erc20Contract([], config.tokens.gOHM),
+};
+
 export const EthFdtSLPToken: TokenMeta = {
   address: config.tokens.ethFDTSLP,
   symbol: KnownTokens.ETH_FDT_SLP,
@@ -163,6 +174,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   YFIToken,
   RGTToken,
   wsOHMToken,
+  gOHMToken,
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
   gOHMFdtAmphoraSLPToken,
@@ -285,12 +297,12 @@ async function getGOHMFdtAmphoraSLPTokenPrice(): Promise<BigNumber> {
   let gOHMAmphoraReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
-    gOHMAmphoraReserve = new BigNumber(reserve1).unscaleBy(gOHMFdtAmphoraSLPToken.decimals);
+    gOHMAmphoraReserve = new BigNumber(reserve1).unscaleBy(gOHMToken.decimals);
   } else {
-    gOHMAmphoraReserve = new BigNumber(reserve0).unscaleBy(gOHMFdtAmphoraSLPToken.decimals);
+    gOHMAmphoraReserve = new BigNumber(reserve0).unscaleBy(gOHMToken.decimals);
   }
 
-  gOHMAmphoraReserve = (gOHMAmphoraReserve as BigNumber).times(gOHMFdtAmphoraSLPToken?.price as BigNumber)
+  gOHMAmphoraReserve = (gOHMAmphoraReserve as BigNumber).times(gOHMToken?.price as BigNumber)
 
   const supply = totalSupply.unscaleBy(decimals);
 

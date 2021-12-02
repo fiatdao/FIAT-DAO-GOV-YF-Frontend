@@ -35,7 +35,7 @@ const TxStatusModal: React.FC<Props> = props => {
         )}
         {state === 'success' && (
           <>
-            <Icon name="png/tx-success" width={240} height={200}  className="mb-32 mh-auto" />
+            <Icon name="png/tx-success" width={240} height={200} className="mb-32 mh-auto" />
             <Text type="h3" weight="semibold" color="primary" className="mb-16 text-center">
               Congratulations!
             </Text>

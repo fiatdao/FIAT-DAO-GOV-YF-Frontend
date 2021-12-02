@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import BigNumber from 'bignumber.js';
+import cn from 'classnames';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatToken } from 'web3/utils';
-import cn from 'classnames';
 
 import Modal, { ModalProps } from 'components/antd/modal';
 import Spin from 'components/antd/spin';
@@ -13,6 +13,7 @@ import { Text } from 'components/custom/typography';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 
 import { useYFPools } from '../../providers/pools-provider';
+
 import s from './s.module.scss';
 
 type PoolHarvestButtonProps = {
@@ -28,9 +29,7 @@ const PoolHarvestButton: FC<PoolHarvestButtonProps> = props => {
 
   return (
     <Spin spinning={loading}>
-      <div
-        className={cn('p-24', s.block)}
-        style={{ width: '100%' }}>
+      <div className={cn('p-24', s.block)} style={{ width: '100%' }}>
         <div className="flex flow-row align-start" style={{ width: '100%', zIndex: 1 }}>
           <div className="flex align-center mb-24">
             <IconsSet
@@ -52,7 +51,11 @@ const PoolHarvestButton: FC<PoolHarvestButtonProps> = props => {
                 {formatToken(reward) ?? '-'}
               </Text>
               <Icon className="mr-12" name={FDTToken.icon!} width={24} height={24} />
-              <button type="button" className="button-primary button-small" onClick={onClick} disabled={loading || !reward?.gt(BigNumber.ZERO)}>
+              <button
+                type="button"
+                className="button-primary button-small"
+                onClick={onClick}
+                disabled={loading || !reward?.gt(BigNumber.ZERO)}>
                 Claim
               </button>
             </div>

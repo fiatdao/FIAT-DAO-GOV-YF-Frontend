@@ -54,6 +54,7 @@ const LayoutHeader: React.FC = () => {
 
   const isSenatusPage = useRouteMatch('/senatus');
   const isRewardsPage = useRouteMatch('/rewards');
+  const isAirdropPage = useRouteMatch('/airdrop');
 
   async function handleAddProjectToken() {
     if (wallet.connector?.id === 'metamask') {
@@ -80,7 +81,7 @@ const LayoutHeader: React.FC = () => {
         <Icon name={isDarkTheme ? 'png/logo-dark' : 'png/logo-light'} width="60" height="auto" className={s.logo} />
       </Link>
       <div className={s.titleDelimiter} />
-      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : isRewardsPage ? 'Rewards' : 'Age of Romulus'}</h1>
+      <h1 className={s.title}>{isSenatusPage ? 'Senatus' : isRewardsPage ? 'Rewards' : isAirdropPage ? 'Airdrop' : 'Age of Romulus'}</h1>
 
       <nav className={s.nav}>
         <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
@@ -94,6 +95,9 @@ const LayoutHeader: React.FC = () => {
         </Link>
         <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
           <span>Age of Romulus</span>
+        </Link>
+        <Link to="/airdrop" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'airdrop' })} onClick={() => setNavOpen(false)}>
+          <span>Airdrop</span>
         </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
@@ -206,6 +210,9 @@ const LayoutHeader: React.FC = () => {
                   </Link>
                   <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Age of Romulus</span>
+                  </Link>
+                  <Link to="/airdrop" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Airdrop</span>
                   </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
