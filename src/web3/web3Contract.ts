@@ -190,11 +190,13 @@ class Web3Contract extends EventEmitter {
       }
     }
 
+    console.log({gasPriceCurr});
+
     Web3Contract.sendIncNumber += 1;
 
     const _sendArgs = {
       from: this.account,
-      gasPrice: gasPriceCurr,
+      gasPrice: gasPrice !== undefined ? getGasValue(gasPrice) : undefined,
       ...sendArgs,
     };
 
