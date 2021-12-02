@@ -6,7 +6,7 @@ import { ExternalLink, Icon, Text } from 'components/custom';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 
 
-import { formatToken, getEtherscanTxUrl, shortenAddr } from '../../../../web3/utils';
+import { formatToken, getEtherscanAddressUrl, shortenAddr } from '../../../../web3/utils';
 import { APIAirdropClaims, fetchAirdropClaims } from '../../api';
 
 
@@ -32,7 +32,7 @@ const columns = [
     dataIndex: 'claimer',
     key: 'claimer',
     render: (text: string) => (
-      <ExternalLink href={getEtherscanTxUrl(text)} className="link-blue mb-4">
+      <ExternalLink href={getEtherscanAddressUrl(text)} className="link-blue mb-4">
         <Text type="p1" weight="semibold" color="var(--gradient-blue-safe)" textGradient="var(--gradient-blue)">
           {shortenAddr(text)}
         </Text>
@@ -40,8 +40,8 @@ const columns = [
     ),
   },
   {
-    dataIndex: 'claimAmount',
-    key: 'claimAmount',
+    dataIndex: 'adjustedAmount',
+    key: 'adjustedAmount',
     render: (amount: string) => (
       <div className="flex flow-col align-center justify-end">
         <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
@@ -50,21 +50,6 @@ const columns = [
         </Text>
       </div>
     )
-  },
-];
-
-const data = [
-  {
-    claimer: "0x22A674F22Dafc25a16A29aD5c2a7710ceE1076FF",
-    claimAmount: '100.000',
-  },
-  {
-    claimer: "0x22A674F22Dafc25a16A29aD5c2a7710ceE1071FF",
-    claimAmount: "100,000",
-  },
-  {
-    claimer: "0x22A674F22Dafc25a16329aD5c2a7710ceE1076FF",
-    claimAmount: "100,000",
   },
 ];
 

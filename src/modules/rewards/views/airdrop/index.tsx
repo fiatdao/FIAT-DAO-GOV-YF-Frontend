@@ -111,7 +111,7 @@ const AirDropPage = () => {
                 </div>
               </div>
             </Grid>
-            <div className={cn(s.card, { 'mb-32': !merkleDistributorContract?.isAirdropClaimed })}>
+            <div className={cn(s.card, { 'mb-32': !merkleDistributorContract?.isAirdropClaimed && !lockedAirDrop })}>
 
               {lockedAirDrop && (
                 <div className="flex full-height justify-center align-center">

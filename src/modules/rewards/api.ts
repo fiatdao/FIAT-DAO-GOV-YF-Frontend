@@ -114,7 +114,7 @@ export function fetchAirdropClaims(
       query($first: Int){
         claims(first: $first) {
           claimer
-          claimAmount
+          adjustedAmount
         }
       }
     `,
