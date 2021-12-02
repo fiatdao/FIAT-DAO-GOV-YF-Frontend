@@ -96,9 +96,9 @@ const LayoutHeader: React.FC = () => {
         <Link to="/age-of-romulus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'age-of-romulus' })} onClick={() => setNavOpen(false)}>
           <span>Age of Romulus</span>
         </Link>
-        {/*<Link to="/airdrop" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'airdrop' })} onClick={() => setNavOpen(false)}>*/}
-        {/*  <span>Airdrop</span>*/}
-        {/*</Link>*/}
+        <Link to="/airdrop" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'airdrop' })} onClick={() => setNavOpen(false)}>
+          <span>Airdrop</span>
+        </Link>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
         {/*</Link>*/}
@@ -211,9 +211,9 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/age-of-romulus" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Age of Romulus</span>
                   </Link>
-                  {/*<Link to="/airdrop" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
-                  {/*  <span>Airdrop</span>*/}
-                  {/*</Link>*/}
+                  <Link to="/airdrop" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
+                    <span>Airdrop</span>
+                  </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
