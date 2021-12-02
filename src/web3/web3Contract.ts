@@ -167,7 +167,7 @@ class Web3Contract extends EventEmitter {
     });
   }
 
-  send(method: string, methodArgs: any[] = [], sendArgs: Record<string, any> = {}, gasPrice?: number): Promise<any> {
+  async send(method: string, methodArgs: any[] = [], sendArgs: Record<string, any> = {}, gasPrice?: number): Promise<any> {
     this.assertAccount();
 
     const contractMethod = this._sendContract.methods[method];
@@ -176,11 +176,25 @@ class Web3Contract extends EventEmitter {
       return Promise.reject(new Error(`Unknown method "${method}" in contract.`));
     }
 
+
+    let gasPriceCurr;
+
+    if(gasPrice) {
+      gasPriceCurr = gasPrice
+    } else {
+      try{
+        gasPriceCurr = await contractMethod(...methodArgs).estimateGas({from: this.account})
+      } catch (e) {
+        console.log('e==', e.message);
+        throw e
+      }
+    }
+
     Web3Contract.sendIncNumber += 1;
 
     const _sendArgs = {
       from: this.account,
-      gasPrice: gasPrice !== undefined ? getGasValue(gasPrice) : undefined,
+      gasPrice: gasPriceCurr,
       ...sendArgs,
     };
 
