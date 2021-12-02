@@ -33,8 +33,8 @@ const AirDropPage = () => {
   const totalClaimed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropClaimed ?? 0).unscaleBy(FDTToken.decimals)
   const totalRedistributed = new _BigNumber(merkleDistributorContract?.totalInfo?.totalFDTAirdropRedistributed ?? 0).unscaleBy(FDTToken.decimals)
 
-  const userAmount = new _BigNumber(merkleDistributorContract?.claimAmount ?? 0)
-  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0)
+  const userAmount = new _BigNumber(merkleDistributorContract?.claimAmount ?? 0).unscaleBy(FDTToken.decimals)
+  const userAvailable = new _BigNumber(merkleDistributorContract?.adjustedAmount?.airdropAmount ?? 0).unscaleBy(FDTToken.decimals)
   const userBonus = new _BigNumber(merkleDistributorContract?.adjustedAmount?.bonusPart ?? 0).unscaleBy(FDTToken.decimals)
 
   const progressPercent = userAvailable?.times(100).div(userAmount ?? 0).toNumber()
