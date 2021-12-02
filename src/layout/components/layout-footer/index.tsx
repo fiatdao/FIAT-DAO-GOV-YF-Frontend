@@ -61,13 +61,13 @@ const LayoutFooter: React.FC = () => {
                   })}>
                   <span>Age of Romulus</span>
                 </Link>
-                {/*<Link*/}
-                {/*  to="/airdrop"*/}
-                {/*  className={cn(s.dropdownLink, {*/}
-                {/*    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'airdrop',*/}
-                {/*  })}>*/}
-                {/*  <span>Airdrop</span>*/}
-                {/*</Link>*/}
+                <Link
+                  to="/airdrop"
+                  className={cn(s.dropdownLink, {
+                    [s.dropdownLink_active]: location.pathname.split('/')[1] === 'airdrop',
+                  })}>
+                  <span>Airdrop</span>
+                </Link>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
@@ -103,9 +103,9 @@ const LayoutFooter: React.FC = () => {
                   <Link to="/age-of-romulus" className={s.dropdownLink}>
                     <span>Age of Romulus</span>
                   </Link>
-                  {/*<Link to="/airdrop" className={s.dropdownLink}>*/}
-                  {/*  <span>Airdrop</span>*/}
-                  {/*</Link>*/}
+                  <Link to="/airdrop" className={s.dropdownLink}>
+                    <span>Airdrop</span>
+                  </Link>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}
