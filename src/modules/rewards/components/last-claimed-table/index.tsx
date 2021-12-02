@@ -102,6 +102,7 @@ const LastClaimed = () => {
       showHeader={false}
       dataSource={state.claims}
       loading={state.loading}
+      locale={{ emptyText: <Icon width={200} height={176} name="png/empty-table" /> }}
       rowKey="claimer"
       pagination={{
         total: state.total,
