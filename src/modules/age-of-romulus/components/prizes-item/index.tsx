@@ -34,9 +34,9 @@ const PrizesItem = ({
 
   const isDisabled =
     // @ts-ignore
-    walletCtx.account && prizeList[key].length && prizeList[key].some(i => i.address.toLowerCase() === walletCtx.account.toLowerCase())
+    walletCtx.account && prizeList[keyItem].length && prizeList[keyItem].some(i => i.address.toLowerCase() === walletCtx.account.toLowerCase())
       ? // @ts-ignore
-      ageOfRomulusCtx[key].isClaimed
+      ageOfRomulusCtx[keyItem].isClaimed
       : true
 
   let stakers;
