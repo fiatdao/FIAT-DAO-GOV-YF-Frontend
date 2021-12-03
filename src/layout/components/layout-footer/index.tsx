@@ -37,7 +37,7 @@ const LayoutFooter: React.FC = () => {
                 </Link>
               </div>
               <div className={s.nav}>
-                <a href="https://fiatdao.com/" target="_blank" rel="noopener noreferrer" className={cn(s.dropdownLink)}>
+                <a href="https://fiatdao.com/" className={cn(s.dropdownLink)}>
                   <span>Home</span>
                 </a>
                 <Link
@@ -89,8 +89,6 @@ const LayoutFooter: React.FC = () => {
                 <div className={s.nav}>
                   <a
                     href="https://fiatdao.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className={cn(s.dropdownLink)}>
                     <span>Home</span>
                   </a>

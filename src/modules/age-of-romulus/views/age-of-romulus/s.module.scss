@@ -167,13 +167,26 @@
       position: absolute;
       top: 0;
       right: 0;
-      background: url('../../../../resources/png/stakers_table_img.png') right bottom no-repeat;
-      background-size: contain;
+
       height: 100%;
       content: '';
       width: 100%;
       pointer-events: none;
 
+      &_Light {
+        background: url('../../../../resources/png/stakers_table_img-light.png') right bottom no-repeat;
+        background-size: contain;
+        @media (max-width: 540px) {
+          background-size: cover;
+        }
+      }
+      &_Dark {
+        background: url('../../../../resources/png/stakers_table_img-dark.png') right bottom no-repeat;
+        background-size: contain;
+        @media (max-width: 540px) {
+          background-size: cover;
+        }
+      }
       @media (max-width: 540px) {
         background-size: cover;
         opacity: 0.5;

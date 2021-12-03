@@ -9,6 +9,7 @@ import { APIVoterEntity, fetchCountAllUsers, fetchVoters } from 'modules/age-of-
 import { useAgeOfRomulus } from 'modules/age-of-romulus/providers/age-of-romulus-providers';
 import nftCard from 'resources/png/nft_card.png';
 import { useWallet } from 'wallets/wallet';
+import { useGeneral } from 'components/providers/general-provider';
 
 import AgeOfRomulusRank from '../../components/age-of-romulus-rank';
 import AgeOfRomulusTable from '../../components/age-of-romulus-table';
@@ -21,6 +22,7 @@ const AgeOfRomulusView = () => {
   const wallet = useWallet();
 
   const ageOfRomulusCtx = useAgeOfRomulus();
+  const { isDarkTheme } = useGeneral();
 
   const [countAllUsers, setCountAllUsers] = useState<null | number>(null);
   const [currUser, setCurrUser] = useState<null | undefined | APIVoterEntity>(null);
@@ -73,7 +75,7 @@ const AgeOfRomulusView = () => {
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>
-            <div className={s.daoStakers__head__img} />
+            <div className={cn(s.daoStakers__head__img, { [s.daoStakers__head__img_Light]: !isDarkTheme, [s.daoStakers__head__img_Dark]: isDarkTheme,})} />
             <Text tag="p" type="h1" weight="bold" color="primary">
               DAO Stakers
             </Text>

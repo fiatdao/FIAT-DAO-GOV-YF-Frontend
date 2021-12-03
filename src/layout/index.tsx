@@ -32,28 +32,33 @@ const LayoutView: React.FC = () => {
   return (
     <div className={s.layout}>
       <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <WarningProvider>
-          <LayoutHeader />
-          <main className={cn(s.main, { [s.main__light]: !isDarkTheme, [s.main__black]: isDarkTheme })}>
-            <ErrorBoundary>
-              <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
-                <Switch>
+        <div className={s.bg}>
+         <div className={cn(s.bg__gradient, { [s.bg__gradient__light]: !isDarkTheme, [s.bg__gradient__dark]: isDarkTheme  })} />
+        </div>
+        <div className={s.wrapper}>
+          <WarningProvider>
+            <LayoutHeader />
+            <main className={cn(s.main)}>
+              <ErrorBoundary>
+                <Suspense fallback={<AntdSpin className="pv-24 ph-64" style={{ width: '100%' }} />}>
+                  <Switch>
 
-                  {/*<Route path="/" component={PlugView} />*/}
-                  <Route path="/airdrop" component={AirdropPage} />
-                  <Route path="/rewards" component={RewardsView} />
-                  <Route path="/senatus/:vt(\w+)" component={SenatusView} />
-                  <Route path="/senatus" component={SenatusView} />
-                  <Route path="/age-of-romulus" component={AgeOfRomulusView} />
-                  {/*<Redirect from="/airdrop" to="/rewards" />*/}
-                  <Redirect from="/" to="/rewards" />
-                </Switch>
-              </Suspense>
-            </ErrorBoundary>
-          </main>
-          <LayoutFooter />
-          <ThemeSwitcher />
-        </WarningProvider>
+                    {/*<Route path="/" component={PlugView} />*/}
+                    <Route path="/airdrop" component={AirdropPage} />
+                    <Route path="/rewards" component={RewardsView} />
+                    <Route path="/senatus/:vt(\w+)" component={SenatusView} />
+                    <Route path="/senatus" component={SenatusView} />
+                    <Route path="/age-of-romulus" component={AgeOfRomulusView} />
+                    {/*<Redirect from="/airdrop" to="/rewards" />*/}
+                    <Redirect from="/" to="/rewards" />
+                  </Switch>
+                </Suspense>
+              </ErrorBoundary>
+            </main>
+            <LayoutFooter />
+            <ThemeSwitcher />
+          </WarningProvider>
+        </div>
       </div>
     </div>
   );
