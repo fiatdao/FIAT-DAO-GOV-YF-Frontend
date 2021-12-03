@@ -84,7 +84,7 @@ const LayoutHeader: React.FC = () => {
       <h1 className={s.title}>{isSenatusPage ? 'Senatus' : isRewardsPage ? 'Rewards' : isAirdropPage ? 'Airdrop' : 'Age of Romulus'}</h1>
 
       <nav className={s.nav}>
-        <a href='https://fiatdao.com/' target="_blank" rel="noopener" className={cn(s.dropdownLink)}>
+        <a href='https://fiatdao.com/' className={cn(s.dropdownLink)}>
           <span>Home</span>
         </a>
         <Link to="/senatus" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'senatus' })} onClick={() => setNavOpen(false)}>

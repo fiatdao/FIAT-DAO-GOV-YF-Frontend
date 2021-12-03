@@ -60,7 +60,7 @@ const AirDropPage = () => {
         </Text>
         <Text type="p3" color="secondary" className="mb-32">
           You may have received claimable token rewards from the $FDT BarnBridge Community Airdrop. Claiming your
-          airdrop before a year has
+          airdrop before 100 weeks has
           <br /> passed will forfeit a portion of your balance. Your total claimable amount will rise whenever someone
           forfeits a portion of their reward.
         </Text>
