@@ -113,7 +113,7 @@ const AirDropPage = () => {
             </Grid>
             <div className={cn(s.card, { 'mb-32': !merkleDistributorContract?.isAirdropClaimed && !lockedAirDrop })}>
 
-              {lockedAirDrop && (
+              {wallet.isActive && lockedAirDrop && (
                 <div className="flex full-height justify-center align-center">
                   <div className="flex flow-row align-center">
                     <Lottie animationData={airdropRewardLocked} className={s.lockedAirDrop} />
@@ -124,7 +124,7 @@ const AirDropPage = () => {
                   </div>
                 </div>
               )}
-              {merkleDistributorContract?.isAirdropClaimed && (
+              {wallet.isActive && merkleDistributorContract?.isAirdropClaimed && (
                 <div className="flex full-height justify-center align-center">
                   <div className="flex flow-row align-center">
                     <Lottie animationData={airdropRewardClaimed} className={s.claimedAirDrop} />
@@ -135,70 +135,67 @@ const AirDropPage = () => {
                   </div>
                 </div>
               )}
-              {!lockedAirDrop && !merkleDistributorContract?.isAirdropClaimed && (
-                <>
-                  {!wallet.isActive ? (
-                    <div className="flex full-height justify-center align-center">
-                      <div className="flex flow-row align-center">
-                        <Lottie animationData={airdropRewardWalletRequest} className={s.walletRequest} />
-                        <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
-                          To check if you are eligible for the airdrop, <br />
-                          connect your wallet.
+              {!wallet.isActive && <div className="flex full-height justify-center align-center">
+                <div className="flex flow-row align-center">
+                  <Lottie animationData={airdropRewardWalletRequest} className={s.walletRequest} />
+                  <Text tag="p" type="p2" color="primary" className="mb-32 text-center">
+                    To check if you are eligible for the airdrop, <br />
+                    connect your wallet.
+                  </Text>
+                  <button
+                    type="button"
+                    className={cn('button-primary', { 'button-small': isMobile })}
+                    onClick={() => wallet.showWalletsModal()}>
+                    <span>Connect {!isMobile && 'wallet'}</span>
+                  </button>
+                </div>
+              </div>}
+              {wallet.isActive && !lockedAirDrop && !merkleDistributorContract?.isAirdropClaimed && (
+                <div>
+                  <div className={s.week}>
+                    <Text type="small">WEEK {merkleDistributorContract?.airdropCurrentWeek}/{merkleDistributorContract?.airdropDurationInWeeks}</Text>
+                  </div>
+                  <div className={s.bigBlock}>
+                    <div>
+                      <Hint text="This is the total amount of $FDT you are getting based on your initial airdrop amount + bonus
+                amount from redistributed $FDT." className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your total airdrop amount
                         </Text>
-                        <button
-                          type="button"
-                          className={cn('button-primary', { 'button-small': isMobile })}
-                          onClick={() => wallet.showWalletsModal()}>
-                          <span>Connect {!isMobile && 'wallet'}</span>
-                        </button>
+                      </Hint>
+                      <div className="flex flow-col align-center mb-48">
+                        <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
+                        <Text type="h1" weight="bold" color="primary">
+                          {formatToken(userBonus?.plus(userAmount ?? 0), { decimals: 1 })}
+                        </Text>
+                      </div>
+                      <Hint text="You received $FDT because you were either staking your $BOND as of 0:00 UTC November 4th,
+                2021, had voted in BarnBridge governance up until that date, or a combination of both." className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your airdrop amount
+                        </Text>
+                      </Hint>
+                      <div className="flex flow-col align-center mb-32">
+                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                        <Text type="p2" weight="bold" color="primary">
+                          {formatToken(userAmount)}
+                        </Text>
+                      </div>
+                      <Hint text="This is the amount of additional $FDT you have received as a result of early claimants
+                forfeiting a portion of their airdrop." className="mb-12">
+                        <Text type="small" color="secondary">
+                          Your bonus amount
+                        </Text>
+                      </Hint>
+                      <div className="flex flow-col align-center">
+                        <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
+                        <Text type="p2" weight="bold" color="green">
+                          +{formatToken(userBonus)}
+                        </Text>
                       </div>
                     </div>
-                  ) : (
-                    <div>
-                      <div className={s.week}>
-                        <Text type="small">WEEK {merkleDistributorContract?.airdropCurrentWeek}/{merkleDistributorContract?.airdropDurationInWeeks}</Text>
-                      </div>
-                      <div className={s.bigBlock}>
-                        <div>
-                          <Hint text="This is the total amount of $FDT you are getting based on your initial airdrop amount + bonus
-                amount from redistributed $FDT." className="mb-12">
-                            <Text type="small" color="secondary">
-                              Your total airdrop amount
-                            </Text>
-                          </Hint>
-                          <div className="flex flow-col align-center mb-48">
-                            <Icon width={40} height={40} name="png/fiat-dao" className="mr-4" />
-                            <Text type="h1" weight="bold" color="primary">
-                              {formatToken(userBonus?.plus(userAmount ?? 0), { decimals: 1 })}
-                            </Text>
-                          </div>
-                          <Hint text="You received $FDT because you were either staking your $BOND as of 0:00 UTC November 4th,
-                2021, had voted in BarnBridge governance up until that date, or a combination of both." className="mb-12">
-                            <Text type="small" color="secondary">
-                              Your airdrop amount
-                            </Text>
-                          </Hint>
-                          <div className="flex flow-col align-center mb-32">
-                            <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                            <Text type="p2" weight="bold" color="primary">
-                              {formatToken(userAmount)}
-                            </Text>
-                          </div>
-                          <Hint text="This is the amount of additional $FDT you have received as a result of early claimants
-                forfeiting a portion of their airdrop." className="mb-12">
-                            <Text type="small" color="secondary">
-                              Your bonus amount
-                            </Text>
-                          </Hint>
-                          <div className="flex flow-col align-center">
-                            <Icon width={19} height={19} name="png/fiat-dao" className="mr-4" />
-                            <Text type="p2" weight="bold" color="green">
-                              +{formatToken(userBonus)}
-                            </Text>
-                          </div>
-                        </div>
-                        <div className={s.progress}>
-                          <div>
+                    <div className={s.progress}>
+                      <div>
                             <span>
                               <Text type="h1" weight="bold" color="primary">
                                  {formatToken(userAvailable, { compact: true })}
@@ -207,20 +204,18 @@ const AirDropPage = () => {
                                 available
                               </Text>
                             </span>
-                            <Lottie
-                              animationData={waveAnimations}
-                              style={{ transform: `translateY(calc(-${isNaN(progressPercent as number) ? 0 : (progressPercent as number) < 20 ? 20 : progressPercent}% - -10px))` }}
-                              className={s.waveAnimation}
-                            />
-                          </div>
-                        </div>
+                        <Lottie
+                          animationData={waveAnimations}
+                          style={{ transform: `translateY(calc(-${isNaN(progressPercent as number) ? 0 : (progressPercent as number) < 20 ? 20 : progressPercent}% - -10px))` }}
+                          className={s.waveAnimation}
+                        />
                       </div>
                     </div>
-                  )}
-                </>
+                  </div>
+                </div>
               )}
             </div>
-            {!merkleDistributorContract?.isAirdropClaimed && !lockedAirDrop && (<div>
+            {wallet.isActive && !merkleDistributorContract?.isAirdropClaimed && !lockedAirDrop && (<div>
               <div className={s.cardGradient}>
                 <div>
                   <Grid className={s.cardGradient__grid} align='center' gap={!isTablet ? 40 : 24}>
@@ -262,7 +257,7 @@ const AirDropPage = () => {
             </div>)}
           </Grid>
           <div className={cn(s.card, s.card__table)}>
-            <Hint text="Total redistributed - tooltip" className="mt-16 mb-32">
+            <Hint text="The list of last claimed addresses" className="mt-16 mb-32">
               <Text type="small" color="secondary">
                 Last claimed
               </Text>
