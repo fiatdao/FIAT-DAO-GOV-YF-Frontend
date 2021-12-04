@@ -254,8 +254,17 @@
           align-items: center;
           justify-content: center;
 
+          @media (max-width: 540px) {
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+
           a {
             padding: 0 18px;
+
+            @media (max-width: 540px) {
+              padding: 12px 0;
+            }
           }
         }
       }
@@ -361,12 +370,14 @@
         padding: 12px 0;
       }
 
-      &:first-child {
-        padding-left: 0;
-      }
+      @media (min-width: 540px) {
+        &:first-child {
+          padding-left: 0;
+        }
 
-      &:last-child {
-        padding-right: 0;
+        &:last-child {
+          padding-right: 0;
+        }
       }
 
       &:hover {
