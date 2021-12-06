@@ -121,7 +121,7 @@ const AgeOfRomulusRank = ({ allUsers, currUser, countAllUsers }: IAgeOfRomulusRa
           <div className="progress">
             <Text type="p3" color="primary" className="mb-12">
               {isUntil
-                ? `Until next prize: ${formatBigValue(lastVoterWithPrize.minus(currUser.votingPower), 2, '-', 2)} vFDT`
+                ? `Additional vFDT required for next prize: ${formatBigValue(lastVoterWithPrize.minus(currUser.votingPower), 2, '-', 2)} vFDT`
                 : `You are ahead by: ${formatBigValue(currUser.votingPower.minus(lastVoterWithPrize), 2, '-', 2)} vFDT`}
             </Text>
             <Progress

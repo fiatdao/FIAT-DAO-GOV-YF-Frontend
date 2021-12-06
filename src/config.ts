@@ -27,7 +27,7 @@ const config = {
     gOHM: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_ADDR),
     ethFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
     wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
-    gOHMFDTAmphoraSLP: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_FDT_Amphora_SUSHI_LP),
+    gOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_FDT_SUSHI_LP),
   },
   contracts: {
     yf: {
@@ -43,6 +43,7 @@ const config = {
       wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP),
       wsOHMFDTSLPOld: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP_OLD),
       gOHMFDTAmphoraSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_gOHM_FDT_AMPHORA_SUSHI_LP),
+      gOHMFDTKitharaSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_gOHM_FDT_Kithara_SUSHI_LP),
       yfERC1155: toLowerCase(process.env.REACT_APP_ERC1155_YF_ADDR),
     },
     dao: {

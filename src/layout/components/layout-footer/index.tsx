@@ -87,9 +87,7 @@ const LayoutFooter: React.FC = () => {
             {isMobile && (
               <>
                 <div className={s.nav}>
-                  <a
-                    href="https://fiatdao.com/"
-                    className={cn(s.dropdownLink)}>
+                  <a href="https://fiatdao.com/" className={cn(s.dropdownLink)}>
                     <span>Home</span>
                   </a>
                   <Link to="/senatus" className={s.dropdownLink}>

@@ -79,7 +79,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
               </Text>
             }>
             <Text type="lb2" weight="semibold" color="primary" className={s.label}>
-              {FDTToken.symbol} Rewards Distributed
+              {FDTToken.symbol} Distributed
             </Text>
           </Hint>
           <div className="flex flow-row">

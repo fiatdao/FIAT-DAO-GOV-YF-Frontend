@@ -43,6 +43,10 @@ import UMASrc from 'resources/png/UMA.png';
 import universeSrc from 'resources/png/universe.png';
 import wsOHM_FDT_SUSHI_LPImg from 'resources/png/wsOHM_FDT_SUSHI_LP.png';
 import gohm_fdt_slp_amphoraImg from 'resources/png/gohm_fdt_slp_amphora.png';
+import gohm_fdt_slp_kitharaImg from 'resources/png/gohm_fdt_slp_kithara.png';
+import gohm_fdt_slp_galeaImg from 'resources/png/gohm_fdt_slp_galea.png';
+import gohm_fdt_slp_gladiusImg from 'resources/png/gohm_fdt_slp_gladius.png';
+import gohm_fdt_slp_coronaImg from 'resources/png/gohm_fdt_slp_corona.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import notConnected from 'resources/svg/not-connected.svg';
@@ -99,6 +103,10 @@ export type TokenIconNames =
   | 'png/ETH_FDT_SLP'
   | 'png/wsOHM_FDT_SUSHI_LP'
   | 'png/gohm_fdt_slp_amphora'
+  | 'png/gohm_fdt_slp_kithara'
+  | 'png/gohm_fdt_slp_galea'
+  | 'png/gohm_fdt_slp_gladius'
+  | 'png/gohm_fdt_slp_corona'
   | 'yearn_finance';
 
 export type NavIconNames =
@@ -273,6 +281,14 @@ const Icon: React.FC<IconProps> = props => {
           return wsOHM_FDT_SUSHI_LPImg;
         case 'png/gohm_fdt_slp_amphora':
           return gohm_fdt_slp_amphoraImg;
+        case 'png/gohm_fdt_slp_kithara':
+          return gohm_fdt_slp_kitharaImg;
+        case 'png/gohm_fdt_slp_galea':
+          return gohm_fdt_slp_galeaImg;
+        case 'png/gohm_fdt_slp_gladius':
+          return gohm_fdt_slp_gladiusImg;
+        case 'png/gohm_fdt_slp_corona':
+          return gohm_fdt_slp_coronaImg;
         case 'png/mkr':
           return MKRSrc;
         case 'png/rgt':

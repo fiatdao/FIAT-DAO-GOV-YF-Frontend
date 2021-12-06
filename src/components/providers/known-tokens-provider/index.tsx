@@ -24,7 +24,7 @@ export enum KnownTokens {
   gOHM = 'gOHM',
   ETH_FDT_SLP = 'ETH_FDT_SLP',
   wsOHM_FDT_SLP = 'wsOHM_FDT_SLP',
-  gOHM_FDT_Amphora_SLP = 'gOHM_FDT_SLP_Amphora',
+  gOHM_FDT_SLP = 'gOHM_FDT_SLP',
 }
 
 export type TokenMeta = {
@@ -155,13 +155,13 @@ export const wsOHMFdtSLPToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.wsOHMFDTSLP),
 };
 
-export const gOHMFdtAmphoraSLPToken: TokenMeta = {
-  address: config.tokens.gOHMFDTAmphoraSLP,
-  symbol: KnownTokens.gOHM_FDT_Amphora_SLP,
-  name: 'gOHM FDT SUSHI LP Amphora',
+export const gOHMFdtSLPToken: TokenMeta = {
+  address: config.tokens.gOHMFDTSLP,
+  symbol: KnownTokens.gOHM_FDT_SLP,
+  name: 'gOHM FDT SUSHI LP',
   decimals: 18,
   icon: 'png/wsOHM_FDT_SUSHI_LP',
-  contract: new Erc20Contract([], config.tokens.gOHMFDTAmphoraSLP),
+  contract: new Erc20Contract([], config.tokens.gOHMFDTSLP),
 };
 
 const KNOWN_TOKENS: TokenMeta[] = [
@@ -177,7 +177,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   gOHMToken,
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
-  gOHMFdtAmphoraSLPToken,
+  gOHMFdtSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -284,8 +284,8 @@ async function getWSOHMFdtSLPPrice(): Promise<BigNumber> {
   return wsOHMReserve.div(supply).times(2);
 }
 
-async function getGOHMFdtAmphoraSLPTokenPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, gOHMFdtAmphoraSLPToken.address);
+async function getGOHMFdtSLPTokenPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, gOHMFdtSLPToken.address);
 
   const [decimals, totalSupply, token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'decimals', transform: Number },
@@ -396,7 +396,7 @@ const KnownTokensProvider: FC = props => {
         FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
-        gOHMFdtAmphoraSLPToken.price = await getGOHMFdtAmphoraSLPTokenPrice().catch(() => undefined);
+        gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
 
 
         KNOWN_TOKENS.forEach(token => {
