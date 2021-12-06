@@ -32,11 +32,13 @@ const PrizesItem = ({
 
   const [isClaim, setIsClaim] = useState(false);
 
+  // @ts-ignore
+  const isActive: boolean = walletCtx.account && prizeList[keyItem].length && prizeList[keyItem].some(i => i.address.toLowerCase() === walletCtx.account.toLowerCase())
+
   const isDisabled =
-    // @ts-ignore
-    walletCtx.account && prizeList[keyItem].length && prizeList[keyItem].some(i => i.address.toLowerCase() === walletCtx.account.toLowerCase())
-      ? // @ts-ignore
-      ageOfRomulusCtx[keyItem].isClaimed
+    isActive
+      // @ts-ignore
+      ? ageOfRomulusCtx[keyItem].isClaimed
       : true
 
   let stakers;
@@ -111,7 +113,9 @@ const PrizesItem = ({
           className="button-primary button-small">
           {!isDisabled ? (
             'Claim'
-          ) : (
+          ) : isActive
+            ? 'Claimed'
+           :(
             <Hint
               text={`This NFT grants you access to the
                        ${
