@@ -82,7 +82,7 @@ export class YfStakingNFTContract extends Web3Contract {
         nextEpochPoolSize: new BigNumber(nextEpochPoolSize),
       };
 
-      console.log('nextEpochPoolSize', nftId === 1 && nextEpochPoolSize);
+      nftId === 1 && console.log('nextEpochPoolSize from contract',nextEpochPoolSize);
       this.stakedTokens.set(tokenAddress, stakedToken);
     }
 
