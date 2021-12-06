@@ -366,7 +366,7 @@ const YFPoolsProvider: FC = props => {
         }
 
         console.log('poolId', poolId);
-        console.log('stakedToken', stakedToken?.nextEpochPoolSize?.unscaleBy(token.decimals)?.toString());
+        console.log('stakedToken', stakedToken);
 
         return knownTokensCtx.convertTokenInUSD(stakedToken.nextEpochPoolSize.unscaleBy(token.decimals), token.symbol);
       });
