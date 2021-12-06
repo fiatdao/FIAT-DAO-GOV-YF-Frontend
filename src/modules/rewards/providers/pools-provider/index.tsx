@@ -365,8 +365,7 @@ const YFPoolsProvider: FC = props => {
           return undefined;
         }
 
-        console.log('poolId', poolId);
-        console.log('stakedToken', stakedToken.nextEpochPoolSize.toString());
+        console.log('stakedToken', poolId === 'gOHM-fdt-slp-amphora' && stakedToken.nextEpochPoolSize.toString());
 
         return knownTokensCtx.convertTokenInUSD(stakedToken.nextEpochPoolSize.unscaleBy(token.decimals), token.symbol);
       });
@@ -499,9 +498,6 @@ const YFPoolsProvider: FC = props => {
       if (distributedReward === undefined) {
         return undefined;
       }
-
-      console.log('yfPool', yfPool.name);
-      console.log('new BigNumber(distributedReward)', new BigNumber(distributedReward).toString());
 
       return new BigNumber(distributedReward);
     });
