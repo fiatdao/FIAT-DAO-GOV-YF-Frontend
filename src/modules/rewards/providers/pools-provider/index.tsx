@@ -341,10 +341,9 @@ const YFPoolsProvider: FC = props => {
 
   const getPoolBalanceInUSD = useCallback(
     (poolId: string): BigNumber | undefined => {
-
-      const isNFTPool = (Object.values(YFPoolNFTID) as string[]).includes(poolId);
-      const currStakingContract = isNFTPool ? stakingNFTContract : stakingContract;
       const pool = getYFKnownPoolByName(poolId);
+
+      const currStakingContract = !!pool?.isNFTPool ? stakingNFTContract : stakingContract;
 
       if (!pool) {
         return undefined;

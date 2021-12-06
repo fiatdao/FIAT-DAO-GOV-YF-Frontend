@@ -36,6 +36,7 @@ const YFPoolProvider: React.FC<Props> = props => {
   const pool = React.useMemo(() => yfPoolsCtx.getYFKnownPoolByName(poolId), [poolId]);
   const poolOld = React.useMemo(() => poolId === YFPoolID.wsOHM_FDT_SLP ? yfPoolsCtx.getYFKnownPoolByName(YFPoolID.wsOHM_FDT_SLP_OLD) : null, [poolId]);
 
+  console.log('YFPoolProvider');
   const poolBalance = yfPoolsCtx.getPoolBalanceInUSD(poolId);
   const effectivePoolBalance = yfPoolsCtx.getPoolEffectiveBalanceInUSD(poolId);
 
