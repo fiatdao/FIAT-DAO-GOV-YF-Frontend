@@ -45,7 +45,7 @@ const PoolUnstake: FC = () => {
   const currStakingContract = !!poolMeta?.isNFTPool ? yfPoolsCtx.stakingNFTContract : yfPoolsCtx.stakingContract;
 
   // @ts-ignore
-  const selectedStakedToken = currStakingContract?.stakedTokens.get(poolMeta?.isNFTPool ? (activeToken?.address as string) : poolMeta.nftId);
+  const selectedStakedToken = currStakingContract?.stakedTokens.get(poolMeta?.isNFTPool ? poolMeta.nftId : (activeToken?.address as string));
   const stakedBalance = selectedStakedToken?.nextEpochUserBalance?.unscaleBy(activeToken?.decimals);
   const walletBalance = activeContract.balance?.unscaleBy(activeToken?.decimals);
   const maxAmount = stakedBalance ?? BigNumber.ZERO;

@@ -42,7 +42,10 @@ const PoolStatistics: FC = () => {
 
   const { lastActiveEpoch } = poolMeta.contract;
 
-  const selectedStakedToken = yfPoolsCtx.stakingContract?.stakedTokens.get(activeToken?.address!);
+  const currStakingContract = !!poolMeta?.isNFTPool ? yfPoolsCtx.stakingNFTContract : yfPoolsCtx.stakingContract;
+
+  // @ts-ignore
+  const selectedStakedToken = currStakingContract?.stakedTokens.get(poolMeta?.isNFTPool ? poolMeta.nftId : (activeToken?.address as string));
 
   function handleTabSelect(tokenSymbol: string) {
     const tokenMeta = knownTokensCtx.getTokenBySymbol(tokenSymbol);
