@@ -27,7 +27,7 @@ const config = {
     gOHM: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_ADDR),
     ethFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
     wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
-    gOHMFDTAmphoraSLP: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_FDT_Amphora_SUSHI_LP),
+    gOHMFDTSLP: toLowerCase(process.env.REACT_APP_TOKEN_gOHM_FDT_SUSHI_LP),
   },
   contracts: {
     yf: {

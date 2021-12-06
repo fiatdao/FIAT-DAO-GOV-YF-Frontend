@@ -13,7 +13,7 @@ import {
   wsOHMToken,
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
-  gOHMFdtAmphoraSLPToken,
+  gOHMFdtSLPToken,
   TokenMeta,
   useKnownTokens,
 } from 'components/providers/known-tokens-provider';
@@ -151,7 +151,7 @@ export const gOHMFdtAmphoraSLPYfPool: YFPoolMeta = {
   label: 'gOHM_FDT_SUSHI_LP_Amphora',
   icons: ['png/gohm_fdt_slp_amphora'],
   colors: ['var(--theme-red-color)'],
-  tokens: [gOHMFdtAmphoraSLPToken],
+  tokens: [gOHMFdtSLPToken],
   isNFTPool: true,
   nftId: 1,
   contract: new YfPoolContract(config.contracts.yf.gOHMFDTAmphoraSLP),
