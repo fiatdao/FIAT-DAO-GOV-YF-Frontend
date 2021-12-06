@@ -227,7 +227,7 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 
 // ToDo: Check the ENTR price calculation
 async function getFdtPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, wsOHMFdtSLPToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, gOHMFdtSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
@@ -235,23 +235,23 @@ async function getFdtPrice(): Promise<BigNumber> {
   ]);
 
   let fdtReserve;
-  let wsOHMReserve;
+  let gOHMReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
     fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
-    wsOHMReserve = new BigNumber(reserve1).unscaleBy(wsOHMToken.decimals);
+    gOHMReserve = new BigNumber(reserve1).unscaleBy(gOHMToken.decimals);
   } else {
     fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
-    wsOHMReserve = new BigNumber(reserve0).unscaleBy(wsOHMToken.decimals);
+    gOHMReserve = new BigNumber(reserve0).unscaleBy(gOHMToken.decimals);
   }
 
-  if (!wsOHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
+  if (!gOHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  wsOHMReserve = (wsOHMReserve as BigNumber).times(wsOHMToken?.price as BigNumber)
+  gOHMReserve = (gOHMReserve as BigNumber).times(gOHMToken?.price as BigNumber)
 
-  return wsOHMReserve.dividedBy(fdtReserve);
+  return gOHMReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
