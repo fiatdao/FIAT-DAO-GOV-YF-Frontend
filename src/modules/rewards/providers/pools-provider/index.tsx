@@ -358,7 +358,8 @@ const YFPoolsProvider: FC = props => {
           return BigNumber.ZERO;
         }
 
-        const stakedToken = currStakingContract.stakedTokens.get(token.address);
+        // @ts-ignore
+        const stakedToken = currStakingContract.stakedTokens.get(pool.isNFTPool ? pool.nftId : token.address);
 
         if (!stakedToken || stakedToken.nextEpochPoolSize === undefined) {
           return undefined;
@@ -391,7 +392,8 @@ const YFPoolsProvider: FC = props => {
           return BigNumber.ZERO;
         }
 
-        const stakedToken = currStakingContract.stakedTokens.get(token.address);
+        // @ts-ignore
+        const stakedToken = currStakingContract.stakedTokens.get(pool.isNFTPool ? pool.nftId : token.address);
 
         if (!stakedToken || stakedToken.currentEpochPoolSize === undefined) {
           return undefined;
@@ -425,7 +427,8 @@ const YFPoolsProvider: FC = props => {
           return BigNumber.ZERO;
         }
 
-        const stakedToken = currStakingContract.stakedTokens.get(token.address);
+        // @ts-ignore
+        const stakedToken = currStakingContract.stakedTokens.get(pool.isNFTPool ? pool.nftId : token.address);
 
         if (!stakedToken || stakedToken.nextEpochUserBalance === undefined) {
           return undefined;
@@ -459,7 +462,8 @@ const YFPoolsProvider: FC = props => {
           return BigNumber.ZERO;
         }
 
-        const stakedToken = currStakingContract.stakedTokens.get(token.address);
+        // @ts-ignore
+        const stakedToken = currStakingContract.stakedTokens.get(pool.isNFTPool ? pool.nftId : token.address);
 
         if (!stakedToken || stakedToken.currentEpochUserBalance === undefined) {
           return undefined;

@@ -44,7 +44,7 @@ export class YfStakingNFTContract extends Web3Contract {
   currentEpoch?: number;
   epochStart?: number;
   epochDuration?: number;
-  stakedTokens: Map<string, YfStakedToken>;
+  stakedTokens: Map<number, YfStakedToken>;
 
   // computed data
   get epochDates(): [number, number, number] | undefined {
@@ -77,13 +77,13 @@ export class YfStakingNFTContract extends Web3Contract {
       ]);
 
       const stakedToken = {
-        ...this.stakedTokens.get(tokenAddress),
+        ...this.stakedTokens.get(nftId),
         currentEpochPoolSize: new BigNumber(currentEpochPoolSize),
         nextEpochPoolSize: new BigNumber(nextEpochPoolSize),
       };
 
       nftId === 1 && console.log('nextEpochPoolSize from contract',nextEpochPoolSize);
-      this.stakedTokens.set(tokenAddress, stakedToken);
+      this.stakedTokens.set(nftId, stakedToken);
     }
 
     this.emit(Web3Contract.UPDATE_DATA);
@@ -106,13 +106,13 @@ export class YfStakingNFTContract extends Web3Contract {
       ]);
 
       const stakedToken = {
-        ...this.stakedTokens.get(tokenAddress),
+        ...this.stakedTokens.get(nftId),
         userBalance: new BigNumber(userBalance),
         userBalanceNFT: new BigNumber(userBalanceNFT),
         currentEpochUserBalance: new BigNumber(currentEpochUserBalance),
         nextEpochUserBalance: new BigNumber(nextEpochUserBalance),
       };
-      this.stakedTokens.set(tokenAddress, stakedToken);
+      this.stakedTokens.set(nftId, stakedToken);
     }
 
     this.emit(Web3Contract.UPDATE_DATA);
