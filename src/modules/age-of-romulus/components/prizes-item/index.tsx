@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import AntdSpin from 'antd/lib/spin';
 import cn from 'classnames';
 import format from 'date-fns/format';
@@ -103,7 +103,7 @@ const PrizesItem = ({
           <span>stakers</span>
         </Text>
       </div>
-      <div className={cn({ [s.button]: isMobile })}>
+      <div className={cn(s.button,{ [s.button_mobile]: isMobile })}>
         {/*// @ts-ignore*/}
         <button
           type="button"
@@ -113,27 +113,23 @@ const PrizesItem = ({
           className="button-primary button-small">
           {!isDisabled ? (
             'Claim'
-          ) : isActive
-            ? 'Claimed'
-           :(
-            <Hint
-              text={`This NFT grants you access to the
-                       ${
-                keyItem === ActiveKeys.amphora
-                  ? 'first'
-                  : keyItem === ActiveKeys.kithara
-                    ? 'second'
-                    : keyItem === ActiveKeys.galea
-                      ? 'third'
-                      : keyItem === ActiveKeys.gladius
-                        ? 'fourth'
-                        : 'fifth'
-              }
-                        tier of liquidity mining rewards for the FDT / gOHM pair on Sushiswap.`}>
-              Claim
-            </Hint>
-          )}
+          ) : isActive ? 'Claimed' : 'Claim'}
         </button>
+        <Hint
+          text={`This NFT grants you access to the
+                       ${
+            keyItem === ActiveKeys.amphora
+              ? 'first'
+              : keyItem === ActiveKeys.kithara
+                ? 'second'
+                : keyItem === ActiveKeys.galea
+                  ? 'third'
+                  : keyItem === ActiveKeys.gladius
+                    ? 'fourth'
+                    : 'fifth'
+          }
+                        tier of liquidity mining rewards for the FDT / gOHM pair on Sushiswap.`}>
+        </Hint>
       </div>
     </Grid>
   );
