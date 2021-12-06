@@ -43,6 +43,7 @@ const config = {
       wsOHMFDTSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP),
       wsOHMFDTSLPOld: toLowerCase(process.env.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP_OLD),
       gOHMFDTAmphoraSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_gOHM_FDT_AMPHORA_SUSHI_LP),
+      gOHMFDTKitharaSLP: toLowerCase(process.env.REACT_APP_CONTRACT_YF_gOHM_FDT_Kithara_SUSHI_LP),
       yfERC1155: toLowerCase(process.env.REACT_APP_ERC1155_YF_ADDR),
     },
     dao: {

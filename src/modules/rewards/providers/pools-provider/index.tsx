@@ -157,6 +157,17 @@ export const gOHMFdtAmphoraSLPYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.gOHMFDTAmphoraSLP),
 };
 
+export const gOHMFdtKitharaSLPYfPool: YFPoolMeta = {
+  name: YFPoolNFTID.gOHM_FDT_SLP_Kithara,
+  label: 'gOHM_FDT_SUSHI_LP_Kithara',
+  icons: ['png/gohm_fdt_slp_kithara'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [gOHMFdtSLPToken],
+  isNFTPool: true,
+  nftId: 2,
+  contract: new YfPoolContract(config.contracts.yf.gOHMFDTKitharaSLP),
+};
+
 const KNOWN_POOLS: YFPoolMeta[] = [
   BondYfPool,
   UMAYfPool,
@@ -171,6 +182,7 @@ const KNOWN_POOLS: YFPoolMeta[] = [
 
 const KNOWN_POOLS_NFT: YFPoolMeta[] = [
   gOHMFdtAmphoraSLPYfPool,
+  gOHMFdtKitharaSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
@@ -267,10 +279,9 @@ const YFPoolsProvider: FC = props => {
       if (pool.contract.isPoolAvailable) {
         pool.contract.on(Web3Contract.UPDATE_DATA, reload);
         pool.contract.loadCommon().catch(Error);
-        const nftId = pool.name === YFPoolNFTID.gOHM_FDT_SLP_Amphora ? 1 : 0;
         pool.tokens.forEach(tokenMeta => {
           if (tokenMeta.address) {
-            stakingNFTContract.loadCommonFor(tokenMeta.address, nftId).catch(Error);
+            stakingNFTContract.loadCommonFor(tokenMeta.address, pool?.nftId as number).catch(Error);
           }
         });
       }
@@ -330,7 +341,8 @@ const YFPoolsProvider: FC = props => {
 
   const getPoolBalanceInUSD = useCallback(
     (poolId: string): BigNumber | undefined => {
-      const isNFTPool = (Object.values(YFPoolNFTID) as string[]).includes(poolId)
+
+      const isNFTPool = (Object.values(YFPoolNFTID) as string[]).includes(poolId);
       const currStakingContract = isNFTPool ? stakingNFTContract : stakingContract;
       const pool = getYFKnownPoolByName(poolId);
 
