@@ -45,6 +45,7 @@ const PoolCard: React.FC<PoolCardProps> = props => {
   );
 
   const poolBalanceInUSD = yfPoolsCtx.getPoolBalanceInUSD(poolId);
+  console.log('PoolCard poolBalanceInUSD', poolId, poolBalanceInUSD);
   const poolEffectiveBalanceInUSD = yfPoolsCtx.getPoolEffectiveBalanceInUSD(poolId);
   const myPoolBalanceInUSD = yfPoolsCtx.getMyPoolBalanceInUSD(poolId);
   const myPoolEffectiveBalanceInUSD = yfPoolsCtx.getMyPoolEffectiveBalanceInUSD(poolId);
