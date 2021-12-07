@@ -50,7 +50,7 @@ const PrizesItem = ({
       stakers = 432;
       break;
     case ActiveKeys.galea:
-      stakers = Math.ceil((countAllUsers ?? 0) * 0.25);
+      stakers = 223;
       break;
     case ActiveKeys.gladius:
       stakers = Math.ceil((countAllUsers ?? 0) * 0.1);
