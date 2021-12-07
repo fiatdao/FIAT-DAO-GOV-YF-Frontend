@@ -103,7 +103,7 @@ const PoolHarvestModal: FC<ModalProps> = props => {
           </Text>
         </div>
         <Grid flow="row" gap={24} className={s.grid}>
-          {yfPoolsCtx.yfPools.map(yfPool => (
+          {yfPoolsCtx.yfPoolsNFT.map(yfPool => (
             <PoolHarvestButton
               key={yfPool.name}
               icons={yfPool.icons}
@@ -113,7 +113,7 @@ const PoolHarvestModal: FC<ModalProps> = props => {
               onClick={() => handleHarvest(yfPool.name)}
             />
           ))}
-          {yfPoolsCtx.yfPoolsNFT.map(yfPool => (
+          {yfPoolsCtx.yfPools.map(yfPool => (
             <PoolHarvestButton
               key={yfPool.name}
               icons={yfPool.icons}
