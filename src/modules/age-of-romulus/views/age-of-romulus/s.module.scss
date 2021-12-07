@@ -45,12 +45,15 @@
         }
 
         .button {
-          @media (max-width: 768px) {
-            grid-column: 1/5;
-            grid-row: 2;
+          display: flex;
+          &_mobile {
+            @media (max-width: 768px) {
+              grid-column: 1/5;
+              grid-row: 2;
 
-            button {
-              width: 100%;
+              button {
+                width: 100%;
+              }
             }
           }
         }

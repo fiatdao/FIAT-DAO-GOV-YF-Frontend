@@ -364,9 +364,6 @@ const YFPoolsProvider: FC = props => {
         if (!stakedToken || stakedToken.nextEpochPoolSize === undefined) {
           return undefined;
         }
-
-        poolId === YFPoolNFTID.gOHM_FDT_SLP_Amphora && console.log('getPoolBalanceInUSD nextEpochPoolSize', stakedToken.nextEpochPoolSize.toString());
-
         return knownTokensCtx.convertTokenInUSD(stakedToken.nextEpochPoolSize.unscaleBy(token.decimals), token.symbol);
       });
     },

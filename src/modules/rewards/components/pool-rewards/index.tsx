@@ -29,7 +29,7 @@ const PoolRewards: React.FC = () => {
   const fdtContract = FDTToken.contract as Erc20Contract;
   const { currentEpoch } = yfPoolsCtx.stakingContract ?? {};
 
-  const totalToClaim = yfPoolsCtx.yfPools.reduce((sum: BigNumber | undefined, { contract }) => {
+  const totalToClaim = [...yfPoolsCtx.yfPools, ...yfPoolsCtx.yfPoolsNFT].reduce((sum: BigNumber | undefined, { contract }) => {
     if (!contract.address) {
       return sum ?? BigNumber.ZERO;
     }
@@ -37,7 +37,7 @@ const PoolRewards: React.FC = () => {
     return (sum ?? BigNumber.ZERO).plus(contract.toClaim ?? BigNumber.ZERO);
   }, undefined);
 
-  const totalPotentialReward = yfPoolsCtx.yfPools.reduce((sum: BigNumber | undefined, { contract }) => {
+  const totalPotentialReward = [...yfPoolsCtx.yfPools, ...yfPoolsCtx.yfPoolsNFT].reduce((sum: BigNumber | undefined, { contract }) => {
     if (contract.isPoolEnded !== false || !contract.address) {
       return sum ?? BigNumber.ZERO;
     }

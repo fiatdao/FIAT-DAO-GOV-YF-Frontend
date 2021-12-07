@@ -22,12 +22,14 @@ import plugBgMobileImg from 'resources/png/plug-bg-mobile.png';
 import plugBgTabletImg from 'resources/png/plug-bg-tablet.png';
 import plugBgImg from 'resources/png/plug-bg.png';
 import RGTSrc from 'resources/png/RGT.png';
-import romanAmphora from 'resources/png/roman_amphora.png';
+
 // Leaderboard
-import romanCorona from 'resources/png/roman_corona.png';
-import romanGalea from 'resources/png/roman_galea.png';
-import romanGladius from 'resources/png/roman_gladius.png';
-import romanKithara from 'resources/png/roman_kithara.png';
+import romanAmphora from 'resources/gif/roman-amphora-nft.gif';
+import romanCorona from 'resources/gif/roman-corona-nft.gif';
+import romanGalea from 'resources/gif/roman-galea-nft.gif';
+import romanGladius from 'resources/gif/roman-gladius-nft.gif';
+import romanKithara from 'resources/gif/roman-kithara-nft.gif';
+
 import sandSrc from 'resources/png/sandbox.png';
 import telegramSrc from 'resources/png/telegram.png';
 import aaveSrc from 'resources/png/token-aave.png';
