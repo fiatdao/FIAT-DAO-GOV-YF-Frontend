@@ -60,7 +60,7 @@ const config = {
   },
   web3: {
     chainId: Number(process.env.REACT_APP_WEB3_CHAIN_ID),
-    poolingInterval: Number(process.env.REACT_APP_WEB3_POLLING_INTERVAL),
+    poolingInterval: 12000,
     rpc: {
       wssUrl: String(process.env.REACT_APP_WEB3_RPC_WSS_URL),
       httpsUrl: String(process.env.REACT_APP_WEB3_RPC_HTTPS_URL),
