@@ -76,6 +76,7 @@ body.mobile-menu-open {
 
   --theme-body-color: #f8f8f9;
   --theme-card-color: rgba(255, 255, 255, 0.6);
+  --theme-menu-color: rgba(255, 255, 255, 0.9);
   --theme-modal-bg: #ffff;
   --theme-amount-color: #fff;
   --theme-overlay-color: #f8f8f9;
@@ -178,6 +179,7 @@ body.mobile-menu-open {
 [data-theme='dark'] {
   --theme-body-color: #171717;
   --theme-card-color: rgba(23, 23, 23, 0.6);
+  --theme-menu-color: rgba(23, 23, 23, 0.9);
   --theme-modal-bg: #202020;
   --theme-amount-color: #171717;
   --theme-overlay-color: #171717;
