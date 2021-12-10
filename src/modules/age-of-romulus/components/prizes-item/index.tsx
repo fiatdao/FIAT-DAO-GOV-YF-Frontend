@@ -85,7 +85,7 @@ const PrizesItem = ({
         <span>{format(new Date(date), 'LLL')}</span>
       </div>
       {
-        <a href={`https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:${keyItem === ActiveKeys.amphora ? 1 : keyItem === ActiveKeys.kithara ? 2 : keyItem === ActiveKeys.galea ? 3 : keyItem === ActiveKeys.gladius ? 4 : 5 }`} target="_blank" rel="noopener">
+        <a href={`https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:${keyItem === ActiveKeys.amphora ? 1 : keyItem === ActiveKeys.kithara ? 2 : keyItem === ActiveKeys.galea ? 5 : keyItem === ActiveKeys.gladius ? 4 : 5 }`} target="_blank" rel="noopener">
           {icon}
         </a>
       }
