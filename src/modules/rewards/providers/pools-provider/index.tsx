@@ -263,6 +263,8 @@ const YFPoolsProvider: FC = props => {
   }, []);
 
   useEffect(() => {
+    merkleDistributor.loadCommonFor().catch(Error);
+
     KNOWN_POOLS.forEach(pool => {
       if (pool.contract.isPoolAvailable) {
         pool.contract.on(Web3Contract.UPDATE_DATA, reload);

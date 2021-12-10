@@ -1,11 +1,11 @@
-import { BigNumber, FixedNumber } from 'ethers';
+import { BigNumber } from 'ethers';
 import { BigNumber as _BigNumber } from 'bignumber.js';
 import { AbiItem } from 'web3-utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
 
 import config from 'config';
 
-import { fetchAirdropClaims, fetchAirdropTotal } from '../modules/rewards/api';
+import { fetchAirdropTotal } from '../modules/rewards/api';
 import add from 'date-fns/add';
 import differenceInCalendarWeeks from 'date-fns/differenceInCalendarWeeks';
 import BalanceTree from '../merkle-distributor/balance-tree';
@@ -78,6 +78,10 @@ export default class MerkleDistributor extends Web3Contract {
     return this.airdropData.find((e: { address: string; }) => e.address === address)?.earnings;
   }
 
+  async loadCommonFor(): Promise<void> {
+    this.totalInfo = await fetchAirdropTotal()
+  }
+
   async loadUserData(): Promise<void> {
     const account = this.account;
 
@@ -90,8 +94,6 @@ export default class MerkleDistributor extends Web3Contract {
     const [ bonusStart] = await this.batch([
       { method: 'bonusStart', methodArgs: [], callArgs: { from: account } },
     ]);
-
-    this.totalInfo = await fetchAirdropTotal()
 
     this.bonusStart = bonusStart;
 
