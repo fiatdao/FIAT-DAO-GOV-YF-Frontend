@@ -1,4 +1,5 @@
 import contractAddresses from './contractAddresses'
+import { REACT_APP_CONTRACT_YF_gOHM_FDT_Galea_SUSHI_LP } from './contractAddresses/prodAddrs';
 
 function toLowerCase(value: any): string {
   return String(value ?? '').toLowerCase();
@@ -46,6 +47,7 @@ const config = {
       wsOHMFDTSLPOld: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_wsOHM_FDT_SUSHI_LP_OLD),
       gOHMFDTAmphoraSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_AMPHORA_SUSHI_LP),
       gOHMFDTKitharaSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Kithara_SUSHI_LP),
+      gOHMFDTGaleaSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Galea_SUSHI_LP),
       yfERC1155: toLowerCase(contractAddresses.REACT_APP_ERC1155_YF_ADDR),
     },
     dao: {
