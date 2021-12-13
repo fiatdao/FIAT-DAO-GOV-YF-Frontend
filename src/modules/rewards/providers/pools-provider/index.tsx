@@ -175,7 +175,7 @@ export const gOHMFdtGaleaSLPYfPool: YFPoolMeta = {
   colors: ['var(--theme-red-color)'],
   tokens: [gOHMFdtSLPToken],
   isNFTPool: true,
-  nftId: 3,
+  nftId: 5,
   contract: new YfPoolContract(config.contracts.yf.gOHMFDTGaleaSLP),
 };
 
