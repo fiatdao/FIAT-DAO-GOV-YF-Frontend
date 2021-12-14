@@ -84,7 +84,9 @@ const Columns: ColumnsType<APIVoterEntity> = [
             </a>
           )}
           {prizeList.gladius.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
-            <Icon name="png/roman-gladius" />
+            <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:6' target="_blank" rel="noopener">
+              <Icon name="png/roman-gladius" />
+            </a>
           )}
           {prizeList.corona.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <Icon name="png/roman-corona" width={50} height={50} />
