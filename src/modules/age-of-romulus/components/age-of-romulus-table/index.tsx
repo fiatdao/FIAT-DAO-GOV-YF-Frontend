@@ -70,17 +70,17 @@ const Columns: ColumnsType<APIVoterEntity> = [
           {/*// @ts-ignore*/}
           {prizeList.amphora.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:1' target="_blank" rel="noopener">
-              <Icon name="png/roman-amphora" width={50} height={50} />
+              <Icon name="png/roman-amphora" width={30} height={30} />
             </a>
           )}
           {prizeList.kithara.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:2' target="_blank" rel="noopener">
-              <Icon name="png/roman-kithara" width={50} height={50} />
+              <Icon name="png/roman-kithara" width={30} height={30} />
             </a>
           )}
           {prizeList.galea.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
             <a href='https://rarible.com/token/0x598b1007a5a9b83dc50e06c668a4eae0986cb6ab:5' target="_blank" rel="noopener">
-              <Icon name="png/roman-galea" width={50} height={50} />
+              <Icon name="png/roman-galea" width={30} height={30} />
             </a>
           )}
           {prizeList.gladius.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
@@ -89,7 +89,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
             </a>
           )}
           {prizeList.corona.find((i: IJsonItem) => i?.address.toLowerCase() === address.toLowerCase()) && (
-            <Icon name="png/roman-corona" width={50} height={50} />
+            <Icon name="png/roman-corona" width={30} height={30} />
           )}
         </div>
       );
