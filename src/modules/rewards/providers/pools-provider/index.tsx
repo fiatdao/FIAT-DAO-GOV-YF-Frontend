@@ -179,6 +179,17 @@ export const gOHMFdtGaleaSLPYfPool: YFPoolMeta = {
   contract: new YfPoolContract(config.contracts.yf.gOHMFDTGaleaSLP),
 };
 
+export const gOHMFdtGladiusSLPYfPool: YFPoolMeta = {
+  name: YFPoolNFTID.gOHM_FDT_SLP_Gladius,
+  label: 'gOHM_FDT_SUSHI_LP_Gladius',
+  icons: ['png/gohm_fdt_slp_gladius'],
+  colors: ['var(--theme-red-color)'],
+  tokens: [gOHMFdtSLPToken],
+  isNFTPool: true,
+  nftId: 6,
+  contract: new YfPoolContract(config.contracts.yf.gOHMFDTGladiusSLP),
+};
+
 const KNOWN_POOLS: YFPoolMeta[] = [
   BondYfPool,
   UMAYfPool,
@@ -195,6 +206,7 @@ const KNOWN_POOLS_NFT: YFPoolMeta[] = [
   gOHMFdtAmphoraSLPYfPool,
   gOHMFdtKitharaSLPYfPool,
   gOHMFdtGaleaSLPYfPool,
+  gOHMFdtGladiusSLPYfPool,
 ];
 
 export function getYFKnownPoolByName(name: string): YFPoolMeta | undefined {
