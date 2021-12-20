@@ -4,7 +4,7 @@ import Web3Contract, { createAbiItem } from 'web3/web3Contract';
 
 import config from 'config';
 
-import { YFPoolNFTID } from '../providers/pools-provider';
+import { YFPoolNFTID, gOHMFdtAmphoraSLPYfPool, gOHMFdtKitharaSLPYfPool, gOHMFdtGaleaSLPYfPool, gOHMFdtGladiusSLPYfPool } from '../providers/pools-provider';
 
 const ABI: AbiItem[] = [
   createAbiItem('balanceOf', ['address', 'uint256'], ['uint256']),
@@ -36,11 +36,11 @@ export class YfNFTContract extends Web3Contract {
     this.assertAccount();
 
     const [balanceOfAmphora, balanceOfKithara, balanceOfGalea, balanceOfGladius,balanceOfCorona, isApproved] = await this.batch([
-      { method: 'balanceOf', methodArgs: [account, 1] },
-      { method: 'balanceOf', methodArgs: [account, 2] },
-      { method: 'balanceOf', methodArgs: [account, 3] },
-      { method: 'balanceOf', methodArgs: [account, 4] },
-      { method: 'balanceOf', methodArgs: [account, 5] },
+      { method: 'balanceOf', methodArgs: [account, gOHMFdtAmphoraSLPYfPool.nftId] },
+      { method: 'balanceOf', methodArgs: [account, gOHMFdtKitharaSLPYfPool.nftId] },
+      { method: 'balanceOf', methodArgs: [account, gOHMFdtGaleaSLPYfPool.nftId] },
+      { method: 'balanceOf', methodArgs: [account, gOHMFdtGladiusSLPYfPool.nftId] },
+      { method: 'balanceOf', methodArgs: [account, 0] },
       { method: 'isApprovedForAll', methodArgs: [account, config.contracts.yf.stakingNFT] }
     ]);
 
