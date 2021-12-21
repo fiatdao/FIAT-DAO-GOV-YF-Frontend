@@ -56,7 +56,7 @@ const PrizesItem = ({
       stakers = 93;
       break;
     case ActiveKeys.corona:
-      stakers = Math.ceil((countAllUsers ?? 0) * 0.05);
+      stakers = 47;
       break;
   }
 

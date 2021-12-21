@@ -26,7 +26,7 @@ export type AgeOfRomulusType = {
   corona?: ClaimAgeOfRomulus;
 };
 
-export const ACTIVE_KEY: ActiveKeys = ActiveKeys.gladius;
+export const ACTIVE_KEY: ActiveKeys = ActiveKeys.corona;
 
 const AgeOfRomulusContext = createContext<AgeOfRomulusType>({
   ACTIVE_KEY,
