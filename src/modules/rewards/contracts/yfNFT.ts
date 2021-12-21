@@ -40,7 +40,7 @@ export class YfNFTContract extends Web3Contract {
       { method: 'balanceOf', methodArgs: [account, gOHMFdtKitharaSLPYfPool.nftId] },
       { method: 'balanceOf', methodArgs: [account, gOHMFdtGaleaSLPYfPool.nftId] },
       { method: 'balanceOf', methodArgs: [account, gOHMFdtGladiusSLPYfPool.nftId] },
-      { method: 'balanceOf', methodArgs: [account, 0] },
+      { method: 'balanceOf', methodArgs: [account, 7] },
       { method: 'isApprovedForAll', methodArgs: [account, config.contracts.yf.stakingNFT] }
     ]);
 
