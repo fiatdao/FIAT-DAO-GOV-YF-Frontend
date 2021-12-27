@@ -62,7 +62,7 @@ const Columns: ColumnsType<APIVoterEntity> = [
   {
     title: 'NFT Prize',
     dataIndex: 'prize-test',
-    width: 266,
+    width: 320,
     align: 'left',
     render: (value: number, { address }) => {
       return (

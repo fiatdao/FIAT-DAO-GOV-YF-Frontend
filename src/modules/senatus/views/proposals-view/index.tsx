@@ -99,11 +99,11 @@ const ProposalsViewInner: React.FC = () => {
                         </li>
                       </ul>
 
-                      <ExternalLink href="https://docs.enterdao.xyz/">
+                      {/*<ExternalLink href="https://docs.enterdao.xyz/">
                         <Text type="p2" weight="semibold" color="blue">
                           Learn more
                         </Text>
-                      </ExternalLink>
+                      </ExternalLink>*/}
                     </Grid>
                   }
                   visible={state.showWhyReason}
