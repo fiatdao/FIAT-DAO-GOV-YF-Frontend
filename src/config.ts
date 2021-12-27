@@ -52,6 +52,7 @@ const config = {
       gOHMFDTKitharaSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Kithara_SUSHI_LP),
       gOHMFDTGaleaSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Galea_SUSHI_LP),
       gOHMFDTGladiusSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Gladius_SUSHI_LP),
+      gOHMFDTCoronaSLP: toLowerCase(contractAddresses.REACT_APP_CONTRACT_YF_gOHM_FDT_Corona_SUSHI_LP),
       yfERC1155: toLowerCase(contractAddresses.REACT_APP_ERC1155_YF_ADDR),
     },
     dao: {
