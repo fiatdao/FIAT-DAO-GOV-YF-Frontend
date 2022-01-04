@@ -4,12 +4,12 @@ import cn from 'classnames';
 import Modal from 'components/antd/modal';
 import Grid from 'components/custom/grid';
 import { Text } from 'components/custom/typography';
+import { useGeneral } from 'components/providers/general-provider';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { APIVoterEntity, fetchCountAllUsers, fetchVoters } from 'modules/age-of-romulus/api';
 import { useAgeOfRomulus } from 'modules/age-of-romulus/providers/age-of-romulus-providers';
 import nftCard from 'resources/png/nft_card.png';
 import { useWallet } from 'wallets/wallet';
-import { useGeneral } from 'components/providers/general-provider';
 
 import AgeOfRomulusRank from '../../components/age-of-romulus-rank';
 import AgeOfRomulusTable from '../../components/age-of-romulus-table';
@@ -68,14 +68,16 @@ const AgeOfRomulusView = () => {
           <div className={s.card}>
             <AgeOfRomulusRank allUsers={allUsers} currUser={currUser} countAllUsers={countAllUsers} />
           </div>
-          <PrizesView
-            countAllUsers={countAllUsers}
-            activeKey={ageOfRomulusCtx.ACTIVE_KEY}
-          />
+          <PrizesView countAllUsers={countAllUsers} activeKey={ageOfRomulusCtx.ACTIVE_KEY} />
         </Grid>
         <div className={s.daoStakers}>
           <div className={s.daoStakers__head}>
-            <div className={cn(s.daoStakers__head__img, { [s.daoStakers__head__img_Light]: !isDarkTheme, [s.daoStakers__head__img_Dark]: isDarkTheme,})} />
+            <div
+              className={cn(s.daoStakers__head__img, {
+                [s.daoStakers__head__img_Light]: !isDarkTheme,
+                [s.daoStakers__head__img_Dark]: isDarkTheme,
+              })}
+            />
             <Text tag="p" type="h1" weight="bold" color="primary">
               DAO Stakers
             </Text>

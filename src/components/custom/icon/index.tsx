@@ -52,6 +52,7 @@ import gohm_fdt_slp_coronaImg from 'resources/png/gohm_fdt_slp_corona.png';
 import wsOHMSrc from 'resources/png/wsOHM.png';
 import YFISrc from 'resources/png/YFI.png';
 import notConnected from 'resources/svg/not-connected.svg';
+import ar_completed from 'resources/svg/age_of_romulus_completed.svg';
 import Sprite from 'resources/svg/icons-sprite.svg';
 
 import s from './s.module.scss';
@@ -237,6 +238,7 @@ export type IconNames =
   | 'png/plug-bg'
   | 'png/fdt_add'
   | 'svg/not-connected'
+  | 'svg/ar-completed'
   | 'static/add-token';
 
 export type IconProps = {
@@ -353,6 +355,8 @@ const Icon: React.FC<IconProps> = props => {
           return romanAmphora;
         case 'svg/not-connected':
           return notConnected;
+        case 'svg/ar-completed':
+          return ar_completed;
         default:
           return '';
       }
