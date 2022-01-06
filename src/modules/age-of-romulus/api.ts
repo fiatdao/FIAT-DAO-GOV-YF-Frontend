@@ -3,6 +3,7 @@ import {getHumanValue} from 'web3/utils';
 
 import { gql } from "@apollo/client";
 import { GraphClient } from "../../web3/graph/client";
+import { VotingPower } from '../senatus/votingPower';
 
 type PaginatedResult<T extends Record<string, any>> = {
   data: T[];
@@ -23,7 +24,12 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
       query GetVoters ($limit: Int, $offset: Int) {
         voters (first: $limit, skip: $offset, orderBy: votingPower, orderDirection: desc, where:{isComitiumUser:true}){
           id
-          votingPower
+          tokensStaked
+          lockedUntil
+          delegatedPower
+          votes
+          proposals
+          hasActiveDelegation
         }
         overview (id: "OVERVIEW") {
           comitiumUsers
@@ -44,7 +50,7 @@ export function fetchVoters(page = 1, limit = 10): Promise<PaginatedResult<APIVo
         return ({
           rank: index + 1,
           address: voter.id,
-          votingPower: getHumanValue(new BigNumber(voter.votingPower), 18)
+          votingPower: getHumanValue(VotingPower.calculate(voter), 18)
         })
       }),
       meta: {count: result.data.overview.comitiumUsers, block: 0}
