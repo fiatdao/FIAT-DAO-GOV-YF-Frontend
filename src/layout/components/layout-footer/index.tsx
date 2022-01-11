@@ -68,6 +68,15 @@ const LayoutFooter: React.FC = () => {
                   })}>
                   <span>Airdrop</span>
                 </Link>
+                <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                  <span>Olympus Pro</span>
+                  <Icon
+                    name="arrow-top-right"
+                    width={8}
+                    height={8}
+                    style={{ position: 'absolute', top: 20, right: -22 }}
+                  />
+                </a>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                 {/*  <span>FIAT DAO</span>*/}
                 {/*</Link>*/}
@@ -102,6 +111,15 @@ const LayoutFooter: React.FC = () => {
                   <Link to="/airdrop" className={s.dropdownLink}>
                     <span>Airdrop</span>
                   </Link>
+                  <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                    <span>Olympus Pro</span>
+                    <Icon
+                      name="arrow-top-right"
+                      width={8}
+                      height={8}
+                      style={{ position: 'absolute', top: 10, right: -13 }}
+                    />
+                  </a>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}

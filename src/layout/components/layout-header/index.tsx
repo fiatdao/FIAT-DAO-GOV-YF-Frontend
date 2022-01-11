@@ -99,6 +99,15 @@ const LayoutHeader: React.FC = () => {
         <Link to="/airdrop" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'airdrop' })} onClick={() => setNavOpen(false)}>
           <span>Airdrop</span>
         </Link>
+        <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+          <span>Olympus Pro</span>
+          <Icon
+            name="arrow-top-right"
+            width={8}
+            height={8}
+            style={{ position: 'absolute', top: 0, right: -12 }}
+          />
+        </a>
         {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
         {/*  <span>FIAT DAO</span>*/}
         {/*</Link>*/}
@@ -214,6 +223,15 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/airdrop" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Airdrop</span>
                   </Link>
+                  <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                    <span>Olympus Pro</span>
+                    <Icon
+                      name="arrow-top-right"
+                      width={8}
+                      height={8}
+                      style={{ position: 'absolute', top: 0, right: 0 }}
+                    />
+                  </a>
                   {/*<Link to="/fiat-dao" className={s.dropdownLink} onClick={() => setNavOpen(false)}>*/}
                   {/*  <span>FIAT DAO</span>*/}
                   {/*</Link>*/}

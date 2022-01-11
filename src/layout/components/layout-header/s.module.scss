@@ -181,6 +181,7 @@
 }
 
 .dropdownLink {
+  position: relative;
   display: flex;
   align-items: center;
   color: var(--theme-secondary-color);
