@@ -74,7 +74,7 @@ const LayoutFooter: React.FC = () => {
                     name="arrow-top-right"
                     width={8}
                     height={8}
-                    style={{ position: 'absolute', top: 20, right: -22 }}
+                    style={{ position: 'absolute', top: 20, right: -14 }}
                   />
                 </a>
                 {/*<Link to="/fiat-dao" className={s.dropdownLink}>*/}
