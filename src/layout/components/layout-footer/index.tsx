@@ -9,7 +9,11 @@ import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Socials from './components/Socials';
 
+// @ts-ignore
+import PDFManuscript from '../../../resources/files/fiat-lux-manuscript.pdf';
+
 import s from './s.module.scss';
+
 
 const LayoutFooter: React.FC = () => {
   const { isDarkTheme } = useGeneral();
@@ -68,6 +72,9 @@ const LayoutFooter: React.FC = () => {
                   })}>
                   <span>Airdrop</span>
                 </Link>
+                <a href={PDFManuscript} target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                  <span>Manuscript</span>
+                </a>
                 <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
                   <span>Olympus Pro</span>
                   <Icon
@@ -111,6 +118,9 @@ const LayoutFooter: React.FC = () => {
                   <Link to="/airdrop" className={s.dropdownLink}>
                     <span>Airdrop</span>
                   </Link>
+                  <a href={PDFManuscript} target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                    <span>Manuscript</span>
+                  </a>
                   <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
                     <span>Olympus Pro</span>
                     <Icon

@@ -20,6 +20,9 @@ import ConnectedWallet from 'wallets/components/connected-wallet';
 import { MetamaskConnector } from 'wallets/connectors/metamask';
 import { useWallet } from 'wallets/wallet';
 
+// @ts-ignore
+import PDFManuscript from '../../../resources/files/fiat-lux-manuscript.pdf';
+
 import s from './s.module.scss';
 
 const modalRoot = document.getElementById('modal-root') || document.body;
@@ -99,6 +102,9 @@ const LayoutHeader: React.FC = () => {
         <Link to="/airdrop" className={cn(s.dropdownLink, { [s.dropdownLink_active]: pathname.split('/')[1] === 'airdrop' })} onClick={() => setNavOpen(false)}>
           <span>Airdrop</span>
         </Link>
+        <a href={PDFManuscript} target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+          <span>Manuscript</span>
+        </a>
         <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
           <span>Olympus Pro</span>
           <Icon
@@ -223,6 +229,9 @@ const LayoutHeader: React.FC = () => {
                   <Link to="/airdrop" className={s.dropdownLink} onClick={() => setNavOpen(false)}>
                     <span>Airdrop</span>
                   </Link>
+                  <a href={PDFManuscript} target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
+                    <span>Manuscript</span>
+                  </a>
                   <a href='https://pro.olympusdao.finance/#/bond/fdt_gohm_slp' target='_blank' rel='noopener noreferrer' className={cn(s.dropdownLink)}>
                     <span>Olympus Pro</span>
                     <Icon
