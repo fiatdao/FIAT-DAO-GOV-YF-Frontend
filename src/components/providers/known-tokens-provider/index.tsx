@@ -22,9 +22,11 @@ export enum KnownTokens {
   RGT = 'RGT',
   wsOHM = 'wsOHM',
   gOHM = 'gOHM',
+  OHM = 'OHM',
   ETH_FDT_SLP = 'ETH_FDT_SLP',
   wsOHM_FDT_SLP = 'wsOHM_FDT_SLP',
   gOHM_FDT_SLP = 'gOHM_FDT_SLP',
+  OHM_FDT_SLP = 'OHM_FDT_SLP',
 }
 
 export type TokenMeta = {
@@ -128,6 +130,16 @@ export const wsOHMToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.wsOHM),
 };
 
+export const OHMToken: TokenMeta = {
+  address: config.tokens.OHM,
+  symbol: KnownTokens.OHM,
+  name: 'OHM',
+  decimals: 18,
+  icon: 'png/wsOHM',
+  coinGeckoId: 'olympus',
+  contract: new Erc20Contract([], config.tokens.OHM),
+};
+
 export const gOHMToken: TokenMeta = {
   address: config.tokens.gOHM,
   symbol: KnownTokens.gOHM,
@@ -165,6 +177,15 @@ export const gOHMFdtSLPToken: TokenMeta = {
   contract: new Erc20Contract([], config.tokens.gOHMFDTSLP),
 };
 
+export const OHMFdtSLPToken: TokenMeta = {
+  address: config.tokens.OHMFDTSLP,
+  symbol: KnownTokens.OHM_FDT_SLP,
+  name: 'OHM FDT UNISWAP LP',
+  decimals: 18,
+  icon: 'png/wsOHM_FDT_SUSHI_LP',
+  contract: new Erc20Contract([], config.tokens.OHMFDTSLP),
+};
+
 const KNOWN_TOKENS: TokenMeta[] = [
   FDTToken,
   EthToken,
@@ -179,6 +200,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
   gOHMFdtSLPToken,
+  OHMFdtSLPToken,
 ];
 
 (window as any).KNOWN_TOKENS = KNOWN_TOKENS;
@@ -226,9 +248,9 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
   createAbiItem('token0', [], ['address']),
 ];
 
-// ToDo: Check the ENTR price calculation
+// ToDo: Check the FDT price calculation
 async function getFdtPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, gOHMFdtSLPToken.address);
+  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
 
   const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
     { method: 'token0' },
@@ -236,23 +258,23 @@ async function getFdtPrice(): Promise<BigNumber> {
   ]);
 
   let fdtReserve;
-  let gOHMReserve;
+  let OHMReserve;
 
   if (String(token0).toLowerCase() === FDTToken.address) {
     fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
-    gOHMReserve = new BigNumber(reserve1).unscaleBy(gOHMToken.decimals);
+    OHMReserve = new BigNumber(reserve1).unscaleBy(OHMToken.decimals);
   } else {
     fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
-    gOHMReserve = new BigNumber(reserve0).unscaleBy(gOHMToken.decimals);
+    OHMReserve = new BigNumber(reserve0).unscaleBy(OHMToken.decimals);
   }
 
-  if (!gOHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
+  if (!OHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
     return BigNumber.ZERO;
   }
 
-  gOHMReserve = (gOHMReserve as BigNumber).times(gOHMToken?.price as BigNumber)
+  OHMReserve = (OHMReserve as BigNumber).times(OHMToken?.price as BigNumber)
 
-  return gOHMReserve.dividedBy(fdtReserve);
+  return OHMReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
@@ -394,7 +416,7 @@ const KnownTokensProvider: FC = props => {
           }
         });
 
-        FDTToken.price = await getFdtPrice().catch(() => undefined);
+        // FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);

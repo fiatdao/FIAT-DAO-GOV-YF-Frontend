@@ -3,6 +3,7 @@ import {
   REACT_APP_CONTRACT_YF_gOHM_FDT_Galea_SUSHI_LP,
   REACT_APP_CONTRACT_YF_gOHM_FDT_Gladius_SUSHI_LP,
 } from './contractAddresses/prodAddrs';
+import { REACT_APP_TOKEN_OHM_ADDR, REACT_APP_TOKEN_OHM_FDT_UNISWAP_LP } from './contractAddresses/devAddrs';
 
 function toLowerCase(value: any): string {
   return String(value ?? '').toLowerCase();
@@ -31,9 +32,11 @@ const config = {
     rgt: toLowerCase(contractAddresses.REACT_APP_TOKEN_RGT_ADDR),
     wsOHM: toLowerCase(contractAddresses.REACT_APP_TOKEN_wsOHM_ADDR),
     gOHM: toLowerCase(contractAddresses.REACT_APP_TOKEN_gOHM_ADDR),
+    OHM: toLowerCase(contractAddresses.REACT_APP_TOKEN_OHM_ADDR),
     ethFDTSLP: toLowerCase(contractAddresses.REACT_APP_TOKEN_ETH_FDT_SUSHI_LP),
     wsOHMFDTSLP: toLowerCase(contractAddresses.REACT_APP_TOKEN_wsOHM_FDT_SUSHI_LP),
     gOHMFDTSLP: toLowerCase(contractAddresses.REACT_APP_TOKEN_gOHM_FDT_SUSHI_LP),
+    OHMFDTSLP: toLowerCase(contractAddresses.REACT_APP_TOKEN_OHM_FDT_UNISWAP_LP),
   },
   contracts: {
     yf: {
