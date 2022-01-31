@@ -104,7 +104,7 @@ const PoolStats: React.FC<Props> = ({ className }) => {
             </Text>
             <ExternalLink href={FDT_MARKET_LINK} className="link-gradient">
               <Text type="p1" weight="semibold" color="var(--gradient-pink-safe)" textGradient="var(--gradient-pink)">
-                SushiSwap market
+                Uniswap market
               </Text>
             </ExternalLink>
           </div>
