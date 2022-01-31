@@ -5,7 +5,7 @@ import cn from 'classnames';
 import Icon from 'components/custom/icon';
 
 import { useGeneral } from '../../../components/providers/general-provider';
-import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK, FDT_MARKET_LINK_Uniswap } from '../../../config';
+import { FDT_MARKET_LINK, FDT_MARKET_LIQUIDITY_LINK } from '../../../config';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import Socials from './components/Socials';
 
@@ -147,12 +147,9 @@ const LayoutFooter: React.FC = () => {
               <div className={s.copyrightLinks}>
                 <div className={s.poweredBy}>
                   <a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">
-                    Add liquidity to SushiSwap gOHM/FDT pool
+                    Add liquidity to Uniswap OHM/FDT pool
                   </a>
                   <a href={FDT_MARKET_LINK} target="_blank" rel="noopener noreferrer">
-                    SushiSwap gOHM/FDT market
-                  </a>
-                  <a href={FDT_MARKET_LINK_Uniswap} target="_blank" rel="noopener noreferrer">
                     Uniswap OHM/FDT market
                   </a>
                   {/*<Link to="/airdrop">*/}

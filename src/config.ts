@@ -103,10 +103,8 @@ const config = {
   },
 };
 
-export const FDT_MARKET_LINK_Uniswap = 'https://app.uniswap.org/#/swap?inputCurrency=0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5&outputCurrency=0xed1480d12be41d92f36f5f7bdd88212e381a3677&chain=mainnet';
+export const FDT_MARKET_LINK = 'https://app.uniswap.org/#/swap?inputCurrency=0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5&outputCurrency=0xed1480d12be41d92f36f5f7bdd88212e381a3677&chain=mainnet';
 
-export const FDT_MARKET_LINK = `https://app.sushi.com/swap?inputCurrency=${config.tokens.gOHM}&outputCurrency=${config.tokens.fdt}`;
-
-export const FDT_MARKET_LIQUIDITY_LINK = `https://app.sushi.com/add/${config.tokens.gOHM}/${config.tokens.fdt}`;
+export const FDT_MARKET_LIQUIDITY_LINK = 'https://app.uniswap.org/#/add/0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5/0xed1480d12be41d92f36f5f7bdd88212e381a3677/10000?chain=mainnet';
 
 export default config;
