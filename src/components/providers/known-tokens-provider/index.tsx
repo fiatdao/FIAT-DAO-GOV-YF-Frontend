@@ -417,7 +417,7 @@ const KnownTokensProvider: FC = props => {
           }
         });
 
-        // FDTToken.price = await getFdtPrice().catch(() => undefined);
+        FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
