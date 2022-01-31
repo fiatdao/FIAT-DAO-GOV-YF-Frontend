@@ -197,6 +197,7 @@ const KNOWN_TOKENS: TokenMeta[] = [
   RGTToken,
   wsOHMToken,
   gOHMToken,
+  OHMToken,
   EthFdtSLPToken,
   wsOHMFdtSLPToken,
   gOHMFdtSLPToken,
