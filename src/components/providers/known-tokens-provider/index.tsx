@@ -249,37 +249,44 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
   createAbiItem('token0', [], ['address']),
 ];
 
-// ToDo: Check the FDT price calculation
-async function getFdtPrice(): Promise<BigNumber> {
-  const priceFeedContract = new Erc20Contract(LP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
+const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
+  createAbiItem('token0', [], ['address']),
+  createAbiItem('slot0', [], ['uint160', 'int24', 'uint16', 'uint16', 'uint16', 'uint8', 'bool']),
+];
 
-  const [token0, { 0: reserve0, 1: reserve1 }] = await priceFeedContract.batch([
+// ToDo: Check the FDT price calculation
+// @ts-ignore
+async function getFdtPrice(): Promise<BigNumber> {
+  const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
+
+  const [token0, slot0] = await priceFeedContract.batch([
     { method: 'token0' },
-    { method: 'getReserves' },
+    { method: 'slot0' },
   ]);
 
   console.log('token0', token0);
-  console.log('reserve0', reserve0);
-  console.log('reserve0', reserve1);
+  console.log('slot0', slot0);
+  // console.log('reserve0', reserve0);
+  // console.log('reserve0', reserve1);
 
-  let fdtReserve;
-  let OHMReserve;
-
-  if (String(token0).toLowerCase() === FDTToken.address) {
-    fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
-    OHMReserve = new BigNumber(reserve1).unscaleBy(OHMToken.decimals);
-  } else {
-    fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
-    OHMReserve = new BigNumber(reserve0).unscaleBy(OHMToken.decimals);
-  }
-
-  if (!OHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
-    return BigNumber.ZERO;
-  }
-
-  OHMReserve = (OHMReserve as BigNumber).times(OHMToken?.price as BigNumber)
-
-  return OHMReserve.dividedBy(fdtReserve);
+  // let fdtReserve;
+  // let OHMReserve;
+  //
+  // if (String(token0).toLowerCase() === FDTToken.address) {
+  //   fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
+  //   OHMReserve = new BigNumber(reserve1).unscaleBy(OHMToken.decimals);
+  // } else {
+  //   fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
+  //   OHMReserve = new BigNumber(reserve0).unscaleBy(OHMToken.decimals);
+  // }
+  //
+  // if (!OHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
+  //   return BigNumber.ZERO;
+  // }
+  //
+  // OHMReserve = (OHMReserve as BigNumber).times(OHMToken?.price as BigNumber)
+  //
+  // return OHMReserve.dividedBy(fdtReserve);
 }
 
 // ToDo: Check the SLP price calculation
@@ -421,7 +428,9 @@ const KnownTokensProvider: FC = props => {
           }
         });
 
-        FDTToken.price = await getFdtPrice().catch(() => undefined);
+        // FDTToken.price = await getFdtPrice().catch(() => undefined);
+        console.log('getFdtPrice');
+        await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
