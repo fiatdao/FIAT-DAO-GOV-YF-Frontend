@@ -263,7 +263,7 @@ const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
 // @ts-ignore
 async function getFdtPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
-
+  console.log('priceFeedContract', priceFeedContract);
   const [{ 0: sqrtPriceX96, 1: tick }, token0, token1, fee, liquidity] = await priceFeedContract.batch([
     { method: 'slot0' },
     { method: 'token0' },
@@ -271,10 +271,20 @@ async function getFdtPrice(): Promise<BigNumber> {
     { method: 'fee' },
     { method: 'liquidity' },
   ]);
+  console.log({sqrtPriceX96});
+  console.log({tick});
+  console.log({token0});
+  console.log({token1});
+  console.log({fee});
+  console.log({fee});
+  console.log({liquidity});
 
   const TokenA = new Token(config.web3.chainId, token0, OHMToken.decimals, OHMToken.symbol, OHMToken.name);
   const TokenB = new Token(config.web3.chainId, token1, FDTToken.decimals, FDTToken.symbol, FDTToken.name);
 
+
+  console.log({TokenA});
+  console.log({TokenB});
 
   const poolExample = new Pool(
     TokenA,
@@ -463,7 +473,7 @@ const KnownTokensProvider: FC = props => {
 
         // FDTToken.price = await getFdtPrice().catch(() => undefined);
         console.log('getFdtPrice');
-        await getFdtPrice().catch(() => undefined);
+        await getFdtPrice().catch((e) => console.error(e));
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
