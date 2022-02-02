@@ -259,13 +259,23 @@ const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
 async function getFdtPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
 
-  const [token0, slot0] = await priceFeedContract.batch([
+  const [token0, { 0: sqrtPriceX96 }] = await priceFeedContract.batch([
     { method: 'token0' },
     { method: 'slot0' },
   ]);
 
-  console.log('token0', token0);
-  console.log('slot0', slot0);
+  // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
+
+  const num1 = new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(1e18))
+
+  const num2 = new BigNumber(1e18).div(2)
+
+  const num3 = num1.div(num2).pow(192)
+
+  console.log('num3', num3.toString());
+
+  // var number_1 =JSBI.BigInt(sqrtPriceX96 *sqrtPriceX96* (1e18))/(1e18)/JSBI.BigInt(2) ** (JSBI.BigInt(192));
+
   // console.log('reserve0', reserve0);
   // console.log('reserve0', reserve1);
 
