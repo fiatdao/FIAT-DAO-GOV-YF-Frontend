@@ -282,17 +282,16 @@ async function getFdtPrice(): Promise<BigNumber> {
   const TokenA = new Token(config.web3.chainId, token0, OHMToken.decimals, OHMToken.symbol, OHMToken.name);
   const TokenB = new Token(config.web3.chainId, token1, FDTToken.decimals, FDTToken.symbol, FDTToken.name);
 
-
   console.log({TokenA});
   console.log({TokenB});
 
   const poolExample = new Pool(
     TokenA,
     TokenB,
-    fee,
-    sqrtPriceX96.toString(),
-    liquidity.toString(),
-    tick
+    Number(fee),
+    sqrtPriceX96,
+    liquidity,
+    Number(tick)
   );
 
   console.log('poolExample', poolExample);
