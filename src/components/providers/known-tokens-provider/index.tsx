@@ -262,6 +262,7 @@ const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
 // ToDo: Check the FDT price calculation
 // @ts-ignore
 async function getFdtPrice(): Promise<BigNumber> {
+  console.log('test', new BigNumber('374742098492.8335').unscaleBy(9)?.toString());
   const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
   console.log('priceFeedContract', priceFeedContract);
   const [{ 0: sqrtPriceX96, 1: tick }, token0, token1, fee, liquidity] = await priceFeedContract.batch([
@@ -294,8 +295,8 @@ async function getFdtPrice(): Promise<BigNumber> {
     Number(tick)
   );
 
-  console.log('token0Price', poolExample.token0Price.toFixed());
-  console.log('token1Price', poolExample.token1Price.toFixed());
+  console.log('token0Price', poolExample.token0Price.invert());
+  console.log('token1Price', poolExample.token1Price.invert());
 
   // // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
   //
