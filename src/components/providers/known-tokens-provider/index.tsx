@@ -1,6 +1,8 @@
 import React, { FC, createContext, useContext, useEffect } from 'react';
 import BigNumber from 'bignumber.js';
 import { AbiItem } from 'web3-utils';
+import { Pool } from "@uniswap/v3-sdk";
+import { Token } from "@uniswap/sdk-core";
 import Erc20Contract from 'web3/erc20Contract';
 import { formatUSD } from 'web3/utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
@@ -250,8 +252,11 @@ const LP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
-  createAbiItem('token0', [], ['address']),
   createAbiItem('slot0', [], ['uint160', 'int24', 'uint16', 'uint16', 'uint16', 'uint8', 'bool']),
+  createAbiItem('token0', [], ['address']),
+  createAbiItem('token1', [], ['address']),
+  createAbiItem('fee', [], ['uint24']),
+  createAbiItem('liquidity', [], ['uint128']),
 ];
 
 // ToDo: Check the FDT price calculation
@@ -259,20 +264,38 @@ const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
 async function getFdtPrice(): Promise<BigNumber> {
   const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
 
-  const [token0, { 0: sqrtPriceX96 }] = await priceFeedContract.batch([
-    { method: 'token0' },
+  const [{ 0: sqrtPriceX96, 1: tick }, token0, token1, fee, liquidity] = await priceFeedContract.batch([
     { method: 'slot0' },
+    { method: 'token0' },
+    { method: 'token1' },
+    { method: 'fee' },
+    { method: 'liquidity' },
   ]);
 
-  // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
+  const TokenA = new Token(config.web3.chainId, token0, OHMToken.decimals, OHMToken.symbol, OHMToken.name);
+  const TokenB = new Token(config.web3.chainId, token1, FDTToken.decimals, FDTToken.symbol, FDTToken.name);
 
-  const num1 = new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(1e18))
 
-  const num2 = new BigNumber(1e18).div(2)
+  const poolExample = new Pool(
+    TokenA,
+    TokenB,
+    fee,
+    sqrtPriceX96.toString(),
+    liquidity.toString(),
+    tick
+  );
 
-  const num3 = num1.div(num2).pow(192)
+  console.log('poolExample', poolExample);
 
-  console.log('num3', num3.toString());
+  // // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
+  //
+  // const num1 = new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(1e18))
+  //
+  // const num2 = new BigNumber(1e18).div(2)
+  //
+  // const num3 = num1.div(num2).pow(192)
+  //
+  // console.log('num3', num3.toString());
 
   // var number_1 =JSBI.BigInt(sqrtPriceX96 *sqrtPriceX96* (1e18))/(1e18)/JSBI.BigInt(2) ** (JSBI.BigInt(192));
 
