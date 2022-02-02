@@ -45,7 +45,7 @@ export const FDTToken: TokenMeta = {
   symbol: KnownTokens.FDT,
   name: 'FDT Token',
   decimals: 18,
-  coinGeckoId: 'fiat-dao-token',
+  // coinGeckoId: 'fiat-dao-token',
   icon: 'png/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.fdt),
 };
@@ -258,6 +258,10 @@ async function getFdtPrice(): Promise<BigNumber> {
     { method: 'getReserves' },
   ]);
 
+  console.log('token0', token0);
+  console.log('reserve0', reserve0);
+  console.log('reserve0', reserve1);
+
   let fdtReserve;
   let OHMReserve;
 
@@ -417,7 +421,7 @@ const KnownTokensProvider: FC = props => {
           }
         });
 
-        // FDTToken.price = await getFdtPrice().catch(() => undefined);
+        FDTToken.price = await getFdtPrice().catch(() => undefined);
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
