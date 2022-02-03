@@ -2,7 +2,7 @@ import React, { FC, createContext, useContext, useEffect } from 'react';
 import BigNumber from 'bignumber.js';
 import { AbiItem } from 'web3-utils';
 import { Pool } from "@uniswap/v3-sdk";
-import { Token } from "@uniswap/sdk-core";
+import { Token, Price } from "@uniswap/sdk-core";
 import Erc20Contract from 'web3/erc20Contract';
 import { formatUSD } from 'web3/utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
@@ -47,7 +47,7 @@ export const FDTToken: TokenMeta = {
   symbol: KnownTokens.FDT,
   name: 'FDT Token',
   decimals: 18,
-  // coinGeckoId: 'fiat-dao-token',
+  coinGeckoId: 'fiat-dao-token',
   icon: 'png/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.fdt),
 };
@@ -295,9 +295,8 @@ async function getFdtPrice(): Promise<BigNumber> {
     Number(tick)
   );
 
-  console.log('token0Price', poolExample.token0Price.toFixed());
-  console.log('token1Price', poolExample.token1Price.toFixed());
-
+  console.log('token0Price', poolExample.token0Price.toSignificant());
+  console.log('token1Price', poolExample.token1Price.toSignificant());
   // // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
   //
   // const num1 = new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(1e18))
