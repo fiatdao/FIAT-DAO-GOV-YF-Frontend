@@ -295,8 +295,8 @@ async function getFdtPrice(): Promise<BigNumber> {
     Number(tick)
   );
 
-  console.log('token0Price', poolExample.token0Price.toString());
-  console.log('token1Price', poolExample.token1Price.toString());
+  console.log('token0Price', poolExample.token0Price.toFixed());
+  console.log('token1Price', poolExample.token1Price.toFixed());
 
   // // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
   //
