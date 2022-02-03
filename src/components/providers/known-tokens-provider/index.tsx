@@ -47,7 +47,7 @@ export const FDTToken: TokenMeta = {
   symbol: KnownTokens.FDT,
   name: 'FDT Token',
   decimals: 18,
-  coinGeckoId: 'fiat-dao-token',
+  // coinGeckoId: 'fiat-dao-token',
   icon: 'png/fiat-dao' as any,
   contract: new Erc20Contract([], config.tokens.fdt),
 };
@@ -136,7 +136,7 @@ export const OHMToken: TokenMeta = {
   address: config.tokens.OHM,
   symbol: KnownTokens.OHM,
   name: 'OHM',
-  decimals: 18,
+  decimals: 9,
   icon: 'png/wsOHM',
   coinGeckoId: 'olympus',
   contract: new Erc20Contract([], config.tokens.OHM),
@@ -260,11 +260,9 @@ const LP_UNISWAP_PRICE_FEED_ABI: AbiItem[] = [
 ];
 
 // ToDo: Check the FDT price calculation
-// @ts-ignore
 async function getFdtPrice(): Promise<BigNumber> {
-  console.log('test', new BigNumber('374742098492.8335').unscaleBy(9)?.toString());
   const priceFeedContract = new Erc20Contract(LP_UNISWAP_PRICE_FEED_ABI, OHMFdtSLPToken.address);
-  console.log('priceFeedContract', priceFeedContract);
+
   const [{ 0: sqrtPriceX96, 1: tick }, token0, token1, fee, liquidity] = await priceFeedContract.batch([
     { method: 'slot0' },
     { method: 'token0' },
@@ -272,19 +270,9 @@ async function getFdtPrice(): Promise<BigNumber> {
     { method: 'fee' },
     { method: 'liquidity' },
   ]);
-  console.log({sqrtPriceX96});
-  console.log({tick});
-  console.log({token0});
-  console.log({token1});
-  console.log({fee});
-  console.log({fee});
-  console.log({liquidity});
 
   const TokenA = new Token(config.web3.chainId, token0, OHMToken.decimals, OHMToken.symbol, OHMToken.name);
   const TokenB = new Token(config.web3.chainId, token1, FDTToken.decimals, FDTToken.symbol, FDTToken.name);
-
-  console.log({TokenA});
-  console.log({TokenB});
 
   const poolExample = new Pool(
     TokenA,
@@ -294,42 +282,7 @@ async function getFdtPrice(): Promise<BigNumber> {
     liquidity,
     Number(tick)
   );
-
-  console.log('token0Price', poolExample.token0Price.toSignificant());
-  console.log('token1Price', poolExample.token1Price.toSignificant());
-  // // const number =  new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(sqrtPriceX96))
-  //
-  // const num1 = new BigNumber(sqrtPriceX96).times(new BigNumber(sqrtPriceX96)).times(new BigNumber(1e18))
-  //
-  // const num2 = new BigNumber(1e18).div(2)
-  //
-  // const num3 = num1.div(num2).pow(192)
-  //
-  // console.log('num3', num3.toString());
-
-  // var number_1 =JSBI.BigInt(sqrtPriceX96 *sqrtPriceX96* (1e18))/(1e18)/JSBI.BigInt(2) ** (JSBI.BigInt(192));
-
-  // console.log('reserve0', reserve0);
-  // console.log('reserve0', reserve1);
-
-  // let fdtReserve;
-  // let OHMReserve;
-  //
-  // if (String(token0).toLowerCase() === FDTToken.address) {
-  //   fdtReserve = new BigNumber(reserve0).unscaleBy(FDTToken.decimals);
-  //   OHMReserve = new BigNumber(reserve1).unscaleBy(OHMToken.decimals);
-  // } else {
-  //   fdtReserve = new BigNumber(reserve1).unscaleBy(FDTToken.decimals);
-  //   OHMReserve = new BigNumber(reserve0).unscaleBy(OHMToken.decimals);
-  // }
-  //
-  // if (!OHMReserve || !fdtReserve || fdtReserve.eq(BigNumber.ZERO)) {
-  //   return BigNumber.ZERO;
-  // }
-  //
-  // OHMReserve = (OHMReserve as BigNumber).times(OHMToken?.price as BigNumber)
-  //
-  // return OHMReserve.dividedBy(fdtReserve);
+  return new BigNumber(poolExample.token1Price.toSignificant(6)).times(OHMToken?.price as BigNumber);
 }
 
 // ToDo: Check the SLP price calculation
@@ -470,10 +423,9 @@ const KnownTokensProvider: FC = props => {
             }
           }
         });
-
-        // FDTToken.price = await getFdtPrice().catch(() => undefined);
         console.log('getFdtPrice');
-        await getFdtPrice().catch((e) => console.error(e));
+        FDTToken.price = await getFdtPrice().catch(() => undefined);
+        // await getFdtPrice().catch((e) => console.error(e));
         // EthFdtSLPToken.price = await getEthFdtSLPPrice().catch(() => undefined);
         wsOHMFdtSLPToken.price = await getWSOHMFdtSLPPrice().catch(() => undefined);
         gOHMFdtSLPToken.price = await getGOHMFdtSLPTokenPrice().catch(() => undefined);
