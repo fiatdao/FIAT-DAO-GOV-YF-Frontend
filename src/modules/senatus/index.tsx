@@ -30,21 +30,11 @@ const SenatusViewInternal: React.FC = () => {
   const warning = useWarning();
 
   React.useEffect(() => {
-    let warningDestructor: () => void;
-
-    if (isMobile) {
-      // warningDestructor = warning.addWarn({
-      //   text: 'Transactions can only be made from the desktop version using Metamask',
-      //   closable: true,
-      //   storageIdentity: 'bb_desktop_metamask_tx_warn',
-      // });
-    } else {
-      warningDestructor = warning.addWarn({
-        text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
-        closable: true,
-        storageIdentity: 'bb_restake_warn',
-      });
-    }
+    const warningDestructor = warning.addWarn({
+      text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
+      closable: true,
+      storageIdentity: 'bb_restake_warn',
+    });
 
     return () => {
       warningDestructor?.();
