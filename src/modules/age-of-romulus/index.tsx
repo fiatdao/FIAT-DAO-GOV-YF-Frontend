@@ -23,9 +23,9 @@ const AgeOfRomulusViewPage: React.FC = () => {
       // });
     } else {
       warningDestructor = warning.addWarn({
-        text: 'Do not send funds directly to the contract!',
+        text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
         closable: true,
-        storageIdentity: 'bb_send_funds_warn',
+        storageIdentity: 'bb_restake_warn',
       });
     }
 
