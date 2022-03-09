@@ -73,7 +73,7 @@ const DAOClaimModal: FC<ModalProps> = props => {
   const daoCtx = useDAO();
 
   return (
-    <Modal width={832} {...modalProps}>
+    <Modal width={565} {...modalProps}>
       <div className="flex flow-row">
         <div className="flex flow-row mb-32">
           <Text type="h2" weight="semibold" color="primary" className="mb-8" font="secondary">
