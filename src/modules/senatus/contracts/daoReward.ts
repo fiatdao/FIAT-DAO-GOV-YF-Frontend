@@ -35,8 +35,8 @@ export type RewardsMeta = {
 
 export const ContractFirst: RewardsMeta = {
   name: RewardsID.First,
-  label: 'DAO Reward First',
-  contract: new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardFirst, 'DAO Reward First'),
+  label: 'Reward contract 1',
+  contract: new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardFirst, 'Reward contract 1'),
   claimSend: async(from: string): Promise<void> => {
     return ContractFirst.contract.send('claim', [], {
       from,
@@ -64,8 +64,8 @@ export const ContractFirst: RewardsMeta = {
 
 export const ContractSecond: RewardsMeta = {
   name: RewardsID.Second,
-  label: 'DAO Reward Second',
-  contract:  new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardSecond, 'DAO Reward Second'),
+  label: 'Reward contract 2',
+  contract:  new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardSecond, 'Reward contract 2'),
   claimSend: async (from: string): Promise<void> => {
     return ContractSecond.contract.send('claim', [], {
       from,
