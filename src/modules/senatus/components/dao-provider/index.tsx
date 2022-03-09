@@ -121,14 +121,14 @@ const DAOProvider: React.FC = props => {
   }, [daoSenatus.isActive, daoComitium.fdtStaked, daoComitium.activationThreshold, daoComitium.votingPower]);
 
   const apr = useMemo(() => {
-    const { rewards, getLastReward } = daoReward;
+    const { getLastReward } = daoReward;
     const { fdtStaked } = daoComitium;
 
     if (!getLastReward().poolFeature || !fdtStaked || (getLastReward().poolFeature?.endTs || 0) < Date.now() / 1_000) {
       return undefined;
     }
 
-    const duration = Number(rewards[rewards.length - 1].poolFeature?.totalDuration);
+    const duration = Number(getLastReward().poolFeature?.totalDuration);
     const yearInSeconds = 365 * 24 * 60 * 60;
 
     return getLastReward().poolFeature?.totalAmount.div(fdtStaked).div(duration).multipliedBy(yearInSeconds);
