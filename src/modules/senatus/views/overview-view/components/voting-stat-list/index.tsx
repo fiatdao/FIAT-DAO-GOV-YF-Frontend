@@ -124,7 +124,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             text={
               <Text type="p2">
                 This number shows the amount of ${FDTToken.symbol} rewards distributed so far out of the total of{' '}
-                {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)} that are going to be available for DAO
+                {formatToken(daoCtx.daoReward.getAllTotalAmount())} that are going to be available for DAO
                 Staking.
               </Text>
             }>
@@ -133,11 +133,11 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
             </Text>
           </Hint>
           <Grid flow="row" gap={4}>
-            <UseLeftTime end={(daoCtx.daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
+            <UseLeftTime end={(daoCtx.daoReward.getLastReward().poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
               {() => (
                 <Grid flow="col" gap={4} align="end">
                   <Text type="h2" weight="bold" color="primary">
-                    {formatToken(daoCtx.daoReward.actions.getEntrRewards())}
+                    {formatToken(daoCtx.daoReward.getAllFDTRewards())}
                   </Text>
                   <Text type="p1" color="secondary">
                     {FDTToken.symbol}
@@ -146,7 +146,7 @@ const VotingStatList: React.FC<VotingStatListProps> = props => {
               )}
             </UseLeftTime>
             <Text type="p1" color="secondary">
-              out of {formatToken(daoCtx.daoReward.poolFeature?.totalAmount)}
+              out of {formatToken(daoCtx.daoReward.getAllTotalAmount())}
             </Text>
           </Grid>
         </Grid>

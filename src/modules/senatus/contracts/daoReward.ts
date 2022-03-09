@@ -1,17 +1,14 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
-import { ZERO_BIG_NUMBER, getHumanValue } from 'web3/utils';
+import { ZERO_BIG_NUMBER, getHumanValue, formatBigValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
 
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
-import useMergeState from 'hooks/useMergeState';
 import { useReload } from 'hooks/useReload';
 import { useWallet } from 'wallets/wallet';
 
 import DAO_REWARD_ABI from './daoReward.json';
-
-const Contract = new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.reward, 'DAO Reward');
 
 export type DaoRewardPullFeature = {
   source: string;
@@ -21,93 +18,36 @@ export type DaoRewardPullFeature = {
   totalAmount: BigNumber;
 };
 
-function loadCommonData(): Promise<any> {
-  return Contract.batch([
-    {
-      method: 'pullFeature',
-      transform: (value: DaoRewardPullFeature) => ({
-        ...value,
-        totalAmount: getHumanValue(new BigNumber(value.totalAmount), FDTToken.decimals),
-      }),
-    },
-  ]).then(([poolFeature]) => {
-    return {
-      poolFeature,
-    };
-  });
+export enum RewardsID {
+  First = 'first',
+  Second = 'second',
 }
 
-function loadUserData(userAddress?: string): Promise<any> {
-  if (!userAddress) {
-    return Promise.reject();
-  }
-
-  return Contract.batch([
-    {
-      method: 'claim',
-      callArgs: {
-        from: userAddress,
-      },
-      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
-      onError: () => ZERO_BIG_NUMBER,
-    },
-  ]).then(([claimValue]) => {
-    return {
-      claimValue,
-    };
-  });
-}
-
-function claimSend(from: string): Promise<void> {
-  return Contract.send('claim', [], {
-    from,
-  });
-}
-
-export type DAORewardContractData = {
+export type RewardsMeta = {
+  name: RewardsID;
+  label: string;
   contract: Web3Contract;
+  claimSend: (from: string) => Promise<void>;
+  getFDTRewards(): BigNumber | undefined;
   claimValue?: BigNumber;
   poolFeature?: DaoRewardPullFeature;
 };
 
-const InitialState: DAORewardContractData = {
-  contract: Contract,
-  claimValue: undefined,
-  poolFeature: undefined,
-};
-
-export type DAORewardContract = DAORewardContractData & {
-  reload(): void;
-  actions: {
-    claim(): Promise<any>;
-    getEntrRewards(): BigNumber | undefined;
-  };
-};
-
-export function useDAORewardContract(): DAORewardContract {
-  const wallet = useWallet();
-
-  const [state, setState] = useMergeState<DAORewardContractData>(InitialState);
-  const [reload, version] = useReload();
-
-  React.useEffect(() => {
-    setState({ poolFeature: undefined });
-
-    loadCommonData().then(setState).catch(Error);
-  }, [version, setState]);
-
-  React.useEffect(() => {
-    setState({ claimValue: undefined });
-
-    loadUserData(wallet.account).then(setState).catch(Error);
-  }, [wallet.account, version, setState]);
-
-  function getEntrRewards(): BigNumber | undefined {
-    if (!state.poolFeature) {
+export const ContractFirst: RewardsMeta = {
+  name: RewardsID.First,
+  label: 'DAO Reward First',
+  contract: new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardFirst, 'DAO Reward First'),
+  claimSend: async(from: string): Promise<void> => {
+    return ContractFirst.contract.send('claim', [], {
+      from,
+    });
+  },
+  getFDTRewards:(): BigNumber | undefined => {
+    if (!ContractFirst.poolFeature) {
       return undefined;
     }
 
-    const { startTs, endTs, totalDuration, totalAmount } = state.poolFeature;
+    const { startTs, endTs, totalDuration, totalAmount } = ContractFirst.poolFeature;
     const now = Date.now() / 1_000;
 
     if (startTs > now) {
@@ -120,15 +60,151 @@ export function useDAORewardContract(): DAORewardContract {
 
     return totalAmount.multipliedBy(now - startTs).div(totalDuration);
   }
+};
+
+export const ContractSecond: RewardsMeta = {
+  name: RewardsID.Second,
+  label: 'DAO Reward Second',
+  contract:  new Web3Contract(DAO_REWARD_ABI as Web3ContractAbiItem[], config.contracts.dao.rewardSecond, 'DAO Reward Second'),
+  claimSend: async (from: string): Promise<void> => {
+    return ContractSecond.contract.send('claim', [], {
+      from,
+    });
+  },
+  getFDTRewards:(): BigNumber | undefined => {
+    if (!ContractSecond.poolFeature) {
+      return undefined;
+    }
+
+    const { startTs, endTs, totalDuration, totalAmount } = ContractSecond.poolFeature;
+    const now = Date.now() / 1_000;
+
+    if (startTs > now) {
+      return ZERO_BIG_NUMBER;
+    }
+
+    if (endTs <= now) {
+      return totalAmount;
+    }
+
+    return totalAmount.multipliedBy(now - startTs).div(totalDuration);
+  }
+};
+
+async function loadCommonData(): Promise<any> {
+
+  const queryPoolFeature = [
+    {
+      method: 'pullFeature',
+      transform: (value: DaoRewardPullFeature) => ({
+        ...value,
+        totalAmount: getHumanValue(new BigNumber(value.totalAmount), FDTToken.decimals),
+      }),
+    },
+  ]
+
+
+  const [firstPoolFeature] = await ContractFirst.contract.batch(queryPoolFeature)
+  const [secondPoolFeature] = await ContractSecond.contract.batch(queryPoolFeature)
+
+  ContractFirst.poolFeature = firstPoolFeature
+  ContractSecond.poolFeature = secondPoolFeature
+}
+
+async function loadUserData(userAddress?: string): Promise<any> {
+  if (!userAddress) {
+    return Promise.reject();
+  }
+
+  const queryClaimValue = [
+    {
+      method: 'claim',
+      callArgs: {
+        from: userAddress,
+      },
+      transform: (value: string) => getHumanValue(new BigNumber(value), FDTToken.decimals),
+      onError: () => ZERO_BIG_NUMBER,
+    },
+  ]
+
+  const [ firstClaimValue ] = await ContractFirst.contract.batch(queryClaimValue);
+  const [ secondClaimValue ] = await ContractSecond.contract.batch(queryClaimValue);
+
+
+  ContractFirst.claimValue = firstClaimValue
+  ContractSecond.claimValue = secondClaimValue
+}
+
+export type DAORewardContractData = {
+  rewards: RewardsMeta[];
+};
+
+const KNOWN_REWARDS: RewardsMeta[] = [
+  ContractFirst,
+  ContractSecond,
+];
+
+export type DAORewardContract = DAORewardContractData & {
+  reload(): void;
+  getLastReward(): RewardsMeta
+  getAllFDTRewards(): BigNumber | undefined;
+  getAllTotalAmount(): BigNumber | undefined;
+  getAllClaimValue(): BigNumber | undefined;
+};
+
+export function useDAORewardContract(): DAORewardContract {
+  const wallet = useWallet();
+
+  const [reload] = useReload();
+
+  React.useEffect(() => {
+    loadCommonData().then(reload).catch(Error);
+  }, []);
+
+  React.useEffect(() => {
+    loadUserData(wallet.account).then(reload).catch(Error);
+  }, [wallet.account]);
+
+  function getAllFDTRewards(): BigNumber | undefined {
+    if (!ContractFirst.poolFeature && !ContractSecond.poolFeature) {
+      return undefined;
+    }
+
+    return  BigNumber.sumEach(KNOWN_REWARDS, contract => {
+      return contract.getFDTRewards()
+    })
+  }
+
+  function getAllTotalAmount(): BigNumber | undefined {
+    if (!ContractFirst.poolFeature && !ContractSecond.poolFeature) {
+      return undefined;
+    }
+
+    return  BigNumber.sumEach(KNOWN_REWARDS, contract => {
+      return contract.poolFeature?.totalAmount
+    })
+  }
+
+  function getAllClaimValue(): BigNumber | undefined {
+    if (!ContractFirst.claimValue && !ContractSecond.claimValue) {
+      return undefined;
+    }
+
+    return  BigNumber.sumEach(KNOWN_REWARDS, contract => {
+      return contract.claimValue
+    })
+  }
+
+  function getLastReward(): RewardsMeta {
+    return KNOWN_REWARDS[KNOWN_REWARDS.length - 1]
+  }
 
   return {
-    ...state,
     reload,
-    actions: {
-      claim(): Promise<void> {
-        return wallet.isActive ? claimSend(wallet.account!) : Promise.reject();
-      },
-      getEntrRewards: getEntrRewards,
-    },
+    rewards: KNOWN_REWARDS,
+    getLastReward,
+    getAllFDTRewards,
+    getAllTotalAmount,
+    getAllClaimValue,
   };
 }

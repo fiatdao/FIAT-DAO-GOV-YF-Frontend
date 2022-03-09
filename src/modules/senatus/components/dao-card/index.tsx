@@ -72,15 +72,15 @@ const DaoCard: FC = () => {
             {FDTToken.symbol} Rewards
           </Text>
           <Text type="p2" color="secondary">
-            out of {formatToken(daoReward.poolFeature?.totalAmount)}
+            out of {formatToken(daoReward.getLastReward()?.poolFeature?.totalAmount)}
           </Text>
         </div>
         <div className="flex flow-col align-center">
           <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
-          <UseLeftTime end={(daoReward.poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
+          <UseLeftTime end={(daoReward.rewards[daoCtx.daoReward.rewards.length - 1].poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="500" color="primary">
-                {formatToken(daoReward.actions.getEntrRewards())}
+                {formatToken(daoReward.getLastReward().getFDTRewards())}
               </Text>
             )}
           </UseLeftTime>
@@ -94,7 +94,7 @@ const DaoCard: FC = () => {
           <div className="flex flow-col align-center">
             <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
             <Text type="p1" weight="500" color="primary">
-              {formatToken(daoReward.claimValue) ?? '-'}
+              {formatToken(daoReward.getLastReward()?.claimValue) ?? '-'}
             </Text>
           </div>
         </div>

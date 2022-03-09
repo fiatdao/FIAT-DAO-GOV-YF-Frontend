@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Spin } from 'antd';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
@@ -20,6 +20,8 @@ import useMediaQuery from '../../../../hooks/useMediaQuery';
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../dao-provider';
 import VotingDetailedModal from '../voting-detailed-modal';
+import DAOClaimModal from '../dao-claim-modal';
+
 
 import { getFormattedDuration, inRange } from 'utils';
 
@@ -39,9 +41,10 @@ const VotingHeader: React.FC = () => {
   const daoCtx = useDAO();
   const isMobile = useMediaQuery(767);
 
+  const [claimModalVisible, showClaimModal] = useState(false);
   const [state, setState] = useMergeState<VotingHeaderState>(InitialState);
 
-  const { claimValue } = daoCtx.daoReward;
+  const { getAllClaimValue } = daoCtx.daoReward;
   const fdtBalance = (FDTToken.contract as Erc20Contract).balance?.unscaleBy(FDTToken.decimals);
   const { votingPower, userLockedUntil, multiplier = 1 } = daoCtx.daoComitium;
 
@@ -52,16 +55,7 @@ const VotingHeader: React.FC = () => {
   }
 
   function handleClaim() {
-    setState({ claiming: true });
-
-    daoCtx.daoReward.actions
-      .claim()
-      .catch(Error)
-      .then(() => {
-        daoCtx.daoReward.reload();
-        (FDTToken.contract as Erc20Contract).loadBalance().catch(Error);
-        setState({ claiming: false });
-      });
+    showClaimModal(true)
   }
 
   return (
@@ -76,11 +70,11 @@ const VotingHeader: React.FC = () => {
               Current reward
             </Text>
             <Grid flow="col" align="center" className={s.item1__grid}>
-              <Tooltip title={<Text type="p2">{formatBigValue(claimValue, FDTToken.decimals)}</Text>}>
-                <Skeleton loading={claimValue === undefined}>
+              <Tooltip title={<Text type="p2">{formatBigValue(getAllClaimValue(), FDTToken.decimals)}</Text>}>
+                <Skeleton loading={getAllClaimValue() === undefined}>
                   <Text type="h3" weight="semibold" color="primary">
-                    {isSmallEntrValue(claimValue) && '> '}
-                    {formatEntrValue(claimValue)}
+                    {isSmallEntrValue(getAllClaimValue()) && '> '}
+                    {formatEntrValue(getAllClaimValue())}
                   </Text>
                 </Skeleton>
               </Tooltip>
@@ -88,7 +82,7 @@ const VotingHeader: React.FC = () => {
               <button
                 type="button"
                 className="button-primary button-small"
-                disabled={claimValue?.isZero()}
+                disabled={getAllClaimValue()?.isZero()}
                 onClick={handleClaim}
                 style={{ marginLeft: isMobile ? 0 : 15 }}>
                 {!state.claiming ? 'Claim' : <Spin spinning />}
@@ -168,6 +162,7 @@ const VotingHeader: React.FC = () => {
           </UseLeftTime>
         </Grid>
       </div>
+      {claimModalVisible && <DAOClaimModal onCancel={() => showClaimModal(false)} />}
     </div>
   );
 };

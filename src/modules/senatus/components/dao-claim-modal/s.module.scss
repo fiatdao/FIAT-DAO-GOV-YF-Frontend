@@ -1,0 +1,26 @@
+.grid {
+  grid-template-rows: repeat(2, 240px);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.block {
+  border-radius: 4px;
+  border: 1px solid var(--theme-border-color);
+  background-color: var(--theme-amount-color);
+}
+
+.item {
+  &__name {
+    align-items: start;
+
+    @media (max-width: 768px) {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      grid-gap: 12px;
+    }
+  }
+}

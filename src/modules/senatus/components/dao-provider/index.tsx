@@ -7,6 +7,7 @@ import { ZERO_BIG_NUMBER } from 'web3/utils';
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
 import useMergeState from 'hooks/useMergeState';
+import { useReload } from 'hooks/useReload';
 import { DAOComitiumContract, useDAOComitiumContract } from 'modules/senatus/contracts/daoComitium';
 import { DAOSenatusContract, useDAOSenatusContract } from 'modules/senatus/contracts/daoSenatus';
 import { DAORewardContract, useDAORewardContract } from 'modules/senatus/contracts/daoReward';
@@ -69,12 +70,13 @@ const DAOProvider: React.FC = props => {
   const daoComitium = useDAOComitiumContract();
   const daoReward = useDAORewardContract();
   const daoSenatus = useDAOSenatusContract();
+  const [reload, version] = useReload();
 
   const [state, setState] = useMergeState<DAOProviderState>(InitialState);
 
   React.useEffect(() => {
     daoComitium.contract.setProvider(walletCtx.provider);
-    daoReward.contract.setProvider(walletCtx.provider);
+    daoReward.rewards.map(i => i.contract.setProvider(walletCtx.provider));
     daoSenatus.contract.setProvider(walletCtx.provider);
   }, [walletCtx.provider]);
 
@@ -83,7 +85,7 @@ const DAOProvider: React.FC = props => {
 
     fdtContract.setAccount(walletCtx.account);
     daoComitium.contract.setAccount(walletCtx.account);
-    daoReward.contract.setAccount(walletCtx.account);
+    daoReward.rewards.map(i => i.contract.setAccount(walletCtx.account));
     daoSenatus.contract.setAccount(walletCtx.account);
 
     if (walletCtx.isActive) {
@@ -119,18 +121,18 @@ const DAOProvider: React.FC = props => {
   }, [daoSenatus.isActive, daoComitium.fdtStaked, daoComitium.activationThreshold, daoComitium.votingPower]);
 
   const apr = useMemo(() => {
-    const { poolFeature } = daoReward;
+    const { rewards, getLastReward } = daoReward;
     const { fdtStaked } = daoComitium;
 
-    if (!poolFeature || !fdtStaked || poolFeature.endTs < Date.now() / 1_000) {
+    if (!getLastReward().poolFeature || !fdtStaked || (getLastReward().poolFeature?.endTs || 0) < Date.now() / 1_000) {
       return undefined;
     }
 
-    const duration = Number(poolFeature.totalDuration);
+    const duration = Number(rewards[rewards.length - 1].poolFeature?.totalDuration);
     const yearInSeconds = 365 * 24 * 60 * 60;
 
-    return poolFeature.totalAmount.div(fdtStaked).div(duration).multipliedBy(yearInSeconds);
-  }, [daoReward.poolFeature, daoComitium.fdtStaked]);
+    return getLastReward().poolFeature?.totalAmount.div(fdtStaked).div(duration).multipliedBy(yearInSeconds);
+  }, [version, daoComitium.fdtStaked]);
 
   function activate() {
     return daoSenatus.actions.activate().then(() => {
@@ -181,7 +183,7 @@ const DAOProvider: React.FC = props => {
       }}>
       {children}
       <ContractListener contract={daoComitium.contract} />
-      <ContractListener contract={daoReward.contract} />
+      {daoReward.rewards.map(i => <ContractListener key={i.name} contract={i.contract} />)}
       <ContractListener contract={daoSenatus.contract} />
     </DAOContext.Provider>
   );

@@ -1,9 +1,4 @@
 import contractAddresses from './contractAddresses'
-import {
-  REACT_APP_CONTRACT_YF_gOHM_FDT_Galea_SUSHI_LP,
-  REACT_APP_CONTRACT_YF_gOHM_FDT_Gladius_SUSHI_LP,
-} from './contractAddresses/prodAddrs';
-import { REACT_APP_TOKEN_OHM_ADDR, REACT_APP_TOKEN_OHM_FDT_UNISWAP_LP } from './contractAddresses/devAddrs';
 
 function toLowerCase(value: any): string {
   return String(value ?? '').toLowerCase();
@@ -61,7 +56,8 @@ const config = {
     dao: {
       governance: toLowerCase(contractAddresses.REACT_APP_CONTRACT_DAO_GOVERNANCE_ADDR),
       comitium: toLowerCase(contractAddresses.REACT_APP_CONTRACT_DAO_COMITIUM_ADDR),
-      reward: toLowerCase(contractAddresses.REACT_APP_CONTRACT_DAO_REWARD_ADDR),
+      rewardFirst: toLowerCase(contractAddresses.REACT_APP_CONTRACT_DAO_REWARD_First_ADDR),
+      rewardSecond: toLowerCase(contractAddresses.REACT_APP_CONTRACT_DAO_REWARD_Second_ADDR),
     },
     merkleDistributor: toLowerCase(contractAddresses.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_ADDR),
     merkleDistributorAmphora: toLowerCase(contractAddresses.REACT_APP_CONTRACT_MERKLE_DISTRIBUTOR_AMPHORA_ADDR),
