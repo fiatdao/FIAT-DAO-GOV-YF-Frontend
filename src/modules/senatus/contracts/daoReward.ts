@@ -141,7 +141,7 @@ export type DAORewardContractData = {
 
 const KNOWN_REWARDS: RewardsMeta[] = [
   ContractFirst,
-  ContractSecond,
+  // ContractSecond,
 ];
 
 export type DAORewardContract = DAORewardContractData & {
