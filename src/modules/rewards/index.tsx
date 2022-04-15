@@ -1,9 +1,6 @@
 import React, { Suspense, lazy } from 'react';
-import { isMobile } from 'react-device-detect';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import AntdSpin from 'antd/lib/spin';
-
-import { useWarning } from 'components/providers/warning-provider';
 
 import YFPoolsProvider from './providers/pools-provider';
 
@@ -11,19 +8,6 @@ const PoolsView = lazy(() => import('./views/pools-view'));
 const PoolView = lazy(() => import('./views/pool-view'));
 
 const RewardsView: React.FC = () => {
-  const warning = useWarning();
-
-  React.useEffect(() => {
-    const warningDestructor = warning.addWarn({
-      text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
-      closable: true,
-      storageIdentity: 'bb_restake_warn',
-    });
-
-    return () => {
-      warningDestructor?.();
-    };
-  }, [isMobile]);
 
   return (
     <YFPoolsProvider>
