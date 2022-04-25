@@ -2,10 +2,8 @@ import React from 'react';
 import { Redirect, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import Tabs from 'components/antd/tabs';
-import ExternalLink from 'components/custom/externalLink';
 import Grid from 'components/custom/grid';
 import Icon from 'components/custom/icon';
-import { Text } from 'components/custom/typography';
 import { useWallet } from 'wallets/wallet';
 
 import DAOProvider from './components/dao-provider';
@@ -18,8 +16,6 @@ import TreasuryView from './views/treasury-view';
 import WalletView from './views/wallets-view';
 
 import s from './s.module.scss';
-import { useWarning } from 'components/providers/warning-provider';
-import { isMobile } from 'react-device-detect';
 
 type SenatusViewParams = {
   vt: string;
@@ -27,19 +23,6 @@ type SenatusViewParams = {
 
 const SenatusViewInternal: React.FC = () => {
   const history = useHistory();
-  const warning = useWarning();
-
-  React.useEffect(() => {
-    const warningDestructor = warning.addWarn({
-      text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
-      closable: true,
-      storageIdentity: 'bb_restake_warn',
-    });
-
-    return () => {
-      warningDestructor?.();
-    };
-  }, [isMobile]);
 
   const {
     params: { vt = 'overview' },
