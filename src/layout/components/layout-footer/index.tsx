@@ -147,7 +147,7 @@ const LayoutFooter: React.FC = () => {
               <div className={s.copyrightLinks}>
                 <div className={s.poweredBy}>
                   <a href={FDT_BALANCER} target="_blank" rel="noopener noreferrer">
-                    Balancer FDT/ETH
+                    Balancer FDT/ETH market
                   </a>
                   {/*<a href={FDT_MARKET_LIQUIDITY_LINK} target="_blank" rel="noopener noreferrer">*/}
                   {/*  Add liquidity to Uniswap OHM/FDT pool*/}
