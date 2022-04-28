@@ -106,4 +106,6 @@ export const FDT_MARKET_LINK = 'https://app.uniswap.org/#/swap?inputCurrency=0x6
 
 export const FDT_MARKET_LIQUIDITY_LINK = 'https://app.uniswap.org/#/add/0x64aa3364f17a4d01c6f1751fd97c2bd3d7e7f1d5/0xed1480d12be41d92f36f5f7bdd88212e381a3677/10000?chain=mainnet';
 
+export const FDT_BALANCER = 'https://app.balancer.fi/#/pool/0x2d344a84bac123660b021eebe4eb6f12ba25fe8600020000000000000000018a';
+
 export default config;
