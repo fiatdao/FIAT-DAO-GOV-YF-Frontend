@@ -1,16 +1,11 @@
 .wrap {
-  --percent: 0%;
-  --height: 8px;
-  --bg-bar: linear-gradient(96.42deg, #FF9574 14.8%, #FF4C8C 92.84%);
-  --bg-component: rgba(var(--pink-rgba), 0.16);
-
   position: relative;
   border-radius: 4px;
   width: 100%;
 }
 
 .progress {
-  height: var(--height);
+  height: 8px;
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -25,25 +20,22 @@
   }
 
   &::before {
-    background: var(--bg-component);
+    background: rgba(var(--pink-rgba), 0.16);
     right: 0;
-    width: calc(100% - var(--percent, 0%) + 8px);
+    width: calc(100% + 8px);
   }
 
   &::after {
     background: linear-gradient(96.42deg, #FF9574 14.8%, #FF4C8C 92.84%);
     left: 0;
-    width: var(--percent, 0%);
+    width: 0;
     border-radius: 2px;
   }
 }
 
 .acceptance {
-  --acceptance: 50%;
-  --acceptance-bg: var(--bg-component);
-
   position: absolute;
-  left: var(--acceptance, 50%);
+  left: 50%;
   top: 0;
   height: 100%;
   width: 4px;
@@ -54,18 +46,18 @@
     position: absolute;
     display: block;
     left: 0;
-    background: var(--acceptance-bg);
+    background: rgba(var(--pink-rgba), 0.16);
     width: 2px;
-    height: calc(var(--height, 8px) / 2);
+    height: calc( 8px/ 2);
   }
 
   &::before {
-    top: calc(var(--height, 8px) / -2);
+    top: calc(8px / -2);
     border-radius: 4px;
   }
 
   &::after {
-    bottom: calc(var(--height, 8px) / -2);
+    bottom: calc(8px / -2);
     border-radius: 2px;
   }
 }
