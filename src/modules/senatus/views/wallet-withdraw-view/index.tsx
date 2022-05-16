@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import * as Antd from 'antd';
 import BigNumber from 'bignumber.js';
 import { ZERO_BIG_NUMBER, formatEntrValue } from 'web3/utils';
@@ -16,9 +16,11 @@ import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../../components/dao-provider';
+import { RewardsID } from '../../contracts/daoReward';
 import cn from 'classnames';
 
 import s from './s.module.scss';
+import { useReload } from '../../../../hooks';
 
 type WithdrawFormData = {
   amount?: BigNumber;
@@ -42,6 +44,7 @@ const InitialState: WalletWithdrawViewState = {
 
 const WalletWithdrawView: React.FC = () => {
   const daoCtx = useDAO();
+  const [_, version] = useReload();
   const [form] = Antd.Form.useForm<WithdrawFormData>();
 
   const [state, setState] = useMergeState<WalletWithdrawViewState>(InitialState);
@@ -70,6 +73,11 @@ const WalletWithdrawView: React.FC = () => {
 
     setState({ saving: false });
   }
+
+  const isDisabled = useMemo((): boolean => {
+    const firstDao = daoCtx.daoReward.rewards.find(({ name }) => name ===  RewardsID.First);
+    return !firstDao?.claimValue?.isZero();
+  }, [version]);
 
   return (
     <div className={cn('card', s.card)}>
@@ -136,7 +144,7 @@ const WalletWithdrawView: React.FC = () => {
           <button
             type="submit"
             className="button-primary"
-            disabled={state.saving || formDisabled}
+            disabled={isDisabled || state.saving || formDisabled}
             style={{ justifySelf: 'start' }}>
             Withdraw
           </button>

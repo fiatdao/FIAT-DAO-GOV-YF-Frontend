@@ -86,12 +86,12 @@ const DAOClaimModal: FC<ModalProps> = props => {
         <Grid flow="row" gap={24} className={s.grid}>
           {daoCtx.daoReward.rewards.map((i) => (
             <DAOClaimButton
-            key={i.name}
-            label={i.label}
-            reward={i.claimValue}
-            loading={!i.claimValue}
-            claimSend={i.claimSend}
-          />
+              key={i.name}
+              label={i.label}
+              reward={i.claimValue}
+              loading={!i.claimValue}
+              claimSend={i.claimSend}
+            />
           ))}
         </Grid>
       </div>
