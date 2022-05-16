@@ -75,13 +75,9 @@ const WalletWithdrawView: React.FC = () => {
   }
 
   const isDisabled = useMemo((): boolean => {
-    const firstDao = daoCtx.daoReward.rewards.find(({ name }) => name ===  RewardsID.First);
-    console.log('firstDao', firstDao?.claimValue);
-    console.log('!firstDao?.claimValue?.isZero()', firstDao?.claimValue?.isZero());
-    return !firstDao?.claimValue?.isZero();
+    const firstDao = daoCtx.daoReward.getFirstReward();
+    return !firstDao.claimValue?.isZero();
   }, [version]);
-
-  console.log('isDisabled', isDisabled);
 
   return (
     <div className={cn('card', s.card)}>

@@ -107,8 +107,9 @@ async function loadCommonData(): Promise<any> {
   const [firstPoolFeature] = await ContractFirst.contract.batch(queryPoolFeature)
   const [secondPoolFeature] = await ContractSecond.contract.batch(queryPoolFeature)
 
-  ContractFirst.poolFeature = firstPoolFeature
-  ContractSecond.poolFeature = secondPoolFeature
+  ContractFirst.poolFeature = firstPoolFeature;
+  ContractSecond.poolFeature = secondPoolFeature;
+  return;
 }
 
 async function loadUserData(userAddress?: string): Promise<any> {
@@ -133,6 +134,7 @@ async function loadUserData(userAddress?: string): Promise<any> {
 
   ContractFirst.claimValue = firstClaimValue
   ContractSecond.claimValue = secondClaimValue
+  return;
 }
 
 export type DAORewardContractData = {
@@ -146,6 +148,7 @@ const KNOWN_REWARDS: RewardsMeta[] = [
 
 export type DAORewardContract = DAORewardContractData & {
   reload(): void;
+  getFirstReward(): RewardsMeta
   getLastReward(): RewardsMeta
   getAllFDTRewards(): BigNumber | undefined;
   getAllTotalAmount(): BigNumber | undefined;
@@ -195,6 +198,10 @@ export function useDAORewardContract(): DAORewardContract {
     })
   }
 
+  function getFirstReward(): RewardsMeta {
+    return KNOWN_REWARDS[0]
+  }
+
   function getLastReward(): RewardsMeta {
     return KNOWN_REWARDS[KNOWN_REWARDS.length - 1]
   }
@@ -202,6 +209,7 @@ export function useDAORewardContract(): DAORewardContract {
   return {
     reload,
     rewards: KNOWN_REWARDS,
+    getFirstReward,
     getLastReward,
     getAllFDTRewards,
     getAllTotalAmount,
