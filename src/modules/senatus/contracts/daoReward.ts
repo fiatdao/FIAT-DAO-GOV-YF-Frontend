@@ -109,6 +109,7 @@ async function loadCommonData(): Promise<any> {
 
   ContractFirst.poolFeature = firstPoolFeature;
   ContractSecond.poolFeature = secondPoolFeature;
+  console.log('loadCommonData')
   return;
 }
 
@@ -134,6 +135,7 @@ async function loadUserData(userAddress?: string): Promise<any> {
 
   ContractFirst.claimValue = firstClaimValue
   ContractSecond.claimValue = secondClaimValue
+  console.log('loadUserData')
   return;
 }
 
@@ -148,6 +150,7 @@ const KNOWN_REWARDS: RewardsMeta[] = [
 
 export type DAORewardContract = DAORewardContractData & {
   reload(): void;
+  version: number;
   getFirstReward(): RewardsMeta
   getLastReward(): RewardsMeta
   getAllFDTRewards(): BigNumber | undefined;
@@ -158,7 +161,7 @@ export type DAORewardContract = DAORewardContractData & {
 export function useDAORewardContract(): DAORewardContract {
   const wallet = useWallet();
 
-  const [reload] = useReload();
+  const [reload, version] = useReload();
 
   React.useEffect(() => {
     loadCommonData().then(reload).catch(Error);
@@ -208,6 +211,7 @@ export function useDAORewardContract(): DAORewardContract {
 
   return {
     reload,
+    version,
     rewards: KNOWN_REWARDS,
     getFirstReward,
     getLastReward,

@@ -16,11 +16,9 @@ import useMergeState from 'hooks/useMergeState';
 
 import Erc20Contract from '../../../../web3/erc20Contract';
 import { useDAO } from '../../components/dao-provider';
-import { RewardsID } from '../../contracts/daoReward';
 import cn from 'classnames';
 
 import s from './s.module.scss';
-import { useReload } from '../../../../hooks';
 
 type WithdrawFormData = {
   amount?: BigNumber;
@@ -44,7 +42,6 @@ const InitialState: WalletWithdrawViewState = {
 
 const WalletWithdrawView: React.FC = () => {
   const daoCtx = useDAO();
-  const [_, version] = useReload();
   const [form] = Antd.Form.useForm<WithdrawFormData>();
 
   const [state, setState] = useMergeState<WalletWithdrawViewState>(InitialState);
@@ -74,10 +71,12 @@ const WalletWithdrawView: React.FC = () => {
     setState({ saving: false });
   }
 
+  console.log('daoCtx.daoReward.version', daoCtx.daoReward.version);
+
   const isDisabled = useMemo((): boolean => {
     const firstDao = daoCtx.daoReward.getFirstReward();
     return !firstDao.claimValue?.isZero();
-  }, [version]);
+  }, [daoCtx.daoReward.version]);
 
   return (
     <div className={cn('card', s.card)}>
@@ -129,7 +128,7 @@ const WalletWithdrawView: React.FC = () => {
                   slider
                 />
               </Form.Item>
-              <Alert message="Locked balances are not available for withdrawal until the timer ends. Withdrawal means you will stop earning staking rewards for the amount withdrawn." />
+              <Alert message={isDisabled ? 'Please claim your accrued rewards first' : 'Locked balances are not available for withdrawal until the timer ends. Withdrawal means you will stop earning staking rewards for the amount withdrawn.'} />
             </Grid>
             <Grid flow="row">
               <Form.Item

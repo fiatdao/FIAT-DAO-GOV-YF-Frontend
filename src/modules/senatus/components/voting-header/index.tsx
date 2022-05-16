@@ -82,8 +82,7 @@ const VotingHeader: React.FC = () => {
               <button
                 type="button"
                 className="button-primary button-small"
-                // disabled={getAllClaimValue()?.isZero()}
-                disabled
+                disabled={getAllClaimValue()?.isZero()}
                 onClick={handleClaim}
                 style={{ marginLeft: isMobile ? 0 : 15 }}>
                 {!state.claiming ? 'Claim' : <Spin spinning />}
