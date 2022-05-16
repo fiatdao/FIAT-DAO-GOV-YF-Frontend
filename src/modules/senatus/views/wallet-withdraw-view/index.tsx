@@ -128,7 +128,7 @@ const WalletWithdrawView: React.FC = () => {
                   slider
                 />
               </Form.Item>
-              <Alert message={isDisabled ? 'Please claim your accrued rewards first' : 'Locked balances are not available for withdrawal until the timer ends. Withdrawal means you will stop earning staking rewards for the amount withdrawn.'} />
+              <Alert message={isDisabled ? 'Please claim the accrued rewards from \'Reward contract 1\' first.' : 'Locked balances are not available for withdrawal until the timer ends. Withdrawal means you will stop earning staking rewards for the amount withdrawn.'} />
             </Grid>
             <Grid flow="row">
               <Form.Item
