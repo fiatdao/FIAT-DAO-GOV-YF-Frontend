@@ -97,6 +97,8 @@ function depositSend(amount: BigNumber, from: string, gasPrice: number): Promise
 }
 
 function withdrawSend(amount: BigNumber, from: string, gasPrice: number): Promise<void> {
+  console.log('withdrawSend amount', amount);
+  console.log('withdrawSend amount string', amount.toString());
   return Contract.send('withdraw', [getNonHumanValue(amount, 18)], {
     from,
     gasPrice: getGasValue(gasPrice),

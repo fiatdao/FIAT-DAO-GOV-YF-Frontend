@@ -177,20 +177,20 @@ class Web3Contract extends EventEmitter {
     }
 
 
-    let gasPriceCurr;
-
-    if(gasPrice) {
-      gasPriceCurr = gasPrice
-    } else {
-      try{
-        gasPriceCurr = await contractMethod(...methodArgs).estimateGas({from: this.account})
-      } catch (e) {
-        console.log('e==', e.message);
-        throw e
-      }
-    }
-
-    console.log({gasPriceCurr});
+    // let gasPriceCurr;
+    //
+    // if(gasPrice) {
+    //   gasPriceCurr = gasPrice
+    // } else {
+    //   try{
+    //     gasPriceCurr = await contractMethod(...methodArgs).estimateGas({from: this.account})
+    //   } catch (e) {
+    //     console.log('e==', e.message);
+    //     throw e
+    //   }
+    // }
+    //
+    // console.log({gasPriceCurr});
 
     Web3Contract.sendIncNumber += 1;
 
