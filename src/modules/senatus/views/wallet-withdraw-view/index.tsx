@@ -63,6 +63,7 @@ const WalletWithdrawView: React.FC = () => {
 
     try {
       await daoCtx.daoComitium.actions.withdraw(amount, gasPrice.value);
+      console.log('withdraw try');
       form.setFieldsValue(InitialFormValues);
       daoCtx.daoComitium.reload();
       (FDTToken.contract as Erc20Contract).loadBalance().catch(Error);
