@@ -99,6 +99,7 @@
     "@ethersproject/abi": "5.0.13",
     "@ethersproject/bignumber": "5.0.12",
     "@ethersproject/providers": "5.4.1",
+    "@ethersproject/units": "^5.6.0",
     "@popperjs/core": "2.9.2",
     "@rooks/use-debounce": "4.10.0",
     "@rooks/use-interval": "4.10.0",

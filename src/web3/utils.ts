@@ -116,7 +116,7 @@ export function getHumanValue(value?: BigNumber, decimals = 0): BigNumber | unde
 }
 
 export function getNonHumanValue(value: BigNumber | number, decimals = 0): BigNumber {
-  return new BigNumber(value).multipliedBy(getExponentValue(decimals));
+  return new BigNumber(value.toString()).multipliedBy(getExponentValue(decimals));
 }
 
 export function getGasValue(price: number): number {

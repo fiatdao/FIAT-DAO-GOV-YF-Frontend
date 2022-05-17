@@ -2,6 +2,7 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 import { getGasValue, getHumanValue, getNonHumanValue } from 'web3/utils';
 import Web3Contract, { Web3ContractAbiItem } from 'web3/web3Contract';
+import { parseUnits } from '@ethersproject/units';
 
 import { FDTToken } from 'components/providers/known-tokens-provider';
 import config from 'config';
@@ -90,14 +91,14 @@ function votingPowerAtTsCall(address: string, timestamp: number): Promise<BigNum
 }
 
 function depositSend(amount: BigNumber, from: string, gasPrice: number): Promise<void> {
-  return Contract.send('deposit', [getNonHumanValue(amount, 18).toString()], {
+  return Contract.send('deposit', [parseUnits(amount.toString(), 18).toString()], {
     from,
     gasPrice: getGasValue(gasPrice),
   });
 }
 
 function withdrawSend(amount: BigNumber, from: string, gasPrice: number): Promise<void> {
-  return Contract.send('withdraw', [getNonHumanValue(amount, 18).toString()], {
+  return Contract.send('withdraw', [parseUnits(amount.toString(), 18).toString()], {
     from,
     gasPrice: getGasValue(gasPrice),
   });
