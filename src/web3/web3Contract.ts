@@ -185,7 +185,7 @@ class Web3Contract extends EventEmitter {
       try{
         gasPriceCurr = await contractMethod(...methodArgs).estimateGas({from: this.account})
       } catch (e) {
-        console.log('estimateGas error==', e.message);
+        console.log('estimateGas error==', {...e});
         // throw e
       }
     }
