@@ -29,17 +29,17 @@ const SenatusViewInternal: React.FC = () => {
   const history = useHistory();
   const warning = useWarning();
 
-  React.useEffect(() => {
-    const warningDestructor = warning.addWarn({
-      text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
-      closable: true,
-      storageIdentity: 'bb_restake_warn',
-    });
-
-    return () => {
-      warningDestructor?.();
-    };
-  }, [isMobile]);
+  // React.useEffect(() => {
+  //   const warningDestructor = warning.addWarn({
+  //     text: 'Please note that we’re currently transitioning to a new rewards period - you will not need to restake.',
+  //     closable: true,
+  //     storageIdentity: 'bb_restake_warn',
+  //   });
+  //
+  //   return () => {
+  //     warningDestructor?.();
+  //   };
+  // }, [isMobile]);
 
   const {
     params: { vt = 'overview' },
