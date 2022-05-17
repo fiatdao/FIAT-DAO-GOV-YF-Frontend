@@ -27,7 +27,7 @@ const NumericInput: React.FC<NumericInputProps> = props => {
   React.useEffect(() => {
     const val = props.value;
 
-    valueRef.current = val !== undefined ? new BigNumber(val).toFormat() : '';
+    valueRef.current = val !== undefined ? new BigNumber(val).toString() : '';
     forceRender({});
   }, [props.value]);
 
@@ -40,11 +40,11 @@ const NumericInput: React.FC<NumericInputProps> = props => {
     const val = removeComma(valueRef.current);
     const bnValue = new BigNumber(val);
 
-    if (removeComma(bnValue.toFormat()) !== val) {
+    if (removeComma(bnValue.toString()) !== val) {
       return;
     }
 
-    valueRef.current = bnValue.toFormat();
+    valueRef.current = bnValue.toString();
     onChangeRef.current?.(bnValue);
   }, [stateVal]);
 
@@ -75,7 +75,7 @@ const NumericInput: React.FC<NumericInputProps> = props => {
 
     const bnValue = new BigNumber(val);
 
-    if (bnValue.toFormat() !== val) {
+    if (bnValue.toString() !== val) {
       onChangeRef.current?.(bnValue);
     }
   }
