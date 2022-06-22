@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { AbiItem } from 'web3-utils';
 import Web3Contract, { createAbiItem } from 'web3/web3Contract';
+import { MaxUint256 } from '@ethersproject/constants'
 
 const ABI: AbiItem[] = [
   createAbiItem('name', [], ['string']),
@@ -145,7 +146,7 @@ export default class Erc20Contract extends Web3Contract {
       return Promise.reject();
     }
 
-    const value = enable ? BigNumber.MAX_UINT_256 : BigNumber.ZERO;
+    const value = enable ? MaxUint256 : BigNumber.ZERO;
 
     return this.send('approve', [spenderAddress, value], {
       from: this.account,
