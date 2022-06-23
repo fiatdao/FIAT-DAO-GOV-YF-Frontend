@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AntdForm from 'antd/lib/form';
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
+import { parseUnits } from '@ethersproject/units';
 import TxConfirmModal from 'web3/components/tx-confirm-modal';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatNumber, formatToken, formatUSD } from 'web3/utils';
@@ -76,9 +77,8 @@ const PoolUnstake: FC = () => {
 
     setUnstaking(true);
 
-    value = value.scaleBy(activeToken.decimals)!;
     if(!!poolMeta?.isNFTPool) {
-      await yfPoolsCtx.stakingNFTContract?.unstake(activeToken.address, (poolMeta.nftId as number), value, gasPrice);
+      await yfPoolsCtx.stakingNFTContract?.unstake(activeToken.address, (poolMeta.nftId as number), parseUnits(value.toString(), activeToken.decimals).toString(), gasPrice);
 
       setBnAmount(new BigNumber(0));
       yfPoolsCtx.stakingNFTContract?.loadCommonFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);

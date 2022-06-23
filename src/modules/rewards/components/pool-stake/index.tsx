@@ -6,6 +6,7 @@ import cn from 'classnames';
 import TxConfirmModal from 'web3/components/tx-confirm-modal';
 import Erc20Contract from 'web3/erc20Contract';
 import { formatToken, formatUSD } from 'web3/utils';
+import { parseUnits } from '@ethersproject/units';
 
 import Alert from 'components/antd/alert';
 import Form from 'components/antd/form';
@@ -104,7 +105,7 @@ const PoolStake: FC = () => {
     value = value.scaleBy(activeToken.decimals)!;
     if(!!poolMeta?.isNFTPool) {
       try {
-        await yfPoolsCtx.stakingNFTContract?.stake(activeToken.address, (poolMeta.nftId as number), value, gasPrice);
+        await yfPoolsCtx.stakingNFTContract?.stake(activeToken.address, (poolMeta.nftId as number), parseUnits(value.toString(), activeToken.decimals).toString(), gasPrice);
 
         setBnAmount(new BigNumber(0));
         yfPoolsCtx.stakingNFTContract?.loadCommonFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);

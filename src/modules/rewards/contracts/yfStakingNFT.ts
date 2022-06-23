@@ -117,12 +117,12 @@ export class YfStakingNFTContract extends Web3Contract {
     this.emit(Web3Contract.UPDATE_DATA);
   }
 
-  async stake(tokenAddress: string, nftId: number, amount: BigNumber, gasPrice: number): Promise<BigNumber> {
+  async stake(tokenAddress: string, nftId: number, amount: BigNumber | string, gasPrice: number): Promise<BigNumber> {
     const result = await this.send('deposit', [tokenAddress, nftId, amount], {}, gasPrice);
     return new BigNumber(result);
   }
 
-  async unstake(tokenAddress: string, nftId: number, amount: BigNumber, gasPrice: number): Promise<BigNumber> {
+  async unstake(tokenAddress: string, nftId: number, amount: BigNumber | string, gasPrice: number): Promise<BigNumber> {
     const result = await this.send('withdraw', [tokenAddress, nftId, amount], {}, gasPrice);
     return new BigNumber(result);
   }
