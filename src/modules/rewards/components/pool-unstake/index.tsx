@@ -85,7 +85,7 @@ const PoolUnstake: FC = () => {
       yfPoolsCtx.stakingNFTContract?.loadUserDataFor(activeToken.address, (poolMeta.nftId as number)).catch(Error);
     } else {
       try {
-        await yfPoolsCtx.stakingContract?.unstake(activeToken.address, value, gasPrice);
+        await yfPoolsCtx.stakingContract?.unstake(activeToken.address, parseUnits(value.toString(), activeToken.decimals).toString(), gasPrice);
 
         setBnAmount(new BigNumber(0));
         yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);

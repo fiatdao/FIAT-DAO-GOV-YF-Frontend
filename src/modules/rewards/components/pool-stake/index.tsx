@@ -113,7 +113,7 @@ const PoolStake: FC = () => {
       } catch (e) {}
     } else {
       try {
-        await yfPoolsCtx.stakingContract?.stake(activeToken.address, value, gasPrice);
+        await yfPoolsCtx.stakingContract?.stake(activeToken.address, parseUnits(value.toString(), activeToken.decimals).toString(), gasPrice);
 
         setBnAmount(new BigNumber(0));
         yfPoolsCtx.stakingContract?.loadCommonFor(activeToken.address).catch(Error);
