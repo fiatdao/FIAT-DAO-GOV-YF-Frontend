@@ -54,11 +54,11 @@ const WalletView: React.FC = () => {
                     <Text type="p1" weight="500" >
                       Deposit
                     </Text>} />
-        <Tabs.Tab key="lock"
+        {/*<Tabs.Tab key="lock"
                   tab={
                     <Text type="p1" weight="500">
                       Lock
-                    </Text>} />
+                      </Text>} /> */}
         <Tabs.Tab key="delegate"
                   tab={
                     <Text type="p1" weight="500">
