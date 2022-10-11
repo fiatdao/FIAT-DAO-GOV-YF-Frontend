@@ -27,7 +27,7 @@ const DaoCard: FC = () => {
           </Text>
         </div>
         {walletCtx.isActive && (
-          <Link to="/senatus/wallet/deposit" className="button-primary">
+          <Link to="/senatus/wallet/deposit" className="button-primary" disabled>
             Deposit
           </Link>
         )}
