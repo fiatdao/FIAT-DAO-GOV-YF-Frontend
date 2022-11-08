@@ -27,9 +27,9 @@ const DaoCard: FC = () => {
           </Text>
         </div>
         {walletCtx.isActive && (
-          <button className="button-primary" disabled>
+          <Link to="/senatus/wallet/deposit" className="button-primary">
             Deposit
-          </button>
+          </Link>
         )}
       </div>
       <div className="card-row card-row-border p-24">
@@ -77,9 +77,7 @@ const DaoCard: FC = () => {
         </div>
         <div className="flex flow-col align-center">
           <Icon name="png/fiat-dao" width={16} height={16} className="mr-4" />
-          <UseLeftTime
-            end={(daoReward.rewards[daoCtx.daoReward.rewards.length - 1].poolFeature?.endTs ?? 0) * 1000}
-            delay={5_000}>
+          <UseLeftTime end={(daoReward.rewards[daoCtx.daoReward.rewards.length - 1].poolFeature?.endTs ?? 0) * 1000} delay={5_000}>
             {() => (
               <Text type="p1" weight="500" color="primary">
                 {formatToken(daoReward.getLastReward().getFDTRewards())}
