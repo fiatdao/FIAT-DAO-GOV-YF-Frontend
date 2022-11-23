@@ -54,11 +54,11 @@ const WalletView: React.FC = () => {
                     <Text type="p1" weight="500" >
                       Deposit
                     </Text>} />
-        <Tabs.Tab key="lock"
+        {/*<Tabs.Tab key="lock"
                   tab={
                     <Text type="p1" weight="500">
                       Lock
-                    </Text>} />
+                      </Text>} /> */}
         <Tabs.Tab key="delegate"
                   tab={
                     <Text type="p1" weight="500">
@@ -72,7 +72,7 @@ const WalletView: React.FC = () => {
       </Tabs>
       <Switch>
         <Route path="/senatus/wallet/deposit" exact component={WalletDepositView} />
-        <Route path="/senatus/wallet/lock" exact component={WalletLockView} />
+        {/*<Route path="/senatus/wallet/lock" exact component={WalletLockView} />*/}
         <Route path="/senatus/wallet/delegate" exact component={WalletDelegateView} />
         <Route path="/senatus/wallet/withdraw" exact component={WalletWithdrawView} />
         <Redirect from="/senatus/wallet" to="/senatus/wallet/deposit" />
