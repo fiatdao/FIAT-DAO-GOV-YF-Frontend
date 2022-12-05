@@ -21,7 +21,7 @@ const PlugPage = () => {
               </a>
             </li>
             <li>
-              <a href="https://discord.gg/fiatdao" target="_blank" rel="noreferrer">
+              <a href="https://discord.gg/5JqBMtc4fm" target="_blank" rel="noreferrer">
                 <Icon name="discord" width="15" />
               </a>
             </li>
